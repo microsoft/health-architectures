@@ -21,7 +21,7 @@ EventHubConnection: <The connection string to the event hub to publish FHIR CRUD
 EventHubName: <The name of the event hub to publish FHIR CRUD events>
 ```
 ## Deploying your own FHIR Event Processor
-This function is deployed and Configured as a part of the [HL72FHIR Workflow Platform](www.microsoft.com)
+This function is deployed and Configured as a part of the [HL72FHIR Workflow Platform](https://github.com/microsoft/health-architectures/tree/master/HL7Conversion)
 
 # Contributing
 

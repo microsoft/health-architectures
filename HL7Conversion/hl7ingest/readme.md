@@ -19,7 +19,7 @@ ServiceBusConnection: <Service Bus Connection String>
 QueueName: <The name of the destination service bus queue>
 ```
 ## Deploying your own HL7 Ingest Function
-This function is deployed and Configured as a part of the [HL7 Ingest Platform](www.microsoft.com)
+This function is deployed and Configured as a part of the [HL7 Ingest Platform](https://github.com/microsoft/health-architectures/tree/master/HL7Conversion)
 
 # Contributing
 
