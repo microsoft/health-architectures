@@ -1,0 +1,1192 @@
+2019/01/23 12:02:30 | --> Wrapper Started as Console
+2019/01/23 12:02:30 | Launching a JVM...
+2019/01/23 12:02:31 | Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+2019/01/23 12:02:31 |   Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+2019/01/23 12:02:31 | 
+2019/01/23 12:02:31 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay is starting. This software is Licensed under the Apache Software License (version 2.0) and is Copyright(c) 2012 University Health Network.
+2019/01/23 12:02:31 |  INFO [WrapperSimpleAppMain] - HL7 over HTTP (HAPI) library version 2.4-SNAPSHOT - Build null (2019-01-23 11:51:18)
+2019/01/23 12:02:32 |  INFO [WrapperSimpleAppMain] - Refreshing org.springframework.context.support.FileSystemXmlApplicationContext@5ac803cd: startup date [Wed Jan 23 12:02:32 EST 2019]; root of context hierarchy
+2019/01/23 12:02:32 |  INFO [WrapperSimpleAppMain] - Loading XML bean definitions from file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]
+2019/01/23 12:02:32 |  INFO [WrapperSimpleAppMain] - hapi.home is set to C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\.
+2019/01/23 12:02:32 |  INFO [WrapperSimpleAppMain] - HAPI version is: 2.3
+2019/01/23 12:02:32 |  WARN [WrapperSimpleAppMain] - No HL7 structure libraries found on the classpath!
+2019/01/23 12:02:32 |  INFO [WrapperSimpleAppMain] - Starting listener on port 8079
+2019/01/23 12:02:32 |  INFO [hoh-port-8079-worker-1] - Starting ConnectionCleaner service
+2019/01/23 12:02:32 |  INFO [hoh-port-8079-worker-1] - Starting SimpleServer running on port 8079
+2019/01/23 12:02:32 |  INFO [WrapperSimpleAppMain] - Listener on port 8079 has started, and is ready for processing
+2019/01/23 12:02:32 |  INFO [WrapperSimpleAppMain] - Sender [theSender] will transmit by HL7 over HTTP to http://localhost:8080/relayURI
+2019/01/23 12:02:32 |  INFO [WrapperSimpleAppMain] - Binding sender[theSender] to listener[theListener] for messages with profile[MsgType:* / MsgTrigger:* / Version:* / Processing:*]
+2019/01/23 12:02:32 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay started in 956 ms
+2019/01/23 12:02:39 | CTRL-C trapped.  Shutting down.
+2019/01/23 12:02:41 |  INFO [Thread-0] - Shutdown request detected, stopping all services
+2019/01/23 12:02:41 |  INFO [Thread-0] - Closing org.springframework.context.support.FileSystemXmlApplicationContext@5ac803cd: startup date [Wed Jan 23 12:02:32 EST 2019]; root of context hierarchy
+2019/01/23 12:02:41 |  INFO [Thread-0] - Stopping listener on port 8079
+2019/01/23 12:02:41 |  INFO [Thread-0] - Listener on port 8079 has stopped
+2019/01/23 12:02:41 |  INFO [Thread-0] - Closing HAPI Context Object
+2019/01/23 12:02:41 |  INFO [Thread-0] - Done closing HAPI Context object
+2019/01/23 12:02:41 |  INFO [Thread-0] - Shutdown request completed
+2019/01/23 12:02:42 | <-- Wrapper Stopped
+2019/01/23 12:28:48 | --> Wrapper Started as Console
+2019/01/23 12:28:48 | Launching a JVM...
+2019/01/23 12:28:48 | Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+2019/01/23 12:28:48 |   Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+2019/01/23 12:28:48 | 
+2019/01/23 12:28:49 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay is starting. This software is Licensed under the Apache Software License (version 2.0) and is Copyright(c) 2012 University Health Network.
+2019/01/23 12:28:49 |  INFO [WrapperSimpleAppMain] - HL7 over HTTP (HAPI) library version 2.4-SNAPSHOT - Build null (2019-01-23 11:51:18)
+2019/01/23 12:28:49 |  INFO [WrapperSimpleAppMain] - Refreshing org.springframework.context.support.FileSystemXmlApplicationContext@5ac803cd: startup date [Wed Jan 23 12:28:49 EST 2019]; root of context hierarchy
+2019/01/23 12:28:49 |  INFO [WrapperSimpleAppMain] - Loading XML bean definitions from file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]
+2019/01/23 12:28:49 |  INFO [WrapperSimpleAppMain] - hapi.home is set to C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\.
+2019/01/23 12:28:49 |  INFO [WrapperSimpleAppMain] - HAPI version is: 2.3
+2019/01/23 12:28:49 |  WARN [WrapperSimpleAppMain] - No HL7 structure libraries found on the classpath!
+2019/01/23 12:28:49 |  INFO [WrapperSimpleAppMain] - Starting listener on port 8079
+2019/01/23 12:28:49 |  INFO [hoh-port-8079-worker-1] - Starting ConnectionCleaner service
+2019/01/23 12:28:49 |  INFO [hoh-port-8079-worker-1] - Starting SimpleServer running on port 8079
+2019/01/23 12:28:50 |  INFO [WrapperSimpleAppMain] - Listener on port 8079 has started, and is ready for processing
+2019/01/23 12:28:50 |  INFO [WrapperSimpleAppMain] - Sender [theSender] will transmit by HL7 over HTTP to https://mshlshl7transform.azurewebsites.net/api/TransformHL7SaveToDB
+2019/01/23 12:28:50 |  INFO [WrapperSimpleAppMain] - Binding sender[theSender] to listener[theListener] for messages with profile[MsgType:* / MsgTrigger:* / Version:* / Processing:*]
+2019/01/23 12:28:50 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay started in 1096 ms
+2019/01/23 12:29:51 |  INFO [hoh-port-8079-worker-1] - Accepted connection from 127.0.0.1:51597 on local port 8079
+2019/01/23 12:30:35 | Wrapper Process has not received any CPU time for 43 seconds.  Extending timeouts.
+2019/01/23 12:30:35 |  INFO [hoh-port-8079-worker-5] - Relaying message (613 bytes) with ID NIST-SS-001.11 from 127.0.0.1:51597 to URL https://mshlshl7transform.azurewebsites.net/api/TransformHL7SaveToDB
+2019/01/23 12:30:35 |  INFO [hoh-port-8079-worker-5] - Creating new remote connection to mshlshl7transform.azurewebsites.net:443
+2019/01/23 12:30:35 | ERROR [hoh-port-8079-worker-5] - Failed to process HL7 over HTTP response from URL "https://mshlshl7transform.azurewebsites.net/api/TransformHL7SaveToDB"
+2019/01/23 12:30:35 | ca.uhn.hl7v2.hoh.api.DecodeException: Content-Type not specified
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.hoh.encoder.AbstractHl7OverHttpDecoder.doReadContentsFromInputStreamAndDecode(AbstractHl7OverHttpDecoder.java:230)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.hoh.encoder.AbstractHl7OverHttpDecoder.readHeadersAndContentsFromInputStreamAndDecode(AbstractHl7OverHttpDecoder.java:541)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.hoh.raw.client.AbstractRawClient.doSendAndReceiveInternal(AbstractRawClient.java:159)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.hoh.raw.client.AbstractRawClient.sendAndReceive(AbstractRawClient.java:279)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.hoh.hapi.client.AbstractClient.sendAndReceiveMessage(AbstractClient.java:161)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.hoh.relay.sender.RelayHttpSender.processMessage(RelayHttpSender.java:83)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.protocol.impl.ApplicationRouterImpl.processMessage(ApplicationRouterImpl.java:174)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.protocol.impl.ApplicationRouterImpl.processMessage(ApplicationRouterImpl.java:105)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.app.Responder.processMessage(Responder.java:91)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.app.Receiver$Grunt.run(Receiver.java:127)
+2019/01/23 12:30:35 | 	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+2019/01/23 12:30:35 | 	at java.util.concurrent.FutureTask.run(Unknown Source)
+2019/01/23 12:30:35 | 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+2019/01/23 12:30:35 | 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+2019/01/23 12:30:35 | 	at java.lang.Thread.run(Unknown Source)
+2019/01/23 12:30:35 | ERROR [hoh-port-8079-worker-5] - Attempting to send error message to remote system.
+2019/01/23 12:30:35 | ca.uhn.hl7v2.HL7Exception: HAPI HL7 over HTTP Relay 2.4-SNAPSHOT - Failed to process HL7 over HTTP response from URL "https://mshlshl7transform.azurewebsites.net/api/TransformHL7SaveToDB" - Error was: Content-Type not specified
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.hoh.relay.sender.RelayHttpSender.processMessage(RelayHttpSender.java:87)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.protocol.impl.ApplicationRouterImpl.processMessage(ApplicationRouterImpl.java:174)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.protocol.impl.ApplicationRouterImpl.processMessage(ApplicationRouterImpl.java:105)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.app.Responder.processMessage(Responder.java:91)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.app.Receiver$Grunt.run(Receiver.java:127)
+2019/01/23 12:30:35 | 	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+2019/01/23 12:30:35 | 	at java.util.concurrent.FutureTask.run(Unknown Source)
+2019/01/23 12:30:35 | 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+2019/01/23 12:30:35 | 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+2019/01/23 12:30:35 | 	at java.lang.Thread.run(Unknown Source)
+2019/01/23 12:30:35 |  INFO [hoh-port-8079-worker-5] - Could not read ID file C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\.\id_file 
+2019/01/23 12:30:35 |  INFO [hoh-port-8079-worker-4] - End of input stream reached.
+2019/01/23 12:30:35 |  INFO [hoh-port-8079-worker-4] - SocketException on read() attempt.  Socket appears to have been closed: End of input stream reached before message starts
+2019/01/23 12:30:35 |  INFO [hoh-port-8079-worker-4] - SocketException: closing Connection from 127.0.0.1:51597, will no longer read messages with this Receiver: End of input stream reached before message starts
+2019/01/23 12:30:35 |  INFO [hoh-port-8079-worker-1] - Accepted connection from 127.0.0.1:51603 on local port 8079
+2019/01/23 12:30:35 |  INFO [hoh-port-8079-worker-5] - Relaying message (613 bytes) with ID NIST-SS-001.11 from 127.0.0.1:51603 to URL https://mshlshl7transform.azurewebsites.net/api/TransformHL7SaveToDB
+2019/01/23 12:30:35 |  INFO [hoh-port-8079-worker-5] - Creating new remote connection to mshlshl7transform.azurewebsites.net:443
+2019/01/23 12:30:35 | ERROR [hoh-port-8079-worker-5] - Failed to process HL7 over HTTP response from URL "https://mshlshl7transform.azurewebsites.net/api/TransformHL7SaveToDB"
+2019/01/23 12:30:35 | ca.uhn.hl7v2.hoh.api.DecodeException: Content-Type not specified
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.hoh.encoder.AbstractHl7OverHttpDecoder.doReadContentsFromInputStreamAndDecode(AbstractHl7OverHttpDecoder.java:230)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.hoh.encoder.AbstractHl7OverHttpDecoder.readHeadersAndContentsFromInputStreamAndDecode(AbstractHl7OverHttpDecoder.java:541)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.hoh.raw.client.AbstractRawClient.doSendAndReceiveInternal(AbstractRawClient.java:159)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.hoh.raw.client.AbstractRawClient.sendAndReceive(AbstractRawClient.java:279)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.hoh.hapi.client.AbstractClient.sendAndReceiveMessage(AbstractClient.java:161)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.hoh.relay.sender.RelayHttpSender.processMessage(RelayHttpSender.java:83)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.protocol.impl.ApplicationRouterImpl.processMessage(ApplicationRouterImpl.java:174)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.protocol.impl.ApplicationRouterImpl.processMessage(ApplicationRouterImpl.java:105)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.app.Responder.processMessage(Responder.java:91)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.app.Receiver$Grunt.run(Receiver.java:127)
+2019/01/23 12:30:35 | 	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+2019/01/23 12:30:35 | 	at java.util.concurrent.FutureTask.run(Unknown Source)
+2019/01/23 12:30:35 | 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+2019/01/23 12:30:35 | 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+2019/01/23 12:30:35 | 	at java.lang.Thread.run(Unknown Source)
+2019/01/23 12:30:35 | ERROR [hoh-port-8079-worker-5] - Attempting to send error message to remote system.
+2019/01/23 12:30:35 | ca.uhn.hl7v2.HL7Exception: HAPI HL7 over HTTP Relay 2.4-SNAPSHOT - Failed to process HL7 over HTTP response from URL "https://mshlshl7transform.azurewebsites.net/api/TransformHL7SaveToDB" - Error was: Content-Type not specified
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.hoh.relay.sender.RelayHttpSender.processMessage(RelayHttpSender.java:87)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.protocol.impl.ApplicationRouterImpl.processMessage(ApplicationRouterImpl.java:174)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.protocol.impl.ApplicationRouterImpl.processMessage(ApplicationRouterImpl.java:105)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.app.Responder.processMessage(Responder.java:91)
+2019/01/23 12:30:35 | 	at ca.uhn.hl7v2.app.Receiver$Grunt.run(Receiver.java:127)
+2019/01/23 12:30:35 | 	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+2019/01/23 12:30:35 | 	at java.util.concurrent.FutureTask.run(Unknown Source)
+2019/01/23 12:30:35 | 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+2019/01/23 12:30:35 | 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+2019/01/23 12:30:35 | 	at java.lang.Thread.run(Unknown Source)
+2019/01/23 12:30:35 |  INFO [hoh-port-8079-worker-4] - End of input stream reached.
+2019/01/23 12:30:35 |  INFO [hoh-port-8079-worker-4] - SocketException on read() attempt.  Socket appears to have been closed: End of input stream reached before message starts
+2019/01/23 12:30:35 |  INFO [hoh-port-8079-worker-4] - SocketException: closing Connection from 127.0.0.1:51603, will no longer read messages with this Receiver: End of input stream reached before message starts
+2019/01/23 12:30:48 |  INFO [hoh-port-8079-worker-1] - Accepted connection from 127.0.0.1:51613 on local port 8079
+2019/01/23 12:30:48 |  INFO [hoh-port-8079-worker-5] - Relaying message (613 bytes) with ID NIST-SS-001.11 from 127.0.0.1:51613 to URL https://mshlshl7transform.azurewebsites.net/api/TransformHL7SaveToDB
+2019/01/23 12:30:48 |  INFO [hoh-port-8079-worker-5] - Creating new remote connection to mshlshl7transform.azurewebsites.net:443
+2019/01/23 12:30:48 | ERROR [hoh-port-8079-worker-5] - Failed to process HL7 over HTTP response from URL "https://mshlshl7transform.azurewebsites.net/api/TransformHL7SaveToDB"
+2019/01/23 12:30:48 | ca.uhn.hl7v2.hoh.api.DecodeException: Content-Type not specified
+2019/01/23 12:30:48 | 	at ca.uhn.hl7v2.hoh.encoder.AbstractHl7OverHttpDecoder.doReadContentsFromInputStreamAndDecode(AbstractHl7OverHttpDecoder.java:230)
+2019/01/23 12:30:48 | 	at ca.uhn.hl7v2.hoh.encoder.AbstractHl7OverHttpDecoder.readHeadersAndContentsFromInputStreamAndDecode(AbstractHl7OverHttpDecoder.java:541)
+2019/01/23 12:30:48 | 	at ca.uhn.hl7v2.hoh.raw.client.AbstractRawClient.doSendAndReceiveInternal(AbstractRawClient.java:159)
+2019/01/23 12:30:48 | 	at ca.uhn.hl7v2.hoh.raw.client.AbstractRawClient.sendAndReceive(AbstractRawClient.java:279)
+2019/01/23 12:30:48 | 	at ca.uhn.hl7v2.hoh.hapi.client.AbstractClient.sendAndReceiveMessage(AbstractClient.java:161)
+2019/01/23 12:30:48 | 	at ca.uhn.hl7v2.hoh.relay.sender.RelayHttpSender.processMessage(RelayHttpSender.java:83)
+2019/01/23 12:30:48 | 	at ca.uhn.hl7v2.protocol.impl.ApplicationRouterImpl.processMessage(ApplicationRouterImpl.java:174)
+2019/01/23 12:30:48 | 	at ca.uhn.hl7v2.protocol.impl.ApplicationRouterImpl.processMessage(ApplicationRouterImpl.java:105)
+2019/01/23 12:30:48 | 	at ca.uhn.hl7v2.app.Responder.processMessage(Responder.java:91)
+2019/01/23 12:30:48 | 	at ca.uhn.hl7v2.app.Receiver$Grunt.run(Receiver.java:127)
+2019/01/23 12:30:48 | 	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+2019/01/23 12:30:48 | 	at java.util.concurrent.FutureTask.run(Unknown Source)
+2019/01/23 12:30:48 | 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+2019/01/23 12:30:48 | 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+2019/01/23 12:30:48 | 	at java.lang.Thread.run(Unknown Source)
+2019/01/23 12:30:48 | ERROR [hoh-port-8079-worker-5] - Attempting to send error message to remote system.
+2019/01/23 12:30:48 | ca.uhn.hl7v2.HL7Exception: HAPI HL7 over HTTP Relay 2.4-SNAPSHOT - Failed to process HL7 over HTTP response from URL "https://mshlshl7transform.azurewebsites.net/api/TransformHL7SaveToDB" - Error was: Content-Type not specified
+2019/01/23 12:30:48 | 	at ca.uhn.hl7v2.hoh.relay.sender.RelayHttpSender.processMessage(RelayHttpSender.java:87)
+2019/01/23 12:30:48 | 	at ca.uhn.hl7v2.protocol.impl.ApplicationRouterImpl.processMessage(ApplicationRouterImpl.java:174)
+2019/01/23 12:30:48 | 	at ca.uhn.hl7v2.protocol.impl.ApplicationRouterImpl.processMessage(ApplicationRouterImpl.java:105)
+2019/01/23 12:30:48 | 	at ca.uhn.hl7v2.app.Responder.processMessage(Responder.java:91)
+2019/01/23 12:30:48 | 	at ca.uhn.hl7v2.app.Receiver$Grunt.run(Receiver.java:127)
+2019/01/23 12:30:48 | 	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+2019/01/23 12:30:48 | 	at java.util.concurrent.FutureTask.run(Unknown Source)
+2019/01/23 12:30:48 | 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+2019/01/23 12:30:48 | 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+2019/01/23 12:30:48 | 	at java.lang.Thread.run(Unknown Source)
+2019/01/23 12:30:48 |  INFO [hoh-port-8079-worker-4] - End of input stream reached.
+2019/01/23 12:30:48 |  INFO [hoh-port-8079-worker-4] - SocketException on read() attempt.  Socket appears to have been closed: End of input stream reached before message starts
+2019/01/23 12:30:48 |  INFO [hoh-port-8079-worker-4] - SocketException: closing Connection from 127.0.0.1:51613, will no longer read messages with this Receiver: End of input stream reached before message starts
+2019/01/23 12:30:55 | CTRL-C trapped.  Shutting down.
+2019/01/23 12:30:55 | CTRL-C trapped.  Forcing immediate shutdown.
+2019/01/23 12:30:55 | JVM did not exit on request, terminated
+2019/01/23 12:30:55 | <-- Wrapper Stopped
+2019/01/23 12:34:49 | --> Wrapper Started as Console
+2019/01/23 12:34:50 | Launching a JVM...
+2019/01/23 12:34:50 | Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+2019/01/23 12:34:50 |   Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+2019/01/23 12:34:50 | 
+2019/01/23 12:34:50 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay is starting. This software is Licensed under the Apache Software License (version 2.0) and is Copyright(c) 2012 University Health Network.
+2019/01/23 12:34:50 |  INFO [WrapperSimpleAppMain] - HL7 over HTTP (HAPI) library version 2.4-SNAPSHOT - Build null (2019-01-23 11:51:18)
+2019/01/23 12:34:50 |  INFO [WrapperSimpleAppMain] - Refreshing org.springframework.context.support.FileSystemXmlApplicationContext@53eb0e51: startup date [Wed Jan 23 12:34:50 EST 2019]; root of context hierarchy
+2019/01/23 12:34:50 |  INFO [WrapperSimpleAppMain] - Loading XML bean definitions from file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]
+2019/01/23 12:34:50 |  INFO [WrapperSimpleAppMain] - hapi.home is set to C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\.
+2019/01/23 12:34:50 |  INFO [WrapperSimpleAppMain] - HAPI version is: 2.3
+2019/01/23 12:34:50 |  WARN [WrapperSimpleAppMain] - No HL7 structure libraries found on the classpath!
+2019/01/23 12:34:50 |  INFO [WrapperSimpleAppMain] - Starting listener on port 8079
+2019/01/23 12:34:50 |  INFO [hoh-port-8079-worker-1] - Starting ConnectionCleaner service
+2019/01/23 12:34:50 |  INFO [hoh-port-8079-worker-1] - Starting SimpleServer running on port 8079
+2019/01/23 12:34:51 |  INFO [WrapperSimpleAppMain] - Listener on port 8079 has started, and is ready for processing
+2019/01/23 12:34:51 |  INFO [WrapperSimpleAppMain] - Sender [theSender] will transmit by HL7 over HTTP to https://mshlshl7transform.azurewebsites.net/api/TransformHL7SaveToDB
+2019/01/23 12:34:51 |  INFO [WrapperSimpleAppMain] - Binding sender[theSender] to listener[theListener] for messages with profile[MsgType:* / MsgTrigger:* / Version:* / Processing:*]
+2019/01/23 12:34:51 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay started in 955 ms
+2019/01/23 12:35:17 |  INFO [hoh-port-8079-worker-1] - Accepted connection from 127.0.0.1:51684 on local port 8079
+2019/01/23 12:35:17 |  INFO [hoh-port-8079-worker-5] - Relaying message (613 bytes) with ID NIST-SS-001.11 from 127.0.0.1:51684 to URL https://mshlshl7transform.azurewebsites.net/api/TransformHL7SaveToDB
+2019/01/23 12:35:17 |  INFO [hoh-port-8079-worker-5] - Creating new remote connection to mshlshl7transform.azurewebsites.net:443
+2019/01/23 12:35:19 |  INFO [hoh-port-8079-worker-5] - Received response to ID NIST-SS-001.11 with ID NIST-SS-001.11 in 2073 ms
+2019/01/23 12:35:19 |  INFO [hoh-port-8079-worker-4] - End of input stream reached.
+2019/01/23 12:35:19 |  INFO [hoh-port-8079-worker-4] - SocketException on read() attempt.  Socket appears to have been closed: End of input stream reached before message starts
+2019/01/23 12:35:19 |  INFO [hoh-port-8079-worker-4] - SocketException: closing Connection from 127.0.0.1:51684, will no longer read messages with this Receiver: End of input stream reached before message starts
+2019/01/23 12:35:29 |  INFO [pool-1-thread-1] - Closing idle socket with local port 51685 because it has been idle since Wed Jan 23 12:35:19 EST 2019
+2019/01/23 12:35:35 |  INFO [hoh-port-8079-worker-1] - Accepted connection from 127.0.0.1:51689 on local port 8079
+2019/01/23 12:35:35 |  INFO [hoh-port-8079-worker-5] - Relaying message (613 bytes) with ID NIST-SS-001.11 from 127.0.0.1:51689 to URL https://mshlshl7transform.azurewebsites.net/api/TransformHL7SaveToDB
+2019/01/23 12:35:35 |  INFO [hoh-port-8079-worker-5] - Creating new remote connection to mshlshl7transform.azurewebsites.net:443
+2019/01/23 12:35:35 |  INFO [hoh-port-8079-worker-5] - Received response to ID NIST-SS-001.11 with ID NIST-SS-001.11 in 356 ms
+2019/01/23 12:35:35 |  INFO [hoh-port-8079-worker-4] - End of input stream reached.
+2019/01/23 12:35:35 |  INFO [hoh-port-8079-worker-4] - SocketException on read() attempt.  Socket appears to have been closed: End of input stream reached before message starts
+2019/01/23 12:35:35 |  INFO [hoh-port-8079-worker-4] - SocketException: closing Connection from 127.0.0.1:51689, will no longer read messages with this Receiver: End of input stream reached before message starts
+2019/01/23 12:35:45 |  INFO [pool-1-thread-1] - Closing idle socket with local port 51690 because it has been idle since Wed Jan 23 12:35:35 EST 2019
+2019/01/24 09:48:52 | --> Wrapper Started as Console
+2019/01/24 09:48:53 | Launching a JVM...
+2019/01/24 09:48:54 | Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+2019/01/24 09:48:54 |   Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+2019/01/24 09:48:54 | 
+2019/01/24 09:48:54 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay is starting. This software is Licensed under the Apache Software License (version 2.0) and is Copyright(c) 2012 University Health Network.
+2019/01/24 09:48:54 |  INFO [WrapperSimpleAppMain] - HL7 over HTTP (HAPI) library version 2.4-SNAPSHOT - Build null (2019-01-23 11:51:18)
+2019/01/24 09:48:54 |  INFO [WrapperSimpleAppMain] - Refreshing org.springframework.context.support.FileSystemXmlApplicationContext@1095adbe: startup date [Thu Jan 24 09:48:54 EST 2019]; root of context hierarchy
+2019/01/24 09:48:54 |  INFO [WrapperSimpleAppMain] - Loading XML bean definitions from file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]
+2019/01/24 09:48:55 |  INFO [WrapperSimpleAppMain] - hapi.home is set to C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\.
+2019/01/24 09:48:55 |  INFO [WrapperSimpleAppMain] - HAPI version is: 2.3
+2019/01/24 09:48:55 |  WARN [WrapperSimpleAppMain] - No HL7 structure libraries found on the classpath!
+2019/01/24 09:48:55 |  INFO [WrapperSimpleAppMain] - Starting listener on port 8079
+2019/01/24 09:48:55 |  INFO [hoh-port-8079-worker-1] - Starting ConnectionCleaner service
+2019/01/24 09:48:55 |  INFO [hoh-port-8079-worker-1] - Starting SimpleServer running on port 8079
+2019/01/24 09:48:55 |  INFO [WrapperSimpleAppMain] - Listener on port 8079 has started, and is ready for processing
+2019/01/24 09:48:55 |  WARN [WrapperSimpleAppMain] - Exception encountered during context initialization - cancelling refresh attempt
+2019/01/24 09:48:55 | org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'theSender' defined in file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]: Error setting property values; nested exception is org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+2019/01/24 09:48:55 | PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'urlString' threw exception; nested exception is java.lang.IllegalArgumentException: URL is not valid. Must be in the form http[s]:
+2019/01/24 09:48:55 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1506)
+2019/01/24 09:48:55 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
+2019/01/24 09:48:55 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+2019/01/24 09:48:55 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+2019/01/24 09:48:55 | 	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+2019/01/24 09:48:55 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+2019/01/24 09:48:55 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+2019/01/24 09:48:55 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+2019/01/24 09:48:55 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:762)
+2019/01/24 09:48:55 | 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+2019/01/24 09:48:55 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+2019/01/24 09:48:55 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:140)
+2019/01/24 09:48:55 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:84)
+2019/01/24 09:48:55 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:34)
+2019/01/24 09:48:55 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:18)
+2019/01/24 09:48:55 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.main(Launcher.java:61)
+2019/01/24 09:48:55 | 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2019/01/24 09:48:55 | 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 09:48:55 | 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 09:48:55 | 	at java.lang.reflect.Method.invoke(Unknown Source)
+2019/01/24 09:48:55 | 	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:240)
+2019/01/24 09:48:55 | 	at java.lang.Thread.run(Unknown Source)
+2019/01/24 09:48:55 | Caused by: org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+2019/01/24 09:48:55 | PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'urlString' threw exception; nested exception is java.lang.IllegalArgumentException: URL is not valid. Must be in the form http[s]:
+2019/01/24 09:48:55 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:121)
+2019/01/24 09:48:55 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:75)
+2019/01/24 09:48:55 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1502)
+2019/01/24 09:48:55 | 	... 21 more
+2019/01/24 09:48:55 |  INFO [WrapperSimpleAppMain] - Stopping listener on port 8079
+2019/01/24 09:48:56 |  INFO [WrapperSimpleAppMain] - Listener on port 8079 has stopped
+2019/01/24 09:48:56 |  INFO [WrapperSimpleAppMain] - Closing HAPI Context Object
+2019/01/24 09:48:56 |  INFO [WrapperSimpleAppMain] - Done closing HAPI Context object
+2019/01/24 09:48:56 | 
+2019/01/24 09:48:56 | WrapperSimpleApp: Encountered an error running main: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'theSender' defined in file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]: Error setting property values; nested exception is org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+2019/01/24 09:48:56 | PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'urlString' threw exception; nested exception is java.lang.IllegalArgumentException: URL is not valid. Must be in the form http[s]:
+2019/01/24 09:48:56 | org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'theSender' defined in file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]: Error setting property values; nested exception is org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+2019/01/24 09:48:56 | PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'urlString' threw exception; nested exception is java.lang.IllegalArgumentException: URL is not valid. Must be in the form http[s]:
+2019/01/24 09:48:56 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1506)
+2019/01/24 09:48:56 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
+2019/01/24 09:48:56 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+2019/01/24 09:48:56 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+2019/01/24 09:48:56 | 	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+2019/01/24 09:48:56 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+2019/01/24 09:48:56 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+2019/01/24 09:48:56 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+2019/01/24 09:48:56 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:762)
+2019/01/24 09:48:56 | 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+2019/01/24 09:48:56 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+2019/01/24 09:48:56 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:140)
+2019/01/24 09:48:56 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:84)
+2019/01/24 09:48:56 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:34)
+2019/01/24 09:48:56 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:18)
+2019/01/24 09:48:56 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.main(Launcher.java:61)
+2019/01/24 09:48:56 | 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2019/01/24 09:48:56 | 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 09:48:56 | 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 09:48:56 | 	at java.lang.reflect.Method.invoke(Unknown Source)
+2019/01/24 09:48:56 | 	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:240)
+2019/01/24 09:48:56 | 	at java.lang.Thread.run(Unknown Source)
+2019/01/24 09:48:56 | Caused by: org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+2019/01/24 09:48:56 | PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'urlString' threw exception; nested exception is java.lang.IllegalArgumentException: URL is not valid. Must be in the form http[s]:
+2019/01/24 09:48:56 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:121)
+2019/01/24 09:48:56 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:75)
+2019/01/24 09:48:56 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1502)
+2019/01/24 09:48:56 | 	... 21 more
+2019/01/24 09:48:58 |  INFO [Thread-0] - Shutdown request detected, stopping all services
+2019/01/24 09:48:58 |  INFO [Thread-0] - Shutdown request completed
+2019/01/24 09:48:58 | <-- Wrapper Stopped
+2019/01/24 09:52:35 | --> Wrapper Started as Console
+2019/01/24 09:52:35 | Launching a JVM...
+2019/01/24 09:52:36 | Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+2019/01/24 09:52:36 |   Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+2019/01/24 09:52:36 | 
+2019/01/24 09:52:36 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay is starting. This software is Licensed under the Apache Software License (version 2.0) and is Copyright(c) 2012 University Health Network.
+2019/01/24 09:52:36 |  INFO [WrapperSimpleAppMain] - HL7 over HTTP (HAPI) library version 2.4-SNAPSHOT - Build null (2019-01-23 11:51:18)
+2019/01/24 09:52:36 |  INFO [WrapperSimpleAppMain] - Refreshing org.springframework.context.support.FileSystemXmlApplicationContext@53eb0e51: startup date [Thu Jan 24 09:52:36 EST 2019]; root of context hierarchy
+2019/01/24 09:52:36 |  INFO [WrapperSimpleAppMain] - Loading XML bean definitions from file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]
+2019/01/24 09:52:36 |  INFO [WrapperSimpleAppMain] - hapi.home is set to C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\.
+2019/01/24 09:52:36 |  INFO [WrapperSimpleAppMain] - HAPI version is: 2.3
+2019/01/24 09:52:36 |  WARN [WrapperSimpleAppMain] - No HL7 structure libraries found on the classpath!
+2019/01/24 09:52:36 |  INFO [WrapperSimpleAppMain] - Starting listener on port 8079
+2019/01/24 09:52:36 |  INFO [hoh-port-8079-worker-1] - Starting ConnectionCleaner service
+2019/01/24 09:52:36 |  INFO [hoh-port-8079-worker-1] - Starting SimpleServer running on port 8079
+2019/01/24 09:52:37 |  INFO [WrapperSimpleAppMain] - Listener on port 8079 has started, and is ready for processing
+2019/01/24 09:52:37 |  WARN [WrapperSimpleAppMain] - Exception encountered during context initialization - cancelling refresh attempt
+2019/01/24 09:52:37 | org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'theSender' defined in file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]: Error setting property values; nested exception is org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+2019/01/24 09:52:37 | PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'urlString' threw exception; nested exception is java.lang.IllegalArgumentException: URL is not valid. Must be in the form http[s]:
+2019/01/24 09:52:37 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1506)
+2019/01/24 09:52:37 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
+2019/01/24 09:52:37 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+2019/01/24 09:52:37 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+2019/01/24 09:52:37 | 	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+2019/01/24 09:52:37 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+2019/01/24 09:52:37 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+2019/01/24 09:52:37 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+2019/01/24 09:52:37 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:762)
+2019/01/24 09:52:37 | 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+2019/01/24 09:52:37 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+2019/01/24 09:52:37 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:140)
+2019/01/24 09:52:37 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:84)
+2019/01/24 09:52:37 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:34)
+2019/01/24 09:52:37 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:18)
+2019/01/24 09:52:37 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.main(Launcher.java:61)
+2019/01/24 09:52:37 | 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2019/01/24 09:52:37 | 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 09:52:37 | 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 09:52:37 | 	at java.lang.reflect.Method.invoke(Unknown Source)
+2019/01/24 09:52:37 | 	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:240)
+2019/01/24 09:52:37 | 	at java.lang.Thread.run(Unknown Source)
+2019/01/24 09:52:37 | Caused by: org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+2019/01/24 09:52:37 | PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'urlString' threw exception; nested exception is java.lang.IllegalArgumentException: URL is not valid. Must be in the form http[s]:
+2019/01/24 09:52:37 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:121)
+2019/01/24 09:52:37 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:75)
+2019/01/24 09:52:37 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1502)
+2019/01/24 09:52:37 | 	... 21 more
+2019/01/24 09:52:37 |  INFO [WrapperSimpleAppMain] - Stopping listener on port 8079
+2019/01/24 09:52:38 |  INFO [WrapperSimpleAppMain] - Listener on port 8079 has stopped
+2019/01/24 09:52:38 |  INFO [WrapperSimpleAppMain] - Closing HAPI Context Object
+2019/01/24 09:52:38 |  INFO [WrapperSimpleAppMain] - Done closing HAPI Context object
+2019/01/24 09:52:38 | 
+2019/01/24 09:52:38 | WrapperSimpleApp: Encountered an error running main: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'theSender' defined in file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]: Error setting property values; nested exception is org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+2019/01/24 09:52:38 | PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'urlString' threw exception; nested exception is java.lang.IllegalArgumentException: URL is not valid. Must be in the form http[s]:
+2019/01/24 09:52:38 | org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'theSender' defined in file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]: Error setting property values; nested exception is org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+2019/01/24 09:52:38 | PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'urlString' threw exception; nested exception is java.lang.IllegalArgumentException: URL is not valid. Must be in the form http[s]:
+2019/01/24 09:52:38 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1506)
+2019/01/24 09:52:38 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
+2019/01/24 09:52:38 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+2019/01/24 09:52:38 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+2019/01/24 09:52:38 | 	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+2019/01/24 09:52:38 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+2019/01/24 09:52:38 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+2019/01/24 09:52:38 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+2019/01/24 09:52:38 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:762)
+2019/01/24 09:52:38 | 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+2019/01/24 09:52:38 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+2019/01/24 09:52:38 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:140)
+2019/01/24 09:52:38 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:84)
+2019/01/24 09:52:38 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:34)
+2019/01/24 09:52:38 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:18)
+2019/01/24 09:52:38 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.main(Launcher.java:61)
+2019/01/24 09:52:38 | 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2019/01/24 09:52:38 | 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 09:52:38 | 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 09:52:38 | 	at java.lang.reflect.Method.invoke(Unknown Source)
+2019/01/24 09:52:38 | 	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:240)
+2019/01/24 09:52:38 | 	at java.lang.Thread.run(Unknown Source)
+2019/01/24 09:52:38 | Caused by: org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+2019/01/24 09:52:38 | PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'urlString' threw exception; nested exception is java.lang.IllegalArgumentException: URL is not valid. Must be in the form http[s]:
+2019/01/24 09:52:38 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:121)
+2019/01/24 09:52:38 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:75)
+2019/01/24 09:52:38 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1502)
+2019/01/24 09:52:38 | 	... 21 more
+2019/01/24 09:52:40 |  INFO [Thread-0] - Shutdown request detected, stopping all services
+2019/01/24 09:52:40 |  INFO [Thread-0] - Shutdown request completed
+2019/01/24 09:52:40 | <-- Wrapper Stopped
+2019/01/24 09:55:24 | --> Wrapper Started as Console
+2019/01/24 09:55:24 | Launching a JVM...
+2019/01/24 09:55:24 | Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+2019/01/24 09:55:24 |   Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+2019/01/24 09:55:24 | 
+2019/01/24 09:55:25 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay is starting. This software is Licensed under the Apache Software License (version 2.0) and is Copyright(c) 2012 University Health Network.
+2019/01/24 09:55:25 |  INFO [WrapperSimpleAppMain] - HL7 over HTTP (HAPI) library version 2.4-SNAPSHOT - Build null (2019-01-23 11:51:18)
+2019/01/24 09:55:25 |  INFO [WrapperSimpleAppMain] - Refreshing org.springframework.context.support.FileSystemXmlApplicationContext@53eb0e51: startup date [Thu Jan 24 09:55:25 EST 2019]; root of context hierarchy
+2019/01/24 09:55:25 |  INFO [WrapperSimpleAppMain] - Loading XML bean definitions from file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]
+2019/01/24 09:55:25 | 
+2019/01/24 09:55:25 | WrapperSimpleApp: Encountered an error running main: org.springframework.beans.factory.xml.XmlBeanDefinitionStoreException: Line 20 in XML document from file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml] is invalid; nested exception is org.xml.sax.SAXParseException; lineNumber: 20; columnNumber: 86; cvc-elt.1: Cannot find the declaration of element 'bean'.
+2019/01/24 09:55:25 | org.springframework.beans.factory.xml.XmlBeanDefinitionStoreException: Line 20 in XML document from file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml] is invalid; nested exception is org.xml.sax.SAXParseException; lineNumber: 20; columnNumber: 86; cvc-elt.1: Cannot find the declaration of element 'bean'.
+2019/01/24 09:55:25 | 	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.doLoadBeanDefinitions(XmlBeanDefinitionReader.java:399)
+2019/01/24 09:55:25 | 	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:336)
+2019/01/24 09:55:25 | 	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:304)
+2019/01/24 09:55:25 | 	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:181)
+2019/01/24 09:55:25 | 	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:217)
+2019/01/24 09:55:25 | 	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:188)
+2019/01/24 09:55:25 | 	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:252)
+2019/01/24 09:55:25 | 	at org.springframework.context.support.AbstractXmlApplicationContext.loadBeanDefinitions(AbstractXmlApplicationContext.java:127)
+2019/01/24 09:55:25 | 	at org.springframework.context.support.AbstractXmlApplicationContext.loadBeanDefinitions(AbstractXmlApplicationContext.java:93)
+2019/01/24 09:55:25 | 	at org.springframework.context.support.AbstractRefreshableApplicationContext.refreshBeanFactory(AbstractRefreshableApplicationContext.java:129)
+2019/01/24 09:55:25 | 	at org.springframework.context.support.AbstractApplicationContext.obtainFreshBeanFactory(AbstractApplicationContext.java:537)
+2019/01/24 09:55:25 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:452)
+2019/01/24 09:55:25 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:140)
+2019/01/24 09:55:25 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:84)
+2019/01/24 09:55:25 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:34)
+2019/01/24 09:55:25 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:18)
+2019/01/24 09:55:25 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.main(Launcher.java:61)
+2019/01/24 09:55:25 | 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2019/01/24 09:55:25 | 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 09:55:25 | 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 09:55:25 | 	at java.lang.reflect.Method.invoke(Unknown Source)
+2019/01/24 09:55:25 | 	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:240)
+2019/01/24 09:55:25 | 	at java.lang.Thread.run(Unknown Source)
+2019/01/24 09:55:25 | Caused by: org.xml.sax.SAXParseException; lineNumber: 20; columnNumber: 86; cvc-elt.1: Cannot find the declaration of element 'bean'.
+2019/01/24 09:55:25 | 	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(Unknown Source)
+2019/01/24 09:55:25 | 	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.error(Unknown Source)
+2019/01/24 09:55:25 | 	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(Unknown Source)
+2019/01/24 09:55:25 | 	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(Unknown Source)
+2019/01/24 09:55:25 | 	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(Unknown Source)
+2019/01/24 09:55:25 | 	at com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaValidator.handleStartElement(Unknown Source)
+2019/01/24 09:55:25 | 	at com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaValidator.startElement(Unknown Source)
+2019/01/24 09:55:25 | 	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.scanStartElement(Unknown Source)
+2019/01/24 09:55:25 | 	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl$NSContentDriver.scanRootElementHook(Unknown Source)
+2019/01/24 09:55:25 | 	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(Unknown Source)
+2019/01/24 09:55:25 | 	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(Unknown Source)
+2019/01/24 09:55:25 | 	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(Unknown Source)
+2019/01/24 09:55:25 | 	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(Unknown Source)
+2019/01/24 09:55:25 | 	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(Unknown Source)
+2019/01/24 09:55:25 | 	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(Unknown Source)
+2019/01/24 09:55:25 | 	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(Unknown Source)
+2019/01/24 09:55:25 | 	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(Unknown Source)
+2019/01/24 09:55:25 | 	at com.sun.org.apache.xerces.internal.parsers.DOMParser.parse(Unknown Source)
+2019/01/24 09:55:25 | 	at com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderImpl.parse(Unknown Source)
+2019/01/24 09:55:25 | 	at org.springframework.beans.factory.xml.DefaultDocumentLoader.loadDocument(DefaultDocumentLoader.java:76)
+2019/01/24 09:55:25 | 	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.doLoadDocument(XmlBeanDefinitionReader.java:429)
+2019/01/24 09:55:25 | 	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.doLoadBeanDefinitions(XmlBeanDefinitionReader.java:391)
+2019/01/24 09:55:25 | 	... 22 more
+2019/01/24 09:55:27 |  INFO [Thread-0] - Shutdown request detected, stopping all services
+2019/01/24 09:55:27 |  INFO [Thread-0] - Shutdown request completed
+2019/01/24 09:55:27 | <-- Wrapper Stopped
+2019/01/24 09:56:12 | --> Wrapper Started as Console
+2019/01/24 09:56:12 | Launching a JVM...
+2019/01/24 09:56:12 | Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+2019/01/24 09:56:12 |   Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+2019/01/24 09:56:12 | 
+2019/01/24 09:56:12 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay is starting. This software is Licensed under the Apache Software License (version 2.0) and is Copyright(c) 2012 University Health Network.
+2019/01/24 09:56:12 |  INFO [WrapperSimpleAppMain] - HL7 over HTTP (HAPI) library version 2.4-SNAPSHOT - Build null (2019-01-23 11:51:18)
+2019/01/24 09:56:12 |  INFO [WrapperSimpleAppMain] - Refreshing org.springframework.context.support.FileSystemXmlApplicationContext@1095adbe: startup date [Thu Jan 24 09:56:12 EST 2019]; root of context hierarchy
+2019/01/24 09:56:13 |  INFO [WrapperSimpleAppMain] - Loading XML bean definitions from file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]
+2019/01/24 09:56:13 | 
+2019/01/24 09:56:13 | WrapperSimpleApp: Encountered an error running main: org.springframework.beans.factory.xml.XmlBeanDefinitionStoreException: Line 20 in XML document from file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml] is invalid; nested exception is org.xml.sax.SAXParseException; lineNumber: 20; columnNumber: 86; cvc-elt.1: Cannot find the declaration of element 'bean'.
+2019/01/24 09:56:13 | org.springframework.beans.factory.xml.XmlBeanDefinitionStoreException: Line 20 in XML document from file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml] is invalid; nested exception is org.xml.sax.SAXParseException; lineNumber: 20; columnNumber: 86; cvc-elt.1: Cannot find the declaration of element 'bean'.
+2019/01/24 09:56:13 | 	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.doLoadBeanDefinitions(XmlBeanDefinitionReader.java:399)
+2019/01/24 09:56:13 | 	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:336)
+2019/01/24 09:56:13 | 	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:304)
+2019/01/24 09:56:13 | 	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:181)
+2019/01/24 09:56:13 | 	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:217)
+2019/01/24 09:56:13 | 	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:188)
+2019/01/24 09:56:13 | 	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:252)
+2019/01/24 09:56:13 | 	at org.springframework.context.support.AbstractXmlApplicationContext.loadBeanDefinitions(AbstractXmlApplicationContext.java:127)
+2019/01/24 09:56:13 | 	at org.springframework.context.support.AbstractXmlApplicationContext.loadBeanDefinitions(AbstractXmlApplicationContext.java:93)
+2019/01/24 09:56:13 | 	at org.springframework.context.support.AbstractRefreshableApplicationContext.refreshBeanFactory(AbstractRefreshableApplicationContext.java:129)
+2019/01/24 09:56:13 | 	at org.springframework.context.support.AbstractApplicationContext.obtainFreshBeanFactory(AbstractApplicationContext.java:537)
+2019/01/24 09:56:13 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:452)
+2019/01/24 09:56:13 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:140)
+2019/01/24 09:56:13 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:84)
+2019/01/24 09:56:13 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:34)
+2019/01/24 09:56:13 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:18)
+2019/01/24 09:56:13 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.main(Launcher.java:61)
+2019/01/24 09:56:13 | 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2019/01/24 09:56:13 | 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 09:56:13 | 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 09:56:13 | 	at java.lang.reflect.Method.invoke(Unknown Source)
+2019/01/24 09:56:13 | 	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:240)
+2019/01/24 09:56:13 | 	at java.lang.Thread.run(Unknown Source)
+2019/01/24 09:56:13 | Caused by: org.xml.sax.SAXParseException; lineNumber: 20; columnNumber: 86; cvc-elt.1: Cannot find the declaration of element 'bean'.
+2019/01/24 09:56:13 | 	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(Unknown Source)
+2019/01/24 09:56:13 | 	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.error(Unknown Source)
+2019/01/24 09:56:13 | 	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(Unknown Source)
+2019/01/24 09:56:13 | 	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(Unknown Source)
+2019/01/24 09:56:13 | 	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(Unknown Source)
+2019/01/24 09:56:13 | 	at com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaValidator.handleStartElement(Unknown Source)
+2019/01/24 09:56:13 | 	at com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaValidator.startElement(Unknown Source)
+2019/01/24 09:56:13 | 	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.scanStartElement(Unknown Source)
+2019/01/24 09:56:13 | 	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl$NSContentDriver.scanRootElementHook(Unknown Source)
+2019/01/24 09:56:13 | 	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(Unknown Source)
+2019/01/24 09:56:13 | 	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(Unknown Source)
+2019/01/24 09:56:13 | 	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(Unknown Source)
+2019/01/24 09:56:13 | 	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(Unknown Source)
+2019/01/24 09:56:13 | 	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(Unknown Source)
+2019/01/24 09:56:13 | 	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(Unknown Source)
+2019/01/24 09:56:13 | 	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(Unknown Source)
+2019/01/24 09:56:13 | 	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(Unknown Source)
+2019/01/24 09:56:13 | 	at com.sun.org.apache.xerces.internal.parsers.DOMParser.parse(Unknown Source)
+2019/01/24 09:56:13 | 	at com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderImpl.parse(Unknown Source)
+2019/01/24 09:56:13 | 	at org.springframework.beans.factory.xml.DefaultDocumentLoader.loadDocument(DefaultDocumentLoader.java:76)
+2019/01/24 09:56:13 | 	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.doLoadDocument(XmlBeanDefinitionReader.java:429)
+2019/01/24 09:56:13 | 	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.doLoadBeanDefinitions(XmlBeanDefinitionReader.java:391)
+2019/01/24 09:56:13 | 	... 22 more
+2019/01/24 09:56:14 |  INFO [Thread-0] - Shutdown request detected, stopping all services
+2019/01/24 09:56:14 |  INFO [Thread-0] - Shutdown request completed
+2019/01/24 09:56:15 | <-- Wrapper Stopped
+2019/01/24 09:57:11 | --> Wrapper Started as Console
+2019/01/24 09:57:12 | Launching a JVM...
+2019/01/24 09:57:12 | Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+2019/01/24 09:57:12 |   Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+2019/01/24 09:57:12 | 
+2019/01/24 09:57:12 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay is starting. This software is Licensed under the Apache Software License (version 2.0) and is Copyright(c) 2012 University Health Network.
+2019/01/24 09:57:12 |  INFO [WrapperSimpleAppMain] - HL7 over HTTP (HAPI) library version 2.4-SNAPSHOT - Build null (2019-01-23 11:51:18)
+2019/01/24 09:57:12 |  INFO [WrapperSimpleAppMain] - Refreshing org.springframework.context.support.FileSystemXmlApplicationContext@53eb0e51: startup date [Thu Jan 24 09:57:12 EST 2019]; root of context hierarchy
+2019/01/24 09:57:12 |  INFO [WrapperSimpleAppMain] - Loading XML bean definitions from file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]
+2019/01/24 09:57:12 | 
+2019/01/24 09:57:12 | WrapperSimpleApp: Encountered an error running main: org.springframework.beans.factory.xml.XmlBeanDefinitionStoreException: Line 20 in XML document from file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml] is invalid; nested exception is org.xml.sax.SAXParseException; lineNumber: 20; columnNumber: 86; cvc-elt.1: Cannot find the declaration of element 'bean'.
+2019/01/24 09:57:12 | org.springframework.beans.factory.xml.XmlBeanDefinitionStoreException: Line 20 in XML document from file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml] is invalid; nested exception is org.xml.sax.SAXParseException; lineNumber: 20; columnNumber: 86; cvc-elt.1: Cannot find the declaration of element 'bean'.
+2019/01/24 09:57:12 | 	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.doLoadBeanDefinitions(XmlBeanDefinitionReader.java:399)
+2019/01/24 09:57:12 | 	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:336)
+2019/01/24 09:57:12 | 	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:304)
+2019/01/24 09:57:12 | 	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:181)
+2019/01/24 09:57:12 | 	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:217)
+2019/01/24 09:57:12 | 	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:188)
+2019/01/24 09:57:12 | 	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:252)
+2019/01/24 09:57:12 | 	at org.springframework.context.support.AbstractXmlApplicationContext.loadBeanDefinitions(AbstractXmlApplicationContext.java:127)
+2019/01/24 09:57:12 | 	at org.springframework.context.support.AbstractXmlApplicationContext.loadBeanDefinitions(AbstractXmlApplicationContext.java:93)
+2019/01/24 09:57:12 | 	at org.springframework.context.support.AbstractRefreshableApplicationContext.refreshBeanFactory(AbstractRefreshableApplicationContext.java:129)
+2019/01/24 09:57:12 | 	at org.springframework.context.support.AbstractApplicationContext.obtainFreshBeanFactory(AbstractApplicationContext.java:537)
+2019/01/24 09:57:12 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:452)
+2019/01/24 09:57:12 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:140)
+2019/01/24 09:57:12 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:84)
+2019/01/24 09:57:12 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:34)
+2019/01/24 09:57:12 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:18)
+2019/01/24 09:57:12 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.main(Launcher.java:61)
+2019/01/24 09:57:12 | 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2019/01/24 09:57:12 | 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 09:57:12 | 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 09:57:12 | 	at java.lang.reflect.Method.invoke(Unknown Source)
+2019/01/24 09:57:12 | 	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:240)
+2019/01/24 09:57:12 | 	at java.lang.Thread.run(Unknown Source)
+2019/01/24 09:57:12 | Caused by: org.xml.sax.SAXParseException; lineNumber: 20; columnNumber: 86; cvc-elt.1: Cannot find the declaration of element 'bean'.
+2019/01/24 09:57:12 | 	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(Unknown Source)
+2019/01/24 09:57:12 | 	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.error(Unknown Source)
+2019/01/24 09:57:12 | 	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(Unknown Source)
+2019/01/24 09:57:12 | 	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(Unknown Source)
+2019/01/24 09:57:12 | 	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(Unknown Source)
+2019/01/24 09:57:12 | 	at com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaValidator.handleStartElement(Unknown Source)
+2019/01/24 09:57:12 | 	at com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaValidator.startElement(Unknown Source)
+2019/01/24 09:57:12 | 	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.scanStartElement(Unknown Source)
+2019/01/24 09:57:12 | 	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl$NSContentDriver.scanRootElementHook(Unknown Source)
+2019/01/24 09:57:12 | 	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(Unknown Source)
+2019/01/24 09:57:12 | 	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(Unknown Source)
+2019/01/24 09:57:12 | 	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(Unknown Source)
+2019/01/24 09:57:12 | 	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(Unknown Source)
+2019/01/24 09:57:12 | 	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(Unknown Source)
+2019/01/24 09:57:12 | 	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(Unknown Source)
+2019/01/24 09:57:12 | 	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(Unknown Source)
+2019/01/24 09:57:12 | 	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(Unknown Source)
+2019/01/24 09:57:12 | 	at com.sun.org.apache.xerces.internal.parsers.DOMParser.parse(Unknown Source)
+2019/01/24 09:57:12 | 	at com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderImpl.parse(Unknown Source)
+2019/01/24 09:57:12 | 	at org.springframework.beans.factory.xml.DefaultDocumentLoader.loadDocument(DefaultDocumentLoader.java:76)
+2019/01/24 09:57:12 | 	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.doLoadDocument(XmlBeanDefinitionReader.java:429)
+2019/01/24 09:57:12 | 	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.doLoadBeanDefinitions(XmlBeanDefinitionReader.java:391)
+2019/01/24 09:57:12 | 	... 22 more
+2019/01/24 09:57:14 | CTRL-C trapped.  Shutting down.
+2019/01/24 09:57:14 |  INFO [Thread-0] - Shutdown request detected, stopping all services
+2019/01/24 09:57:14 |  INFO [Thread-0] - Shutdown request completed
+2019/01/24 09:57:14 | <-- Wrapper Stopped
+2019/01/24 09:57:51 | --> Wrapper Started as Console
+2019/01/24 09:57:51 | Launching a JVM...
+2019/01/24 09:57:51 | Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+2019/01/24 09:57:51 |   Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+2019/01/24 09:57:51 | 
+2019/01/24 09:57:51 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay is starting. This software is Licensed under the Apache Software License (version 2.0) and is Copyright(c) 2012 University Health Network.
+2019/01/24 09:57:51 |  INFO [WrapperSimpleAppMain] - HL7 over HTTP (HAPI) library version 2.4-SNAPSHOT - Build null (2019-01-23 11:51:18)
+2019/01/24 09:57:52 |  INFO [WrapperSimpleAppMain] - Refreshing org.springframework.context.support.FileSystemXmlApplicationContext@53eb0e51: startup date [Thu Jan 24 09:57:51 EST 2019]; root of context hierarchy
+2019/01/24 09:57:52 |  INFO [WrapperSimpleAppMain] - Loading XML bean definitions from file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]
+2019/01/24 09:57:52 |  INFO [WrapperSimpleAppMain] - hapi.home is set to C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\.
+2019/01/24 09:57:52 |  INFO [WrapperSimpleAppMain] - HAPI version is: 2.3
+2019/01/24 09:57:52 |  WARN [WrapperSimpleAppMain] - No HL7 structure libraries found on the classpath!
+2019/01/24 09:57:52 |  INFO [WrapperSimpleAppMain] - Starting listener on port 8079
+2019/01/24 09:57:52 |  INFO [hoh-port-8079-worker-1] - Starting ConnectionCleaner service
+2019/01/24 09:57:52 |  INFO [hoh-port-8079-worker-1] - Starting SimpleServer running on port 8079
+2019/01/24 09:57:52 |  INFO [WrapperSimpleAppMain] - Listener on port 8079 has started, and is ready for processing
+2019/01/24 09:57:52 |  WARN [WrapperSimpleAppMain] - Exception encountered during context initialization - cancelling refresh attempt
+2019/01/24 09:57:52 | org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'theSender' defined in file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]: Error setting property values; nested exception is org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+2019/01/24 09:57:52 | PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'urlString' threw exception; nested exception is java.lang.IllegalArgumentException: URL is not valid. Must be in the form http[s]:
+2019/01/24 09:57:52 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1506)
+2019/01/24 09:57:52 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
+2019/01/24 09:57:52 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+2019/01/24 09:57:52 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+2019/01/24 09:57:52 | 	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+2019/01/24 09:57:52 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+2019/01/24 09:57:52 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+2019/01/24 09:57:52 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+2019/01/24 09:57:52 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:762)
+2019/01/24 09:57:52 | 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+2019/01/24 09:57:52 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+2019/01/24 09:57:52 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:140)
+2019/01/24 09:57:52 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:84)
+2019/01/24 09:57:52 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:34)
+2019/01/24 09:57:52 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:18)
+2019/01/24 09:57:52 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.main(Launcher.java:61)
+2019/01/24 09:57:52 | 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2019/01/24 09:57:52 | 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 09:57:52 | 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 09:57:52 | 	at java.lang.reflect.Method.invoke(Unknown Source)
+2019/01/24 09:57:52 | 	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:240)
+2019/01/24 09:57:52 | 	at java.lang.Thread.run(Unknown Source)
+2019/01/24 09:57:52 | Caused by: org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+2019/01/24 09:57:52 | PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'urlString' threw exception; nested exception is java.lang.IllegalArgumentException: URL is not valid. Must be in the form http[s]:
+2019/01/24 09:57:52 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:121)
+2019/01/24 09:57:52 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:75)
+2019/01/24 09:57:52 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1502)
+2019/01/24 09:57:52 | 	... 21 more
+2019/01/24 09:57:52 |  INFO [WrapperSimpleAppMain] - Stopping listener on port 8079
+2019/01/24 09:57:53 |  INFO [WrapperSimpleAppMain] - Listener on port 8079 has stopped
+2019/01/24 09:57:53 |  INFO [WrapperSimpleAppMain] - Closing HAPI Context Object
+2019/01/24 09:57:53 |  INFO [WrapperSimpleAppMain] - Done closing HAPI Context object
+2019/01/24 09:57:53 | 
+2019/01/24 09:57:53 | WrapperSimpleApp: Encountered an error running main: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'theSender' defined in file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]: Error setting property values; nested exception is org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+2019/01/24 09:57:53 | PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'urlString' threw exception; nested exception is java.lang.IllegalArgumentException: URL is not valid. Must be in the form http[s]:
+2019/01/24 09:57:53 | org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'theSender' defined in file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]: Error setting property values; nested exception is org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+2019/01/24 09:57:53 | PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'urlString' threw exception; nested exception is java.lang.IllegalArgumentException: URL is not valid. Must be in the form http[s]:
+2019/01/24 09:57:53 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1506)
+2019/01/24 09:57:53 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
+2019/01/24 09:57:53 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+2019/01/24 09:57:53 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+2019/01/24 09:57:53 | 	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+2019/01/24 09:57:53 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+2019/01/24 09:57:53 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+2019/01/24 09:57:53 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+2019/01/24 09:57:53 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:762)
+2019/01/24 09:57:53 | 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+2019/01/24 09:57:53 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+2019/01/24 09:57:53 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:140)
+2019/01/24 09:57:53 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:84)
+2019/01/24 09:57:53 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:34)
+2019/01/24 09:57:53 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:18)
+2019/01/24 09:57:53 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.main(Launcher.java:61)
+2019/01/24 09:57:53 | 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2019/01/24 09:57:53 | 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 09:57:53 | 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 09:57:53 | 	at java.lang.reflect.Method.invoke(Unknown Source)
+2019/01/24 09:57:53 | 	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:240)
+2019/01/24 09:57:53 | 	at java.lang.Thread.run(Unknown Source)
+2019/01/24 09:57:53 | Caused by: org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+2019/01/24 09:57:53 | PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'urlString' threw exception; nested exception is java.lang.IllegalArgumentException: URL is not valid. Must be in the form http[s]:
+2019/01/24 09:57:53 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:121)
+2019/01/24 09:57:53 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:75)
+2019/01/24 09:57:53 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1502)
+2019/01/24 09:57:53 | 	... 21 more
+2019/01/24 09:57:55 |  INFO [Thread-0] - Shutdown request detected, stopping all services
+2019/01/24 09:57:55 |  INFO [Thread-0] - Shutdown request completed
+2019/01/24 09:57:55 | <-- Wrapper Stopped
+2019/01/24 09:58:26 | --> Wrapper Started as Console
+2019/01/24 09:58:26 | Launching a JVM...
+2019/01/24 09:58:26 | Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+2019/01/24 09:58:26 |   Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+2019/01/24 09:58:26 | 
+2019/01/24 09:58:26 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay is starting. This software is Licensed under the Apache Software License (version 2.0) and is Copyright(c) 2012 University Health Network.
+2019/01/24 09:58:26 |  INFO [WrapperSimpleAppMain] - HL7 over HTTP (HAPI) library version 2.4-SNAPSHOT - Build null (2019-01-23 11:51:18)
+2019/01/24 09:58:27 |  INFO [WrapperSimpleAppMain] - Refreshing org.springframework.context.support.FileSystemXmlApplicationContext@53eb0e51: startup date [Thu Jan 24 09:58:26 EST 2019]; root of context hierarchy
+2019/01/24 09:58:27 |  INFO [WrapperSimpleAppMain] - Loading XML bean definitions from file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]
+2019/01/24 09:58:27 |  INFO [WrapperSimpleAppMain] - hapi.home is set to C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\.
+2019/01/24 09:58:27 |  INFO [WrapperSimpleAppMain] - HAPI version is: 2.3
+2019/01/24 09:58:27 |  WARN [WrapperSimpleAppMain] - No HL7 structure libraries found on the classpath!
+2019/01/24 09:58:27 |  INFO [WrapperSimpleAppMain] - Starting listener on port 8079
+2019/01/24 09:58:27 |  INFO [hoh-port-8079-worker-1] - Starting ConnectionCleaner service
+2019/01/24 09:58:27 |  INFO [hoh-port-8079-worker-1] - Starting SimpleServer running on port 8079
+2019/01/24 09:58:27 |  INFO [WrapperSimpleAppMain] - Listener on port 8079 has started, and is ready for processing
+2019/01/24 09:58:27 |  INFO [WrapperSimpleAppMain] - Sender [theSender] will transmit by HL7 over HTTP to https://mshlshl7transform.azurewebsites.net/api/TransformHL7SaveToDB
+2019/01/24 09:58:27 |  INFO [WrapperSimpleAppMain] - Binding sender[theSender] to listener[theListener] for messages with profile[MsgType:* / MsgTrigger:* / Version:* / Processing:*]
+2019/01/24 09:58:27 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay started in 949 ms
+2019/01/24 09:58:35 | CTRL-C trapped.  Shutting down.
+2019/01/24 09:58:37 |  INFO [Thread-0] - Shutdown request detected, stopping all services
+2019/01/24 09:58:37 |  INFO [Thread-0] - Closing org.springframework.context.support.FileSystemXmlApplicationContext@53eb0e51: startup date [Thu Jan 24 09:58:26 EST 2019]; root of context hierarchy
+2019/01/24 09:58:37 |  INFO [Thread-0] - Stopping listener on port 8079
+2019/01/24 09:58:37 |  INFO [Thread-0] - Listener on port 8079 has stopped
+2019/01/24 09:58:37 |  INFO [Thread-0] - Closing HAPI Context Object
+2019/01/24 09:58:37 |  INFO [Thread-0] - Done closing HAPI Context object
+2019/01/24 09:58:37 |  INFO [Thread-0] - Shutdown request completed
+2019/01/24 09:58:38 | <-- Wrapper Stopped
+2019/01/24 10:51:08 | --> Wrapper Started as Console
+2019/01/24 10:51:08 | Launching a JVM...
+2019/01/24 10:51:10 | Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+2019/01/24 10:51:10 |   Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+2019/01/24 10:51:10 | 
+2019/01/24 10:51:10 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay is starting. This software is Licensed under the Apache Software License (version 2.0) and is Copyright(c) 2012 University Health Network.
+2019/01/24 10:51:10 |  INFO [WrapperSimpleAppMain] - HL7 over HTTP (HAPI) library version 2.4-SNAPSHOT - Build null (2019-01-24 10:42:31)
+2019/01/24 10:51:10 |  INFO [WrapperSimpleAppMain] - Refreshing org.springframework.context.support.FileSystemXmlApplicationContext@62791a1e: startup date [Thu Jan 24 10:51:10 EST 2019]; root of context hierarchy
+2019/01/24 10:51:10 |  INFO [WrapperSimpleAppMain] - Loading XML bean definitions from file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]
+2019/01/24 10:51:10 |  INFO [WrapperSimpleAppMain] - hapi.home is set to C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\.
+2019/01/24 10:51:10 |  INFO [WrapperSimpleAppMain] - HAPI version is: 2.3
+2019/01/24 10:51:10 |  WARN [WrapperSimpleAppMain] - No HL7 structure libraries found on the classpath!
+2019/01/24 10:51:10 |  INFO [WrapperSimpleAppMain] - Starting listener on port 8079
+2019/01/24 10:51:10 |  INFO [hoh-port-8079-worker-1] - Starting ConnectionCleaner service
+2019/01/24 10:51:10 |  INFO [hoh-port-8079-worker-1] - Starting SimpleServer running on port 8079
+2019/01/24 10:51:11 |  INFO [WrapperSimpleAppMain] - Listener on port 8079 has started, and is ready for processing
+2019/01/24 10:51:11 |  WARN [WrapperSimpleAppMain] - Exception encountered during context initialization - cancelling refresh attempt
+2019/01/24 10:51:11 | org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'theSender' defined in file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]: Error setting property values; nested exception is org.springframework.beans.NotWritablePropertyException: Invalid property 'extraHeaders' of bean class [ca.uhn.hl7v2.hoh.relay.sender.RelayHttpSender]: Bean property 'extraHeaders' is not writable or has an invalid setter method. Does the parameter type of the setter match the return type of the getter?
+2019/01/24 10:51:11 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1506)
+2019/01/24 10:51:11 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
+2019/01/24 10:51:11 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+2019/01/24 10:51:11 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+2019/01/24 10:51:11 | 	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+2019/01/24 10:51:11 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+2019/01/24 10:51:11 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+2019/01/24 10:51:11 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+2019/01/24 10:51:11 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:762)
+2019/01/24 10:51:11 | 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+2019/01/24 10:51:11 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+2019/01/24 10:51:11 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:140)
+2019/01/24 10:51:11 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:84)
+2019/01/24 10:51:11 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:34)
+2019/01/24 10:51:11 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:18)
+2019/01/24 10:51:11 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.main(Launcher.java:61)
+2019/01/24 10:51:11 | 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2019/01/24 10:51:11 | 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 10:51:11 | 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 10:51:11 | 	at java.lang.reflect.Method.invoke(Unknown Source)
+2019/01/24 10:51:11 | 	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:240)
+2019/01/24 10:51:11 | 	at java.lang.Thread.run(Unknown Source)
+2019/01/24 10:51:11 | Caused by: org.springframework.beans.NotWritablePropertyException: Invalid property 'extraHeaders' of bean class [ca.uhn.hl7v2.hoh.relay.sender.RelayHttpSender]: Bean property 'extraHeaders' is not writable or has an invalid setter method. Does the parameter type of the setter match the return type of the getter?
+2019/01/24 10:51:11 | 	at org.springframework.beans.BeanWrapperImpl.setPropertyValue(BeanWrapperImpl.java:1067)
+2019/01/24 10:51:11 | 	at org.springframework.beans.BeanWrapperImpl.setPropertyValue(BeanWrapperImpl.java:926)
+2019/01/24 10:51:11 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:95)
+2019/01/24 10:51:11 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:75)
+2019/01/24 10:51:11 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1502)
+2019/01/24 10:51:11 | 	... 21 more
+2019/01/24 10:51:11 |  INFO [WrapperSimpleAppMain] - Stopping listener on port 8079
+2019/01/24 10:51:12 |  INFO [WrapperSimpleAppMain] - Listener on port 8079 has stopped
+2019/01/24 10:51:12 |  INFO [WrapperSimpleAppMain] - Closing HAPI Context Object
+2019/01/24 10:51:12 |  INFO [WrapperSimpleAppMain] - Done closing HAPI Context object
+2019/01/24 10:51:12 | 
+2019/01/24 10:51:12 | WrapperSimpleApp: Encountered an error running main: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'theSender' defined in file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]: Error setting property values; nested exception is org.springframework.beans.NotWritablePropertyException: Invalid property 'extraHeaders' of bean class [ca.uhn.hl7v2.hoh.relay.sender.RelayHttpSender]: Bean property 'extraHeaders' is not writable or has an invalid setter method. Does the parameter type of the setter match the return type of the getter?
+2019/01/24 10:51:12 | org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'theSender' defined in file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]: Error setting property values; nested exception is org.springframework.beans.NotWritablePropertyException: Invalid property 'extraHeaders' of bean class [ca.uhn.hl7v2.hoh.relay.sender.RelayHttpSender]: Bean property 'extraHeaders' is not writable or has an invalid setter method. Does the parameter type of the setter match the return type of the getter?
+2019/01/24 10:51:12 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1506)
+2019/01/24 10:51:12 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
+2019/01/24 10:51:12 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+2019/01/24 10:51:12 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+2019/01/24 10:51:12 | 	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+2019/01/24 10:51:12 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+2019/01/24 10:51:12 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+2019/01/24 10:51:12 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+2019/01/24 10:51:12 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:762)
+2019/01/24 10:51:12 | 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+2019/01/24 10:51:12 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+2019/01/24 10:51:12 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:140)
+2019/01/24 10:51:12 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:84)
+2019/01/24 10:51:12 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:34)
+2019/01/24 10:51:12 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:18)
+2019/01/24 10:51:12 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.main(Launcher.java:61)
+2019/01/24 10:51:12 | 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2019/01/24 10:51:12 | 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 10:51:12 | 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 10:51:12 | 	at java.lang.reflect.Method.invoke(Unknown Source)
+2019/01/24 10:51:12 | 	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:240)
+2019/01/24 10:51:12 | 	at java.lang.Thread.run(Unknown Source)
+2019/01/24 10:51:12 | Caused by: org.springframework.beans.NotWritablePropertyException: Invalid property 'extraHeaders' of bean class [ca.uhn.hl7v2.hoh.relay.sender.RelayHttpSender]: Bean property 'extraHeaders' is not writable or has an invalid setter method. Does the parameter type of the setter match the return type of the getter?
+2019/01/24 10:51:12 | 	at org.springframework.beans.BeanWrapperImpl.setPropertyValue(BeanWrapperImpl.java:1067)
+2019/01/24 10:51:12 | 	at org.springframework.beans.BeanWrapperImpl.setPropertyValue(BeanWrapperImpl.java:926)
+2019/01/24 10:51:12 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:95)
+2019/01/24 10:51:12 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:75)
+2019/01/24 10:51:12 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1502)
+2019/01/24 10:51:12 | 	... 21 more
+2019/01/24 10:51:14 |  INFO [Thread-0] - Shutdown request detected, stopping all services
+2019/01/24 10:51:14 |  INFO [Thread-0] - Shutdown request completed
+2019/01/24 10:51:14 | <-- Wrapper Stopped
+2019/01/24 10:55:24 | --> Wrapper Started as Console
+2019/01/24 10:55:24 | Launching a JVM...
+2019/01/24 10:55:25 | Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+2019/01/24 10:55:25 |   Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+2019/01/24 10:55:25 | 
+2019/01/24 10:55:25 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay is starting. This software is Licensed under the Apache Software License (version 2.0) and is Copyright(c) 2012 University Health Network.
+2019/01/24 10:55:25 |  INFO [WrapperSimpleAppMain] - HL7 over HTTP (HAPI) library version 2.4-SNAPSHOT - Build null (2019-01-24 10:42:31)
+2019/01/24 10:55:25 |  INFO [WrapperSimpleAppMain] - Refreshing org.springframework.context.support.FileSystemXmlApplicationContext@53eb0e51: startup date [Thu Jan 24 10:55:25 EST 2019]; root of context hierarchy
+2019/01/24 10:55:25 |  INFO [WrapperSimpleAppMain] - Loading XML bean definitions from file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]
+2019/01/24 10:55:25 |  INFO [WrapperSimpleAppMain] - hapi.home is set to C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\.
+2019/01/24 10:55:25 |  INFO [WrapperSimpleAppMain] - HAPI version is: 2.3
+2019/01/24 10:55:25 |  WARN [WrapperSimpleAppMain] - No HL7 structure libraries found on the classpath!
+2019/01/24 10:55:25 |  INFO [WrapperSimpleAppMain] - Starting listener on port 8079
+2019/01/24 10:55:25 |  INFO [hoh-port-8079-worker-1] - Starting ConnectionCleaner service
+2019/01/24 10:55:25 |  INFO [hoh-port-8079-worker-1] - Starting SimpleServer running on port 8079
+2019/01/24 10:55:26 |  INFO [WrapperSimpleAppMain] - Listener on port 8079 has started, and is ready for processing
+2019/01/24 10:55:26 |  WARN [WrapperSimpleAppMain] - Exception encountered during context initialization - cancelling refresh attempt
+2019/01/24 10:55:26 | org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'theSender' defined in file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]: Error setting property values; nested exception is org.springframework.beans.NotWritablePropertyException: Invalid property 'ExtraHeaders' of bean class [ca.uhn.hl7v2.hoh.relay.sender.RelayHttpSender]: Bean property 'ExtraHeaders' is not writable or has an invalid setter method. Does the parameter type of the setter match the return type of the getter?
+2019/01/24 10:55:26 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1506)
+2019/01/24 10:55:26 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
+2019/01/24 10:55:26 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+2019/01/24 10:55:26 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+2019/01/24 10:55:26 | 	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+2019/01/24 10:55:26 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+2019/01/24 10:55:26 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+2019/01/24 10:55:26 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+2019/01/24 10:55:26 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:762)
+2019/01/24 10:55:26 | 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+2019/01/24 10:55:26 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+2019/01/24 10:55:26 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:140)
+2019/01/24 10:55:26 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:84)
+2019/01/24 10:55:26 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:34)
+2019/01/24 10:55:26 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:18)
+2019/01/24 10:55:26 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.main(Launcher.java:61)
+2019/01/24 10:55:26 | 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2019/01/24 10:55:26 | 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 10:55:26 | 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 10:55:26 | 	at java.lang.reflect.Method.invoke(Unknown Source)
+2019/01/24 10:55:26 | 	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:240)
+2019/01/24 10:55:26 | 	at java.lang.Thread.run(Unknown Source)
+2019/01/24 10:55:26 | Caused by: org.springframework.beans.NotWritablePropertyException: Invalid property 'ExtraHeaders' of bean class [ca.uhn.hl7v2.hoh.relay.sender.RelayHttpSender]: Bean property 'ExtraHeaders' is not writable or has an invalid setter method. Does the parameter type of the setter match the return type of the getter?
+2019/01/24 10:55:26 | 	at org.springframework.beans.BeanWrapperImpl.setPropertyValue(BeanWrapperImpl.java:1067)
+2019/01/24 10:55:26 | 	at org.springframework.beans.BeanWrapperImpl.setPropertyValue(BeanWrapperImpl.java:926)
+2019/01/24 10:55:26 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:95)
+2019/01/24 10:55:26 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:75)
+2019/01/24 10:55:26 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1502)
+2019/01/24 10:55:26 | 	... 21 more
+2019/01/24 10:55:26 |  INFO [WrapperSimpleAppMain] - Stopping listener on port 8079
+2019/01/24 10:55:27 |  INFO [WrapperSimpleAppMain] - Listener on port 8079 has stopped
+2019/01/24 10:55:27 |  INFO [WrapperSimpleAppMain] - Closing HAPI Context Object
+2019/01/24 10:55:27 |  INFO [WrapperSimpleAppMain] - Done closing HAPI Context object
+2019/01/24 10:55:27 | 
+2019/01/24 10:55:27 | WrapperSimpleApp: Encountered an error running main: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'theSender' defined in file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]: Error setting property values; nested exception is org.springframework.beans.NotWritablePropertyException: Invalid property 'ExtraHeaders' of bean class [ca.uhn.hl7v2.hoh.relay.sender.RelayHttpSender]: Bean property 'ExtraHeaders' is not writable or has an invalid setter method. Does the parameter type of the setter match the return type of the getter?
+2019/01/24 10:55:27 | org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'theSender' defined in file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]: Error setting property values; nested exception is org.springframework.beans.NotWritablePropertyException: Invalid property 'ExtraHeaders' of bean class [ca.uhn.hl7v2.hoh.relay.sender.RelayHttpSender]: Bean property 'ExtraHeaders' is not writable or has an invalid setter method. Does the parameter type of the setter match the return type of the getter?
+2019/01/24 10:55:27 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1506)
+2019/01/24 10:55:27 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
+2019/01/24 10:55:27 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+2019/01/24 10:55:27 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+2019/01/24 10:55:27 | 	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+2019/01/24 10:55:27 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+2019/01/24 10:55:27 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+2019/01/24 10:55:27 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+2019/01/24 10:55:27 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:762)
+2019/01/24 10:55:27 | 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+2019/01/24 10:55:27 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+2019/01/24 10:55:27 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:140)
+2019/01/24 10:55:27 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:84)
+2019/01/24 10:55:27 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:34)
+2019/01/24 10:55:27 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:18)
+2019/01/24 10:55:27 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.main(Launcher.java:61)
+2019/01/24 10:55:27 | 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2019/01/24 10:55:27 | 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 10:55:27 | 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+2019/01/24 10:55:27 | 	at java.lang.reflect.Method.invoke(Unknown Source)
+2019/01/24 10:55:27 | 	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:240)
+2019/01/24 10:55:27 | 	at java.lang.Thread.run(Unknown Source)
+2019/01/24 10:55:27 | Caused by: org.springframework.beans.NotWritablePropertyException: Invalid property 'ExtraHeaders' of bean class [ca.uhn.hl7v2.hoh.relay.sender.RelayHttpSender]: Bean property 'ExtraHeaders' is not writable or has an invalid setter method. Does the parameter type of the setter match the return type of the getter?
+2019/01/24 10:55:27 | 	at org.springframework.beans.BeanWrapperImpl.setPropertyValue(BeanWrapperImpl.java:1067)
+2019/01/24 10:55:27 | 	at org.springframework.beans.BeanWrapperImpl.setPropertyValue(BeanWrapperImpl.java:926)
+2019/01/24 10:55:27 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:95)
+2019/01/24 10:55:27 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:75)
+2019/01/24 10:55:27 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1502)
+2019/01/24 10:55:27 | 	... 21 more
+2019/01/24 10:55:29 |  INFO [Thread-0] - Shutdown request detected, stopping all services
+2019/01/24 10:55:29 |  INFO [Thread-0] - Shutdown request completed
+2019/01/24 10:55:29 | <-- Wrapper Stopped
+2019/01/24 11:21:55 | --> Wrapper Started as Console
+2019/01/24 11:21:55 | Launching a JVM...
+2019/01/24 11:21:56 | Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+2019/01/24 11:21:56 |   Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+2019/01/24 11:21:56 | 
+2019/01/24 11:21:56 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay is starting. This software is Licensed under the Apache Software License (version 2.0) and is Copyright(c) 2012 University Health Network.
+2019/01/24 11:21:56 |  INFO [WrapperSimpleAppMain] - HL7 over HTTP (HAPI) library version 2.4-SNAPSHOT - Build null (2019-01-24 11:17:53)
+2019/01/24 11:21:56 |  INFO [WrapperSimpleAppMain] - Refreshing org.springframework.context.support.FileSystemXmlApplicationContext@53eb0e51: startup date [Thu Jan 24 11:21:56 EST 2019]; root of context hierarchy
+2019/01/24 11:21:56 |  INFO [WrapperSimpleAppMain] - Loading XML bean definitions from file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]
+2019/01/24 11:21:56 |  INFO [WrapperSimpleAppMain] - hapi.home is set to C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\.
+2019/01/24 11:21:56 |  INFO [WrapperSimpleAppMain] - HAPI version is: 2.3
+2019/01/24 11:21:56 |  WARN [WrapperSimpleAppMain] - No HL7 structure libraries found on the classpath!
+2019/01/24 11:21:56 |  INFO [WrapperSimpleAppMain] - Starting listener on port 8079
+2019/01/24 11:21:56 |  INFO [hoh-port-8079-worker-1] - Starting ConnectionCleaner service
+2019/01/24 11:21:56 |  INFO [hoh-port-8079-worker-1] - Starting SimpleServer running on port 8079
+2019/01/24 11:21:57 |  INFO [WrapperSimpleAppMain] - Listener on port 8079 has started, and is ready for processing
+2019/01/24 11:21:57 |  INFO [WrapperSimpleAppMain] - Sender [theSender] will transmit by HL7 over HTTP to https://mshlshl7transform.azurewebsites.net/api/TransformHL7SaveToDB
+2019/01/24 11:21:57 |  INFO [WrapperSimpleAppMain] - Binding sender[theSender] to listener[theListener] for messages with profile[MsgType:* / MsgTrigger:* / Version:* / Processing:*]
+2019/01/24 11:21:57 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay started in 1018 ms
+2019/01/24 11:23:02 |  INFO [hoh-port-8079-worker-1] - Accepted connection from 127.0.0.1:55268 on local port 8079
+2019/01/24 11:23:13 |  INFO [hoh-port-8079-worker-5] - Relaying message (870 bytes) with ID Q123456789T123456789X123456 from 127.0.0.1:55268 to URL https://mshlshl7transform.azurewebsites.net/api/TransformHL7SaveToDB
+2019/01/24 11:23:13 |  INFO [hoh-port-8079-worker-5] - Creating new remote connection to mshlshl7transform.azurewebsites.net:443
+2019/01/24 11:23:15 | ERROR [hoh-port-8079-worker-5] - Attempting to send error message to remote system.
+2019/01/24 11:23:15 | java.lang.NullPointerException
+2019/01/24 11:23:15 | 	at ca.uhn.hl7v2.hoh.raw.client.AbstractRawClient.doSendAndReceiveInternal(AbstractRawClient.java:152)
+2019/01/24 11:23:15 | 	at ca.uhn.hl7v2.hoh.raw.client.AbstractRawClient.sendAndReceive(AbstractRawClient.java:303)
+2019/01/24 11:23:15 | 	at ca.uhn.hl7v2.hoh.hapi.client.AbstractClient.sendAndReceiveMessage(AbstractClient.java:170)
+2019/01/24 11:23:15 | 	at ca.uhn.hl7v2.hoh.relay.sender.RelayHttpSender.processMessage(RelayHttpSender.java:83)
+2019/01/24 11:23:15 | 	at ca.uhn.hl7v2.protocol.impl.ApplicationRouterImpl.processMessage(ApplicationRouterImpl.java:174)
+2019/01/24 11:23:15 | 	at ca.uhn.hl7v2.protocol.impl.ApplicationRouterImpl.processMessage(ApplicationRouterImpl.java:105)
+2019/01/24 11:23:15 | 	at ca.uhn.hl7v2.app.Responder.processMessage(Responder.java:91)
+2019/01/24 11:23:15 | 	at ca.uhn.hl7v2.app.Receiver$Grunt.run(Receiver.java:127)
+2019/01/24 11:23:15 | 	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+2019/01/24 11:23:15 | 	at java.util.concurrent.FutureTask.run(Unknown Source)
+2019/01/24 11:23:15 | 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+2019/01/24 11:23:15 | 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+2019/01/24 11:23:15 | 	at java.lang.Thread.run(Unknown Source)
+2019/01/24 11:23:25 |  INFO [pool-1-thread-1] - Closing idle socket with local port 55269 because it has been idle since Thu Jan 24 11:23:15 EST 2019
+2019/01/24 11:39:23 | CTRL-C trapped.  Shutting down.
+2019/01/24 11:39:24 |  INFO [Thread-0] - Shutdown request detected, stopping all services
+2019/01/24 11:39:24 |  INFO [Thread-0] - Closing org.springframework.context.support.FileSystemXmlApplicationContext@53eb0e51: startup date [Thu Jan 24 11:21:56 EST 2019]; root of context hierarchy
+2019/01/24 11:39:24 |  INFO [Thread-0] - Stopping listener on port 8079
+2019/01/24 11:39:25 |  INFO [Thread-0] - Listener on port 8079 has stopped
+2019/01/24 11:39:25 |  INFO [Thread-0] - Closing HAPI Context Object
+2019/01/24 11:39:25 |  INFO [hoh-port-8079-worker-4] - SocketException on read() attempt.  Socket appears to have been closed: Socket Closed
+2019/01/24 11:39:25 |  INFO [hoh-port-8079-worker-4] - SocketException: closing Connection from 127.0.0.1:55268, will no longer read messages with this Receiver: Socket Closed
+2019/01/24 11:39:25 |  INFO [Thread-0] - Done closing HAPI Context object
+2019/01/24 11:39:25 |  INFO [Thread-0] - Shutdown request completed
+2019/01/24 11:39:25 | <-- Wrapper Stopped
+2019/01/24 11:42:48 | --> Wrapper Started as Console
+2019/01/24 11:42:48 | Launching a JVM...
+2019/01/24 11:42:49 | Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+2019/01/24 11:42:49 |   Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+2019/01/24 11:42:49 | 
+2019/01/24 11:42:49 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay is starting. This software is Licensed under the Apache Software License (version 2.0) and is Copyright(c) 2012 University Health Network.
+2019/01/24 11:42:49 |  INFO [WrapperSimpleAppMain] - HL7 over HTTP (HAPI) library version 2.4-SNAPSHOT - Build null (2019-01-24 11:40:11)
+2019/01/24 11:42:49 |  INFO [WrapperSimpleAppMain] - Refreshing org.springframework.context.support.FileSystemXmlApplicationContext@5ac803cd: startup date [Thu Jan 24 11:42:49 EST 2019]; root of context hierarchy
+2019/01/24 11:42:49 |  INFO [WrapperSimpleAppMain] - Loading XML bean definitions from file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]
+2019/01/24 11:42:49 |  INFO [WrapperSimpleAppMain] - hapi.home is set to C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\.
+2019/01/24 11:42:49 |  INFO [WrapperSimpleAppMain] - HAPI version is: 2.3
+2019/01/24 11:42:49 |  WARN [WrapperSimpleAppMain] - No HL7 structure libraries found on the classpath!
+2019/01/24 11:42:49 |  INFO [WrapperSimpleAppMain] - Starting listener on port 8079
+2019/01/24 11:42:49 |  INFO [hoh-port-8079-worker-1] - Starting ConnectionCleaner service
+2019/01/24 11:42:49 |  INFO [hoh-port-8079-worker-1] - Starting SimpleServer running on port 8079
+2019/01/24 11:42:50 |  INFO [WrapperSimpleAppMain] - Listener on port 8079 has started, and is ready for processing
+2019/01/24 11:42:50 |  INFO [WrapperSimpleAppMain] - Sender [theSender] will transmit by HL7 over HTTP to https://mshlshl7transform.azurewebsites.net/api/TransformHL7SaveToDB
+2019/01/24 11:42:50 |  INFO [WrapperSimpleAppMain] - Binding sender[theSender] to listener[theListener] for messages with profile[MsgType:* / MsgTrigger:* / Version:* / Processing:*]
+2019/01/24 11:42:50 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay started in 973 ms
+2019/01/24 11:43:18 |  INFO [hoh-port-8079-worker-1] - Accepted connection from 127.0.0.1:55711 on local port 8079
+2019/01/24 11:43:25 |  INFO [hoh-port-8079-worker-5] - Relaying message (870 bytes) with ID Q123456789T123456789X123456 from 127.0.0.1:55711 to URL https://mshlshl7transform.azurewebsites.net/api/TransformHL7SaveToDB
+2019/01/24 11:43:25 |  INFO [hoh-port-8079-worker-5] - Creating new remote connection to mshlshl7transform.azurewebsites.net:443
+2019/01/24 11:43:28 |  INFO [hoh-port-8079-worker-5] - Received response to ID Q123456789T123456789X123456 with ID Q123456789T123456789X123456 in 2570 ms
+2019/01/24 11:43:38 |  INFO [pool-1-thread-1] - Closing idle socket with local port 55715 because it has been idle since Thu Jan 24 11:43:28 EST 2019
+2019/01/24 11:43:44 |  INFO [hoh-port-8079-worker-5] - Relaying message (4173 bytes) with ID 147197250 from 127.0.0.1:55711 to URL https://mshlshl7transform.azurewebsites.net/api/TransformHL7SaveToDB
+2019/01/24 11:43:44 |  INFO [hoh-port-8079-worker-5] - Creating new remote connection to mshlshl7transform.azurewebsites.net:443
+2019/01/24 11:43:45 |  INFO [hoh-port-8079-worker-5] - Received response to ID 147197250 with ID 147197250 in 261 ms
+2019/01/24 11:43:55 |  INFO [pool-1-thread-1] - Closing idle socket with local port 55716 because it has been idle since Thu Jan 24 11:43:44 EST 2019
+2019/01/24 11:44:12 | CTRL-C trapped.  Shutting down.
+2019/01/24 11:44:14 |  INFO [Thread-0] - Shutdown request detected, stopping all services
+2019/01/24 11:44:14 |  INFO [Thread-0] - Closing org.springframework.context.support.FileSystemXmlApplicationContext@5ac803cd: startup date [Thu Jan 24 11:42:49 EST 2019]; root of context hierarchy
+2019/01/24 11:44:14 |  INFO [Thread-0] - Stopping listener on port 8079
+2019/01/24 11:44:15 |  INFO [Thread-0] - Listener on port 8079 has stopped
+2019/01/24 11:44:15 |  INFO [hoh-port-8079-worker-4] - SocketException on read() attempt.  Socket appears to have been closed: Socket Closed
+2019/01/24 11:44:15 |  INFO [Thread-0] - Closing HAPI Context Object
+2019/01/24 11:44:15 |  INFO [hoh-port-8079-worker-4] - SocketException: closing Connection from 127.0.0.1:55711, will no longer read messages with this Receiver: Socket Closed
+2019/01/24 11:44:15 |  INFO [Thread-0] - Done closing HAPI Context object
+2019/01/24 11:44:15 |  INFO [Thread-0] - Shutdown request completed
+2019/01/24 11:44:15 | <-- Wrapper Stopped
+2019/01/24 11:45:12 | --> Wrapper Started as Console
+2019/01/24 11:45:12 | Launching a JVM...
+2019/01/24 11:45:12 | Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+2019/01/24 11:45:12 |   Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+2019/01/24 11:45:12 | 
+2019/01/24 11:45:13 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay is starting. This software is Licensed under the Apache Software License (version 2.0) and is Copyright(c) 2012 University Health Network.
+2019/01/24 11:45:13 |  INFO [WrapperSimpleAppMain] - HL7 over HTTP (HAPI) library version 2.4-SNAPSHOT - Build null (2019-01-24 11:40:11)
+2019/01/24 11:45:13 |  INFO [WrapperSimpleAppMain] - Refreshing org.springframework.context.support.FileSystemXmlApplicationContext@53eb0e51: startup date [Thu Jan 24 11:45:13 EST 2019]; root of context hierarchy
+2019/01/24 11:45:13 |  INFO [WrapperSimpleAppMain] - Loading XML bean definitions from file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]
+2019/01/24 11:45:13 |  INFO [WrapperSimpleAppMain] - hapi.home is set to C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\.
+2019/01/24 11:45:13 |  INFO [WrapperSimpleAppMain] - HAPI version is: 2.3
+2019/01/24 11:45:13 |  WARN [WrapperSimpleAppMain] - No HL7 structure libraries found on the classpath!
+2019/01/24 11:45:13 |  INFO [WrapperSimpleAppMain] - Starting listener on port 8079
+2019/01/24 11:45:13 |  INFO [hoh-port-8079-worker-1] - Starting ConnectionCleaner service
+2019/01/24 11:45:13 |  INFO [hoh-port-8079-worker-1] - Starting SimpleServer running on port 8079
+2019/01/24 11:45:14 |  INFO [WrapperSimpleAppMain] - Listener on port 8079 has started, and is ready for processing
+2019/01/24 11:45:14 |  INFO [WrapperSimpleAppMain] - Sender [theSender] will transmit by HL7 over HTTP to https://mshlshl7transform.azurewebsites.net/api/TransformHL7SaveToDB
+2019/01/24 11:45:14 |  INFO [WrapperSimpleAppMain] - Binding sender[theSender] to listener[theListener] for messages with profile[MsgType:* / MsgTrigger:* / Version:* / Processing:*]
+2019/01/24 11:45:14 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay started in 1002 ms
+2019/01/24 11:45:17 | CTRL-C trapped.  Shutting down.
+2019/01/24 11:45:19 |  INFO [Thread-0] - Shutdown request detected, stopping all services
+2019/01/24 11:45:19 |  INFO [Thread-0] - Closing org.springframework.context.support.FileSystemXmlApplicationContext@53eb0e51: startup date [Thu Jan 24 11:45:13 EST 2019]; root of context hierarchy
+2019/01/24 11:45:19 |  INFO [Thread-0] - Stopping listener on port 8079
+2019/01/24 11:45:20 |  INFO [Thread-0] - Listener on port 8079 has stopped
+2019/01/24 11:45:20 |  INFO [Thread-0] - Closing HAPI Context Object
+2019/01/24 11:45:20 |  INFO [Thread-0] - Done closing HAPI Context object
+2019/01/24 11:45:20 |  INFO [Thread-0] - Shutdown request completed
+2019/01/24 11:45:20 | <-- Wrapper Stopped
+2019/01/24 11:45:27 | OpenSCManager failed - Access is denied. (0x5)
+2019/01/24 11:45:35 | --> Wrapper Started as Console
+2019/01/24 11:45:36 | Launching a JVM...
+2019/01/24 11:45:36 | Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+2019/01/24 11:45:36 |   Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+2019/01/24 11:45:36 | 
+2019/01/24 11:45:36 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay is starting. This software is Licensed under the Apache Software License (version 2.0) and is Copyright(c) 2012 University Health Network.
+2019/01/24 11:45:36 |  INFO [WrapperSimpleAppMain] - HL7 over HTTP (HAPI) library version 2.4-SNAPSHOT - Build null (2019-01-24 11:40:11)
+2019/01/24 11:45:36 |  INFO [WrapperSimpleAppMain] - Refreshing org.springframework.context.support.FileSystemXmlApplicationContext@53eb0e51: startup date [Thu Jan 24 11:45:36 EST 2019]; root of context hierarchy
+2019/01/24 11:45:36 |  INFO [WrapperSimpleAppMain] - Loading XML bean definitions from file [C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\conf\config.xml]
+2019/01/24 11:45:36 |  INFO [WrapperSimpleAppMain] - hapi.home is set to C:\Users\stordahl\Downloads\ctakes-healthnlp-docker\hl7overhttp\hl7overhttp-relay\.
+2019/01/24 11:45:36 |  INFO [WrapperSimpleAppMain] - HAPI version is: 2.3
+2019/01/24 11:45:36 |  WARN [WrapperSimpleAppMain] - No HL7 structure libraries found on the classpath!
+2019/01/24 11:45:36 |  INFO [WrapperSimpleAppMain] - Starting listener on port 8079
+2019/01/24 11:45:36 |  INFO [hoh-port-8079-worker-1] - Starting ConnectionCleaner service
+2019/01/24 11:45:36 |  INFO [hoh-port-8079-worker-1] - Starting SimpleServer running on port 8079
+2019/01/24 11:45:37 |  INFO [WrapperSimpleAppMain] - Listener on port 8079 has started, and is ready for processing
+2019/01/24 11:45:37 |  INFO [WrapperSimpleAppMain] - Sender [theSender] will transmit by HL7 over HTTP to https://mshlshl7transform.azurewebsites.net/api/TransformHL7SaveToDB
+2019/01/24 11:45:37 |  INFO [WrapperSimpleAppMain] - Binding sender[theSender] to listener[theListener] for messages with profile[MsgType:* / MsgTrigger:* / Version:* / Processing:*]
+2019/01/24 11:45:37 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay started in 951 ms
+2019/01/24 11:45:44 | CTRL-C trapped.  Shutting down.
+2019/01/24 11:45:45 | CTRL-C trapped.  Forcing immediate shutdown.
+2019/01/24 11:45:45 | JVM did not exit on request, terminated
+2019/01/24 11:45:45 | CTRL-C trapped.  Forcing immediate shutdown.
+2019/01/24 11:45:45 | <-- Wrapper Stopped
+2019/02/07 12:24:25 | --> Wrapper Started as Console
+2019/02/07 12:24:25 | Launching a JVM...
+2019/02/07 12:24:27 | Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+2019/02/07 12:24:27 |   Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+2019/02/07 12:24:27 | 
+2019/02/07 12:24:27 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay is starting. This software is Licensed under the Apache Software License (version 2.0) and is Copyright(c) 2012 University Health Network.
+2019/02/07 12:24:27 |  INFO [WrapperSimpleAppMain] - HL7 over HTTP (HAPI) library version 2.4-SNAPSHOT - Build null (2019-01-24 11:40:11)
+2019/02/07 12:24:27 |  INFO [WrapperSimpleAppMain] - Refreshing org.springframework.context.support.FileSystemXmlApplicationContext@1095adbe: startup date [Thu Feb 07 12:24:27 EST 2019]; root of context hierarchy
+2019/02/07 12:24:27 |  INFO [WrapperSimpleAppMain] - Loading XML bean definitions from file [C:\Users\stordahl\source\repos\health-dataplatform-ingest\hl7overhttp\hl7overhttp-relay\conf\config.xml]
+2019/02/07 12:24:27 |  INFO [WrapperSimpleAppMain] - hapi.home is set to C:\Users\stordahl\source\repos\health-dataplatform-ingest\hl7overhttp\hl7overhttp-relay\.
+2019/02/07 12:24:27 |  INFO [WrapperSimpleAppMain] - HAPI version is: 2.3
+2019/02/07 12:24:27 |  WARN [WrapperSimpleAppMain] - No HL7 structure libraries found on the classpath!
+2019/02/07 12:24:27 |  INFO [WrapperSimpleAppMain] - Starting listener on port 8079
+2019/02/07 12:24:27 |  INFO [hoh-port-8079-worker-1] - Starting ConnectionCleaner service
+2019/02/07 12:24:27 |  INFO [hoh-port-8079-worker-1] - Starting SimpleServer running on port 8079
+2019/02/07 12:24:28 |  INFO [WrapperSimpleAppMain] - Listener on port 8079 has started, and is ready for processing
+2019/02/07 12:24:28 |  WARN [WrapperSimpleAppMain] - Exception encountered during context initialization - cancelling refresh attempt
+2019/02/07 12:24:28 | org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'theSender' defined in file [C:\Users\stordahl\source\repos\health-dataplatform-ingest\hl7overhttp\hl7overhttp-relay\conf\config.xml]: Error setting property values; nested exception is org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+2019/02/07 12:24:28 | PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'urlString' threw exception; nested exception is java.lang.IllegalArgumentException: URL is not valid. Must be in the form http[s]:
+2019/02/07 12:24:28 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1506)
+2019/02/07 12:24:28 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
+2019/02/07 12:24:28 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+2019/02/07 12:24:28 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+2019/02/07 12:24:28 | 	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+2019/02/07 12:24:28 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+2019/02/07 12:24:28 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+2019/02/07 12:24:28 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+2019/02/07 12:24:28 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:762)
+2019/02/07 12:24:28 | 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+2019/02/07 12:24:28 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+2019/02/07 12:24:28 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:140)
+2019/02/07 12:24:28 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:84)
+2019/02/07 12:24:28 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:34)
+2019/02/07 12:24:28 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:18)
+2019/02/07 12:24:28 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.main(Launcher.java:61)
+2019/02/07 12:24:28 | 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2019/02/07 12:24:28 | 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+2019/02/07 12:24:28 | 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+2019/02/07 12:24:28 | 	at java.lang.reflect.Method.invoke(Unknown Source)
+2019/02/07 12:24:28 | 	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:240)
+2019/02/07 12:24:28 | 	at java.lang.Thread.run(Unknown Source)
+2019/02/07 12:24:28 | Caused by: org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+2019/02/07 12:24:28 | PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'urlString' threw exception; nested exception is java.lang.IllegalArgumentException: URL is not valid. Must be in the form http[s]:
+2019/02/07 12:24:28 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:121)
+2019/02/07 12:24:28 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:75)
+2019/02/07 12:24:28 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1502)
+2019/02/07 12:24:28 | 	... 21 more
+2019/02/07 12:24:28 |  INFO [WrapperSimpleAppMain] - Stopping listener on port 8079
+2019/02/07 12:24:29 |  INFO [WrapperSimpleAppMain] - Listener on port 8079 has stopped
+2019/02/07 12:24:29 |  INFO [WrapperSimpleAppMain] - Closing HAPI Context Object
+2019/02/07 12:24:29 |  INFO [WrapperSimpleAppMain] - Done closing HAPI Context object
+2019/02/07 12:24:29 | 
+2019/02/07 12:24:29 | WrapperSimpleApp: Encountered an error running main: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'theSender' defined in file [C:\Users\stordahl\source\repos\health-dataplatform-ingest\hl7overhttp\hl7overhttp-relay\conf\config.xml]: Error setting property values; nested exception is org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+2019/02/07 12:24:29 | PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'urlString' threw exception; nested exception is java.lang.IllegalArgumentException: URL is not valid. Must be in the form http[s]:
+2019/02/07 12:24:29 | org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'theSender' defined in file [C:\Users\stordahl\source\repos\health-dataplatform-ingest\hl7overhttp\hl7overhttp-relay\conf\config.xml]: Error setting property values; nested exception is org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+2019/02/07 12:24:29 | PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'urlString' threw exception; nested exception is java.lang.IllegalArgumentException: URL is not valid. Must be in the form http[s]:
+2019/02/07 12:24:29 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1506)
+2019/02/07 12:24:29 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
+2019/02/07 12:24:29 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+2019/02/07 12:24:29 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+2019/02/07 12:24:29 | 	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+2019/02/07 12:24:29 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+2019/02/07 12:24:29 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+2019/02/07 12:24:29 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+2019/02/07 12:24:29 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:762)
+2019/02/07 12:24:29 | 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+2019/02/07 12:24:29 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+2019/02/07 12:24:29 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:140)
+2019/02/07 12:24:29 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:84)
+2019/02/07 12:24:29 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:34)
+2019/02/07 12:24:29 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:18)
+2019/02/07 12:24:29 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.main(Launcher.java:61)
+2019/02/07 12:24:29 | 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2019/02/07 12:24:29 | 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+2019/02/07 12:24:29 | 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+2019/02/07 12:24:29 | 	at java.lang.reflect.Method.invoke(Unknown Source)
+2019/02/07 12:24:29 | 	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:240)
+2019/02/07 12:24:29 | 	at java.lang.Thread.run(Unknown Source)
+2019/02/07 12:24:29 | Caused by: org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+2019/02/07 12:24:29 | PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'urlString' threw exception; nested exception is java.lang.IllegalArgumentException: URL is not valid. Must be in the form http[s]:
+2019/02/07 12:24:29 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:121)
+2019/02/07 12:24:29 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:75)
+2019/02/07 12:24:29 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1502)
+2019/02/07 12:24:29 | 	... 21 more
+2019/02/07 12:24:31 |  INFO [Thread-0] - Shutdown request detected, stopping all services
+2019/02/07 12:24:31 |  INFO [Thread-0] - Shutdown request completed
+2019/02/07 12:24:31 | <-- Wrapper Stopped
+2019/02/07 12:27:51 | --> Wrapper Started as Console
+2019/02/07 12:27:52 | Launching a JVM...
+2019/02/07 12:27:52 | Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+2019/02/07 12:27:52 |   Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+2019/02/07 12:27:52 | 
+2019/02/07 12:27:52 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay is starting. This software is Licensed under the Apache Software License (version 2.0) and is Copyright(c) 2012 University Health Network.
+2019/02/07 12:27:52 |  INFO [WrapperSimpleAppMain] - HL7 over HTTP (HAPI) library version 2.4-SNAPSHOT - Build null (2019-01-24 11:40:11)
+2019/02/07 12:27:52 |  INFO [WrapperSimpleAppMain] - Refreshing org.springframework.context.support.FileSystemXmlApplicationContext@53eb0e51: startup date [Thu Feb 07 12:27:52 EST 2019]; root of context hierarchy
+2019/02/07 12:27:52 |  INFO [WrapperSimpleAppMain] - Loading XML bean definitions from file [C:\Users\stordahl\source\repos\health-dataplatform-ingest\hl7overhttp\hl7overhttp-relay\conf\config.xml]
+2019/02/07 12:27:52 |  INFO [WrapperSimpleAppMain] - hapi.home is set to C:\Users\stordahl\source\repos\health-dataplatform-ingest\hl7overhttp\hl7overhttp-relay\.
+2019/02/07 12:27:52 |  INFO [WrapperSimpleAppMain] - HAPI version is: 2.3
+2019/02/07 12:27:52 |  WARN [WrapperSimpleAppMain] - No HL7 structure libraries found on the classpath!
+2019/02/07 12:27:52 |  INFO [WrapperSimpleAppMain] - Starting listener on port 8079
+2019/02/07 12:27:52 |  INFO [hoh-port-8079-worker-1] - Starting ConnectionCleaner service
+2019/02/07 12:27:52 |  INFO [hoh-port-8079-worker-1] - Starting SimpleServer running on port 8079
+2019/02/07 12:27:53 |  INFO [WrapperSimpleAppMain] - Listener on port 8079 has started, and is ready for processing
+2019/02/07 12:27:53 |  WARN [WrapperSimpleAppMain] - Exception encountered during context initialization - cancelling refresh attempt
+2019/02/07 12:27:53 | org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'theSender' defined in file [C:\Users\stordahl\source\repos\health-dataplatform-ingest\hl7overhttp\hl7overhttp-relay\conf\config.xml]: Error setting property values; nested exception is org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+2019/02/07 12:27:53 | PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'urlString' threw exception; nested exception is java.lang.IllegalArgumentException: URL is not valid. Must be in the form http[s]:
+2019/02/07 12:27:53 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1506)
+2019/02/07 12:27:53 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
+2019/02/07 12:27:53 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+2019/02/07 12:27:53 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+2019/02/07 12:27:53 | 	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+2019/02/07 12:27:53 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+2019/02/07 12:27:53 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+2019/02/07 12:27:53 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+2019/02/07 12:27:53 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:762)
+2019/02/07 12:27:53 | 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+2019/02/07 12:27:53 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+2019/02/07 12:27:53 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:140)
+2019/02/07 12:27:53 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:84)
+2019/02/07 12:27:53 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:34)
+2019/02/07 12:27:53 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:18)
+2019/02/07 12:27:53 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.main(Launcher.java:61)
+2019/02/07 12:27:53 | 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2019/02/07 12:27:53 | 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+2019/02/07 12:27:53 | 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+2019/02/07 12:27:53 | 	at java.lang.reflect.Method.invoke(Unknown Source)
+2019/02/07 12:27:53 | 	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:240)
+2019/02/07 12:27:53 | 	at java.lang.Thread.run(Unknown Source)
+2019/02/07 12:27:53 | Caused by: org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+2019/02/07 12:27:53 | PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'urlString' threw exception; nested exception is java.lang.IllegalArgumentException: URL is not valid. Must be in the form http[s]:
+2019/02/07 12:27:53 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:121)
+2019/02/07 12:27:53 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:75)
+2019/02/07 12:27:53 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1502)
+2019/02/07 12:27:53 | 	... 21 more
+2019/02/07 12:27:53 |  INFO [WrapperSimpleAppMain] - Stopping listener on port 8079
+2019/02/07 12:27:54 |  INFO [WrapperSimpleAppMain] - Listener on port 8079 has stopped
+2019/02/07 12:27:54 |  INFO [WrapperSimpleAppMain] - Closing HAPI Context Object
+2019/02/07 12:27:54 |  INFO [WrapperSimpleAppMain] - Done closing HAPI Context object
+2019/02/07 12:27:54 | 
+2019/02/07 12:27:54 | WrapperSimpleApp: Encountered an error running main: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'theSender' defined in file [C:\Users\stordahl\source\repos\health-dataplatform-ingest\hl7overhttp\hl7overhttp-relay\conf\config.xml]: Error setting property values; nested exception is org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+2019/02/07 12:27:54 | PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'urlString' threw exception; nested exception is java.lang.IllegalArgumentException: URL is not valid. Must be in the form http[s]:
+2019/02/07 12:27:54 | org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'theSender' defined in file [C:\Users\stordahl\source\repos\health-dataplatform-ingest\hl7overhttp\hl7overhttp-relay\conf\config.xml]: Error setting property values; nested exception is org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+2019/02/07 12:27:54 | PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'urlString' threw exception; nested exception is java.lang.IllegalArgumentException: URL is not valid. Must be in the form http[s]:
+2019/02/07 12:27:54 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1506)
+2019/02/07 12:27:54 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
+2019/02/07 12:27:54 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+2019/02/07 12:27:54 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+2019/02/07 12:27:54 | 	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+2019/02/07 12:27:54 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+2019/02/07 12:27:54 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+2019/02/07 12:27:54 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+2019/02/07 12:27:54 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:762)
+2019/02/07 12:27:54 | 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+2019/02/07 12:27:54 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+2019/02/07 12:27:54 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:140)
+2019/02/07 12:27:54 | 	at org.springframework.context.support.FileSystemXmlApplicationContext.<init>(FileSystemXmlApplicationContext.java:84)
+2019/02/07 12:27:54 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:34)
+2019/02/07 12:27:54 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.<init>(Launcher.java:18)
+2019/02/07 12:27:54 | 	at ca.uhn.hl7v2.hoh.relay.Launcher.main(Launcher.java:61)
+2019/02/07 12:27:54 | 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2019/02/07 12:27:54 | 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+2019/02/07 12:27:54 | 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+2019/02/07 12:27:54 | 	at java.lang.reflect.Method.invoke(Unknown Source)
+2019/02/07 12:27:54 | 	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:240)
+2019/02/07 12:27:54 | 	at java.lang.Thread.run(Unknown Source)
+2019/02/07 12:27:54 | Caused by: org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
+2019/02/07 12:27:54 | PropertyAccessException 1: org.springframework.beans.MethodInvocationException: Property 'urlString' threw exception; nested exception is java.lang.IllegalArgumentException: URL is not valid. Must be in the form http[s]:
+2019/02/07 12:27:54 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:121)
+2019/02/07 12:27:54 | 	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:75)
+2019/02/07 12:27:54 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1502)
+2019/02/07 12:27:54 | 	... 21 more
+2019/02/07 12:27:56 |  INFO [Thread-0] - Shutdown request detected, stopping all services
+2019/02/07 12:27:56 |  INFO [Thread-0] - Shutdown request completed
+2019/02/07 12:27:56 | <-- Wrapper Stopped
+2019/02/07 12:30:20 | --> Wrapper Started as Console
+2019/02/07 12:30:20 | Launching a JVM...
+2019/02/07 12:30:21 | Wrapper (Version 3.2.3) http://wrapper.tanukisoftware.org
+2019/02/07 12:30:21 |   Copyright 1999-2006 Tanuki Software, Inc.  All Rights Reserved.
+2019/02/07 12:30:21 | 
+2019/02/07 12:30:21 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay is starting. This software is Licensed under the Apache Software License (version 2.0) and is Copyright(c) 2012 University Health Network.
+2019/02/07 12:30:21 |  INFO [WrapperSimpleAppMain] - HL7 over HTTP (HAPI) library version 2.4-SNAPSHOT - Build null (2019-01-24 11:40:11)
+2019/02/07 12:30:21 |  INFO [WrapperSimpleAppMain] - Refreshing org.springframework.context.support.FileSystemXmlApplicationContext@53eb0e51: startup date [Thu Feb 07 12:30:21 EST 2019]; root of context hierarchy
+2019/02/07 12:30:21 |  INFO [WrapperSimpleAppMain] - Loading XML bean definitions from file [C:\Users\stordahl\source\repos\health-dataplatform-ingest\hl7overhttp\hl7overhttp-relay\conf\config.xml]
+2019/02/07 12:30:21 |  INFO [WrapperSimpleAppMain] - hapi.home is set to C:\Users\stordahl\source\repos\health-dataplatform-ingest\hl7overhttp\hl7overhttp-relay\.
+2019/02/07 12:30:21 |  INFO [WrapperSimpleAppMain] - HAPI version is: 2.3
+2019/02/07 12:30:21 |  WARN [WrapperSimpleAppMain] - No HL7 structure libraries found on the classpath!
+2019/02/07 12:30:21 |  INFO [WrapperSimpleAppMain] - Starting listener on port 8079
+2019/02/07 12:30:21 |  INFO [hoh-port-8079-worker-1] - Starting ConnectionCleaner service
+2019/02/07 12:30:21 |  INFO [hoh-port-8079-worker-1] - Starting SimpleServer running on port 8079
+2019/02/07 12:30:22 |  INFO [WrapperSimpleAppMain] - Listener on port 8079 has started, and is ready for processing
+2019/02/07 12:30:22 |  INFO [WrapperSimpleAppMain] - Sender [theSender] will transmit by HL7 over HTTP to https://hdptransform1026.azurewebsites.net/api/TransformHL7SaveToDB
+2019/02/07 12:30:22 |  INFO [WrapperSimpleAppMain] - Binding sender[theSender] to listener[theListener] for messages with profile[MsgType:* / MsgTrigger:* / Version:* / Processing:*]
+2019/02/07 12:30:22 |  INFO [WrapperSimpleAppMain] - HAPI HL7 over HTTP Relay started in 999 ms
+2019/02/07 12:30:41 |  INFO [hoh-port-8079-worker-1] - Accepted connection from 127.0.0.1:62669 on local port 8079
+2019/02/07 12:30:56 |  INFO [hoh-port-8079-worker-5] - Relaying message (870 bytes) with ID Q123456789T123456789X123456 from 127.0.0.1:62669 to URL https://hdptransform1026.azurewebsites.net/api/TransformHL7SaveToDB
+2019/02/07 12:30:56 |  INFO [hoh-port-8079-worker-5] - Creating new remote connection to hdptransform1026.azurewebsites.net:443
+2019/02/07 12:31:00 |  INFO [hoh-port-8079-worker-5] - Received response to ID Q123456789T123456789X123456 with ID Q123456789T123456789X123456 in 3190 ms
+2019/02/07 12:31:10 |  INFO [pool-1-thread-1] - Closing idle socket with local port 62672 because it has been idle since Thu Feb 07 12:31:00 EST 2019
+2019/02/07 12:32:31 |  INFO [hoh-port-8079-worker-4] - End of input stream reached.
+2019/02/07 12:32:31 |  INFO [hoh-port-8079-worker-4] - SocketException on read() attempt.  Socket appears to have been closed: End of input stream reached before message starts
+2019/02/07 12:32:31 |  INFO [hoh-port-8079-worker-4] - SocketException: closing Connection from 127.0.0.1:62669, will no longer read messages with this Receiver: End of input stream reached before message starts
+2019/02/07 12:32:34 | CTRL-C trapped.  Shutting down.
+2019/02/07 12:32:35 |  INFO [Thread-0] - Shutdown request detected, stopping all services
+2019/02/07 12:32:35 |  INFO [Thread-0] - Closing org.springframework.context.support.FileSystemXmlApplicationContext@53eb0e51: startup date [Thu Feb 07 12:30:21 EST 2019]; root of context hierarchy
+2019/02/07 12:32:35 |  INFO [Thread-0] - Stopping listener on port 8079
+2019/02/07 12:32:36 |  INFO [Thread-0] - Listener on port 8079 has stopped
+2019/02/07 12:32:36 |  INFO [Thread-0] - Closing HAPI Context Object
+2019/02/07 12:32:36 |  INFO [Thread-0] - Done closing HAPI Context object
+2019/02/07 12:32:36 |  INFO [Thread-0] - Shutdown request completed
+2019/02/07 12:32:36 | <-- Wrapper Stopped
