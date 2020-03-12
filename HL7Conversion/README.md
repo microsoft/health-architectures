@@ -29,9 +29,9 @@ Infrastructure deployment that will allow you to:
 ### <a name="ingest"></a>Deploying your own HL7 Ingest Platform
 1. [Get or Obtain a valid Azure Subscription](https://azure.microsoft.com/en-us/free/)
 2. [Install Azure CLI 2.0 on Linux based System or Windows Bash Shell](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest)
-3. [Download/Clone this repo](https://dev.azure.com/smokejumpers/_git/ReferenceSolutions)
+3. [Download/Clone this repo](https://github.com/microsoft/health-architectures)
 4. Open a bash shell into the Azure CLI 2.0 environment
-5. Switch to the Managed/HL7Conversion subdirectory of this repo
+5. Switch to the HL7Conversion subdirectory of this repo
 6. Run the deployhl7ingest.bash script and follow the prompts
 7. Send in an hl7 message via HL7 over HTTPS:
     + Locate the sample message medtest.png in the root directory of the repo
