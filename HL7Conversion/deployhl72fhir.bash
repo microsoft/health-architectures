@@ -24,9 +24,7 @@ declare serviceplanSuffix="asp"
 declare faname=fhirevt$RANDOM
 declare faresourceid=""
 declare fakey=""
-declare repoURL="https://smokejumpers@dev.azure.com/smokejumpers/FHIREventProcessor/_git/FHIREventProcessor"
-declare repoBranch="master"
-declare repoToken="nn5zg7g4xmscv6f6qmih6ysvna6ct53vskceuaob5wq4z4mb4dpq"
+declare deployzip="../FHIR/FHIREventProcessor/distribution/publish.zip"
 declare deployprefix=""
 declare defdeployprefix=""
 declare fsurl=""
@@ -254,7 +252,7 @@ echo "Starting HL72FHIR Workflow Platform deployment..."
 		stepresult=$(az functionapp config appsettings set --name $faname  --resource-group $resourceGroupName --settings FS_URL=$fsurl FS_TENANT_NAME=$fstenant FS_CLIENT_ID=$fsclientid FS_SECRET=$fssecret FS_RESOURCE=$fsaud EventHubConnection=$evconnectionString EventHubName=$evhub)
 		echo "Deploying FHIREventProcessor Function App from repo to host ["$fahost"]..."
 		#deployment from git repo
-		stepresult=$(az functionapp deployment source config --name $faname --resource-group $resourceGroupName --branch $repoBranch --repo-url $repoURL --git-token $repoToken)
+		stepresult=$(az functionapp deployment source config-zip --name $faname --resource-group $resourceGroupName --src $deployzip)
 		#Deploy HL7 FHIR Converter
 		hl7converterinstance=$deployprefix$hl7convertername$RANDOM
 		echo "Deploying FHIR Converter ["$hl7converterinstance"] to resource group ["$hl7converterrg"]..."

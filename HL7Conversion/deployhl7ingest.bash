@@ -22,9 +22,7 @@ declare busqueue="hl7ingest"
 declare sbconnectionString=""
 declare serviceplanSuffix="asp"
 declare faname=hl7ingest$RANDOM
-declare repoURL="https://smokejumpers@dev.azure.com/smokejumpers/hl7ingest/_git/hl7ingest"
-declare repoBranch="master"
-declare repoToken="nn5zg7g4xmscv6f6qmih6ysvna6ct53vskceuaob5wq4z4mb4dpq"
+declare deployzip="hl7ingest/distribution/publish.zip"
 declare deployprefix=""
 declare defdeployprefix=""
 declare storecontainername="hl7"
@@ -162,7 +160,7 @@ echo "Starting HL7 Ingest Platform deployment..."
 		stepresult=$(az functionapp config appsettings set --name $faname  --resource-group $resourceGroupName --settings StorageAccount=$storageConnectionString StorageAccountBlobContainer=$storecontainername ServiceBusConnection=$sbconnectionString QueueName=$busqueue)
 		#deeployment from devops repo
 		echo "Deploying hl7ingest Function App from source repo to ["$fahost"]..."
-		stepresult=$(az functionapp deployment source config --name $faname --resource-group $resourceGroupName --branch $repoBranch --repo-url $repoURL --git-token $repoToken)
+		stepresult=$(az functionapp deployment source config-zip --name $faname --resource-group $resourceGroupName --src $deployzip)
 		echo " "
 		echo "************************************************************************************************************"
 		echo "HL7 Ingest Platform has successfully been deployed to group "$resourceGroupName" on "$(date)
