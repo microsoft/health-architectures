@@ -58,7 +58,7 @@ namespace FHIRProxy
             log.LogInformation("FHIR SecureAccess Function Invoked");
             if (!principal.Identity.IsAuthenticated)
             {
-                return new ContentResult() { Content = "User is not Authenticated", StatusCode = (int)System.Net.HttpStatusCode.Unauthorized };
+                return new ContentResult() { Content = Utils.genOOErrResponse("login","User is not Authenticated"), StatusCode = (int)System.Net.HttpStatusCode.Unauthorized ,ContentType="application/json"};
             }
             //Is the prinicipal a FHIR Server Administrator
             ClaimsIdentity ci = (ClaimsIdentity)principal.Identity;
@@ -69,14 +69,14 @@ namespace FHIRProxy
             {
                 if (!admin && !ci.IsInFHIRRole(Environment.GetEnvironmentVariable("READER_ROLE")))
                 {
-                    return new ContentResult() { Content = "User does not have suffiecient rights (READER is required)", StatusCode = (int)System.Net.HttpStatusCode.Unauthorized };
+                    return new ContentResult() { Content = Utils.genOOErrResponse("auth-denied","User/Application must be in a reader role to access"), StatusCode = (int)System.Net.HttpStatusCode.Unauthorized,ContentType="application/json"};
                 }
             }
             else
             { //OTHER VERBS ARE WRITER
                 if (!admin && !ci.IsInFHIRRole(Environment.GetEnvironmentVariable("WRITER_ROLE")))
                 {
-                    return new ContentResult() { Content = "User does not have suffiecient rights (WRITER is required)", StatusCode = (int)System.Net.HttpStatusCode.Unauthorized };
+                    return new ContentResult() { Content = Utils.genOOErrResponse("auth-denied", "User/Application must be in a writer role to update"), StatusCode = (int)System.Net.HttpStatusCode.Unauthorized, ContentType = "application/json" };
                 }
             }
             string aadten = ci.Tenant();
@@ -179,7 +179,7 @@ namespace FHIRProxy
                 {
                     if (!IsAParticipantOrPatient(result, fhirClient, resourceidentities, porcache, auditheaders.ToArray()))
                     {
-                        return new ContentResult() { Content = $"Not authorized to access resource:{res + (id == null ? "" : "/" + id)}", StatusCode = (int)System.Net.HttpStatusCode.Unauthorized };
+                        return new ContentResult() { Content = Utils.genOOErrResponse("auth-denied",$"Not authorized to access resource:{res + (id == null ? "" : "/" + id)}"), StatusCode = (int)System.Net.HttpStatusCode.Unauthorized,ContentType="application/json" };
                     }
                 }
             }
