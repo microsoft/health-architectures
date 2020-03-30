@@ -35,12 +35,12 @@ namespace FHIRProxy
     {
         public static string _bearerToken;
         private static object _lock = new object();
-        private static string[] allowedresources = { "patient", "practitioner","relatedperson" };
+        private static string[] allowedresources = { "patient", "practitioner", "relatedperson" };
 
         [FunctionName("SecureLink")]
         public static IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "linkresource/{res}/{id}")] HttpRequest req,
-            ILogger log, ClaimsPrincipal principal,string res,string id)
+            ILogger log, ClaimsPrincipal principal, string res, string id)
         {
             FhirJsonParser _parser = new FhirJsonParser();
             _parser.Settings.AcceptUnknownMembers = true;
@@ -65,7 +65,6 @@ namespace FHIRProxy
             auditheaders.Add(new HeaderParm("X-MS-AZUREFHIR-AUDIT-TENANT", aadten));
             auditheaders.Add(new HeaderParm("X-MS-AZUREFHIR-AUDIT-SOURCE", req.HttpContext.Connection.RemoteIpAddress.ToString()));
             auditheaders.Add(new HeaderParm("X-MS-AZUREFHIR-AUDIT-PROXY", "FHIRProxy-LinkResource"));
-            //string aadten = "http://schemas.microsoft.com/identity/claims/tenantid/e38bcec5-64e4-45a4-8f18-97b0e5c8794f";
             //Are we linking the correct resource type
             if (string.IsNullOrEmpty(res) || !allowedresources.Any(res.ToLower().Contains))
             {
@@ -91,16 +90,17 @@ namespace FHIRProxy
             FHIRClient fhirClient = new FHIRClient(System.Environment.GetEnvironmentVariable("FS_URL"), _bearerToken);
             int.TryParse(System.Environment.GetEnvironmentVariable("LINK_DAYS"), out int i_link_days);
             //Load the resource to Link
-            var fhirresp = fhirClient.LoadResource(res + "/" + id,null,false,auditheaders.ToArray());
+            var fhirresp = fhirClient.LoadResource(res + "/" + id, null, false, auditheaders.ToArray());
             var lres = _parser.Parse<Resource>((string)fhirresp.Content);
-           if (lres.ResourceType==Hl7.Fhir.Model.ResourceType.OperationOutcome)
+            if (lres.ResourceType == Hl7.Fhir.Model.ResourceType.OperationOutcome)
             {
 
                 return new BadRequestObjectResult(lres.ToString());
 
             }
             //Add Link to AAD Tenent in Identifiers
-            if (lres.ResourceType==Hl7.Fhir.Model.ResourceType.Practitioner) {
+            if (lres.ResourceType == Hl7.Fhir.Model.ResourceType.Practitioner)
+            {
                 var tr = (Hl7.Fhir.Model.Practitioner)lres;
                 var fbid = tr.Identifier.FirstOrDefault(ident => ident.System == aadten);
                 if (fbid != null)
@@ -112,16 +112,19 @@ namespace FHIRProxy
                 tr.Identifier.Add(newid);
                 FhirJsonSerializer serializer = new FhirJsonSerializer();
                 string srv = serializer.SerializeToString(tr);
-                var saveresult = fhirClient.SaveResource(srv,"PUT",auditheaders.ToArray());
+                var saveresult = fhirClient.SaveResource(Enum.GetName(typeof(ResourceType), tr.ResourceType), srv, "PUT", auditheaders.ToArray());
                 if (saveresult.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     return new OkObjectResult($"Identity: {name} in directory {aadten} is now linked to {res}/{id}");
 
-                } else
+                }
+                else
                 {
                     return new BadRequestObjectResult($"Unable to link Identity: {name} in directory {aadten}:{saveresult.StatusCode}");
                 }
-            } else if (lres.ResourceType == Hl7.Fhir.Model.ResourceType.Patient) {
+            }
+            else if (lres.ResourceType == Hl7.Fhir.Model.ResourceType.Patient)
+            {
                 var tr = (Hl7.Fhir.Model.Patient)lres;
                 var fbid = tr.Identifier.FirstOrDefault(ident => ident.System == aadten);
                 if (fbid != null)
@@ -133,7 +136,7 @@ namespace FHIRProxy
                 tr.Identifier.Add(newid);
                 FhirJsonSerializer serializer = new FhirJsonSerializer();
                 string srv = serializer.SerializeToString(tr);
-                var saveresult = fhirClient.SaveResource(srv,"PUT",auditheaders.ToArray());
+                var saveresult = fhirClient.SaveResource(Enum.GetName(typeof(ResourceType), tr.ResourceType), srv, "PUT", auditheaders.ToArray());
                 if (saveresult.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     return new OkObjectResult($"Identity: {name} in directory {aadten} is now linked to {res}/{id}");
@@ -147,6 +150,6 @@ namespace FHIRProxy
             return new OkObjectResult($"No action taken Identity: {name}");
 
         }
-       
+
     }
 }

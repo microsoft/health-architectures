@@ -151,7 +151,7 @@ namespace FHIRProxy
             }
             else
             {
-                fhirresp = fhirClient.SaveResource(requestBody, req.Method, customandrestheaders.ToArray());
+                fhirresp = fhirClient.SaveResource(res,requestBody, req.Method, customandrestheaders.ToArray());
             }
             //Fix location header to proxy address
             if (fhirresp.Headers.ContainsKey("Location"))

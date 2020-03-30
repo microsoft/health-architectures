@@ -121,12 +121,12 @@ namespace FHIRProxy
             IRestResponse response2 = _client.Execute(request);
             return new FHIRResponse(response2, parse);
         }
-        public FHIRResponse SaveResource(string content, string method = "PUT", HeaderParm[] headers = null)
+        public FHIRResponse SaveResource(string reqresource,string content, string method = "PUT", HeaderParm[] headers = null)
         {
             var r = JObject.Parse(content);
-            return SaveResource(r, method, headers);
+            return SaveResource(reqresource, r, method, headers);
         }
-        public FHIRResponse SaveResource(JObject r, string method = "PUT", HeaderParm[] headers = null)
+        public FHIRResponse SaveResource(string reqresource,JObject r, string method = "PUT", HeaderParm[] headers = null)
         {
             refreshToken();
             Method rm = Method.PUT;
@@ -149,10 +149,20 @@ namespace FHIRProxy
 
             }
             string rt = (string)r["resourceType"];
-            if (string.IsNullOrEmpty(rt)) throw new Exception("Resource Type not found or is blank");
-            string id = (string)r["id"];
-            if (id == null && rm != Method.POST) throw new Exception("Must Specify resource id on modification HTTP Verbs");
-            var request = new RestRequest(rt + (rm != Method.POST ? "/" + id : ""), rm);
+            RestRequest request = null;
+            if (string.IsNullOrEmpty(reqresource) && !string.IsNullOrEmpty(rt) && rt.Equals("Bundle"))
+            {
+                if (rm != Method.POST) throw new Exception("Verb Must be POST for Bundle Processing");
+                request = new RestRequest("", rm);
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(rt)) throw new Exception("Resource Type not found or is blank in content");
+                if ((!rt.Equals(reqresource))) throw new Exception("Resource Request Type must match resource type in content");
+                string id = (string)r["id"];
+                if (id == null && rm != Method.POST) throw new Exception("Must Specify resource id on modification HTTP Verbs");
+                request = new RestRequest(rt + (rm != Method.POST ? "/" + id : ""), rm);
+            }
             request.AddHeader("Accept", "application/json");
             request.AddHeader("Content-Type", "application/json");
             if (BearerToken != null)
