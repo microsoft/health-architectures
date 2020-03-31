@@ -1,0 +1,25 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "apiforfhir":{
+            "value": "https://cgsiomtsbx.azurehealthcareapis.com",
+            "metadata": {
+                "description":"https://<myfhir>.azurehealthcareapis.com  WARNING: make sure to remove the forward slash / after .com"
+            }
+    },
+        "tenantID":{
+            "value": "4165df7d-04c5-4261-b2f9-380c564150ab",
+            "metadata": {
+                "description":"format should be eithers the tenant GUID or tenantname.onmicrosoft.com"
+            }
+    },
+        "clientID":{
+            "value": "ddf43be5-844e-4bb3-84df-1a71727b7363"
+    },
+        "clientSecret":{
+            "value": "m4RzC76J6%3DT-ua-V%5Dgv1b%3FrKSIwPa%5D2m"
+            
+    }
+}
+}
