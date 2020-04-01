@@ -1,0 +1,114 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "logicappname": {
+            "defaultValue": "[substring(resourceGroup().name,0,sub(length(resourceGroup().name),2))]",
+            "type": "String"
+        },
+        "apiforfhir":{
+            "type":"string",
+            "minLength":3
+        },
+        "tenantID":{
+            "type":"securestring",
+            "minLength":3
+        },
+        "clientID":{
+            "type":"securestring",
+            "minLength":3
+        },
+        "clientSecret":{
+            "type":"securestring",
+            "minLength":3
+        },
+        "utcdate":{
+            "type":"string",
+            "defaultValue":"[utcnow('yyyy-MM-dd')]"
+        }
+    },
+    "variables": {
+        "tokenBody": "[concat('grant_type=client_credentials&client_id=',parameters('clientID'),'&client_secret=',parameters('clientSecret'),'&resource=',parameters('apiforfhir'))]"
+        ,"tokenUri":"[concat('https://login.microsoftonline.com/',parameters('tenantID'),'/oauth2/token')]"
+        ,"triggerUri":"[concat(parameters('apiforfhir'),'/$export')]"
+        ,"utcstart":"[concat(parameters('utcdate'),'T01:00:00Z')]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Logic/workflows",
+            "apiVersion": "2017-07-01",
+            "name": "[parameters('logicappname')]",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "state": "Enabled",
+                "definition": {
+                    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {},
+                    "triggers": {
+                        "Recurrence": {
+                            "recurrence": {
+                                "frequency": "Day",
+                                "interval": 1,
+                                "startTime": "[variables('utcstart')]",
+                                "timeZone": "UTC"
+                            },
+                            "type": "Recurrence"
+                        }
+                    },
+                    "actions": {
+                        "Get_Token": {
+                            "runAfter": {},
+                            "type": "Http",
+                            "inputs": {
+                                "body": "[variables('tokenBody')]",
+                                "headers": {
+                                    "Content-Type": "application/x-www-form-urlencoded"
+                                },
+                                "method": "POST",
+                                "uri": "[variables('tokenURI')]"
+                            }
+                        },
+                        "Set_Bearer_Token": {
+                            "runAfter": {
+                                "Get_Token": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "BearerToken",
+                                        "type": "string",
+                                        "value": "@{concat('Bearer ',body('Get_Token').access_token)}"
+                                    }
+                                ]
+                            }
+                        },
+                        "Trigger_Export": {
+                            "runAfter": {
+                                "Set_Bearer_Token": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "Http",
+                            "inputs": {
+                                "headers": {
+                                    "Accept": "application/fhir+json",
+                                    "Authorization": "@{variables('BearerToken')}",
+                                    "Content-Type": "application/json",
+                                    "Prefer": "respond-async"
+                                },
+                                "method": "GET",
+                                "uri": "[variables('triggerUri')]"
+                            }
+                        }
+                    },
+                    "outputs": {}
+                },
+                "parameters": {}
+            }
+        }
+    ]
+}
