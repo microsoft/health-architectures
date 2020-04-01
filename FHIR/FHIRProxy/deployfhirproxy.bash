@@ -40,6 +40,11 @@ declare rolepatient="Patient"
 declare roleparticipant="Practitioner,RelatedPerson"
 declare roleglobal="DataScientist"
 declare roledeid="DataScientist"
+declare spappid=""
+declare spsecret=""
+declare sptenant=""
+declare spreplyurls=""
+declare tokeniss=""
 # Initialize parameters specified from command line
 while getopts ":i:g:n:l:p" arg; do
 	case "${arg}" in
@@ -185,6 +190,21 @@ echo "Starting Secure FHIR Proxy deployment..."
 		#Create the function app
 		echo "Creating Secure FHIR Proxy Function App ["$faname"]..."
 		fahost=$(az functionapp create --name $faname --storage-account $deployprefix$storageAccountNameSuffix  --plan $deployprefix$serviceplanSuffix  --resource-group $resourceGroupName --runtime dotnet --os-type Windows --runtime-version 2 --query defaultHostName --output tsv)
+		echo "Creating Service Principal for AAD Auth"
+		stepresult=$(az ad sp create-for-rbac -n "https://"$fahost)
+		spappid=$(echo $stepresult | jq -r '.appId')
+		sptenant=$(echo $stepresult | jq -r '.tenant')
+		spsecret=$(echo $stepresult | jq -r '.password')
+		spreplyurls="https://"$fahost"/.auth/login/aad/callback"
+		tokeniss="https://sts.windows.net/"$sptenant
+		echo "Adding Sign-in User Read Permission on Graph API..."
+		stepresult=$(az ad app permission add --id $spappid --api 00000002-0000-0000-c000-000000000000 --api-permissions 311a71cc-e848-46a1-bdf8-97ff7156d8e6=Scope)
+		echo "Granting Admin Consent to Permission..."
+		stepresult=$(az ad app permission grant --id $spappid --api 00000002-0000-0000-c000-000000000000)
+		echo "Configuring reply urls for app..."
+		stepresult=$(az ad app update --id $spappid --reply-urls $spreplyurls)
+		echo "Adding FHIR Custom Roles to Manifest..."
+		stepresult=$(az ad app update --id $spappid --app-roles @fhirroles.json)
 		#Add App Settings
 		#StorageAccount
 		echo "Configuring Secure FHIR Proxy App ["$faname"]..."
@@ -192,11 +212,14 @@ echo "Starting Secure FHIR Proxy deployment..."
 		#deeployment from publish directory
 		echo "Deploying Secure FHIR Proxy Function App from source repo to ["$fahost"]..."
 		stepresult=$(az functionapp deployment source config-zip --name $faname --resource-group $resourceGroupName --src $deployzip)
+		echo "Enabling AAD Authorization and Securing the FHIR Proxy"
+		stepresult=$(az webapp auth update -g $resourceGroupName -n $faname --enabled true --action LoginWithAzureActiveDirectory --aad-allowed-token-audiences $fahost --aad-client-id $spappid --aad-client-secret $spsecret --aad-token-issuer-url $tokeniss)
 		echo " "
 		echo "************************************************************************************************************"
 		echo "Secure FHIR Proxy Platform has successfully been deployed to group "$resourceGroupName" on "$(date)
 		echo "Please note the following reference information for future use:"
 		echo "Your secure fhir proxy host is: https://"$fahost
+		echo "Your secure fhir proxy application id is: "$spappid
 		echo "Your secure fhir proxy FHIR Server URL is: "$fsurl
 		echo "Your deid config storage account name is: "$deployprefix$storageAccountNameSuffix
 		echo "Your deid config storage account container is: "$storecontainername

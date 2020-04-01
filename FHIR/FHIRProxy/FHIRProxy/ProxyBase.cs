@@ -62,6 +62,23 @@ namespace FHIRProxy
             string aadten = ci.Tenant();
             /* Load the principal Name */
             string name = principal.Identity.Name;
+            /* Minimum Authorization must be in an access Role Reader, Writer or Admin based on HTTP Verb*/
+            bool admin = ci.IsInFHIRRole(Environment.GetEnvironmentVariable("ADMIN_ROLE"));
+            //GET (READ)
+            if (req.Method.Equals("GET"))
+            {
+                if (!admin && !ci.IsInFHIRRole(Environment.GetEnvironmentVariable("READER_ROLE")))
+                {
+                    return new ContentResult() { Content = Utils.genOOErrResponse("auth-access", "User/Application must be in a reader role to access"), StatusCode = (int)System.Net.HttpStatusCode.Unauthorized, ContentType = "application/json" };
+                }
+            }
+            else
+            { //OTHER VERBS ARE WRITER
+                if (!admin && !ci.IsInFHIRRole(Environment.GetEnvironmentVariable("WRITER_ROLE")))
+                {
+                    return new ContentResult() { Content = Utils.genOOErrResponse("auth-access", "User/Application must be in a writer role to update"), StatusCode = (int)System.Net.HttpStatusCode.Unauthorized, ContentType = "application/json" };
+                }
+            }
             /* Load the request contents */
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             /* Get/update/check current bearer token to authenticate the proxy to the FHIR Server
