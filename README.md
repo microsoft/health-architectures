@@ -1,13 +1,13 @@
 # Introduction 
 Health Architectures is a collection of reference architectures and, when appropriate, implementations. They illustrate end-to-end best practices for using the Azure API for FHIR and related technologies. Below is the holistic conceptual end to end architecture for Azure API for FHIR.
 ![Microsoft Health Concecptual](./ConceptualArchitectureCore.png)
-See [Azure for Health Cloud](https://azure.microsoft.com/en-us/industries/healthcare/) for a discussion of health solutions in the Azure cloud.  See [Azure API for FHIR](https://azure.microsoft.com/en-us/services/azure-api-for-fhir/) for more information regarding the Azure Fast Healthcare Interoperability Resource (FHIR) service for health data solutions.
+For more information on health solutions go to [Azure for Health Cloud.](https://azure.microsoft.com/en-us/industries/healthcare/) For more information regarding the Azure Fast Healthcare Interoperability Resource (FHIR) service for health data solutions go to [Azure API for FHIR.](https://azure.microsoft.com/en-us/services/azure-api-for-fhir/)
 
-We, the Microsoft Health Cloud & Data Architectural Engineering team, are part of Microsoft Health. We work side by side with the product teams responsible for technologies such as the Azure API for FHIR, IoMT FHIR Connector for Azure, and more. Through collaboration with the product teams we bring these reference architectures to you.
+We are the Microsoft Health Cloud & Data Architectural Engineering team, which is part of Microsoft Health. We work side by side with the product teams responsible for technologies such as the Azure API for FHIR, IoMT FHIR Connector for Azure, and more. Through collaboration with the product teams, partners and customers we bring you these reference architectures.
 
-As we work with customers, partners, and co-workers, we frequently come across requests references architectures & code for end to end implementations. For example, how can I pick up HL7v2 messages generated in my environment from my EMR (Electronic Medical Record), Lab System, Scheduling System, etc. then ingest them into FHIR near real-time? These questions and scenarios then become the basis for our reference architectures. Of course, we remove customer specific data, then generalize the design for greater impact.
+As we work with customers, partners, and co-workers, we frequently come across requests for references architectures & code for end to end implementations. For example, how can I pick up HL7v2 messages generated in my environment from my EMR (Electronic Medical Record), Lab System, Scheduling System, etc. then ingest them into FHIR near real-time? These questions and scenarios then become the basis for our reference architectures. Of course, we remove customer specific data, then generalize the design for greater suitability and impact.
 
-As you look through this repository you will see some typical 'hello world' examples as well as more complex solutions. We conduct peer reviews to bring you the best practices for using the Microsoft Health technologies.
+As you look through this repository, which will be updated over time, you will see some typical 'hello world' examples as well as more complex solutions. We conduct peer reviews to bring you the best practices for using the Microsoft Health technologies.
 
 We invite you to ask questions, make suggestions and share use cases which we might consider for future reference architectures or implementations.
 
@@ -17,17 +17,17 @@ We have organized this repo into areas which map to our offering for FHIR and re
 
 1.  For capabilities central to our FHIR offerings look [here.](http://github.com/microsoft/health-architectures/tree/master/FHIR)  
 Topics include:  
-    *   How to generate events when create, update, or delete operations take place in FHIR
+    *   How to generate events when create, read, update, or delete (CRUD) operations take place in FHIR
     *   How to export data from FHIR for research, analytics, machine learning, etc.  
     *   How to secure resources in FHIR and/or process data on egress (i.e. anonymization)
 2.  For capabilities around our Internet of Medical Things (IoMT) offering look [here.](http://github.com/microsoft/health-architectures/tree/master/IoMT)  
 Topics include:  
     *   How to configure the IoMT FHIR Connector and process telemetry data  
-    *   Integrating IoMT data with FHIR and using Microsoft Power BI to create a dashboard  
-    *   Integrating IoMT data with FHIR and using Microsoft Teams to create notifications
+    *   How to integrate IoMT data with FHIR and using Microsoft Power BI to create a dashboard  
+    *   How to integrate IoMT data with FHIR and using Microsoft Teams to create notifications
 3.  For capabilities around ingesting HL7v2 and converting messages to FHIR look [here.](http://github.com/microsoft/health-architectures/tree/master/HL7Conversion)  
 Topics include:  
-    *   Ingesting HL7v2 from your on-premises system and delivering to Azure for conversion and storage to FHIR   
+    *   How to ingest HL7v2 from your on-premises system and deliver to Azure for conversion and storage to FHIR   
  
 
 # How to set-up a demonstration environment
