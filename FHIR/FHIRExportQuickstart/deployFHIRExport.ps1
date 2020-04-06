@@ -8,14 +8,14 @@
 
 param(
     [string]$Name = "fhirexport",
-    [string]$location = "eastus"
+    [string]$Location = "eastus"
 )
 
 try {
     $rgName = $Name + 'rg'
-    New-AzResourceGroup -Name $rgName -Location $location
+    New-AzResourceGroup -Name $rgName -Location $Location
     New-AzResourceGroupDeployment -ResourceGroupName $rgName -TemplateFile "./arm_template.json" -TemplateParameterFile "./arm_template_parameters.json"
 }
 catch {
-    Write-Host "Unable to deploy template. Please check parameters file"
+    Write-Host "Unable to deploy template. Please check parameters file or variables"
 }
