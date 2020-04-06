@@ -11,7 +11,7 @@ It is integrated with Azure Active Directory to provide Role based access contro
 
 ## Deploying your own FHIR Proxy
 
-Please note you should deploy this proxy into a tenant that you control Application Registrations, Enterprise Applications, Permissions and Role Assignments
+Please note you should deploy this proxy into a tenant that you control Application Registrations, Enterprise Applications, Permissions and Role Definitions Assignments
 
 1. [Get or Obtain a valid Azure Subscription](https://azure.microsoft.com/en-us/free/)</br>
    _Note:Skip to Step 5 if you already have a FHIR Server/Service Client deployed_
@@ -23,13 +23,14 @@ Please note you should deploy this proxy into a tenant that you control Applicat
    + The Client Secret for the FHIR Service Client
    + The AAD Tenant ID for the FHIR Server/Service Client
    + The Audience/Resource for the FHIR Server/Service Client typically https://azurehealthcareapis.com for Azure API for FHIR
-6. [Install Azure CLI 2.0 on Linux based System or Windows Bash Shell](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest)
-7. [Install jq for your environment](https://stedolan.github.io/jq/download/)
-8. [Download/Clone this repo](https://github.com/microsoft/health-architectures)
-9. Open a bash shell into the Azure CLI 2.0 environment
-10. Switch to the FHIR/FHIRproxy subdirectory of this repo ```cd FHIR\FHIRProxy```
-11. Run the deployfhirproxy.bash script and follow the prompts
-12. Congratulations you now have a Secure FHIR Proxy instance with authentication running. You can now configure Authorized Access.
+6. [If you are running Windows 10 make sure you have enabled Windows Linux Subsystem](https://code.visualstudio.com/remote-tutorials/wsl/enable-wsl) and [Installed a Linux Distribution](https://code.visualstudio.com/remote-tutorials/wsl/install-linux)
+7. [Install Azure CLI 2.0 on Linux based System or Windows Linux Subsystem](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest)
+8. [Install jq for your environment](https://stedolan.github.io/jq/download/)
+9. [Download/Clone this repo](https://github.com/microsoft/health-architectures)
+10. Open a bash shell into the Azure CLI 2.0 environment
+11. Switch to the FHIR/FHIRproxy subdirectory of this repo ```cd FHIR\FHIRProxy```
+12. Run the deployfhirproxy.bash script and follow the prompts
+13. Congratulations you now have a Secure FHIR Proxy instance with authentication running. You can now configure Authorized Access.
 
 ## Configuring Authorization Access Roles for Users
 At a minimum users must be placed in one or more FHIR Access roles in order to access the FHIR Server. The Access roles are Administrator, Reader and Writer 
@@ -58,8 +59,9 @@ This endpoint will by default only enforce access roles granted to users/applica
 For example to see conformance statement for the FHIR Server, use your browser and access the following endpoint:</br>
 ```https://<secure proxy url from above>/api/fhir/metadata```
 
-_Note: Individual endpoints can be disabled by disabling the coresponding Function in the Secure FHIR Proxy Function App via the Azure Portal_
-
+_Note: Individual endpoints can be disabled by disabling the coresponding Function in the Secure FHIR Proxy Function App via the Azure Portal_</br>
+_Note: You will need to login as a user in a FHIR Reader and/or FHIR Administrative role to view._
+ 
 # Participant Endpoint
 This endpoint is a further extended example of the ProxyBase endpoint it will filter returned patient based resources to only include Patients where you are the patient owner of the medical record or are a "Practitioner of Record" (e.g. in a participant role and are part of the patient care team, listed as a practitioner participant in an Encounter resource or a general practioner for the Patient) The process is depicted in the diagram below:
 ## How the participant endpoint works
@@ -88,7 +90,33 @@ At a minimum users must be placed in one or more FHIR Participant roles in order
 14. Congratulations the select users have been assigned the participant role and can now be linked to FHIR Resources
 
 ## Linking Users in Participant Roles to FHIR Resources
-!! Under Construction !!
+1. Make sure you have configured Participant Authorization Roles for users
+2. Obtain the FHIR Resource Id you wish to link to a AAD User prinicipal.  Note you can use any search methods for the resources described in the FHIR specification.  It is strongly recomended to use a known Business Identifier in your query to ensure a specific and correct match.
+   For example:
+   To find a specific Patient in FHIR with a MRN of 1234567 you could issue the following URL in your browser:
+   
+   ```https://<your fhir proxy url>/api/fhir/Patient?identifier=1234567```
+   
+   To find a specific Practioner with last name Smith, in this case you can use other fields to validate like address, identifiers,etc... 
+   ```https://<your fhir proxy address>/api/fhir/Practioner?name=smith```
+    
+   The resource id is located in the id field of the returned resource or resource member in a search bundle
+   ```"id": "3bdaac8f-5c8e-499d-b906-aab31633337d"``` 
+ 
+   _Note: You will need to login as a user in a FHIR Reader and/or FHIR Administrative role to view._
+ 
+ 3. You will need to ontain the participant user prinicipal name for the AAD instance in your tenant that are assigned and in roles for the secure proxy application.  Make sure the Role they are in cooresponds to the FHIR Resource you are linking. 
+    For example: ```somedoctor@sometenant.onmicrosoft.com```
+ 4. Now you can link the FHIR Resource to the user principal name by entering the following URL in your browser:
+ 
+    ```https://<your fhir proxy url>/api/<ResourceName>/<ResourceID>?name=<user prinicipal name>``` 
+
+    For example to connect Dr. Mickey in my AAD tenant principal whos user name is mickey@myaad.onmicrosoft.com to the FHIR Practitioner Resource Id 3bdaac8f-5c8e-499d-b906-aab31633337d you would enter the following URL:
+    ```https://<your fhir proxy url>/api/Practitioner/3bdaac8f-5c8e-499d-b906-aab31633337d?name=mickey@myaad.onmicrosoft.com```
+     
+    _Note: You will need to login as a user in a FHIR Administrative role to perform the assignment_
+
+5.  Your done the principal user is now connected in role to the FHIR resource.
 
 ## Contributing
 

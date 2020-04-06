@@ -1,20 +1,17 @@
-# HL7 Ingest, Conversion and De-Identification Samples
-This project contains fully functional sample deployments of ingest, conversion and de-identification workflows powered by Microsoft's FHIR Converter and FHIR Tools for Anonymization. The goal of this project is to provide quick start examples that can be used to accelerate implementation of health data ingest into Azure Health Data Platform.  
+# HL7 Ingest, Conversion Samples
+This project contains fully functional sample deployments of ingest and conversion workflows powered by Microsoft's FHIR Converter. The goal of this project is to provide quick start examples that can be used to accelerate implementation of health data ingest into Azure Health Data Platform.  
 
 The [FHIR Converter](https://github.com/microsoft/FHIR-Converter) is an open source project that enables healthcare organizations to convert legacy data (currently HL7 v2 messages) into FHIR bundles. Converting legacy data to FHIR expands the use cases for health data and enables interoperability.  
 
-[FHIR Tools for Anonymization](https://github.com/microsoft/FHIR-Tools-for-Anonymization) is an open-source project that helps anonymize healthcare FHIR data, on-premises or in the cloud, for secondary usage such as research, public health, and more.
 
 ## Overview
 This repo provides reference architecture and sample deployments for the ingest and conversion to FHIR of HL7 messages and the de-identification of FHIR resources.
-These samples demonstrate incorporating Microsoft's FHIR Converter and FHIR Anonymizer into your enterprise HL7 messaging/FHIR infrastructure to enable end-to-end workflows for a variety of use cases.
+These samples demonstrate incorporating Microsoft's FHIR Converter into your enterprise HL7 messaging/FHIR infrastructure to enable end-to-end workflows for a variety of use cases.
 The examples include:
   + An HL7 ingest platform to consume HL7 Messages via MLLP and securely Transfer them to Azure via HL7overHTTPS and place in blob storage and produce a consumable event on a high speed ordered service bus for processing.  
   
   + A workflow that performs orderly conversion from HL7 to FHIR via the conversion API and persists the message into a FHIR Server and publishes change events referencing FHIR resources to a high speed event hub to interested subscribers.  
-  
-  + An event driven De-Identification workflow to support data science activities by de-identified sensitive data and landing it into storage for consumption in analytics activities. 
-  
+    
 
 ## HL7 Ingest
 
@@ -28,12 +25,13 @@ Infrastructure deployment that will allow you to:
 ![Converter Ingest](hl7ingest1.png)
 ### <a name="ingest"></a>Deploying your own HL7 Ingest Platform
 1. [Get or Obtain a valid Azure Subscription](https://azure.microsoft.com/en-us/free/)
-2. [Install Azure CLI 2.0 on Linux based System or Windows Bash Shell](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest)
-3. [Download/Clone this repo](https://github.com/microsoft/health-architectures)
-4. Open a bash shell into the Azure CLI 2.0 environment
-5. Switch to the HL7Conversion subdirectory of this repo
-6. Run the deployhl7ingest.bash script and follow the prompts
-7. Send in an hl7 message via HL7 over HTTPS:
+2. [If you are running Windows 10 make sure you have enabled Windows Linux Subsystem](https://code.visualstudio.com/remote-tutorials/wsl/enable-wsl) and [Installed a Linux Distribution](https://code.visualstudio.com/remote-tutorials/wsl/install-linux)
+3. [Install Azure CLI 2.0 on Linux based System or Windows Linux Subsystem](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest) 
+4. [Download/Clone this repo](https://github.com/microsoft/health-architectures)
+5. Open a bash shell into the Azure CLI 2.0 environment
+6. Switch to the HL7Conversion subdirectory of this repo
+7. Run the deployhl7ingest.bash script and follow the prompts
+8. Send in an hl7 message via HL7 over HTTPS:
     + Locate the sample message medtest.png in the root directory of the repo
     + Use an image viewer to see contents
     + From the linux command shell run the following command to test the hl7overhttps ingest
@@ -42,7 +40,7 @@ Infrastructure deployment that will allow you to:
       ``` 
     + You should receive back an HL7 ACK message
     + Congratulations!!! The sample hl7 message was accepted securely stored into blob storage and queued for further ingest processing on the deployed service bus queue
-8. Send in HL7 messages using the local HL7 MLLP Relay. To run a local copy of the HL7 MLLP Relay:
+9. Send in HL7 messages using the local HL7 MLLP Relay. To run a local copy of the HL7 MLLP Relay:
     + Make sure [Docker](https://www.docker.com/) is installed and running in your linux or windows environment
     + From a command prompt run the runhl7relay.bash(linux) or runhl7relay.cmd(windows) passing in the hl7ingest Function App URL (Saved from Above) and the function app access key (Saved from above) as parameters.
         ```
@@ -83,16 +81,6 @@ Features of the HL7toFHIR Conversion Platform:
 
 ![Sample Converter Run](samplerun.png)
 
-## FHIR De-Identification
 
-Infrastructure deployment that will create an event driven workflow driven by the FHIR Event Hub. This is a real time workflow that de-identifies and redacts sensitive data of FHIR Resources via [FHIR Tools for Anonymization](https://github.com/microsoft/FHIR-Tools-for-Anonymization) and lands them in a de-identified storage account for open consumption in analytics and other non identified data activities
-
-![Converter Ingest](deid.png)
-
-## Deploying your own HL7toFHIR Conversion Workflow
-1. [Deploy the HL7toFHIR Conversion Workflow](#convert)
-2. Open a shell or command window into the Azure CLI 2.0 environment
-3. Switch to the Managed/HL7Conversion subdirectory of this repo
-4. Run the deploydeid.bash script and follow the prompts
-
-FHIR® is the registered trademark of HL7 and is used with the permission of HL7
+FHIR® is the registered trademark of HL7 and is used with the permission of HL7</br>
+HAPI is an open source tool set developed by [University Health Network](http://www.uhn.ca/)
