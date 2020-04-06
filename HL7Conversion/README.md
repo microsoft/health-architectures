@@ -1,20 +1,17 @@
-# HL7 Ingest, Conversion and De-Identification Samples
-This project contains fully functional sample deployments of ingest, conversion and de-identification workflows powered by Microsoft's FHIR Converter and FHIR Tools for Anonymization. The goal of this project is to provide quick start examples that can be used to accelerate implementation of health data ingest into Azure Health Data Platform.  
+# HL7 Ingest, Conversion Samples
+This project contains fully functional sample deployments of ingest and conversion workflows powered by Microsoft's FHIR Converter. The goal of this project is to provide quick start examples that can be used to accelerate implementation of health data ingest into Azure Health Data Platform.  
 
 The [FHIR Converter](https://github.com/microsoft/FHIR-Converter) is an open source project that enables healthcare organizations to convert legacy data (currently HL7 v2 messages) into FHIR bundles. Converting legacy data to FHIR expands the use cases for health data and enables interoperability.  
 
-[FHIR Tools for Anonymization](https://github.com/microsoft/FHIR-Tools-for-Anonymization) is an open-source project that helps anonymize healthcare FHIR data, on-premises or in the cloud, for secondary usage such as research, public health, and more.
 
 ## Overview
 This repo provides reference architecture and sample deployments for the ingest and conversion to FHIR of HL7 messages and the de-identification of FHIR resources.
-These samples demonstrate incorporating Microsoft's FHIR Converter and FHIR Anonymizer into your enterprise HL7 messaging/FHIR infrastructure to enable end-to-end workflows for a variety of use cases.
+These samples demonstrate incorporating Microsoft's FHIR Converter into your enterprise HL7 messaging/FHIR infrastructure to enable end-to-end workflows for a variety of use cases.
 The examples include:
   + An HL7 ingest platform to consume HL7 Messages via MLLP and securely Transfer them to Azure via HL7overHTTPS and place in blob storage and produce a consumable event on a high speed ordered service bus for processing.  
   
   + A workflow that performs orderly conversion from HL7 to FHIR via the conversion API and persists the message into a FHIR Server and publishes change events referencing FHIR resources to a high speed event hub to interested subscribers.  
-  
-  + An event driven De-Identification workflow to support data science activities by de-identified sensitive data and landing it into storage for consumption in analytics activities. 
-  
+    
 
 ## HL7 Ingest
 
