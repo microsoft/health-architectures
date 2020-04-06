@@ -178,7 +178,7 @@ echo "Starting Secure FHIR Proxy deployment..."
 		#set -x
 		#Create Storage Account
 		echo "Creating Storage Account ["$deployprefix$storageAccountNameSuffix"]..."
-		stepresult=$(az storage account create --name $deployprefix$storageAccountNameSuffix --resource-group $resourceGroupName --location  $resourceGroupLocation --sku Standard_LRS --encryption blob)
+		stepresult=$(az storage account create --name $deployprefix$storageAccountNameSuffix --resource-group $resourceGroupName --location  $resourceGroupLocation --sku Standard_LRS --encryption-services blob)
 		echo "Retrieving Storage Account Connection String..."
 		storageConnectionString=$(az storage account show-connection-string -g $resourceGroupName -n $deployprefix$storageAccountNameSuffix --query "connectionString" --out tsv)
 		echo "Creating Storage Account Container ["$storecontainername"]..."
@@ -189,7 +189,7 @@ echo "Starting Secure FHIR Proxy deployment..."
 		stepresult=$(az appservice plan create -g  $resourceGroupName -n $deployprefix$serviceplanSuffix --number-of-workers 2 --sku P1v2)
 		#Create the function app
 		echo "Creating Secure FHIR Proxy Function App ["$faname"]..."
-		fahost=$(az functionapp create --name $faname --storage-account $deployprefix$storageAccountNameSuffix  --plan $deployprefix$serviceplanSuffix  --resource-group $resourceGroupName --runtime dotnet --os-type Windows --runtime-version 2 --query defaultHostName --output tsv)
+		fahost=$(az functionapp create --name $faname --storage-account $deployprefix$storageAccountNameSuffix  --plan $deployprefix$serviceplanSuffix  --resource-group $resourceGroupName --runtime dotnet --os-type Windows --query defaultHostName --output tsv)
 		echo "Creating Service Principal for AAD Auth"
 		stepresult=$(az ad sp create-for-rbac -n "https://"$fahost)
 		spappid=$(echo $stepresult | jq -r '.appId')
