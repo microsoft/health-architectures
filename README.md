@@ -1,53 +1,39 @@
----
-page_type: sample
-languages:
-- csharp
-products:
-- dotnet
-description: "Add 150 character max description"
-urlFragment: "update-this-to-unique-url-stub"
----
+# Introduction 
+Health Architectures is a collection of reference architectures and, when appropriate, implementations. They illustrate end-to-end best practices for using the Azure API for FHIR and related technologies. Below is the holistic conceptual end to end architecture for Azure API for FHIR.
+![Microsoft Health Concecptual](./ConceptualArchitectureCore.png)
+See [Azure for Health Cloud](https://azure.microsoft.com/en-us/industries/healthcare/) for a discussion of health solutions in the Azure cloud.  See [Azure API for FHIR](https://azure.microsoft.com/en-us/services/azure-api-for-fhir/) for more information regarding the Azure Fast Healthcare Interoperability Resource (FHIR) service for health data solutions.
 
-# Official Microsoft Sample
+We, the Microsoft Health Cloud & Data Architectural Engineering team, are part of Microsoft Health. We work side by side with the product teams responsible for technologies such as the Azure API for FHIR, IoMT FHIR Connector for Azure, and more. Through collaboration with the product teams we bring these reference architectures to you.
 
-<!-- 
-Guidelines on README format: https://review.docs.microsoft.com/help/onboard/admin/samples/concepts/readme-template?branch=master
+As we work with customers, partners, and co-workers, we frequently come across requests references architectures & code for end to end implementations. For example, how can I pick up HL7v2 messages generated in my environment from my EMR (Electronic Medical Record), Lab System, Scheduling System, etc. then ingest them into FHIR near real-time? These questions and scenarios then become the basis for our reference architectures. Of course, we remove customer specific data, then generalize the design for greater impact.
 
-Guidance on onboarding samples to docs.microsoft.com/samples: https://review.docs.microsoft.com/help/onboard/admin/samples/process/onboarding?branch=master
+As you look through this repository you will see some typical 'hello world' examples as well as more complex solutions. We conduct peer reviews to bring you the best practices for using the Microsoft Health technologies.
 
-Taxonomies for products and languages: https://review.docs.microsoft.com/new-hope/information-architecture/metadata/taxonomies?branch=master
--->
+We invite you to ask questions, make suggestions and share use cases which we might consider for future reference architectures or implementations.
 
-Give a short description for your sample here. What does it do and why is it important?
 
-## Contents
+# Getting Started
+We have organized this repo into areas which map to our offering for FHIR and related technologies.
 
-Outline the file contents of the repository. It helps users navigate the codebase, build configuration and any related assets.
+1.  For capabilities central to our FHIR offerings look [here.](http://github.com/microsoft/health-architectures/tree/master/FHIR)  
+Topics include:  
+    *   How to generate events when create, update, or delete operations take place in FHIR
+    *   How to export data from FHIR for research, analytics, machine learning, etc.  
+    *   How to secure resources in FHIR and/or process data on egress (i.e. anonymization)
+2.  For capabilities around our Internet of Medical Things (IoMT) offering look [here.](http://github.com/microsoft/health-architectures/tree/master/IoMT)  
+Topics include:  
+    *   How to configure the IoMT FHIR Connector and process telemetry data  
+    *   Integrating IoMT data with FHIR and using Microsoft Power BI to create a dashboard  
+    *   Integrating IoMT data with FHIR and using Microsoft Teams to create notifications
+3.  For capabilities around ingesting HL7v2 and converting messages to FHIR look [here.](http://github.com/microsoft/health-architectures/tree/master/HL7Conversion)  
+Topics include:  
+    *   Ingesting HL7v2 from your on-premises system and delivering to Azure for conversion and storage to FHIR   
+ 
 
-| File/folder       | Description                                |
-|-------------------|--------------------------------------------|
-| `src`             | Sample source code.                        |
-| `.gitignore`      | Define what to ignore at commit time.      |
-| `CHANGELOG.md`    | List of changes to the sample.             |
-| `CONTRIBUTING.md` | Guidelines for contributing to the sample. |
-| `README.md`       | This README file.                          |
-| `LICENSE`         | The license for the sample.                |
+# How to set-up a demonstration environment
+We have provided code solutions alongside the reference architectures. While we have tested our code with our OSS & managed FHIR offerings many should be able to deploy against other FHIR deployments (if compliant and at the R4 level).
 
-## Prerequisites
-
-Outline the required components and tools that a user might need to have on their machine in order to run the sample. This can be anything from frameworks, SDKs, OS versions or IDE releases.
-
-## Setup
-
-Explain how to prepare the sample once the user clones or downloads the repository. The section should outline every step necessary to install dependencies and set up any settings (for example, API keys and output folders).
-
-## Running the sample
-
-Outline step-by-step instructions to execute the sample and see its output. Include steps for executing the sample from the IDE, starting specific services in the Azure portal or anything related to the overall launch of the code.
-
-## Key concepts
-
-Provide users with more context on the tools and services used in the sample. Explain some of the code that is being used and how services interact with each other.
+You can use your existing deployment of our API for FHIR or FHIR Server or you can deploy a sandbox/demo environment by deploying our FHIR server samples as described [here.](http://aka.ms/fhircore)
 
 ## Contributing
 
