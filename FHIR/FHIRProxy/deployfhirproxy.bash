@@ -189,7 +189,7 @@ echo "Starting Secure FHIR Proxy deployment..."
 		stepresult=$(az appservice plan create -g  $resourceGroupName -n $deployprefix$serviceplanSuffix --number-of-workers 2 --sku P1v2)
 		#Create the function app
 		echo "Creating Secure FHIR Proxy Function App ["$faname"]..."
-		fahost=$(az functionapp create --name $faname --storage-account $deployprefix$storageAccountNameSuffix  --plan $deployprefix$serviceplanSuffix  --resource-group $resourceGroupName --runtime dotnet --os-type Windows --runtime-version 2 --query defaultHostName --output tsv)
+		fahost=$(az functionapp create --name $faname --storage-account $deployprefix$storageAccountNameSuffix  --plan $deployprefix$serviceplanSuffix  --resource-group $resourceGroupName --runtime dotnet --os-type Windows --query defaultHostName --output tsv)
 		echo "Creating Service Principal for AAD Auth"
 		stepresult=$(az ad sp create-for-rbac -n "https://"$fahost)
 		spappid=$(echo $stepresult | jq -r '.appId')
