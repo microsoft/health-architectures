@@ -32,8 +32,8 @@ Infrastructure deployment that will allow you to:
 6. Switch to the HL7Conversion subdirectory of this repo
 7. Run the deployhl7ingest.bash script and follow the prompts
 8. Send in an hl7 message via HL7 over HTTPS:
-    + Locate the sample message medtest.png in the root directory of the repo
-    + Use an image viewer to see contents
+    + Locate the sample message samplemsg.hl7 in the root directory of the repo
+    + Use a text editor to see contents
     + From the linux command shell run the following command to test the hl7overhttps ingest
       ```
         curl --trace-ascii - -H "Content-Type:text/plain" --data-binary @samplemsg.hl7 <your ingest host name from above>/api/hl7ingest?code=<your ingest host key from above>

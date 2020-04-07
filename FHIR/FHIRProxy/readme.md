@@ -1,6 +1,6 @@
 # Secure FHIR Proxy
 
-Secure FHIR Proxy is an Azure Function based solution to act as an intelligent FHIR based reverse proxy.
+Secure FHIR Proxy is an Azure Function based solution to act as an intelligent FHIR reverse proxy.
 It is integrated with Azure Active Directory to provide Role based access control.  This solution contains the following examples:
  + ProxyBase - A generic FHIR Proxy with no business logic validation and only authentication verification. You can use this sample to build your own business purpose driven proxy to perform any pre processing and post processing tasks for FHIR server calls.
  + ParticipantAccess - A sample FHIR Proxy based on ProxyBase that will filter returned patient based resources to only include Patients where you are the patient or are a "Practitioner of Record" (e.g. in a participant role and are part of the patient care team) Note: this only filters patient based resources
@@ -28,12 +28,12 @@ Please note you should deploy this proxy into a tenant that you control Applicat
 8. [Install jq for your environment](https://stedolan.github.io/jq/download/)
 9. [Download/Clone this repo](https://github.com/microsoft/health-architectures)
 10. Open a bash shell into the Azure CLI 2.0 environment
-11. Switch to the FHIR/FHIRproxy subdirectory of this repo ```cd FHIR\FHIRProxy```
+11. Switch to the FHIR/FHIRproxy subdirectory of this repo ```cd FHIR/FHIRProxy```
 12. Run the deployfhirproxy.bash script and follow the prompts
 13. Congratulations you now have a Secure FHIR Proxy instance with authentication running. You can now configure Authorized Access.
 
 ## Configuring Authorization Access Roles for Users
-At a minimum users must be placed in one or more FHIR Access roles in order to access the FHIR Server. The Access roles are Administrator, Reader and Writer 
+At a minimum users must be placed in one or more FHIR Access roles in order to access the FHIR Server. The Access roles are Administrator, Resource Reader and Resource Writer 
 1. [Login to Azure Portal](https://portal.azure.com) _Note: If you have multiple tenants make sure you switch to the directory that contains the Secure FHIR Proxy_
 2. [Access the Azure Active Directory Enterprise Application Blade](https://ms.portal.azure.com/#blade/Microsoft_AAD_IAM/StartboardApplicationsMenuBlade/AllApps/menuId/)
 3. Change the Application Type Drop Down to All Applications and click the Apply button
@@ -47,7 +47,9 @@ At a minimum users must be placed in one or more FHIR Access roles in order to a
    + Administrator - Full Privledges to Read/Write/Link resource to the FHIR Server
    + Resource Reader - Allowed to Read Resources from the FHIR Server
    + Resource Writer - Allowed to Create, Update, Deleten Resources on the FHIR Server
-   When the role is selected click the select button at the bottom of the panel
+  
+    When the role is selected click the select button at the bottom of the panel
+
 10. Select the Users assignment box
 11. Select and/or Search and Select registered users/guests that you want to assign the selected role too.
 12. When all users desired have been selected click the select button at the bottom of the panel.
@@ -82,6 +84,7 @@ At a minimum users must be placed in one or more FHIR Participant roles in order
    + Patient - This user is a patient and is linked to a Patient resource in the FHIR Server
    + Practitioner - This user is a practioner and is linked to a Practioner resource in the FHIR Server
    + RealtedPerson - This user is a relative/caregiver to a patient and is linked to a RelatedPerson resource in the FHIR Server
+    
    When the role is selected click the select button at the bottom of the panel
 10. Select the Users assignment box
 11. Select and/or Search and Select registered users/guests that you want to assign the selected role too.
