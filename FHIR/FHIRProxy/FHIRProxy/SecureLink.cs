@@ -76,13 +76,16 @@ namespace FHIRProxy
                 return new BadRequestObjectResult("Linked resource must have principal name specified in parameters (e.g. ?name=)");
             }
             //Get/update/check current bearer token to talk to authenticate to FHIR Server
-            if (_bearerToken == null || FHIRClient.isTokenExpired(_bearerToken))
+            if (FHIRClient.isTokenExpired(_bearerToken))
             {
                 lock (_lock)
                 {
-                    log.LogInformation($"Obtaining new OAUTH2 Bearer Token for access to FHIR Server");
-                    _bearerToken = FHIRClient.GetOAUTH2BearerToken(System.Environment.GetEnvironmentVariable("FS_TENANT_NAME"), System.Environment.GetEnvironmentVariable("FS_RESOURCE"),
-                                                               System.Environment.GetEnvironmentVariable("FS_CLIENT_ID"), System.Environment.GetEnvironmentVariable("FS_SECRET"));
+                    if (FHIRClient.isTokenExpired(_bearerToken))
+                    {
+                        log.LogInformation($"Obtaining new OAUTH2 Bearer Token for access to FHIR Server");
+                        _bearerToken = FHIRClient.GetOAUTH2BearerToken(System.Environment.GetEnvironmentVariable("FS_RESOURCE"), System.Environment.GetEnvironmentVariable("FS_TENANT_NAME"),
+                                                                  System.Environment.GetEnvironmentVariable("FS_CLIENT_ID"), System.Environment.GetEnvironmentVariable("FS_SECRET")).GetAwaiter().GetResult();
+                    }
                 }
             }
             //Get a FHIR Client so we can talk to the FHIR Server

@@ -31,6 +31,8 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using System.Linq.Expressions;
 using System.ComponentModel.Design;
+using Microsoft.Azure.Services.AppAuthentication;
+using FHIRProxy;
 
 namespace FHIREventProcessor
 {
@@ -49,25 +51,26 @@ namespace FHIREventProcessor
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             /* Get/update/check current bearer token to authenticate the proxy to the FHIR Server
              * The following parameters must be defined in environment variables:
+             * To use Manged Service Identity or Service Client:
              * FS_URL = the fully qualified URL to the FHIR Server
+             * FS_RESOURCE = the audience or resource for the FHIR Server for Azure API for FHIR should be https://azurehealthcareapis.com
+             * To use a Service Client Principal the following must also be specified:
              * FS_TENANT_NAME = the GUID or UPN of the AAD tenant that is hosting FHIR Server Authentication
              * FS_CLIENT_ID = the client or app id of the private client authorized to access the FHIR Server
              * FS_SECRET = the client secret to pass to FHIR Server Authentication
-             * FS_RESOURCE = the audience or resource for the FHIR Server for Azure API for FHIR should be https://azurehealthcareapis.com
              */
-            if (!string.IsNullOrEmpty(System.Environment.GetEnvironmentVariable("FS_CLIENT_ID")) && (_bearerToken == null || FHIRClient.isTokenExpired(_bearerToken)))
+            if (!string.IsNullOrEmpty(System.Environment.GetEnvironmentVariable("FS_RESOURCE")) && FHIRClient.isTokenExpired(_bearerToken))
             {
                 lock (_lock)
                 {
-                    log.LogInformation($"Obtaining new OAUTH2 Bearer Token for access to FHIR Server");
-                    _bearerToken = FHIRClient.GetOAUTH2BearerToken(System.Environment.GetEnvironmentVariable("FS_TENANT_NAME"), System.Environment.GetEnvironmentVariable("FS_RESOURCE"),
-                                                               System.Environment.GetEnvironmentVariable("FS_CLIENT_ID"), System.Environment.GetEnvironmentVariable("FS_SECRET"));
+                    if (FHIRClient.isTokenExpired(_bearerToken))
+                    {
+                        log.LogInformation($"Obtaining new OAUTH2 Bearer Token for access to FHIR Server");
+                        _bearerToken = FHIRClient.GetOAUTH2BearerToken(System.Environment.GetEnvironmentVariable("FS_RESOURCE"), System.Environment.GetEnvironmentVariable("FS_TENANT_NAME"),
+                                                                  System.Environment.GetEnvironmentVariable("FS_CLIENT_ID"), System.Environment.GetEnvironmentVariable("FS_SECRET")).GetAwaiter().GetResult();
+                    }
                 }
             }
-            /* 
-             * Create User Custom Headers these headers are passed to the FHIR Server to communicate credentials of the authorized user for each proxy call
-             * this is ensures accruate audit trails for FHIR server access. Note: This headers are honored by the Azure API for FHIR Server
-             */
             List<HeaderParm> auditheaders = new List<HeaderParm>();
             auditheaders.Add(new HeaderParm("X-MS-AZUREFHIR-AUDIT-PROXY", "FHIREventProcessor"));
             /* Preserve FHIR Specific change control headers and include in the proxy call */
@@ -83,6 +86,7 @@ namespace FHIREventProcessor
             /* Get a FHIR Client instance to talk to the FHIR Server */
             log.LogInformation($"Instanciating FHIR Client Proxy");
             FHIRClient fhirClient = new FHIRClient(System.Environment.GetEnvironmentVariable("FS_URL"), _bearerToken);
+
             FHIRResponse fhirresp = null;
             /* Proxy the call to the FHIR Server */
             JObject result = null;
@@ -93,7 +97,7 @@ namespace FHIREventProcessor
             }
             else
             {
-                fhirresp = fhirClient.SaveResource(requestBody, req.Method, customandrestheaders.ToArray());
+                fhirresp = fhirClient.SaveResource(res,requestBody, req.Method, customandrestheaders.ToArray());
             }
             /* Fix location header to proxy address */
             if (fhirresp.Headers.ContainsKey("Location"))
@@ -110,7 +114,10 @@ namespace FHIREventProcessor
                 req.HttpContext.Response.Headers.Remove(key);
                 req.HttpContext.Response.Headers.Add(key, fhirresp.Headers[key].Value);
             }
-            return new JsonResult(result);
+            var jr = new JsonResult(result);
+            jr.StatusCode = (int)fhirresp.StatusCode;
+            return jr;
+
         }
 
        

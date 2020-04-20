@@ -40,7 +40,7 @@ namespace FHIRProxy
         private static object _lock = new object();
         [FunctionName("ProxyBase")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", "put", "patch", "delete", Route = "fhir/{res}/{id?}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", "put", "patch", "delete", Route = "fhir/{res?}/{id?}")] HttpRequest req,
                          ILogger log, ClaimsPrincipal principal, string res, string id)
         {
             
@@ -82,22 +82,24 @@ namespace FHIRProxy
             /* Load the request contents */
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             /* Get/update/check current bearer token to authenticate the proxy to the FHIR Server
-             * The following parameters must be defined in environment variables:
-             * FS_URL = the fully qualified URL to the FHIR Server
-             * FS_TENANT_NAME = the GUID or UPN of the AAD tenant that is hosting FHIR Server Authentication
-             * FS_CLIENT_ID = the client or app id of the private client authorized to access the FHIR Server
-             * FS_SECRET = the client secret to pass to FHIR Server Authentication
-             * FS_RESOURCE = the audience or resource for the FHIR Server for Azure API for FHIR should be https://azurehealthcareapis.com
-             */
-            if (_bearerToken == null || FHIRClient.isTokenExpired(_bearerToken))
+            * The following parameters must be defined in environment variables:
+            * To use Manged Service Identity or Service Client:
+            * FS_URL = the fully qualified URL to the FHIR Server
+            * FS_RESOURCE = the audience or resource for the FHIR Server for Azure API for FHIR should be https://azurehealthcareapis.com
+            * To use a Service Client Principal the following must also be specified:
+            * FS_TENANT_NAME = the GUID or UPN of the AAD tenant that is hosting FHIR Server Authentication
+            * FS_CLIENT_ID = the client or app id of the private client authorized to access the FHIR Server
+            * FS_SECRET = the client secret to pass to FHIR Server Authentication
+            */
+            if (!string.IsNullOrEmpty(System.Environment.GetEnvironmentVariable("FS_RESOURCE")) && FHIRClient.isTokenExpired(_bearerToken))
             {
                 lock (_lock)
                 {
-                    if (_bearerToken == null || FHIRClient.isTokenExpired(_bearerToken))
+                    if (FHIRClient.isTokenExpired(_bearerToken))
                     {
                         log.LogInformation($"Obtaining new OAUTH2 Bearer Token for access to FHIR Server");
-                        _bearerToken = FHIRClient.GetOAUTH2BearerToken(System.Environment.GetEnvironmentVariable("FS_TENANT_NAME"), System.Environment.GetEnvironmentVariable("FS_RESOURCE"),
-                                                               System.Environment.GetEnvironmentVariable("FS_CLIENT_ID"), System.Environment.GetEnvironmentVariable("FS_SECRET"));
+                        _bearerToken = FHIRClient.GetOAUTH2BearerToken(System.Environment.GetEnvironmentVariable("FS_RESOURCE"), System.Environment.GetEnvironmentVariable("FS_TENANT_NAME"),
+                                                                  System.Environment.GetEnvironmentVariable("FS_CLIENT_ID"), System.Environment.GetEnvironmentVariable("FS_SECRET")).GetAwaiter().GetResult();
                     }
                 }
             }
@@ -160,7 +162,9 @@ namespace FHIRProxy
                 req.HttpContext.Response.Headers.Remove(key);
                 req.HttpContext.Response.Headers.Add(key, fhirresp.Headers[key].Value);
             }
-            return new JsonResult(result);
+            var jr = new JsonResult(result);
+            jr.StatusCode = (int)fhirresp.StatusCode;
+            return jr;
         }
 
        

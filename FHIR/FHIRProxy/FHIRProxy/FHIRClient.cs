@@ -22,7 +22,8 @@ using RestSharp;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
-
+using Microsoft.Azure.Services.AppAuthentication;
+using System.Threading.Tasks;
 
 namespace FHIRProxy
 {
@@ -37,18 +38,14 @@ namespace FHIRProxy
         {
             init(baseurl, bearerToken);
         }
-        public FHIRClient(string baseurl, string tenent = null, string clientid = null, string secret = null, string resource = null)
+        public FHIRClient(string baseurl, string resource,string tenent = null, string clientid = null, string secret = null)
         {
             auth_tenent = tenent;
             auth_client_id = clientid;
             auth_secret = secret;
             auth_resource = resource;
             string tokenresp = null;
-            if (tenent != null && clientid != null && secret != null)
-            {
-                var r = resource != null ? resource : baseurl;
-                tokenresp = GetOAUTH2BearerToken(tenent, r, clientid, secret);
-            }
+            tokenresp = GetOAUTH2BearerToken(auth_resource, auth_tenent, auth_client_id, auth_secret).GetAwaiter().GetResult();
             init(baseurl, tokenresp);
         }
         public string BearerToken { get; set; }
@@ -59,6 +56,7 @@ namespace FHIRProxy
         }
         public static bool isTokenExpired(string bearerToken)
         {
+            if (bearerToken == null) return true;
             var handler = new JwtSecurityTokenHandler();
             var token = handler.ReadToken(bearerToken) as JwtSecurityToken;
             var tokenExpiryDate = token.ValidTo;
@@ -71,31 +69,40 @@ namespace FHIRProxy
             return false;
 
         }
-        public static string GetOAUTH2BearerToken(string tenent, string resource, string clientid, string secret)
+        public static async Task<string> GetOAUTH2BearerToken(string resource, string tenant=null, string clientid=null, string secret=null)
         {
-            using (WebClient client = new WebClient())
+            if (!string.IsNullOrEmpty(resource) && (string.IsNullOrEmpty(tenant) && string.IsNullOrEmpty(clientid) && string.IsNullOrEmpty(secret)))
             {
-                byte[] response =
-                 client.UploadValues("https://login.microsoftonline.com/" + tenent + "/oauth2/token", new NameValueCollection()
-                 {
-                    {"grant_type","client_credentials"},
-                    {"client_id",clientid},
-                    { "client_secret", secret },
-                    { "resource", resource }
-                 });
+                //Assume Managed Service Identity with only resource provided.
+                var azureServiceTokenProvider = new AzureServiceTokenProvider();
+                var _accessToken = await azureServiceTokenProvider.GetAccessTokenAsync(resource);
+                return _accessToken;
+            }
+            else
+            {
+                using (WebClient client = new WebClient())
+                {
+                    byte[] response =
+                     client.UploadValues("https://login.microsoftonline.com/" + tenant + "/oauth2/token", new NameValueCollection()
+                     {
+                        {"grant_type","client_credentials"},
+                        {"client_id",clientid},
+                        { "client_secret", secret },
+                        { "resource", resource }
+                     });
 
 
-                string result = System.Text.Encoding.UTF8.GetString(response);
-                JObject obj = JObject.Parse(result);
-                return (string)obj["access_token"];
+                    string result = System.Text.Encoding.UTF8.GetString(response);
+                    JObject obj = JObject.Parse(result);
+                    return (string)obj["access_token"];
+                }
             }
         }
         private void refreshToken()
         {
-            if (BearerToken != null && auth_tenent != null && auth_client_id != null && auth_secret != null && isTokenExpired(BearerToken))
+            if (BearerToken != null && isTokenExpired(BearerToken))
             {
-                var r = auth_resource != null ? auth_resource : _client.BaseUrl.OriginalString;
-                BearerToken = GetOAUTH2BearerToken(auth_tenent, r, auth_client_id, auth_secret);
+                BearerToken = GetOAUTH2BearerToken(auth_resource, auth_tenent, auth_client_id, auth_secret).GetAwaiter().GetResult();
             }
 
         }

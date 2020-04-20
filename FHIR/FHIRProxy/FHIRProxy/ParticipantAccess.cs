@@ -83,15 +83,15 @@ namespace FHIRProxy
             string name = principal.Identity.Name;
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             //Get/update/check current bearer token to talk to authemticate to FHIR Server
-            if (_bearerToken == null || FHIRClient.isTokenExpired(_bearerToken))
+            if (FHIRClient.isTokenExpired(_bearerToken))
             {
                 lock (_lock)
                 {
-                    if (_bearerToken == null || FHIRClient.isTokenExpired(_bearerToken))
+                    if (FHIRClient.isTokenExpired(_bearerToken))
                     {
                         log.LogInformation($"Obtaining new OAUTH2 Bearer Token for access to FHIR Server");
-                        _bearerToken = FHIRClient.GetOAUTH2BearerToken(System.Environment.GetEnvironmentVariable("FS_TENANT_NAME"), System.Environment.GetEnvironmentVariable("FS_RESOURCE"),
-                                                               System.Environment.GetEnvironmentVariable("FS_CLIENT_ID"), System.Environment.GetEnvironmentVariable("FS_SECRET"));
+                        _bearerToken = FHIRClient.GetOAUTH2BearerToken(System.Environment.GetEnvironmentVariable("FS_RESOURCE"), System.Environment.GetEnvironmentVariable("FS_TENANT_NAME"),
+                                                                  System.Environment.GetEnvironmentVariable("FS_CLIENT_ID"), System.Environment.GetEnvironmentVariable("FS_SECRET")).GetAwaiter().GetResult();
                     }
                 }
             }
@@ -209,7 +209,9 @@ namespace FHIRProxy
                 result = JObject.Parse(str1);
                
             }
-            return new JsonResult(result);
+            var jr = new JsonResult(result);
+            jr.StatusCode = (int)fhirresp.StatusCode;
+            return jr;
         }
 
         private static bool IsAParticipantOrPatient(JObject resource, FHIRClient fhirClient, IEnumerable<string> knownresourceIdentities, Dictionary<string, bool> porcache, HeaderParm[] auditheaders)

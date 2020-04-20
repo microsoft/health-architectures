@@ -33,6 +33,8 @@ using System.Linq.Expressions;
 using System.ComponentModel.Design;
 using Microsoft.Azure.EventHubs;
 using System.Text;
+using Microsoft.Azure.Services.AppAuthentication;
+using FHIRProxy;
 
 namespace FHIREventProcessor
 {
@@ -42,7 +44,7 @@ namespace FHIREventProcessor
         private static object _lock = new object();
         [FunctionName("Import")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "import")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "post", "put", Route = "import/{resourceType?}")] HttpRequest req, string resourceType,
             [EventHub("%EventHubName%", Connection = "EventHubConnection")]IAsyncCollector<EventData> outputEvents,
                          ILogger log)
         {
@@ -51,25 +53,31 @@ namespace FHIREventProcessor
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             /* Get/update/check current bearer token to authenticate the proxy to the FHIR Server
              * The following parameters must be defined in environment variables:
+             * To use Manged Service Identity or Service Client:
              * FS_URL = the fully qualified URL to the FHIR Server
+             * FS_RESOURCE = the audience or resource for the FHIR Server for Azure API for FHIR should be https://azurehealthcareapis.com
+             * To use a Service Client Principal the following must also be specified:
              * FS_TENANT_NAME = the GUID or UPN of the AAD tenant that is hosting FHIR Server Authentication
              * FS_CLIENT_ID = the client or app id of the private client authorized to access the FHIR Server
              * FS_SECRET = the client secret to pass to FHIR Server Authentication
-             * FS_RESOURCE = the audience or resource for the FHIR Server for Azure API for FHIR should be https://azurehealthcareapis.com
              */
-            if (!string.IsNullOrEmpty(System.Environment.GetEnvironmentVariable("FS_CLIENT_ID")) && (_bearerToken == null || FHIRClient.isTokenExpired(_bearerToken)))
+            if (!string.IsNullOrEmpty(System.Environment.GetEnvironmentVariable("FS_RESOURCE")) && FHIRClient.isTokenExpired(_bearerToken))
             {
                 lock (_lock)
                 {
-                    log.LogInformation($"Obtaining new OAUTH2 Bearer Token for access to FHIR Server");
-                    _bearerToken = FHIRClient.GetOAUTH2BearerToken(System.Environment.GetEnvironmentVariable("FS_TENANT_NAME"), System.Environment.GetEnvironmentVariable("FS_RESOURCE"),
-                                                               System.Environment.GetEnvironmentVariable("FS_CLIENT_ID"), System.Environment.GetEnvironmentVariable("FS_SECRET"));
+                    if (FHIRClient.isTokenExpired(_bearerToken))
+                    {
+                        log.LogInformation($"Obtaining new OAUTH2 Bearer Token for access to FHIR Server");
+                        _bearerToken = FHIRClient.GetOAUTH2BearerToken(System.Environment.GetEnvironmentVariable("FS_RESOURCE"),System.Environment.GetEnvironmentVariable("FS_TENANT_NAME"),
+                                                                  System.Environment.GetEnvironmentVariable("FS_CLIENT_ID"), System.Environment.GetEnvironmentVariable("FS_SECRET")).GetAwaiter().GetResult();
+                    }
                 }
             }
             /* 
              * Create User Custom Headers these headers are passed to the FHIR Server to communicate credentials of the authorized user for each proxy call
              * this is ensures accruate audit trails for FHIR server access. Note: This headers are honored by the Azure API for FHIR Server
              */
+
             List<HeaderParm> auditheaders = new List<HeaderParm>();
             auditheaders.Add(new HeaderParm("X-MS-AZUREFHIR-AUDIT-PROXY", "FHIREventProcessor-Import"));
             /* Preserve FHIR Specific change control headers and include in the proxy call */
@@ -86,49 +94,46 @@ namespace FHIREventProcessor
             log.LogInformation($"Instanciating FHIR Client Proxy");
             FHIRClient fhirClient = new FHIRClient(System.Environment.GetEnvironmentVariable("FS_URL"), _bearerToken);
             //Check for transaction bundle
-            JObject result = JObject.Parse(requestBody);
-            List<string> effectedresources = new List<string>();
-            int updated = 0;
-            if (result != null && ((string)result["resourceType"]).Equals("Bundle") && ((string)result["type"]).Equals("transaction"))
+            var result = fhirClient.SaveResource(resourceType, requestBody, "POST", customandrestheaders.ToArray());
+            if (result.StatusCode == HttpStatusCode.OK || result.StatusCode == HttpStatusCode.Created)
             {
-                if (result["entry"] != null)
+                var fhirresp = JObject.Parse((string)result.Content);
+                if(fhirresp != null && ((string)fhirresp["resourceType"]).Equals("Bundle") && ((string)fhirresp["type"]).EndsWith("-response"))
                 {
-
-                    JArray entries = (JArray)result["entry"];
+                    JArray entries = (JArray)fhirresp["entry"];
                     foreach (JToken tok in entries)
                     {
-                        JObject res = (JObject)tok["resource"];
-                        var rslt = fhirClient.SaveResource(res, "PUT", customandrestheaders.ToArray());
-                        if (rslt.StatusCode == HttpStatusCode.OK || rslt.StatusCode == HttpStatusCode.Created)
+                        JObject entryresp = (JObject)tok["response"];
+                        var entrystatus = (string)entryresp["status"];
+                        if (entrystatus.Equals("200") || entrystatus.Equals("201"))
                         {
-                            updated++;
+                            var res = (JObject)tok["resource"];
                             string msg = "{\"effectedresource\":\"" + (string)res["resourceType"] + "\",\"id\":\"" + (string)res["id"] + "\"}";
+                            log.LogInformation("Adding Event: " + msg);
                             EventData dt = new EventData(Encoding.UTF8.GetBytes(msg));
                             await outputEvents.AddAsync(dt);
                         }
+                    }
+                } else
+                {
+                    string msg = "{\"effectedresource\":\"" + (string)fhirresp["resourceType"] + "\",\"id\":\"" + (string)fhirresp["id"] + "\"}";
+                    log.LogInformation("Adding Event: " + msg);
+                    EventData dt = new EventData(Encoding.UTF8.GetBytes(msg));
+                    await outputEvents.AddAsync(dt);
+                }
 
-                    }
-                    
-                    
-                }
-                
-            } else
-            {
-                if (result !=null) { 
-                     var rslt = fhirClient.SaveResource(result, "POST", customandrestheaders.ToArray());
-                    if (rslt.StatusCode == HttpStatusCode.OK || rslt.StatusCode == HttpStatusCode.Created)
-                    {
-                        updated++;
-                        string msg = "{\"effectedresource\":\"" + (string)result["resourceType"] + "\",\"id\":\"" + (string)result["id"] + "\"}";
-                        EventData dt = new EventData(Encoding.UTF8.GetBytes(msg));
-                        await outputEvents.AddAsync(dt);
-                    }
-                }
-                
+                return new JsonResult(fhirresp);
+
+
+
             }
-            string retval = "{\"updated\":\"" + updated + "\"}";
-            return new JsonResult(JObject.Parse(retval));
+            string retval = (string)result.Content;
+            if (string.IsNullOrEmpty(retval)) retval = "{\"error\":\"Unexpected Result\"}";
+            var jr = new JsonResult(JObject.Parse(retval));
+            jr.StatusCode = (int)result.StatusCode;
+            return jr;
 
+        
 
         }
 
