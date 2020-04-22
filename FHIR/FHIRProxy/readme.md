@@ -4,7 +4,7 @@ Secure FHIR Proxy is an Azure Function based solution to act as an intelligent F
 It is integrated with Azure Active Directory to provide Role based access control.  This solution contains the following examples:
  + ProxyBase - A generic FHIR Proxy with no business logic validation and only authentication verification. You can use this sample to build your own business purpose driven proxy to perform any pre processing and post processing tasks for FHIR server calls.
  + ParticipantAccess - A sample FHIR Proxy based on ProxyBase that will filter returned patient based resources to only include Patients where you are the patient or are a "Practitioner of Record" (e.g. in a participant role and are part of the patient care team) Note: this only filters patient based resources
- + SecureLink - A administration function that links AAD Principals in roles for the FHIR server with cooresponding FHIR Resources to establish a map between AAD Role Identity and FHIR
+ + SecureLink - A administration function that links AAD Principals in roles for the FHIR server with corresponding FHIR Resources to establish a map between AAD Role Identity and FHIR
 ## Architecture Overview
 ![Fhirproxy Arch](fhirproxy_arch.png)
 
@@ -44,9 +44,9 @@ At a minimum users must be placed in one or more FHIR Access roles in order to a
 8. Click on the Select Role assignment box
 9. Select the access role you want to assign to specific users
    The following are the predefined FHIR Access roles:
-   + Administrator - Full Privledges to Read/Write/Link resource to the FHIR Server
+   + Administrator - Full Privileges to Read/Write/Link resource to the FHIR Server
    + Resource Reader - Allowed to Read Resources from the FHIR Server
-   + Resource Writer - Allowed to Create, Update, Deleten Resources on the FHIR Server
+   + Resource Writer - Allowed to Create, Update, Delete Resources on the FHIR Server
   
     When the role is selected click the select button at the bottom of the panel
 
@@ -61,16 +61,16 @@ This endpoint will by default only enforce access roles granted to users/applica
 For example to see conformance statement for the FHIR Server, use your browser and access the following endpoint:</br>
 ```https://<secure proxy url from above>/api/fhir/metadata```
 
-_Note: Individual endpoints can be disabled by disabling the coresponding Function in the Secure FHIR Proxy Function App via the Azure Portal_</br>
+_Note: Individual endpoints can be disabled by disabling the corresponding Function in the Secure FHIR Proxy Function App via the Azure Portal_</br>
 _Note: You will need to login as a user in a FHIR Reader and/or FHIR Administrative role to view._
  
 # Participant Endpoint
-This endpoint is a further extended example of the ProxyBase endpoint it will filter returned patient based resources to only include Patients where you are the patient owner of the medical record or are a "Practitioner of Record" (e.g. in a participant role and are part of the patient care team, listed as a practitioner participant in an Encounter resource or a general practioner for the Patient) The process is depicted in the diagram below:
+This endpoint is a further extended example of the ProxyBase endpoint it will filter returned patient based resources to only include Patients where you are the patient owner of the medical record or are a "Practitioner of Record" (e.g. in a participant role and are part of the patient care team, listed as a practitioner participant in an Encounter resource or a general practitioner for the Patient) The process is depicted in the diagram below:
 ## How the participant endpoint works
 ![F H I R Proxy Seq](FHIRProxy_Seq.png)
 
 ## Configuring Participant Authorization Roles for Users
-At a minimum users must be placed in one or more FHIR Participant roles in order to appropriately filter results from tbe FHIR Server. The Access roles are Patient, Practioner and RelatedPerson. _Note:The user must also be in an appropriate Access role defined above_
+At a minimum users must be placed in one or more FHIR Participant roles in order to appropriately filter results from tbe FHIR Server. The Access roles are Patient, Practitioner and RelatedPerson. _Note:The user must also be in an appropriate Access role defined above_
 1. [Login to Azure Portal](https://portal.azure.com) _Note: If you have multiple tenants make sure you switch to the directory that contains the Secure FHIR Proxy_
 2. [Access the Azure Active Directory Enterprise Application Blade](https://ms.portal.azure.com/#blade/Microsoft_AAD_IAM/StartboardApplicationsMenuBlade/AllApps/menuId/)
 3. Change the Application Type Drop Down to All Applications and click the Apply button
@@ -82,8 +82,8 @@ At a minimum users must be placed in one or more FHIR Participant roles in order
 9. Select the access role you want to assign to specific users
    The following are the predefined FHIR Access roles:
    + Patient - This user is a patient and is linked to a Patient resource in the FHIR Server
-   + Practitioner - This user is a practioner and is linked to a Practioner resource in the FHIR Server
-   + RealtedPerson - This user is a relative/caregiver to a patient and is linked to a RelatedPerson resource in the FHIR Server
+   + Practitioner - This user is a practitioner and is linked to a Practitioner resource in the FHIR Server
+   + RelatedPerson - This user is a relative/caregiver to a patient and is linked to a RelatedPerson resource in the FHIR Server
     
    When the role is selected click the select button at the bottom of the panel
 10. Select the Users assignment box
@@ -94,13 +94,13 @@ At a minimum users must be placed in one or more FHIR Participant roles in order
 
 ## Linking Users in Participant Roles to FHIR Resources
 1. Make sure you have configured Participant Authorization Roles for users
-2. Obtain the FHIR Resource Id you wish to link to a AAD User prinicipal.  Note you can use any search methods for the resources described in the FHIR specification.  It is strongly recomended to use a known Business Identifier in your query to ensure a specific and correct match.
+2. Obtain the FHIR Resource Id you wish to link to a AAD User principal.  Note you can use any search methods for the resources described in the FHIR specification.  It is strongly recommended to use a known Business Identifier in your query to ensure a specific and correct match.
    For example:
    To find a specific Patient in FHIR with a MRN of 1234567 you could issue the following URL in your browser:
    
    ```https://<your fhir proxy url>/api/fhir/Patient?identifier=1234567```
    
-   To find a specific Practioner with last name Smith, in this case you can use other fields to validate like address, identifiers,etc... 
+   To find a specific Practitioner with last name Smith, in this case you can use other fields to validate like address, identifiers,etc... 
    ```https://<your fhir proxy address>/api/fhir/Practitioner?name=smith```
     
    The resource id is located in the id field of the returned resource or resource member in a search bundle
@@ -108,13 +108,13 @@ At a minimum users must be placed in one or more FHIR Participant roles in order
  
    _Note: You will need to login as a user in a FHIR Reader and/or FHIR Administrative role to view._
  
- 3. You will need to obtain the participant user prinicipal name for the AAD instance in your tenant that are assigned and in roles for the secure proxy application.  Make sure the Role they are in cooresponds to the FHIR Resource you are linking. 
+ 3. You will need to obtain the participant user principal name for the AAD instance in your tenant that are assigned and in roles for the secure proxy application.  Make sure the Role they are in corresponds to the FHIR Resource you are linking. 
     For example: ```somedoctor@sometenant.onmicrosoft.com```
  4. Now you can link the FHIR Resource to the user principal name by entering the following URL in your browser:
  
     ```https://<your fhir proxy url>/api/manage/link/<ResourceName>/<ResourceID>?name=<user prinicipal name>``` 
 
-    For example to connect Dr. Mickey in my AAD tenant principal whos user name is mickey@myaad.onmicrosoft.com to the FHIR Practitioner Resource Id 3bdaac8f-5c8e-499d-b906-aab31633337d you would enter the following URL:
+    For example to connect Dr. Mickey in my AAD tenant principal who’s user name is mickey@myaad.onmicrosoft.com to the FHIR Practitioner Resource Id 3bdaac8f-5c8e-499d-b906-aab31633337d you would enter the following URL:
     ```https://<your fhir proxy url>/api/manage/link/Practitioner/3bdaac8f-5c8e-499d-b906-aab31633337d?name=mickey@myaad.onmicrosoft.com```
      
     _Note: You will need to login as a user in a FHIR Administrative role to perform the assignment_
