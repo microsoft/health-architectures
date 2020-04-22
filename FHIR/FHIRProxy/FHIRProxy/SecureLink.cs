@@ -36,11 +36,12 @@ namespace FHIRProxy
         public static string _bearerToken;
         private static object _lock = new object();
         private static string[] allowedresources = { "patient", "practitioner", "relatedperson" };
+        private static string[] validcmds = { "link", "unlink", "list" };
 
         [FunctionName("SecureLink")]
         public static IActionResult Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "linkresource/{res}/{id}")] HttpRequest req,
-            ILogger log, ClaimsPrincipal principal, string res, string id)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "manage/{cmd}/{res}/{id}")] HttpRequest req,
+            ILogger log, ClaimsPrincipal principal, string cmd, string res, string id)
         {
             FhirJsonParser _parser = new FhirJsonParser();
             _parser.Settings.AcceptUnknownMembers = true;
@@ -58,6 +59,10 @@ namespace FHIRProxy
             {
                 return new ContentResult() { Content = "User does not have suffiecient rights (Administrator required)", StatusCode = (int)System.Net.HttpStatusCode.Unauthorized };
             }
+            if (string.IsNullOrEmpty(cmd) || !validcmds.Any(cmd.Contains))
+            {
+                return new BadRequestObjectResult("Invalid Command....Valid commands are link, unlink and list");
+            }
             string aadten = ci.Tenant();
             //Custom Headers for User Audit in FHIR
             List<HeaderParm> auditheaders = new List<HeaderParm>();
@@ -68,10 +73,11 @@ namespace FHIRProxy
             //Are we linking the correct resource type
             if (string.IsNullOrEmpty(res) || !allowedresources.Any(res.ToLower().Contains))
             {
-                return new BadRequestObjectResult("Linked resource must be Patient,Practitioner or RelatedPerson");
+                return new BadRequestObjectResult("Resource must be Patient,Practitioner or RelatedPerson");
             }
             string name = req.Query["name"];
-            if (string.IsNullOrEmpty(name))
+            
+            if (string.IsNullOrEmpty(name) && cmd.Equals("link"))
             {
                 return new BadRequestObjectResult("Linked resource must have principal name specified in parameters (e.g. ?name=)");
             }
@@ -108,22 +114,33 @@ namespace FHIRProxy
                 var fbid = tr.Identifier.FirstOrDefault(ident => ident.System == aadten);
                 if (fbid != null)
                 {
+                    if (cmd.Equals("list")) return new OkObjectResult($"Resource {res}/{id} is linked to Identity: {fbid.Value} in directory {aadten}");
                     tr.Identifier.Remove(fbid);
                 }
-                Hl7.Fhir.Model.Identifier newid = new Hl7.Fhir.Model.Identifier(aadten, name);
-                newid.Period = new Hl7.Fhir.Model.Period(Hl7.Fhir.Model.FhirDateTime.Now(), new Hl7.Fhir.Model.FhirDateTime(DateTimeOffset.Now.AddDays(i_link_days)));
-                tr.Identifier.Add(newid);
+                else
+                {
+                    if (cmd.Equals("unlink") || cmd.Equals("list"))
+                    {
+                        return new OkObjectResult($"Resource {res}/{id} has no links to an Identity in directory {aadten}");
+                    }
+                }
+                if (cmd.Equals("link"))
+                {
+                    Hl7.Fhir.Model.Identifier newid = new Hl7.Fhir.Model.Identifier(aadten, name);
+                    newid.Period = new Hl7.Fhir.Model.Period(Hl7.Fhir.Model.FhirDateTime.Now(), new Hl7.Fhir.Model.FhirDateTime(DateTimeOffset.Now.AddDays(i_link_days)));
+                    tr.Identifier.Add(newid);
+                }
                 FhirJsonSerializer serializer = new FhirJsonSerializer();
                 string srv = serializer.SerializeToString(tr);
                 var saveresult = fhirClient.SaveResource(Enum.GetName(typeof(ResourceType), tr.ResourceType), srv, "PUT", auditheaders.ToArray());
                 if (saveresult.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    return new OkObjectResult($"Identity: {name} in directory {aadten} is now linked to {res}/{id}");
+                    return new OkObjectResult($"Identity: {name} in directory {aadten} is now {cmd}ed {res}/{id}");
 
                 }
                 else
                 {
-                    return new BadRequestObjectResult($"Unable to link Identity: {name} in directory {aadten}:{saveresult.StatusCode}");
+                    return new BadRequestObjectResult($"Unable to {cmd} Identity: {name} in directory {aadten}:{saveresult.StatusCode}");
                 }
             }
             else if (lres.ResourceType == Hl7.Fhir.Model.ResourceType.Patient)
@@ -132,21 +149,32 @@ namespace FHIRProxy
                 var fbid = tr.Identifier.FirstOrDefault(ident => ident.System == aadten);
                 if (fbid != null)
                 {
+                    if (cmd.Equals("list")) return new OkObjectResult($"Resource {res}/{id} is linked to Identity: {fbid.Value} in directory {aadten}");
                     tr.Identifier.Remove(fbid);
                 }
-                Hl7.Fhir.Model.Identifier newid = new Hl7.Fhir.Model.Identifier(aadten, name);
-                newid.Period = new Hl7.Fhir.Model.Period(Hl7.Fhir.Model.FhirDateTime.Now(), new Hl7.Fhir.Model.FhirDateTime(DateTimeOffset.Now.AddDays(i_link_days)));
-                tr.Identifier.Add(newid);
+                else
+                {
+                    if (cmd.Equals("unlink") || cmd.Equals("list"))
+                    {
+                        return new OkObjectResult($"Resource {res}/{id} has no links to an Identity in directory {aadten}");
+                    }
+                }
+                if (cmd.Equals("link"))
+                {
+                    Hl7.Fhir.Model.Identifier newid = new Hl7.Fhir.Model.Identifier(aadten, name);
+                    newid.Period = new Hl7.Fhir.Model.Period(Hl7.Fhir.Model.FhirDateTime.Now(), new Hl7.Fhir.Model.FhirDateTime(DateTimeOffset.Now.AddDays(i_link_days)));
+                    tr.Identifier.Add(newid);
+                }
                 FhirJsonSerializer serializer = new FhirJsonSerializer();
                 string srv = serializer.SerializeToString(tr);
                 var saveresult = fhirClient.SaveResource(Enum.GetName(typeof(ResourceType), tr.ResourceType), srv, "PUT", auditheaders.ToArray());
                 if (saveresult.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    return new OkObjectResult($"Identity: {name} in directory {aadten} is now linked to {res}/{id}");
+                    return new OkObjectResult($"Identity: {name} in directory {aadten} is now {cmd}ed {res}/{id}");
                 }
                 else
                 {
-                    return new BadRequestObjectResult($"Unable to link Identity: {name} in directory {aadten}:{saveresult.StatusCode}");
+                    return new BadRequestObjectResult($"Unable to {cmd} Identity: {name} in directory {aadten}:{saveresult.StatusCode}");
                 }
             }
 

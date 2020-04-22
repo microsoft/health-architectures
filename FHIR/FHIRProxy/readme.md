@@ -101,21 +101,21 @@ At a minimum users must be placed in one or more FHIR Participant roles in order
    ```https://<your fhir proxy url>/api/fhir/Patient?identifier=1234567```
    
    To find a specific Practioner with last name Smith, in this case you can use other fields to validate like address, identifiers,etc... 
-   ```https://<your fhir proxy address>/api/fhir/Practioner?name=smith```
+   ```https://<your fhir proxy address>/api/fhir/Practitioner?name=smith```
     
    The resource id is located in the id field of the returned resource or resource member in a search bundle
    ```"id": "3bdaac8f-5c8e-499d-b906-aab31633337d"``` 
  
    _Note: You will need to login as a user in a FHIR Reader and/or FHIR Administrative role to view._
  
- 3. You will need to ontain the participant user prinicipal name for the AAD instance in your tenant that are assigned and in roles for the secure proxy application.  Make sure the Role they are in cooresponds to the FHIR Resource you are linking. 
+ 3. You will need to obtain the participant user prinicipal name for the AAD instance in your tenant that are assigned and in roles for the secure proxy application.  Make sure the Role they are in cooresponds to the FHIR Resource you are linking. 
     For example: ```somedoctor@sometenant.onmicrosoft.com```
  4. Now you can link the FHIR Resource to the user principal name by entering the following URL in your browser:
  
-    ```https://<your fhir proxy url>/api/<ResourceName>/<ResourceID>?name=<user prinicipal name>``` 
+    ```https://<your fhir proxy url>/api/manage/link/<ResourceName>/<ResourceID>?name=<user prinicipal name>``` 
 
     For example to connect Dr. Mickey in my AAD tenant principal whos user name is mickey@myaad.onmicrosoft.com to the FHIR Practitioner Resource Id 3bdaac8f-5c8e-499d-b906-aab31633337d you would enter the following URL:
-    ```https://<your fhir proxy url>/api/Practitioner/3bdaac8f-5c8e-499d-b906-aab31633337d?name=mickey@myaad.onmicrosoft.com```
+    ```https://<your fhir proxy url>/api/manage/link/Practitioner/3bdaac8f-5c8e-499d-b906-aab31633337d?name=mickey@myaad.onmicrosoft.com```
      
     _Note: You will need to login as a user in a FHIR Administrative role to perform the assignment_
 
