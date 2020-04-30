@@ -229,7 +229,7 @@ echo "Starting HL72FHIR Workflow Platform deployment..."
 		#set -x
 		#Create Storage Account
 		echo "Creating Storage Account["$deployprefix$storageAccountNameSuffix"]..."
-		stepresult=$(az storage account create --name $deployprefix$storageAccountNameSuffix --resource-group $resourceGroupName --location  $resourceGroupLocation --sku Standard_LRS --encryption blob --kind StorageV2)
+		stepresult=$(az storage account create --name $deployprefix$storageAccountNameSuffix --resource-group $resourceGroupName --location  $resourceGroupLocation --sku Standard_LRS --encryption-services blob --kind StorageV2)
 		echo "Retrieving Storage Account Connection String..."
 		storageConnectionString=$(az storage account show-connection-string -g $resourceGroupName -n $deployprefix$storageAccountNameSuffix --query "connectionString" --output tsv)
 		#Create EventHub Bus Namespace and Hub

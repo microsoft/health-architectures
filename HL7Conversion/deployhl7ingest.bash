@@ -132,7 +132,7 @@ echo "Starting HL7 Ingest Platform deployment..."
 		#set -x
 		#Create Storage Account
 		echo "Creating Storage Account ["$deployprefix$storageAccountNameSuffix"]..."
-		stepresult=$(az storage account create --name $deployprefix$storageAccountNameSuffix --resource-group $resourceGroupName --location  $resourceGroupLocation --sku Standard_LRS --encryption blob)
+		stepresult=$(az storage account create --name $deployprefix$storageAccountNameSuffix --resource-group $resourceGroupName --location  $resourceGroupLocation --sku Standard_LRS --encryption-services blob)
 		echo "Retrieving Storage Account Connection String..."
 		storageConnectionString=$(az storage account show-connection-string -g $resourceGroupName -n $deployprefix$storageAccountNameSuffix --query "connectionString" --out tsv)
 		echo "Creating Storage Account Container ["$storecontainername"]..."
