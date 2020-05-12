@@ -128,6 +128,19 @@ namespace FHIRProxy
             IRestResponse response2 = _client.Execute(request);
             return new FHIRResponse(response2, parse);
         }
+        public FHIRResponse DeleteResource(string resource, HeaderParm[] headers = null)
+        {
+            refreshToken();
+            var request = new RestRequest(resource, Method.DELETE);
+            request.AddHeader("Accept", "application/json");
+            if (BearerToken != null)
+            {
+                request.AddHeader("Authorization", "Bearer " + BearerToken);
+            }
+            AddCustomHeadersToRequest(request, headers);
+            IRestResponse response2 = _client.Execute(request);
+            return new FHIRResponse(response2);
+        }
         public FHIRResponse SaveResource(string reqresource,string content, string method = "PUT", HeaderParm[] headers = null)
         {
             var r = JObject.Parse(content);

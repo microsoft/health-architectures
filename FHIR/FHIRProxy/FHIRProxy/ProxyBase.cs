@@ -140,8 +140,14 @@ namespace FHIRProxy
             }
             else
             {
-                fhirresp = fhirClient.SaveResource(res,requestBody, req.Method, customandrestheaders.ToArray());
-            }
+             if (req.Method.Equals("DELETE"))
+                {
+                    fhirresp = fhirClient.DeleteResource(res + (id == null ? "" : "/" + id), customandrestheaders.ToArray());
+                }
+                else
+                {
+                    fhirresp = fhirClient.SaveResource(res, requestBody, req.Method, customandrestheaders.ToArray());
+                }            }
             /* Fix location header to proxy address */
             if (fhirresp.Headers.ContainsKey("Location"))
             {
@@ -149,9 +155,9 @@ namespace FHIRProxy
             }
             var str = fhirresp.Content == null ? "" : (string)fhirresp.Content;
             /* Fix server locations to proxy address */
-            str = str.Replace(Environment.GetEnvironmentVariable("FS_URL"), req.Scheme + "://" + req.Host.Value + req.Path.Value.Substring(0, req.Path.Value.IndexOf(res) - 1));
-            result = JObject.Parse(str);
-            /*
+            str = str.Replace(Environment.GetEnvironmentVariable("FS_URL"), req.Scheme + "://" + req.Host.Value + (res!=null ? req.Path.Value.Substring(0, req.Path.Value.IndexOf(res) - 1) : req.Path.Value));
+            result = (string.IsNullOrEmpty(str) ? null : JObject.Parse(str));
+           /*
              * TODO: Add your Filter Logic here
              * Any custom post FHIR filtering or security checks
              * or transform mappings.
