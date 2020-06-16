@@ -56,7 +56,7 @@
 						"application/json"
 					  ],
 					  "paths": {
-						"/api/convert/hl7/{template}": {
+						"/api/convert/{template}": {
 						  "post": {
 							"responses": {
 							  "default": {
