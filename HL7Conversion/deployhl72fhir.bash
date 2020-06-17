@@ -243,7 +243,7 @@ echo "Starting HL72FHIR Workflow Platform deployment..."
 		#Create FHIREventProcessor Function App
 		#Create Service Plan
 		echo "Creating FHIREventProcessor Function App Service Plan["$deployprefix$serviceplanSuffix"]..."
-		stepresult=$(az appservice plan create -g  $resourceGroupName -n $deployprefix$serviceplanSuffix --number-of-workers 2 --sku P1v2)
+		stepresult=$(az appservice plan create -g  $resourceGroupName -n $deployprefix$serviceplanSuffix --number-of-workers 2 --sku B1)
 		#Create the Function App
 		echo "Creating FHIREventProcessor Function App ["$faname"]..."
 		fahost=$(az functionapp create --name $faname --storage-account $deployprefix$storageAccountNameSuffix  --plan $deployprefix$serviceplanSuffix  --resource-group $resourceGroupName --runtime dotnet --os-type Windows --runtime-version 2 --query defaultHostName --output tsv)
