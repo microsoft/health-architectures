@@ -136,7 +136,7 @@
                 "headers": {
                   "Content-Type": "text/plain"
                 },
-                "path": "/api/convert/hl7/@{encodeURIComponent(concat(json(base64ToString(triggerBody()?['ContentData'])).msgtype,'_',json(base64ToString(triggerBody()?['ContentData'])).msgevent,'.hbs'))}"
+                "path": "/api/convert/@{encodeURIComponent(concat('hl7v2/',json(base64ToString(triggerBody()?['ContentData'])).msgtype,'_',json(base64ToString(triggerBody()?['ContentData'])).msgevent,'.hbs'))}"
               },
               "runAfter": {
                 "Get_blob_content": [
@@ -169,7 +169,7 @@
                   }
                 },
                 "method": "post",
-                "body": "@body('ConvertHL7WithTemplate')",
+                "body": "@body('ConvertHL7WithTemplate')['fhirResource']",
                 "path": "/api/import"
               },
               "runAfter": {

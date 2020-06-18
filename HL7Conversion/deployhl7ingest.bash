@@ -21,6 +21,7 @@ declare busnamespaceName="hlsb"$RANDOM
 declare busqueue="hl7ingest"
 declare sbconnectionString=""
 declare serviceplanSuffix="asp"
+declare serviceplansku="B1"
 declare faname=hl7ingest$RANDOM
 declare deployzip="hl7ingest/distribution/publish.zip"
 declare deployprefix=""
@@ -148,7 +149,7 @@ echo "Starting HL7 Ingest Platform deployment..."
 		#Create HL7OverHTTPS Ingest Functions App
 		#Create Service Plan
 		echo "Creating hl7ingest Function App Serviceplan["$deployprefix$serviceplanSuffix"]..."
-		stepresult=$(az appservice plan create -g  $resourceGroupName -n $deployprefix$serviceplanSuffix --number-of-workers 2 --sku P1V2)
+		stepresult=$(az appservice plan create -g  $resourceGroupName -n $deployprefix$serviceplanSuffix --number-of-workers 2 --sku $serviceplansku)
 		#Create the Transform Function App
 		echo "Creating hl7ingest Function App ["$faname"]..."
 		fahost=$(az functionapp create --name $faname --storage-account $deployprefix$storageAccountNameSuffix  --plan $deployprefix$serviceplanSuffix  --resource-group $resourceGroupName --runtime dotnet --os-type Windows --runtime-version 2 --query defaultHostName --output tsv)
