@@ -3,7 +3,6 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "fhirserver-url": {
-<<<<<<< Updated upstream
             "value": "",
             "metadata": {
                 "description":"https://<myfhir>.azurehealthcareapis.com  WARNING: make sure to remove the forward slash / after .com If you are using the FHIR Proxy enter the fhir proxy url."
@@ -26,24 +25,6 @@
             "metadata":{
                 "description": "If the FHIR integration has already been setup with a storage account, then add the name of the storage account here. Otherwise a new storage account will be created"
             }
-=======
-            "value": "https://hafhirdemo.azurehealthcareapis.com",
-            "metadata": {
-                "description":"https://<myfhir>.azurehealthcareapis.com  WARNING: make sure to remove the forward slash / after .com"
-            }
-        },
-        "fhirserver-clientid": {
-            "value": "6ec4d976-1963-4bb7-b352-429ba1b14eb3"
-        },
-        "fhirserver-clientSecret": {
-            "value": "Itu-1R4w0M-boVJCr290WMKMBX0Z4_.fyO"
-        },
-        "fhirauth-tenantid": {
-            "value": "a229c322-1dae-48f4-9999-9973b4807cd4",
-            "metadata": {
-                "description": "Supply only if fhir authenication and the deployment subscription are not in the same tenant. If you are unsure leave NULL or remove segment"
-            }
->>>>>>> Stashed changes
         }
     }
 }

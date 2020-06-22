@@ -26,26 +26,18 @@
         "batchPoolVMSize": {
             "defaultValue": "STANDARD_D4_V3",
             "type": "string"
-<<<<<<< Updated upstream
         },
         "IntegrationStorageAccount":{
             "type": "string"
-=======
->>>>>>> Stashed changes
         }
     },
     "variables": {
         "rgLocation": "[resourceGroup().location]",
         "resourceGroup": "[resourceGroup().name]",
         "subscriptionid": "[subscription().subscriptionId]",
-<<<<<<< Updated upstream
         "tenantid": "[if(empty(parameters('fhirauth-tenantid')), subscription().tenantId, parameters('fhirauth-tenantid'))]",
         "utcstart": "[concat(parameters('utcdate'),'T01:00:00Z')]",
         "storageAccountName": "[if(empty(parameters('IntegrationStorageAccount')),concat(variables('resourceGroup'),'stg'),parameters('IntegrationStorageAccount'))]",
-=======
-        "utcstart": "[concat(parameters('utcdate'),'T01:00:00Z')]",
-        "storageAccountName": "[concat(variables('resourceGroup'),'stg')]",
->>>>>>> Stashed changes
         "datalakeName": "[concat(variables('resourceGroup'),'dlg2')]",
         "keyVaultName": "[concat(variables('resourceGroup'),'kv')]",
         "logicAppName": "[concat(variables('resourceGroup'),'la')]",
@@ -201,11 +193,7 @@
             "name": "[concat(variables('keyVaultName'),'/fhirserver-tentantid')]",
             "dependsOn": [],
             "properties": {
-<<<<<<< Updated upstream
                 "value": "[variables('tenantid')]",
-=======
-                "value": "[parameters('fhirauth-tenantid')]",
->>>>>>> Stashed changes
                 "attributes": {
                     "enabled": true
                 }
@@ -219,11 +207,7 @@
                 "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
             ],
             "properties": {
-<<<<<<< Updated upstream
                 "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageAccountName'),';AccountKey=',concat(listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')),'2019-06-01').keys[0].value),';EndpointSuffix=core.windows.net')]",
-=======
-                "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageAccountName'),';AccountKey=',concat(listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')),'2019-06-01').keys[0].value))]",
->>>>>>> Stashed changes
                 "attributes": {
                     "enabled": true
                 }
@@ -237,11 +221,7 @@
                 "[resourceId('Microsoft.Storage/storageAccounts', variables('datalakeName'))]"
             ],
             "properties": {
-<<<<<<< Updated upstream
                 "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('datalakeName'),';AccountKey=',concat(listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('datalakeName')),'2019-06-01').keys[0].value),';EndpointSuffix=core.windows.net')]",
-=======
-                "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('datalakeName'),';AccountKey=',concat(listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('datalakeName')),'2019-06-01').keys[0].value))]",
->>>>>>> Stashed changes
                 "attributes": {
                     "enabled": true
                 }

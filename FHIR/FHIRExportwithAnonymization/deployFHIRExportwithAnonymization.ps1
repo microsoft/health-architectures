@@ -1,5 +1,4 @@
 <#
-<<<<<<< Updated upstream
 .AUTHOR Cory Stevenson, Microsoft
 .EDITOR Benjamin Xue, Microsoft
 Repo: https://github.com/microsoft/health-architectures/tree/master/FHIR/FHIRExportwithAnonymiztion 
@@ -19,10 +18,6 @@ Parent Repo: https://github.com/microsoft/health-architectures
     <FIX THIS>
     - Modify FHIR data anonymization rules if necessary post deployment. The deployment supports the safe harbor method. The configuration file will be located in the 
     - A list of FHIR data anonymization configutations are available here:  https://github.com/microsoft/FHIR-Tools-for-Anonymization#configuration-file-format
-=======
-.SYNOPSIS
-    Deploy Logic App workflow for API for FHIR $export
->>>>>>> Stashed changes
 .PARAMETER BatchComputeNodeRuntimeId
     Default: win10-x64
     Specify the dotnet runtime id in your compute node.
@@ -31,7 +26,6 @@ Parent Repo: https://github.com/microsoft/health-architectures
 param
 (
     [Parameter(Mandatory = $true)]
-<<<<<<< Updated upstream
     [ValidateNotNullOrEmpty()]
     [ValidateLength(5,12)]
     [ValidateScript({
@@ -46,14 +40,11 @@ Vault name must be between 3-24 alphanumeric characters. The name must begin wit
             return $false
         }
     })]
-=======
->>>>>>> Stashed changes
     [string]$EnvironmentName,
 
     [Parameter(Mandatory = $false)]
     [string]$EnvironmentLocation = "eastus2",
 
-<<<<<<< Updated upstream
     # If the FHIR integration has already been setup with a storage account, then add the name of the storage account as a paramenter input. Otherwise a new storage account will be created.
     [Parameter(Mandatory = $false)]
     [string] $IntegrationStorageAccount
@@ -68,23 +59,11 @@ the varable names I did not want users to look through the code.
 Names should match the names in the ARM templates. If you change the names here you need to change
 the ARM templates.
 #>
-=======
-    [Parameter(Mandatory = $false)]
-    [string]$ResourceGroupName = $EnvironmentName
-)
-
-
-### Naming variables used towards the end of the script. In the off chance users needed to change
-### the varable names I did not want users to look through the code. 
-### Names should match the names in the ARM templates. If you change the names here you need to change
-### the ARM templates.
->>>>>>> Stashed changes
 
 ### Key Value Name
 $KeyVaultName = $EnvironmentName + "kv"
     
 ### Azure Storage Staging Account
-<<<<<<< Updated upstream
 if([string]::IsNullOrEmpty($IntegrationStorageAccount))
 {
     $storageAccountName = $EnvironmentName + "stg"
@@ -93,9 +72,6 @@ if([string]::IsNullOrEmpty($IntegrationStorageAccount))
 else {
     $storageAccountName = $IntegrationStorageAccount
 }
-=======
-$storageAccountName = $ResourceGroupName + "stg"
->>>>>>> Stashed changes
 
 ### Logic App Name
 $logicAppName = $EnvironmentName + "la"
@@ -115,21 +91,12 @@ catch {
     throw "Please log in to Azure RM with Login-AzAccount cmdlet before proceeding"
 }
 
-<<<<<<< Updated upstream
 $resourceGroup = Get-AzResourceGroup -Name $EnvironmentName -ErrorAction SilentlyContinue
 
 if (!$resourceGroup) {
     Write-Host "Creating Resource Group with name $EnvironmentName"
 
     New-AzResourceGroup -Name $EnvironmentName -Location $EnvironmentLocation | Out-Null
-=======
-$resourceGroup = Get-AzResourceGroup -Name $ResourceGroupName -ErrorAction SilentlyContinue
-
-if (!$resourceGroup) {
-    Write-Host "Creating Resource Group with name $ResourceGroupName"
-
-    New-AzResourceGroup -Name $ResourceGroupName -Location $EnvironmentLocation | Out-Null
->>>>>>> Stashed changes
 }
 
 $keyVault = Get-AzKeyVault -VaultName $KeyVaultName 
@@ -137,11 +104,7 @@ $keyVault = Get-AzKeyVault -VaultName $KeyVaultName
 if (!$keyVault) {
     Write-Host "Creating keyvault with the name $KeyVaultName"
         
-<<<<<<< Updated upstream
     New-AzKeyVault -VaultName $KeyVaultName -ResourceGroupName $EnvironmentName -Location $EnvironmentLocation | Out-Null
-=======
-    New-AzKeyVault -VaultName $KeyVaultName -ResourceGroupName $ResourceGroupName -Location $EnvironmentLocation | Out-Null
->>>>>>> Stashed changes
 
     Write-Host "Keyvault created..."
 }
@@ -185,17 +148,12 @@ if ($currentObjectId) {
 
 try
 {
-<<<<<<< Updated upstream
     Write-Host "Starting ARM Deployment"
     New-AzResourceGroupDeployment -ResourceGroupName $EnvironmentName -TemplateFile "./Assets/arm_template_part1.json" -TemplateParameterFile "./Assets/arm_template.parameters.json" 
-=======
-    New-AzResourceGroupDeployment -ResourceGroupName $ResourceGroupName -TemplateFile "./Assets/arm_template_part1.json" -TemplateParameterFile "./Assets/arm_template.parameters.json" 
->>>>>>> Stashed changes
 
     ### Azure Batch ARM deployments do come online very fast. This break gives Azure Batch a chance
     ### to finish prior to moving on. 
     Write-Host "Taking quick break for ARM to finish deploying part 1"
-<<<<<<< Updated upstream
     Start-Sleep -Seconds 60
     Write-Host "Starting part 2..."
 
@@ -204,37 +162,19 @@ try
     ### Giving ARM a bit more time to finish"
     Write-Host "Taking quick break for ARM to finish deploying part 2"
     Start-Sleep -Seconds 60
-=======
-    Start-Sleep -Seconds 5
-
-    New-AzResourceGroupDeployment -ResourceGroupName $ResourceGroupName -TemplateFile "./Assets/arm_template_part2.json" -TemplateParameterFile "./Assets/arm_template.parameters.json"
-
-    ### Giving ARM a bit more time to finish"
-    Write-Host "Taking quick break for ARM to finish deploying part 2"
-    Start-Sleep -Seconds 5
->>>>>>> Stashed changes
 
     Write-Host "ARM deployment complete. Finishing up a few details."
 
     # Uploading the FHIR Tools for Anomization Code
-<<<<<<< Updated upstream
     $storageAcctKey = (Get-AzStorageAccountKey -ResourceGroupName $EnvironmentName -AccountName $storageAccountName)| Where-Object {$_.KeyName -eq "key1"}
     $storageContext = New-AzStorageContext -StorageAccountName $storageAccountName -StorageAccountKey $storageAcctKey.Value
 
     Set-AzStorageBlobContent -Context $storageContext -Container "customactivity" -File "./Assets/AdfApplication.zip" -Blob "AdfApplication/AdfApplication.zip" -Force
     Set-AzStorageBlobContent -Context $storageContext -Container "customactivity" -File "./Assets/CustomActivity.ps1" -Blob "AdfApplication/CustomActivity.ps1" -Force 
-=======
-    $storageAcctKey = (Get-AzStorageAccountKey -ResourceGroupName $ResourceGroupName -AccountName $storageAccountName)| Where-Object {$_.KeyName -eq "key1"}
-    $storageContext = New-AzStorageContext -StorageAccountName $storageAccountName -StorageAccountKey $storageAcctKey.Value
-
-    Set-AzStorageBlobContent -Context $storageContext -Container "customactivity" -File "./Assets/AdfApplication.zip" -Blob "AdfApplication.zip" -Force 
-    Set-AzStorageBlobContent -Context $storageContext -Container "customactivity" -File "./Assets/CustomActivity.ps1" -Blob "CustomActivity.ps1" -Force 
->>>>>>> Stashed changes
 
     $logicAppMSI = (Get-AzResource -Name $logicAppName -ResourceType Microsoft.Logic/workflows).Identity.PrincipalId
     # Giving Logic App access to Key Vault
     Set-AzKeyVaultAccessPolicy -VaultName $keyVaultName -ObjectId $logicAppMSI -PermissionsToSecrets get,list -BypassObjectIdValidation
-<<<<<<< Updated upstream
 
 $LogicAppRoleExist = Get-AzRoleAssignment -ObjectId $logicAppMSI -ResourceGroupName $EnvironmentName -ResourceName $adfName -RoleDefinitionName "Data Factory Contributor" -ResourceType "Microsoft.DataFactory/factories"
 
@@ -256,19 +196,3 @@ catch
 {
     throw "Template deployment failed. With error(s) " + $_.Exception.Message
 }
-=======
-    # Giving Logic App access to Azure Data Factory V2
-    New-AzRoleAssignment -ObjectId $logicAppMSI -ResourceGroupName $ResourceGroupName -ResourceName $adfName -RoleDefinitionName "Data Factory Contributor" -ResourceType "Microsoft.DataFactory/factories"
-
-    # Giving Azure Data Factory V2 access to Key Vault
-$adfmsi = (Get-AzDataFactoryV2 -ResourceGroupName $ResourceGroupName -Name $adfName).Identity.PrincipalId
-Set-AzKeyVaultAccessPolicy -VaultName $keyVaultName -ObjectId $adfmsi -PermissionsToSecrets get,list -BypassObjectIdValidation
-
-Write-Host "Looks like we are all good here. Time to export data and do some research"
-}
-catch
-{
-    throw "Template deployment failed. With error(s) " + $_.Exception.Message
-}
-
->>>>>>> Stashed changes

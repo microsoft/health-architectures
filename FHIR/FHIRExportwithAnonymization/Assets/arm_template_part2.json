@@ -26,22 +26,16 @@
         "batchPoolVMSize": {
             "defaultValue": "STANDARD_D4_V3",
             "type": "string"
-<<<<<<< Updated upstream
         },
         "IntegrationStorageAccount":{
             "type": "string"
-=======
->>>>>>> Stashed changes
         }
     },
     "variables": {
         "rgLocation": "[resourceGroup().location]",
         "resourceGroup": "[resourceGroup().name]",
         "subscriptionid": "[subscription().subscriptionId]",
-<<<<<<< Updated upstream
         "tenantid": "[if(empty(parameters('fhirauth-tenantid')), subscription().tenantId, parameters('fhirauth-tenantid'))]",
-=======
->>>>>>> Stashed changes
         "utcstart": "[concat(parameters('utcdate'),'T01:00:00Z')]",
         "datalakeName": "[concat(variables('resourceGroup'),'dlg2')]",
         "keyVaultName": "[concat(variables('resourceGroup'),'kv')]",
@@ -100,11 +94,7 @@
                                 "queries": {
                                     "api-version": "2016-10-01"
                                 },
-<<<<<<< Updated upstream
                                 "uri": "[concat('https://',variables('keyVaultName'),'.vault.azure.net/secrets/fhirserver-clientid')]"
-=======
-                                "uri": "[concat('https://',variables('keyVaultName'),'.vault.azure.net/secrets/fhir-clientid')]"
->>>>>>> Stashed changes
                             },
                             "runtimeConfiguration": {
                                 "secureData": {
@@ -130,11 +120,7 @@
                                 "queries": {
                                     "api-version": "2016-10-01"
                                 },
-<<<<<<< Updated upstream
                                 "uri": "[concat('https://',variables('keyVaultName'),'.vault.azure.net/secrets/fhirserver-clientsecret')]"
-=======
-                                "uri": "[concat('https://',variables('keyVaultName'),'.vault.azure.net/secrets/fhir-clientsecret')]"
->>>>>>> Stashed changes
                             },
                             "runtimeConfiguration": {
                                 "secureData": {
@@ -157,11 +143,7 @@
                                     "Content-Type": "application/x-www-form-urlencoded"
                                 },
                                 "method": "POST",
-<<<<<<< Updated upstream
                                 "uri": "[concat('https://login.microsoftonline.com/',variables('tenantid'),'/oauth2/token')]"
-=======
-                                "uri": "[concat('https://login.microsoftonline.com/',parameters('fhirauth-tenantid'),'/oauth2/token')]"
->>>>>>> Stashed changes
                             }
                         },
                         "Set_Source_Container": {
@@ -276,13 +258,8 @@
                                     "type": "Wait",
                                     "inputs": {
                                         "interval": {
-<<<<<<< Updated upstream
                                             "count": 5,
                                             "unit": "Minute"
-=======
-                                            "count": 30,
-                                            "unit": "Second"
->>>>>>> Stashed changes
                                         }
                                     }
                                 },
@@ -299,11 +276,7 @@
                                             "Content-Type": "application/x-www-form-urlencoded"
                                         },
                                         "method": "POST",
-<<<<<<< Updated upstream
                                         "uri": "[concat('https://login.microsoftonline.com/',variables('tenantid'),'/oauth2/token')]"
-=======
-                                        "uri": "[concat('https://login.microsoftonline.com/',parameters('fhirauth-tenantid'),'/oauth2/token')]"
->>>>>>> Stashed changes
                                     },
                                     "runtimeConfiguration": {
                                         "secureData": {
@@ -387,11 +360,7 @@
                                 ]
                             },
                             {
-<<<<<<< Updated upstream
                                 "activity": "SetContainerName",
-=======
-                                "activity": "GetDatalakeString",
->>>>>>> Stashed changes
                                 "dependencyConditions": [
                                     "Succeeded"
                                 ]
@@ -418,34 +387,22 @@
                                     "type": "Expression"
                                 },
                                 "destinationConnectionString": {
-<<<<<<< Updated upstream
                                     "value": "@activity('GetSourceString').output.value",
                                     "type": "Expression"
                                 },
                                 "skipExistedBlob": {
                                     "value":"@pipeline().parameters.skipExistedBlob",
-=======
-                                    "value": "@activity('GetDatalakeString').output.value",
->>>>>>> Stashed changes
                                     "type": "Expression"
                                 }
                             },
                             "referenceObjects": {
                                 "linkedServices": [
                                     {
-<<<<<<< Updated upstream
                                         "referenceName": "SourceStorageLinkedService",
                                         "type": "LinkedServiceReference"
                                     },
                                     {
                                         "referenceName": "DestinationStorageLinkedService",
-=======
-                                        "referenceName": "SourceDataset",
-                                        "type": "LinkedServiceReference"
-                                    },
-                                    {
-                                        "referenceName": "Sink_ADLS_G2",
->>>>>>> Stashed changes
                                         "type": "LinkedServiceReference"
                                     }
                                 ],
@@ -454,19 +411,14 @@
                                         "referenceName": "InputDataset",
                                         "type": "DatasetReference",
                                         "parameters": {
-<<<<<<< Updated upstream
                                             "inputSourceContainer": {
                                                 "value": "@pipeline().parameters.sourceContainer",
                                                 "type": "Expression"
                                             }
-=======
-                                            "sourceContainer": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXX"
->>>>>>> Stashed changes
                                         }
                                     },
                                     {
                                         "referenceName": "OutputDataset",
-<<<<<<< Updated upstream
                                         "type": "DatasetReference",
                                         "parameters": {
                                             "datetimeoutput": {
@@ -474,9 +426,6 @@
                                                 "type": "Expression"
                                             }
                                         }
-=======
-                                        "type": "DatasetReference"
->>>>>>> Stashed changes
                                     }
                                 ]
                             }
@@ -507,7 +456,6 @@
                         }
                     },
                     {
-<<<<<<< Updated upstream
                         "name": "Copy data from staging to Data Lake",
                         "type": "Copy",
                         "dependsOn": [
@@ -584,11 +532,6 @@
                                 ]
                             }
                         ],
-=======
-                        "name": "GetDatalakeString",
-                        "type": "WebActivity",
-                        "dependsOn": [],
->>>>>>> Stashed changes
                         "policy": {
                             "timeout": "7.00:00:00",
                             "retry": 0,
@@ -596,7 +539,6 @@
                             "secureOutput": false,
                             "secureInput": false
                         },
-<<<<<<< Updated upstream
                         "userProperties": [],
                         "typeProperties": {
                             "dataset": {
@@ -633,19 +575,10 @@
                             "value": {
                                 "value": "@concat(formatDateTime(utcnow(), 'yyyyMMddHHmm'), '-output')",
                                 "type": "Expression"
-=======
-                        "typeProperties": {
-                            "url": "[concat('https://',variables('keyVaultName'),'.vault.azure.net/secrets/datalakestring?api-version=7.0')]",
-                            "method": "GET",
-                            "authentication": {
-                                "type": "MSI",
-                                "resource": "https://vault.azure.net"
->>>>>>> Stashed changes
                             }
                         }
                     }
                 ],
-<<<<<<< Updated upstream
                 "parameters": {
                     "skipExistedBlob": {
                         "type": "bool",
@@ -671,17 +604,6 @@
                 "[concat(variables('factoryId'), '/linkedServices/Batch_Config')]",
                 "[concat(variables('factoryId'), '/linkedServices/AzureBatch')]",
                 "[concat(variables('factoryId'), '/datasets/DataLakeDestination')]"
-=======
-                "annotations": []
-            },
-            "dependsOn": [
-                "[concat(variables('factoryId'), '/linkedServices/SourceDataset')]",
-                "[concat(variables('factoryId'), '/linkedServices/Sink_ADLS_G2')]",
-                "[concat(variables('factoryId'), '/datasets/InputDataset')]",
-                "[concat(variables('factoryId'), '/datasets/OutputDataset')]",
-                "[concat(variables('factoryId'), '/linkedServices/Batch_Config')]",
-                "[concat(variables('factoryId'), '/linkedServices/AzureBatch')]"
->>>>>>> Stashed changes
             ]
         },
         {
@@ -690,7 +612,6 @@
             "apiVersion": "2018-06-01",
             "properties": {
                 "linkedServiceName": {
-<<<<<<< Updated upstream
                     "referenceName": "SourceStorageLinkedService",
                     "type": "LinkedServiceReference"
                 },
@@ -728,13 +649,6 @@
                 },
                 "parameters": {
                     "datetimeoutput": {
-=======
-                    "referenceName": "SourceDataset",
-                    "type": "LinkedServiceReference"
-                },
-                "parameters": {
-                    "sourceContainer": {
->>>>>>> Stashed changes
                         "type": "string"
                     }
                 },
@@ -744,11 +658,7 @@
                     "location": {
                         "type": "AzureBlobStorageLocation",
                         "container": {
-<<<<<<< Updated upstream
                             "value": "@dataset().datetimeoutput",
-=======
-                            "value": "@dataset().sourceContainer",
->>>>>>> Stashed changes
                             "type": "Expression"
                         }
                     }
@@ -756,24 +666,15 @@
                 "schema": {}
             },
             "dependsOn": [
-<<<<<<< Updated upstream
                 "[concat(variables('factoryId'), '/linkedServices/DestinationStorageLinkedService')]"
             ]
         },
         {
             "name": "[concat(variables('factoryName'), '/DataLakeDestination')]",
-=======
-                "[concat(variables('factoryId'), '/linkedServices/SourceDataset')]"
-            ]
-        },
-        {
-            "name": "[concat(variables('factoryName'), '/OutputDataset')]",
->>>>>>> Stashed changes
             "type": "Microsoft.DataFactory/factories/datasets",
             "apiVersion": "2018-06-01",
             "properties": {
                 "linkedServiceName": {
-<<<<<<< Updated upstream
                     "referenceName": "AzureDataLakeGen2",
                     "type": "LinkedServiceReference"
                 },
@@ -782,22 +683,13 @@
                         "type": "string"
                     }
                 },
-=======
-                    "referenceName": "Sink_ADLS_G2",
-                    "type": "LinkedServiceReference"
-                },
->>>>>>> Stashed changes
                 "annotations": [],
                 "type": "Json",
                 "typeProperties": {
                     "location": {
                         "type": "AzureBlobFSLocation",
                         "fileSystem": {
-<<<<<<< Updated upstream
                             "value": "@dataset().DataLakeContainerName",
-=======
-                            "value": "@concat(formatDateTime(utcnow(), 'yyyyMMddHHmm'), '_output')",
->>>>>>> Stashed changes
                             "type": "Expression"
                         }
                     }
@@ -805,11 +697,7 @@
                 "schema": {}
             },
             "dependsOn": [
-<<<<<<< Updated upstream
                 "[concat(variables('factoryId'), '/linkedServices/AzureDataLakeGen2')]"
-=======
-                "[concat(variables('factoryId'), '/linkedServices/Sink_ADLS_G2')]"
->>>>>>> Stashed changes
             ]
         },
         {
@@ -860,22 +748,14 @@
             ]
         },
         {
-<<<<<<< Updated upstream
             "name": "[concat(variables('factoryName'), '/AzureDataLakeGen2')]",
-=======
-            "name": "[concat(variables('factoryName'), '/Sink_ADLS_G2')]",
->>>>>>> Stashed changes
             "type": "Microsoft.DataFactory/factories/linkedServices",
             "apiVersion": "2018-06-01",
             "properties": {
                 "annotations": [],
                 "type": "AzureBlobFS",
                 "typeProperties": {
-<<<<<<< Updated upstream
                     "url": "[concat('https://',variables('datalakeName'),'.dfs.core.windows.net')]",
-=======
-                    "url": "[concat('https://',variables('datalakeName'),'dfs.core.windows.net')]",
->>>>>>> Stashed changes
                     "accountKey": {
                         "type": "AzureKeyVaultSecret",
                         "store": {
@@ -891,7 +771,6 @@
             ]
         },
         {
-<<<<<<< Updated upstream
             "name": "[concat(variables('factoryName'), '/SourceStorageLinkedService')]",
             "type": "Microsoft.DataFactory/factories/linkedServices",
             "apiVersion": "2018-06-01",
@@ -915,9 +794,6 @@
         },
         {
             "name": "[concat(variables('factoryName'), '/DestinationStorageLinkedService')]",
-=======
-            "name": "[concat(variables('factoryName'), '/SourceDataset')]",
->>>>>>> Stashed changes
             "type": "Microsoft.DataFactory/factories/linkedServices",
             "apiVersion": "2018-06-01",
             "properties": {
