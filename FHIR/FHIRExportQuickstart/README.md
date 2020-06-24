@@ -120,5 +120,5 @@ June 24, 2020
 
 1. Improved README documentation
 2. Added Key Vault support for sensitive information
-3. Turned on secure output on the API calls to keyvault. This will prevent FHIR client id and secrets from being written to logs
+3. Turned on secure output on the API calls to key vault. This will prevent FHIR client id and secrets from being written to logs
 4. Cleaned up the parameter names to match the naming of the FHIR Export with Anonymization
