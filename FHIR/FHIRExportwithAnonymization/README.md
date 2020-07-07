@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The FHIR Export with Anonymization is a template for creating an automated pipeling to process the bulk export for FHIR using Azure tools. The goal of the template is to enable quick and continuous creation of research datasets while applying HIPAA safe harbor rules.
+The FHIR Export with Anonymization is a template for creating an automated pipeline to process the bulk export for FHIR using Azure tools. The goal of the template is to enable quick and continuous creation of research datasets while applying HIPAA safe harbor rules.
 
 The template connects multiple tools from the Microsoft Health Cloud and Data Team together into an automated solution. The two main components are:
 
@@ -17,18 +17,18 @@ The FHIR Export with Anonymization follows the architecture and steps below.
 
 1. Timer triggers Logic App - 1:00 AM UTC is the default
 2. Logic App calls FHIR service with GET $export
-3. The FHIR service pushs bulk export to preset storage location
+3. The FHIR service pushes bulk export to preset storage location
 4. Logic App runs an Until loop waiting for $export operation to complete
 5. Logic App sends the $export storage location information to Azure Data Factory
 6. Azure Data Factory calls Azure Batch with the storage location information
 7. Azure Batch performs the deidentification with the FHIR Tools for Anonymization
 8. Azure Batch and Azure Data Factory put the deidentified data in a new output location (Azure Data Lake Gen 2)
 
-The Big Data tools shown in the architecture are a representatoin of what you can use. They are not included in the template and therefore will not be deployed.
+The Big Data tools shown in the architecture are a representation of what you can use. They are not included in the template and therefore will not be deployed.
 
 The Azure Logic App loops on a 5 minute time checking for the Bulk Export to finish. If the export is not complete the Logic App will wait 5 minutes then check again. The frequency is adjustable inside the Azure Logic App.
 
-Note: The template does not goes as far as applying networking rules. You may revise the template to include the rules for your environment, or manually adjust them after deployment.
+Note: The template does not go as far as applying networking rules. You may revise the template to include the rules for your environment, or manually adjust them after deployment.
 
 ## Prerequisites
 
@@ -52,7 +52,7 @@ Before deploying the pipeline, make sure you have:
     git clone https://github.com/Microsoft/health-architectures
     ```
 
-2. Navigate health-architectures/FHIR/FHIRExportwithAnonymization and open the ./Assets/arm_template_parameters.json file in your perferred json editor. Replace FHIR URL, client id, client secret, tenant id and storage account with yours.
+2. Navigate to health-architectures/FHIR/FHIRExportwithAnonymization and open the ./Assets/arm_template_parameters.json file in your preferred JSON editor. Replace FHIR URL, client id, client secret, tenant id and storage account with yours.
 
 ```json
 {
@@ -75,7 +75,7 @@ Before deploying the pipeline, make sure you have:
         "fhirauth-tenantid": {
             "value": "",
             "metadata": {
-                "description": "Supply only if FHIR authenication and the deployment subscription are not in the same tenant. If you are unsure leave "" or remove entire segment"
+                "description": "Supply only if FHIR authentication and the deployment subscription are not in the same tenant. If you are unsure leave "" or remove entire segment"
             }
         },
         "IntegrationStorageAccount":{
@@ -110,7 +110,7 @@ The FHIR Export with Anonymization uses the default settings in the Anonymizatio
 
 1. Launch **PowerShell** on your machine. Keep PowerShell open until the end of this tutorial. If you close and reopen, you may need to run these commands again.
 
-2. Make sure PowerShell is run in the correct directiory
+2. Make sure PowerShell is run in the correct directory
 
    ```powershell
    cd health-architectures/FHIRExportQuickStart
@@ -148,7 +148,7 @@ This deployment process may take 5 minutes or more to complete.
 Common errors on deployment include:
 
 - Azure Batch not enabled in the subscription
-- Azure Batch already deployed the max number of time in a subscription
+- Azure Batch already deployed the max number of times in a subscription
 
 ## Post Deployment
 

@@ -37,7 +37,7 @@ Before deploying make sure you have:
     git clone https://github.com/Microsoft/health-architectures
     ```
 
-2. navigate health-architectures/FHIRExportQuickStart and open the arm_template_parameters.json file in your perference json editor. Notepad works.
+2. Navigate to health-architectures/FHIRExportQuickStart and open the arm_template_parameters.json file in your preferred JSON editor. Notepad works.
 
     ```json
     {
@@ -59,20 +59,20 @@ Before deploying make sure you have:
         "fhirauth-tenantid": {
             "value": "",
             "metadata": {
-                "description": "Supply only if fhir authenication and the deployment subscription are not in the same tenant. If you are unsure leave NULL or remove segment"
+                "description": "Supply only if fhir authentication and the deployment subscription are not in the same tenant. If you are unsure leave NULL or remove segment"
             }
         }
     }
     }
     ```
 
-3. Fill out the parameter values with your inforamtion. Save & Close the file.
+3. Fill out the parameter values with your information. Save & Close the file.
 
 #### Log in to Azure using PowerShell
 
 1. Launch **PowerShell** on your machine. Keep PowerShell open until the end of this tutorial. If you close and reopen, you may need to run these commands again.
 
-2. Make sure PowerShell is in the correct directiory
+2. Make sure PowerShell is in the correct directory
 
    ```powershell
    cd health-architectures/FHIRExportQuickStart
@@ -102,10 +102,10 @@ Before deploying make sure you have:
     $Name = "<NAME HERE>", #default is fhirexport
     $Location = "<LOCATION HERE>" #default is eastus
 
-    ./ deployFHIRExport.ps1 -EnvironmentName $Name -EnvironmentLocation $Location
+    ./deployFHIRExport.ps1 -EnvironmentName $Name -EnvironmentLocation $Location
     ```
 
-7. When the PowerShell is finished you should have a LogicApp ready to run your export. You can manually trigger in the Azure Portal or but using this command.
+7. When the PowerShell is finished you should have a LogicApp ready to run your export. You can manually trigger in the Azure Portal or by using this command.
 
 ```powershell
 Start-AzLogicApp

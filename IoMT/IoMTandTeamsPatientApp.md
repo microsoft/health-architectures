@@ -1,8 +1,8 @@
 ### IoMT Connector for Azure and Microsoft Teams Patient App
 
 When combining the [IoMT Connector for Azure](https://github.com/microsoft/iomt-fhir), Azure API for FHIR, 
-and Microsoft Teams customers can enable multiple care solutions. Below is the conceptual architecture for enabling IoMT connector, FHIR and Microsoft Teams Patient App. We can even embed Power BI Dashbaords inside 
-the Microsoft Teams client. For more information on embeding Power BI in Microsoft Team visit [here.](https://powerbi.microsoft.com/en-us/blog/power-bi-teams-up-with-microsoft-teams/)
+and Microsoft Teams customers can enable multiple care solutions. Below is the conceptual architecture for enabling IoMT connector, FHIR and Microsoft Teams Patient App. We can even embed Power BI Dashboards inside
+the Microsoft Teams client. For more information on embedding Power BI in Microsoft Team visit [here.](https://powerbi.microsoft.com/en-us/blog/power-bi-teams-up-with-microsoft-teams/)
 
 #### IoMT Connector and Team Reference Architecture 
 
