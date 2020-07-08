@@ -1,9 +1,9 @@
 ## IoMT FHIR Solutions Getting Started
 
 The IoMT FHIR Connector for Azure enables rapid deployments of IoT to FHIR projects. Enclosed is a set of solutions
-for getting started on a varity of IoMT projects. 
+for getting started on a variety of IoMT projects.
 
-If you are not familar with the Microsoft IoMT FHIR Connector for Azure please visit - https://azure.microsoft.com/en-us/blog/accelerate-iomt-on-fhir-with-new-microsoft-oss-connector/
+If you are not familiar with the Microsoft IoMT FHIR Connector for Azure please visit - https://azure.microsoft.com/en-us/blog/accelerate-iomt-on-fhir-with-new-microsoft-oss-connector/
 
 Here are some architectures to assist with end to end solutioning of your IoMT projects.
 
