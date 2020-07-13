@@ -1,0 +1,30 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "fhirserver-url": {
+            "value": "",
+            "metadata": {
+                "description":"https://<myfhir>.azurehealthcareapis.com  WARNING: make sure to remove the forward slash / after .com If you are using the FHIR Proxy enter the fhir proxy url."
+            }
+        },
+        "fhirserver-clientid": {
+            "value": ""
+        },
+        "fhirserver-clientSecret": {
+            "value": ""
+        },
+        "fhirauth-tenantid": {
+            "value": "",
+            "metadata": {
+                "description": "Supply only if fhir authenication and the deployment subscription are not in the same tenant. If you are unsure leave NULL or remove segment"
+            }
+        },
+        "IntegrationStorageAccount":{
+            "value": "", 
+            "metadata":{
+                "description": "If the FHIR integration has already been setup with a storage account, then add the name of the storage account here. Otherwise a new storage account will be created"
+            }
+        }
+    }
+}
