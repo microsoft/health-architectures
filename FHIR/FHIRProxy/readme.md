@@ -140,7 +140,7 @@ This process requires a configuration setting on the function app:
     FHIRVALIDATION_URL:<A valid URL to a compliant FHIR Validation Server>
 ```
 
-The health-architectures [FHIR Validator](#) provides a Docker wrapped version of the org.hl7 FHIR Validator and can be used with this processor.  It supports FHIR R4 and [US Core](https://www.hl7.org/fhir/us/core/) profiles.  To specify a profile(s) to validate against you can pass in valid US core profile references using the ```ms-fp-profile``` query parameter.
+The health-architectures [FHIR Validator](https://github.com/microsoft/health-architectures/tree/master/FHIR/FHIRValidator) provides a Docker wrapped version of the org.hl7 FHIR Validator and can be used with this processor.  It supports FHIR R4 and [US Core](https://www.hl7.org/fhir/us/core/) profiles.  To specify a profile(s) to validate against you can pass in valid US core profile references using the ```ms-fp-profile``` query parameter.
 For example to validate a Patient resource for US Core compliance you would call the proxy with POST/PUT with the resource in the message body using the following url:
 
 ```
