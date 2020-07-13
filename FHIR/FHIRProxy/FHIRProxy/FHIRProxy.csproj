@@ -3,18 +3,20 @@
 	<TargetFramework>netcoreapp3.1</TargetFramework>
 	<AzureFunctionsVersion>v3</AzureFunctionsVersion>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Hl7.Fhir.Specification.R4" Version="1.4.0" />
+    <PackageReference Include="LazyCache" Version="2.0.4" />
+    <PackageReference Include="Microsoft.Azure.Cosmos.Table" Version="1.0.7" />
+    <PackageReference Include="Microsoft.Azure.EventHubs" Version="4.2.0" />
     <PackageReference Include="Microsoft.Azure.Services.AppAuthentication" Version="1.4.0" />
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Storage" Version="3.0.10" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.3" />
     <PackageReference Include="RestSharp" Version="106.10.1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Fhir.Anonymizer.Core\Fhir.Anonymizer.Core.csproj">
-      <Private>true</Private>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">

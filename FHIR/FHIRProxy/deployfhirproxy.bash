@@ -18,7 +18,8 @@ declare resourceGroupLocation=""
 declare storageAccountNameSuffix="store"$RANDOM
 declare storageConnectionString=""
 declare serviceplanSuffix="asp"
-declare faname=sfp$RANDOM
+declare faname=""
+declare deffaname="sfp"$RANDOM
 declare fsurl=""
 declare fsclientid=""
 declare fssecret=""
@@ -28,7 +29,6 @@ declare fsdefaud="https://azurehealthcareapis.com"
 declare deployzip="distribution/publish.zip"
 declare deployprefix=""
 declare defdeployprefix=""
-declare storecontainername="deid"
 declare stepresult=""
 declare fahost=""
 declare fakey=""
@@ -39,12 +39,14 @@ declare rolewriter="Writer"
 declare rolepatient="Patient"
 declare roleparticipant="Practitioner,RelatedPerson"
 declare roleglobal="DataScientist"
-declare roledeid="DataScientist"
 declare spappid=""
 declare spsecret=""
 declare sptenant=""
 declare spreplyurls=""
 declare tokeniss=""
+declare preprocessors=""
+declare postprocessors=""
+
 # Initialize parameters specified from command line
 while getopts ":i:g:n:l:p" arg; do
 	case "${arg}" in
@@ -122,6 +124,13 @@ if [ -z "$subscriptionId" ] || [ -z "$resourceGroupName" ]; then
 	echo "Either one of subscriptionId, resourceGroupName is empty"
 	usage
 fi
+#Function App Name
+echo "Enter the proxy function app name["$deffaname"]:"
+	read faname
+	if [ -z "$faname" ] ; then
+		faname=$deffaname
+	fi
+	[[ "${faname:?}" ]]
 #Prompt for FHIR Server Parameters
 echo "Enter the destination FHIR Server URL:"
 read fsurl
@@ -129,17 +138,13 @@ if [ -z "$fsurl" ] ; then
 	echo "You must provide a destination FHIR Server URL"
 	exit 1;
 fi
-echo "Enter the FHIR Server Service Client Application ID:"
-read fsclientid
-if [ -z "$fsclientid" ] ; then
-	echo "You must provide a Service Client Application ID"
-	exit 1;
-fi
-echo "Enter the FHIR Server Service Client Secret:"
-read fssecret
-if [ -z "$fssecret" ] ; then
-	echo "You must provide a Service Client Secret"
-	exit 1;
+echo "Enter the FHIR Server/Service Client Tenant ID. Empty for MSI[]:"
+read fstenant
+if [ ! -z "$fstenant" ] ; then
+	echo "Enter the FHIR Server Se	rvice Client Application ID. Leave Empty for MSI[]:"
+	read fsclientid
+	echo "Enter the FHIR Server Service Client Secret. Leave Empty for MSI[]:"
+	read fssecret
 fi
 echo "Enter the FHIR Server/Service Client Audience/Resource ["$fsdefaud"]:"
 	read fsaud
@@ -147,12 +152,6 @@ echo "Enter the FHIR Server/Service Client Audience/Resource ["$fsdefaud"]:"
 		fsaud=$fsdefaud
 	fi
 	[[ "${fsaud:?}" ]]
-echo "Enter the FHIR Server/Service Client Tenant ID:"
-read fstenant
-if [ -z "$fstenant" ] ; then
-	echo "You must provide a FHIR Server/Service Client Tenant"
-	exit 1;
-fi
 
 #set the default subscription id
 az account set --subscription $subscriptionId
@@ -181,12 +180,10 @@ echo "Starting Secure FHIR Proxy deployment..."
 		stepresult=$(az storage account create --name $deployprefix$storageAccountNameSuffix --resource-group $resourceGroupName --location  $resourceGroupLocation --sku Standard_LRS --encryption-services blob)
 		echo "Retrieving Storage Account Connection String..."
 		storageConnectionString=$(az storage account show-connection-string -g $resourceGroupName -n $deployprefix$storageAccountNameSuffix --query "connectionString" --out tsv)
-		echo "Creating Storage Account Container ["$storecontainername"]..."
-		stepresult=$(az storage container create -n $storecontainername --connection-string $storageConnectionString)
-		#Create FHIR Proxy Function App
+		#FHIR Proxy Function App
 		#Create Service Plan
 		echo "Creating Secure FHIR Proxy Function App Serviceplan["$deployprefix$serviceplanSuffix"]..."
-		stepresult=$(az appservice plan create -g  $resourceGroupName -n $deployprefix$serviceplanSuffix --number-of-workers 2 --sku P1v2)
+		stepresult=$(az appservice plan create -g  $resourceGroupName -n $deployprefix$serviceplanSuffix --number-of-workers 2 --sku B1)
 		#Create the function app
 		echo "Creating Secure FHIR Proxy Function App ["$faname"]..."
 		fahost=$(az functionapp create --name $faname --storage-account $deployprefix$storageAccountNameSuffix  --plan $deployprefix$serviceplanSuffix  --resource-group $resourceGroupName --runtime dotnet --os-type Windows --query defaultHostName --output tsv)
@@ -208,8 +205,8 @@ echo "Starting Secure FHIR Proxy deployment..."
 		#Add App Settings
 		#StorageAccount
 		echo "Configuring Secure FHIR Proxy App ["$faname"]..."
-		stepresult=$(az functionapp config appsettings set --name $faname  --resource-group $resourceGroupName --settings ADMIN_ROLE=$roleadmin READER_ROLE=$rolereader WRITER_ROLE=$rolewriter GLOBAL_ACCESS_ROLES=$roleglobal PATIENT_ACCESS_ROLES=$rolepatient DEID_ROLES=$roledeid PARTICIPANT_ACCESS_ROLES=$roleparticipant STORAGEACCT=$storageConnectionString DEIDCONFIG=$storecontainername/configuration.json FS_URL=$fsurl FS_TENANT_NAME=$fstenant FS_CLIENT_ID=$fsclientid FS_SECRET=$fssecret FS_RESOURCE=$fsaud)
-		#deeployment from publish directory
+		stepresult=$(az functionapp config appsettings set --name $faname  --resource-group $resourceGroupName --settings ADMIN_ROLE=$roleadmin READER_ROLE=$rolereader WRITER_ROLE=$rolewriter GLOBAL_ACCESS_ROLES=$roleglobal PATIENT_ACCESS_ROLES=$rolepatient PARTICIPANT_ACCESS_ROLES=$roleparticipant STORAGEACCT=$storageConnectionString FS_URL=$fsurl FS_TENANT_NAME=$fstenant FS_CLIENT_ID=$fsclientid FS_SECRET=$fssecret FS_RESOURCE=$fsaud)
+		#deployment from publish directory
 		echo "Deploying Secure FHIR Proxy Function App from source repo to ["$fahost"]..."
 		stepresult=$(az functionapp deployment source config-zip --name $faname --resource-group $resourceGroupName --src $deployzip)
 		echo "Enabling AAD Authorization and Securing the FHIR Proxy"
@@ -221,9 +218,6 @@ echo "Starting Secure FHIR Proxy deployment..."
 		echo "Your secure fhir proxy host is: https://"$fahost
 		echo "Your secure fhir proxy application id is: "$spappid
 		echo "Your secure fhir proxy FHIR Server URL is: "$fsurl
-		echo "Your deid config storage account name is: "$deployprefix$storageAccountNameSuffix
-		echo "Your deid config storage account container is: "$storecontainername
-		echo "Note: Place your deid configuration file in the deid config storage container before use."
 		echo "************************************************************************************************************"
 		echo " "
 )

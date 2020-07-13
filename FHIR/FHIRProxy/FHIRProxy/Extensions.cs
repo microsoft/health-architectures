@@ -13,6 +13,7 @@
 * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,24 @@ namespace FHIRProxy
 {
     public static class Extensions
     {
+        public static bool IsNullOrEmpty(this JToken token)
+        {
+            return (token == null) ||
+                   (token.Type == JTokenType.Array && !token.HasValues) ||
+                   (token.Type == JTokenType.Object && !token.HasValues) ||
+                   (token.Type == JTokenType.String && token.ToString() == String.Empty) ||
+                   (token.Type == JTokenType.Null);
+        }
+        public static JToken getFirstField(this JToken o)
+        {
+            if (o == null) return null;
+            if (o.Type == JTokenType.Array)
+            {
+                if (o.HasValues) return ((JArray)o)[0];
+                return null;
+            }
+            return o;
+        }
         public static bool IsInFHIRRole(this ClaimsIdentity identity, string rolestring)
         {
             if (string.IsNullOrEmpty(rolestring)) return false;
@@ -52,10 +71,23 @@ namespace FHIRProxy
                 return "";
             } else
             {
-                return $"http://schemas.microsoft.com/identity/claims/tenantid/{tid.Single().Value}"; 
+                return tid.Single().Value.ToAzureKeyString(); 
             }
                            
             
+        }
+        public static string ToAzureKeyString(this string str)
+        {
+            var sb = new StringBuilder();
+            foreach (var c in str
+                .Where(c => c != '/'
+                            && c != '\\'
+                            && c != '#'
+                            && c != '/'
+                            && c != '?'
+                            && !char.IsControl(c)))
+                sb.Append(c);
+            return sb.ToString();
         }
     }
 }

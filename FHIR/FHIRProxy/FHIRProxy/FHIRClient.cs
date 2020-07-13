@@ -24,6 +24,8 @@ using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Azure.Services.AppAuthentication;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 
 namespace FHIRProxy
 {
@@ -53,6 +55,19 @@ namespace FHIRProxy
         {
             _client = new RestClient(baseurl);
             BearerToken = bearerToken;
+        }
+        public static HeaderParm[] ToHeaderParmArray(IHeaderDictionary headers)
+        {
+            List<HeaderParm> retVal = new List<HeaderParm>();
+            if (headers != null)
+            {
+                foreach (string key in headers.Keys)
+                {
+                    if (key.StartsWith("X-"))
+                        retVal.Add(new HeaderParm(key, headers[key].First()));
+                }
+            }
+            return retVal.ToArray();
         }
         public static bool isTokenExpired(string bearerToken)
         {
@@ -115,7 +130,8 @@ namespace FHIRProxy
             }
 
         }
-        public FHIRResponse LoadResource(string resource, string parmstring = null, bool parse = true, HeaderParm[] headers = null)
+      
+        public FHIRResponse LoadResource(string resource, string parmstring = null, bool parse = true, IHeaderDictionary headers = null)
         {
             refreshToken();
             var request = new RestRequest(resource + (parmstring != null ? (!parmstring.StartsWith("?") ? "?" :"") + parmstring : ""), Method.GET);
@@ -124,11 +140,11 @@ namespace FHIRProxy
             {
                 request.AddHeader("Authorization", "Bearer " + BearerToken);
             }
-            AddCustomHeadersToRequest(request, headers);
+            //AddCustomHeadersToRequest(request, ToHeaderParmArray(headers));
             IRestResponse response2 = _client.Execute(request);
             return new FHIRResponse(response2, parse);
         }
-        public FHIRResponse DeleteResource(string resource, HeaderParm[] headers = null)
+        public FHIRResponse DeleteResource(string resource, IHeaderDictionary headers = null)
         {
             refreshToken();
             var request = new RestRequest(resource, Method.DELETE);
@@ -137,16 +153,16 @@ namespace FHIRProxy
             {
                 request.AddHeader("Authorization", "Bearer " + BearerToken);
             }
-            AddCustomHeadersToRequest(request, headers);
+            AddCustomHeadersToRequest(request, ToHeaderParmArray(headers));
             IRestResponse response2 = _client.Execute(request);
             return new FHIRResponse(response2);
         }
-        public FHIRResponse SaveResource(string reqresource,string content, string method = "PUT", HeaderParm[] headers = null)
+        public FHIRResponse SaveResource(string reqresource,string content, string method = "PUT", IHeaderDictionary headers = null)
         {
             var r = JObject.Parse(content);
             return SaveResource(reqresource, r, method, headers);
         }
-        public FHIRResponse SaveResource(string reqresource,JObject r, string method = "PUT", HeaderParm[] headers = null)
+        public FHIRResponse SaveResource(string reqresource,JObject r, string method = "PUT", IHeaderDictionary headers = null)
         {
             refreshToken();
             Method rm = Method.PUT;
@@ -189,7 +205,7 @@ namespace FHIRProxy
             {
                 request.AddHeader("Authorization", "Bearer " + BearerToken);
             }
-            AddCustomHeadersToRequest(request, headers);
+            AddCustomHeadersToRequest(request, ToHeaderParmArray(headers));
             string srv = r.ToString(Formatting.None);
             request.AddParameter("application/json; charset=utf-8", srv, ParameterType.RequestBody);
             request.RequestFormat = DataFormat.Json;
@@ -232,6 +248,16 @@ namespace FHIRProxy
         public IDictionary<string, HeaderParm> Headers { get; set; }
         public object Content { get; set; }
         public HttpStatusCode StatusCode { get; set; }
+        public override string ToString()
+        {
+            if (Content == null) return "";
+            if (Content is string) return (string)Content;
+            if (Content is JToken)
+            {
+                return ((JToken)Content).ToString();
+            }
+            return base.ToString();
+        }
 
     }
     public class HeaderParm
