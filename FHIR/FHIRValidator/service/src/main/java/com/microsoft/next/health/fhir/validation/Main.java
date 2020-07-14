@@ -7,6 +7,7 @@ import org.apache.catalina.core.StandardContext;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.catalina.webresources.DirResourceSet;
 import org.apache.catalina.webresources.StandardRoot;
+import org.apache.tomcat.util.scan.StandardJarScanner;
 
 public class Main {
 
@@ -24,8 +25,13 @@ public class Main {
         }
 
         tomcat.setPort(Integer.valueOf(webPort));
+        tomcat.getConnector(); // Trigger the creation of the default connector
 
         StandardContext ctx = (StandardContext) tomcat.addWebapp("/", new File(webappDirLocation).getAbsolutePath());
+        StandardJarScanner scanner=new StandardJarScanner();
+        scanner.setScanClassPath( false );
+        scanner.setScanManifest( false );
+        ctx.setJarScanner(scanner);
         System.out.println("configuring app with basedir: " + new File("./" + webappDirLocation).getAbsolutePath());
 
         // Declare an alternative location for your "WEB-INF/classes" dir
