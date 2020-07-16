@@ -188,10 +188,10 @@ echo "Starting Secure FHIR Proxy deployment..."
 		echo "Creating Secure FHIR Proxy Function App ["$faname"]..."
 		fahost=$(az functionapp create --name $faname --storage-account $deployprefix$storageAccountNameSuffix  --plan $deployprefix$serviceplanSuffix  --resource-group $resourceGroupName --runtime dotnet --os-type Windows --query defaultHostName --output tsv)
 		echo "Creating Service Principal for AAD Auth"
-		stepresult=$(az ad sp create-for-rbac -n "https://"$fahost)
-		spappid=$(echo $stepresult | jq -r '.appId')
-		sptenant=$(echo $stepresult | jq -r '.tenant')
-		spsecret=$(echo $stepresult | jq -r '.password')
+		stepresult=$(az ad sp create-for-rbac --query '[appId,tenant,password]' -o tsv -n "https://"$fahost)
+		spappid=$(echo $stepresult | cut -f1 -d' ')
+		sptenant=$(echo $stepresult | cut -f2 -d' ')
+		spsecret=$(echo $stepresult | cut -f3 -d' ')
 		spreplyurls="https://"$fahost"/.auth/login/aad/callback"
 		tokeniss="https://sts.windows.net/"$sptenant
 		echo "Adding Sign-in User Read Permission on Graph API..."

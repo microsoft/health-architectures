@@ -46,12 +46,11 @@ Please note you should deploy this proxy into a tenant that you control Applicat
    + The Audience/Resource for the FHIR Server/Service Client typically https://<I>[yourfhirservername]</I>.azurehealthcareapis.com for Azure API for FHIR
 6. [If you are running Windows 10 make sure you have enabled Windows Linux Subsystem](https://code.visualstudio.com/remote-tutorials/wsl/enable-wsl) and [Installed a Linux Distribution](https://code.visualstudio.com/remote-tutorials/wsl/install-linux)
 7. [Install Azure CLI 2.0 on Linux based System or Windows Linux Subsystem](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest)
-8. [Install jq for your environment](https://stedolan.github.io/jq/download/)
-9. [Download/Clone this repo](https://github.com/microsoft/health-architectures)
-10. Open a bash shell into the Azure CLI 2.0 environment
-11. Switch to the FHIR/FHIRproxy subdirectory of this repo ```cd FHIR/FHIRProxy```
-12. Run the ```deployfhirproxy.bash``` script and follow the prompts
-13. Congratulations you now have a Secure FHIR Proxy instance with authentication running. You can now add users/groups for authorized access (see below)
+8. [Download/Clone this repo](https://github.com/microsoft/health-architectures)
+9. Open a bash shell into the Azure CLI 2.0 environment
+10. Switch to the FHIR/FHIRproxy subdirectory of this repo ```cd FHIR/FHIRProxy```
+11. Run the ```deployfhirproxy.bash``` script and follow the prompts
+12. Congratulations you now have a Secure FHIR Proxy instance with authentication running. You can now add users/groups for authorized access (see below)
 
 # Proxy Endpoint
 The new endpoint for your FHIR Server should now be: ```https://<secure proxy url from above>/api/fhirproxy```. You can use any supported FHIR HTTP verb and any FHIR compliant request/query
