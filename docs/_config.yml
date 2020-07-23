@@ -19,9 +19,9 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Microsoft Health Architectures
-email: blank@blank.com
+# email: blank@blank.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Microsoft Health Architectures highlights Healthcare Patterns that enable Provider, Payor, Patient and Clinical workflows through reference architectures
+  Healthcare Patterns that enable Provider, Payor, Patient and Clinical workflows through reference architectures and examples
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://microsoft.github.io/health-architectures/" # the base hostname & protocol for your site, e.g. http://example.com
 
