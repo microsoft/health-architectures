@@ -17,16 +17,16 @@
     <Component Exclude="List exceptions here to not be scanned, that have been included above">    
     <!-- Make sure to consult http://aka.ms/NExtStart if excluding 3rd party or OSS components -->
     <!-- Use back slash \ to indicate folder path e.g. src\external\ -->
-    <ExcludeFolder>\FHIR\FHIRExportwithAnonymization\Assets\AdfApplication.zip\configuration-sample.json</ExcludeFolder>
-    <ExcludeFolder>\FHIR\FHIRProxy\distribution\publish.zip\specification.zip\dataelements.xml</ExcludeFolder>
-    <ExcludeFolder>\FHIR\FHIRProxy\distribution\publish.zip\specification.zip\extension-definitions.xml</ExcludeFolder>
-    <ExcludeFolder>\FHIR\FHIRProxy\distribution\publish.zip\specification.zip\profiles-others.xml</ExcludeFolder>
-    <ExcludeFolder>\FHIR\FHIRProxy\distribution\publish.zip\specification.zip\profiles-resources.xml</ExcludeFolder>
-    <ExcludeFolder>\FHIR\FHIRProxy\distribution\publish.zip\specification.zip\profiles-types.xml</ExcludeFolder>
-    <ExcludeFolder>\FHIR\FHIRProxy\distribution\publish.zip\specification.zip\search-parameters.xml</ExcludeFolder>
-    <ExcludeFolder>\FHIR\FHIRProxy\distribution\publish.zip\specification.zip\v2-tables.xml</ExcludeFolder>
-    <ExcludeFolder>\FHIR\FHIRProxy\distribution\publish.zip\specification.zip\v3-codesystems.xml</ExcludeFolder>
-    <ExcludeFolder>\FHIR\FHIRProxy\distribution\publish.zip\specification.zip\valuesets.xml</ExcludeFolder>
+    <ExcludeFolder>FHIR\FHIRExportwithAnonymization\Assets\AdfApplication.zip\configuration-sample.json</ExcludeFolder>
+    <ExcludeFolder>FHIR\FHIRProxy\distribution\publish.zip\specification.zip\dataelements.xml</ExcludeFolder>
+    <ExcludeFolder>FHIR\FHIRProxy\distribution\publish.zip\specification.zip\extension-definitions.xml</ExcludeFolder>
+    <ExcludeFolder>FHIR\FHIRProxy\distribution\publish.zip\specification.zip\profiles-others.xml</ExcludeFolder>
+    <ExcludeFolder>FHIR\FHIRProxy\distribution\publish.zip\specification.zip\profiles-resources.xml</ExcludeFolder>
+    <ExcludeFolder>FHIR\FHIRProxy\distribution\publish.zip\specification.zip\profiles-types.xml</ExcludeFolder>
+    <ExcludeFolder>FHIR\FHIRProxy\distribution\publish.zip\specification.zip\search-parameters.xml</ExcludeFolder>
+    <ExcludeFolder>FHIR\FHIRProxy\distribution\publish.zip\specification.zip\v2-tables.xml</ExcludeFolder>
+    <ExcludeFolder>FHIR\FHIRProxy\distribution\publish.zip\specification.zip\v3-codesystems.xml</ExcludeFolder>
+    <ExcludeFolder>FHIR\FHIRProxy\distribution\publish.zip\specification.zip\valuesets.xml</ExcludeFolder>
     <ExcludeFolder>.gitignore</ExcludeFolder>
     <ExcludeFolder>GeoPol.xml</ExcludeFolder>
   </Component>
