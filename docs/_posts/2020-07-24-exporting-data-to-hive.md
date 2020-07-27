@@ -1,3 +1,18 @@
+---
+layout: default
+---
+
+<small>{{ page.date | date: "%-d %B %Y" }}</small>
+<h1>{{ page.title }}</h1>
+
+<p class="view">by {{ page.author | default: site.author }}</p>
+
+{{content}}
+
+{% if page.tags %}
+  <small>tags: <em>{{ page.tags | join: "</em> - <em>" }}</em></small>
+{% endif %}
+
 # Exporting Data to HIVE, HDFS or Azure DataBricks
 
 Last week a customer asked our team the following question, "If I want to export FHIR to Hive what is the best practice?" Turns out there is a very simple method to accomplish this task. This walkthrough post works with Hive, Hadoop, Spark, DataBricks or any other tools supporting the HDFS data sources.
