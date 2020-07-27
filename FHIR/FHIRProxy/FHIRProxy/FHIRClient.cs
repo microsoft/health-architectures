@@ -184,7 +184,7 @@ namespace FHIRProxy
                     throw new Exception($"{method} is not supported for SaveResource");
 
             }
-            string rt = (string)r["resourceType"];
+            string rt = r.FHIRResourceType();
             RestRequest request = null;
             if (string.IsNullOrEmpty(reqresource) && !string.IsNullOrEmpty(rt) && rt.Equals("Bundle"))
             {

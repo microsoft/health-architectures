@@ -47,15 +47,14 @@ namespace FHIRProxy.postprocessors
             List<string> fhirresourceroles = new List<string>();
             fhirresourceroles.AddRange(Environment.GetEnvironmentVariable("PARTICIPANT_ACCESS_ROLES").Split(","));
             fhirresourceroles.AddRange(Environment.GetEnvironmentVariable("PATIENT_ACCESS_ROLES").Split(","));
-            Dictionary<string, bool> porcache = new Dictionary<string, bool>();
+            Dictionary<string, bool> porcache = new Dictionary<string,bool>();
             FHIRClient fhirClient = FHIRClientFactory.getClient(log);
-
+            var table = Utils.getTable();
             //Load linked Resource Identifiers from linkentities table for each known role the user is in
             foreach (string r in inroles)
             {
                 if (fhirresourceroles.Any(r.Equals))
                 {
-                    var table = Utils.getTable();
                     var entity = Utils.getLinkEntity(table, r, aadten + "-" + name);
                     if (entity != null)
                     {
@@ -70,10 +69,19 @@ namespace FHIRProxy.postprocessors
                     JArray entries = (JArray)result["entry"];
                     if (!entries.IsNullOrEmpty())
                     {
-                        JArray toremove = new JArray();
-                        for (int i = entries.Count - 1; i >= 0; i--)
+            
+                        foreach (JToken entry in entries)
                         {
-                            if (!IsAParticipantOrPatient((JObject)entries[i]["resource"], fhirClient, resourceidentities, porcache, req.Headers)) entries[i].Remove();
+                            if (!IsAParticipantOrPatient(entry["resource"], fhirClient, resourceidentities, porcache, req.Headers))
+                            {
+                                JObject denyObj = new JObject();
+                                denyObj["resourceType"] = entry["resource"].FHIRResourceType();
+                                denyObj["id"] = entry["resource"].FHIRResourceId();
+                                denyObj["text"] = new JObject();
+                                denyObj["text"]["status"] = "generated";
+                                denyObj["text"]["div"] = "<div xmlns =\"http://www.w3.org/1999/xhtml\"><p>You do not have access to data contained in this resource</p></div>";
+                                entry["resource"] = denyObj;
+                            }
 
                         }
                     }
@@ -82,22 +90,22 @@ namespace FHIRProxy.postprocessors
                 {
                     if (!IsAParticipantOrPatient(result, fhirClient, resourceidentities, porcache, req.Headers))
                     {
-                        fr.Content = Utils.genOOErrResponse("auth-denied", $"Not authorized to access resource:{res + (id == null ? "" : "/" + id)}");
+                        fr.Content = Utils.genOOErrResponse("access-denied", $"You are not an authorized Paticipant in care and cannot access this resource: {res + (id == null ? "" : "/" + id)}");
                         fr.StatusCode = System.Net.HttpStatusCode.Unauthorized;
-                        return new ProxyProcessResult(false, "auth-denied", "",fr);
+                        return new ProxyProcessResult(false, "access-denied", "",fr);
                     }
                 }
             }
             fr.Content = result.ToString();
             return new ProxyProcessResult(true, "", "",fr);
         }
-        private static bool IsAParticipantOrPatient(JObject resource, FHIRClient fhirClient, IEnumerable<string> knownresourceIdentities, Dictionary<string, bool> porcache, IHeaderDictionary auditheaders)
+        private static bool IsAParticipantOrPatient(JToken resource, FHIRClient fhirClient, IEnumerable<string> knownresourceIdentities, Dictionary<string, bool> porcache, IHeaderDictionary auditheaders)
         {
 
             string patientId = null;
             string encounterId = null;
-            JObject patient = null;
-            JObject encounter = null;
+            JToken patient = null;
+            JToken encounter = null;
 
             string rt = (string)resource["resourceType"];
             //Check for Patient resource or load patient resource from subject member

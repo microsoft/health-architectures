@@ -30,21 +30,22 @@ namespace FHIRProxy.preprocessors
         public ProxyProcessResult Process(string requestBody, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id, string hist, string vid)
         {
             /*Call Resource and Profile Validation server*/
-            /* Pass Validation profile names in msfp_profile query parameter */
+            /* Pass Validation profile names in ms-fp-profile query parameter or specify empty ms-fp-profile validation parameter for schema validation only*/
             if (string.IsNullOrEmpty(requestBody) || req.Method.Equals("GET") || req.Method.Equals("DELETE")) return new ProxyProcessResult(true, "", requestBody, null);
+            if (!req.Query.ContainsKey("ms-fp-profile")) return new ProxyProcessResult(true, "", requestBody, null);
             string url = Environment.GetEnvironmentVariable("FHIRVALIDATION_URL");
             if (string.IsNullOrEmpty(url)) {
                 log.LogWarning("The validation URL is not configured....Validatioh will not be run");
                 return new ProxyProcessResult(true, "", requestBody, null);
             }
-          
-            using (WebClient client = new WebClient())
+           
+                using (WebClient client = new WebClient())
             {
                 if (req.Query.ContainsKey("ms-fp-profile"))
                 {
                     foreach (string v in req.Query["ms-fp-profile"])
                     {
-                        client.QueryString.Add("profile", v);
+                        if(!string.IsNullOrEmpty(v)) client.QueryString.Add("profile", v);
                     }
                     
                 }

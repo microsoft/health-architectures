@@ -31,12 +31,13 @@ namespace FHIRProxy.postprocessors
         public ProxyProcessResult Process(FHIRResponse response, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id, string hist, string vid)
         {
             if (!req.Method.Equals("GET") || response.StatusCode != HttpStatusCode.OK || response.Content == null) return new ProxyProcessResult(true, "", "", response);
-            SortedSet<JToken> ss = null;
+            List<JToken> ss = null;
             if (DATE_SORT_RESOURCES_SUPPORTED.Contains(res) && req.Query.ContainsKey("_sort") && req.Query["_sort"].First().Contains("date"))
             {
                 var fhirresp = JObject.Parse(response.Content.ToString());
                 if (fhirresp.IsNullOrEmpty() || !((string)fhirresp["resourceType"]).Equals("Bundle") || !((string)fhirresp["type"]).Equals("searchset")) return new ProxyProcessResult(true, "", "", response);
-                ss = new SortedSet<JToken>(new DateSortedIndexComparar(req.Query["_sort"].First().Contains("-date")));
+                //ss = new SortedSet<JToken>(new DateSortedIndexComparar(req.Query["_sort"].First().Contains("-date")));
+                ss = new List<JToken>();
                 addEntries((JArray)fhirresp["entry"],ss,log);
                 //Process Next Pages until out or max array
                 bool nextlink = !fhirresp["link"].IsNullOrEmpty() && ((string)fhirresp["link"].getFirstField()["relation"]).Equals("next");
@@ -46,11 +47,12 @@ namespace FHIRProxy.postprocessors
                     FHIRClient fhirClient = FHIRClientFactory.getClient(log);
                     var nextresult = fhirClient.LoadResource(nextpage);
                     fhirresp = JObject.Parse(nextresult.Content.ToString());
-                    if (fhirresp.IsNullOrEmpty() || !((string)fhirresp["resourceType"]).Equals("Bundle") || !((string)fhirresp["type"]).Equals("searchset")) return new ProxyProcessResult(false, "Next Page not Returned or server error", "", nextresult);
+                    if (fhirresp.IsNullOrEmpty() || !fhirresp.FHIRResourceType().Equals("Bundle") || !((string)fhirresp["type"]).Equals("searchset")) return new ProxyProcessResult(false, "Next Page not Returned or server error", "", nextresult);
                     addEntries((JArray)fhirresp["entry"], ss, log);
                     nextlink = !fhirresp["link"].IsNullOrEmpty() && ((string)fhirresp["link"].getFirstField()["relation"]).Equals("next");
                 }
-                fhirresp["entry"] = new JArray(ss.ToArray<JToken>());
+                ss.Sort(new DateSortedIndexComparar(req.Query["_sort"].First().Contains("-date")));
+                fhirresp["entry"] = new JArray(ss.ToArray());
                 fhirresp["link"] = new JArray();
               
                 response.Content = fhirresp.ToString();
@@ -64,15 +66,12 @@ namespace FHIRProxy.postprocessors
             retVal.Response = response;
             return retVal;
         }
-        private void addEntries(JArray entries,SortedSet<JToken> ss,ILogger log)
+        private void addEntries(JArray entries,List<JToken> ss,ILogger log)
         {
             if (!entries.IsNullOrEmpty())
             {
                 log.LogInformation($"Adding {entries.Count} bundle entries to sorted array...");
-                foreach (JToken tok in entries)
-                {
-                    ss.Add(tok);
-                }
+                ss.AddRange(entries);
             }
         }
     }
@@ -86,7 +85,7 @@ namespace FHIRProxy.postprocessors
         }
         public int Compare(JToken x, JToken y)
         {
-            string rt = (string)x["resource"]["resourceType"];
+            string rt = x.FHIRResourceType();
             switch (rt)
             {
                 case "Observation":

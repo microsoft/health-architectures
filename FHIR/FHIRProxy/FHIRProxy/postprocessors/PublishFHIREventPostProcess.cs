@@ -51,13 +51,14 @@ namespace FHIRProxy.postprocessors
                     var fhirresp = JObject.Parse(response.Content.ToString());
                     if (!fhirresp.IsNullOrEmpty() && ((string)fhirresp["resourceType"]).Equals("Bundle") && ((string)fhirresp["type"]).EndsWith("-response"))
                     {
+
                         JArray entries = (JArray)fhirresp["entry"];
                         if (!entries.IsNullOrEmpty())
                         {
                             foreach (JToken tok in entries)
                             {
-                               
-                                JObject entryresp = (JObject)tok["response"];
+                                
+                                 JObject entryresp = (JObject)tok["response"];
                                 var entrystatus = (string)entryresp["status"];
                                 if (entrystatus.Equals("200") || entrystatus.Equals("201"))
                                 {
@@ -96,7 +97,7 @@ namespace FHIRProxy.postprocessors
                 {
                     if (eventHubClient != null) eventHubClient.Close();
                 }
-                catch (Exception e) { }
+                catch (Exception) {}
 
             }
             return new ProxyProcessResult(true, "", "", response);
@@ -104,7 +105,7 @@ namespace FHIRProxy.postprocessors
         }
         private void publishEvent(EventHubClient eventHubClient,HttpRequest req,JObject resource)
         {
-            string msg = "{\"action\":\"" + req.Method + "\",\"resourcetype\":\"" + (string)resource["resourceType"] + "\",\"id\":\"" + (string)resource["id"] + "\"}";
+            string msg = "{\"action\":\"" + req.Method + "\",\"resourcetype\":\"" + resource.FHIRResourceType() + "\",\"id\":\"" + resource.FHIRResourceId() + "\",\"version\":\"" + resource.FHIRVersionId() + "\",\"lastupdated\":\"" + resource.FHIRLastUpdated() + "\"}";
             EventData dt = new EventData(Encoding.UTF8.GetBytes(msg));
             eventHubClient.SendAsync(dt).GetAwaiter().GetResult();
         }

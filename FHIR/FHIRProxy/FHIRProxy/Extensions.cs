@@ -19,11 +19,55 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
-
+using Newtonsoft.Json;
 namespace FHIRProxy
 {
     public static class Extensions
     {
+        public static string SerializeList<T>(this List<T> thelist)
+        {
+            if (thelist == null) return null;
+            return JsonConvert.SerializeObject(thelist);
+        }
+        public static List<T> DeSerializeList<T>(this string str)
+        {
+            if (str == null) return null;
+            return JsonConvert.DeserializeObject<List<T>>(str);
+        }
+        public static string FHIRResourceId(this JToken token)
+        {
+            if (!token.IsNullOrEmpty()) return (string)token?["id"];
+            return null;
+        }
+        public static string FHIRResourceType(this JToken token)
+        {
+            if (!token.IsNullOrEmpty()) return (string)token?["resourceType"];
+            return null; ;
+        }
+        public static string FHIRVersionId(this JToken token)
+        {
+            if (!token.IsNullOrEmpty() && !token["meta"].IsNullOrEmpty())
+            {
+                return (string)token["meta"]?["versionId"];
+            }
+            return null;
+        }
+        public static string FHIRLastUpdated(this JToken token)
+        {
+            if (!token.IsNullOrEmpty() && !token["meta"].IsNullOrEmpty() && !token["meta"]["lastUpdated"].IsNullOrEmpty())
+            {
+                return JsonConvert.SerializeObject(token["meta"]?["lastUpdated"]).Replace("\"","");
+            }
+            return null;
+        }
+        public static string FHIRReferenceId(this JToken token)
+        {    
+            if (!token.IsNullOrEmpty() && !token["resourceType"].IsNullOrEmpty() && !token["id"].IsNullOrEmpty())
+            {
+                return (string)token["resourceType"] + "/" + (string)token["id"];
+            }
+            return "";
+        }
         public static bool IsNullOrEmpty(this JToken token)
         {
             return (token == null) ||

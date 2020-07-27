@@ -6,7 +6,7 @@ IFS=$'\n\t'
 # -o: prevents errors in a pipeline from being masked
 # IFS new value is less likely to cause confusing bugs when looping arrays or arguments (e.g. $@)
 #
-#HL7 Ingest Setup --- Author Steve Ordahl Principal Architect Health Data Platform
+#FHIR Proxy Setup --- Author Steve Ordahl Principal Architect Health Data Platform
 #
 
 usage() { echo "Usage: $0 -i <subscriptionId> -g <resourceGroupName> -l <resourceGroupLocation> -p <prefix>" 1>&2; exit 1; }
@@ -17,6 +17,9 @@ declare resourceGroupName=""
 declare resourceGroupLocation=""
 declare storageAccountNameSuffix="store"$RANDOM
 declare storageConnectionString=""
+declare redisAccountNameSuffix="cache"$RANDOM
+declare redisConnectionString=""
+declare redisKey=""
 declare serviceplanSuffix="asp"
 declare faname=""
 declare deffaname="sfp"$RANDOM
@@ -138,7 +141,7 @@ if [ -z "$fsurl" ] ; then
 	echo "You must provide a destination FHIR Server URL"
 	exit 1;
 fi
-echo "Enter the FHIR Server/Service Client Tenant ID. Empty for MSI[]:"
+echo "Enter the FHIR Server Service Client Tenant ID. Empty for MSI[]:"
 read fstenant
 if [ ! -z "$fstenant" ] ; then
 	echo "Enter the FHIR Server Se	rvice Client Application ID. Leave Empty for MSI[]:"
@@ -180,13 +183,19 @@ echo "Starting Secure FHIR Proxy deployment..."
 		stepresult=$(az storage account create --name $deployprefix$storageAccountNameSuffix --resource-group $resourceGroupName --location  $resourceGroupLocation --sku Standard_LRS --encryption-services blob)
 		echo "Retrieving Storage Account Connection String..."
 		storageConnectionString=$(az storage account show-connection-string -g $resourceGroupName -n $deployprefix$storageAccountNameSuffix --query "connectionString" --out tsv)
+		#Redis Cache to Support Proxy Modules
+		echo "Creating Redis Cache ["$deployprefix$redisAccountNameSuffix"]..."
+		stepresult=$(az redis create --location $resourceGroupLocation --name $deployprefix$redisAccountNameSuffix --resource-group $resourceGroupName --sku Basic --vm-size c0)
+		echo "Creating Redis Connection String..."
+		redisKey=$(az redis list-keys -g $resourceGroupName -n $deployprefix$redisAccountNameSuffix --query "primaryKey" --out tsv)
+		redisConnectionString=$deployprefix$redisAccountNameSuffix".redis.cache.windows.net:6380,password="$redisKey",ssl=True,abortConnect=False"
 		#FHIR Proxy Function App
 		#Create Service Plan
 		echo "Creating Secure FHIR Proxy Function App Serviceplan["$deployprefix$serviceplanSuffix"]..."
 		stepresult=$(az appservice plan create -g  $resourceGroupName -n $deployprefix$serviceplanSuffix --number-of-workers 2 --sku B1)
 		#Create the function app
 		echo "Creating Secure FHIR Proxy Function App ["$faname"]..."
-		fahost=$(az functionapp create --name $faname --storage-account $deployprefix$storageAccountNameSuffix  --plan $deployprefix$serviceplanSuffix  --resource-group $resourceGroupName --runtime dotnet --os-type Windows --query defaultHostName --output tsv)
+		fahost=$(az functionapp create --name $faname --storage-account $deployprefix$storageAccountNameSuffix  --plan $deployprefix$serviceplanSuffix  --resource-group $resourceGroupName --runtime dotnet --os-type Windows --functions-version 3 --query defaultHostName --output tsv)
 		echo "Creating Service Principal for AAD Auth"
 		stepresult=$(az ad sp create-for-rbac -n "https://"$fahost)
 		spappid=$(echo $stepresult | jq -r '.appId')
@@ -203,9 +212,8 @@ echo "Starting Secure FHIR Proxy deployment..."
 		echo "Adding FHIR Custom Roles to Manifest..."
 		stepresult=$(az ad app update --id $spappid --app-roles @fhirroles.json)
 		#Add App Settings
-		#StorageAccount
 		echo "Configuring Secure FHIR Proxy App ["$faname"]..."
-		stepresult=$(az functionapp config appsettings set --name $faname  --resource-group $resourceGroupName --settings ADMIN_ROLE=$roleadmin READER_ROLE=$rolereader WRITER_ROLE=$rolewriter GLOBAL_ACCESS_ROLES=$roleglobal PATIENT_ACCESS_ROLES=$rolepatient PARTICIPANT_ACCESS_ROLES=$roleparticipant STORAGEACCT=$storageConnectionString FS_URL=$fsurl FS_TENANT_NAME=$fstenant FS_CLIENT_ID=$fsclientid FS_SECRET=$fssecret FS_RESOURCE=$fsaud)
+		stepresult=$(az functionapp config appsettings set --name $faname  --resource-group $resourceGroupName --settings REDISCONNECTION=$redisConnectionString ADMIN_ROLE=$roleadmin READER_ROLE=$rolereader WRITER_ROLE=$rolewriter GLOBAL_ACCESS_ROLES=$roleglobal PATIENT_ACCESS_ROLES=$rolepatient PARTICIPANT_ACCESS_ROLES=$roleparticipant STORAGEACCT=$storageConnectionString FS_URL=$fsurl FS_TENANT_NAME=$fstenant FS_CLIENT_ID=$fsclientid FS_SECRET=$fssecret FS_RESOURCE=$fsaud)
 		#deployment from publish directory
 		echo "Deploying Secure FHIR Proxy Function App from source repo to ["$fahost"]..."
 		stepresult=$(az functionapp deployment source config-zip --name $faname --resource-group $resourceGroupName --src $deployzip)

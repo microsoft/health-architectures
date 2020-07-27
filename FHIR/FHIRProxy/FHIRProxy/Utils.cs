@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
+using StackExchange.Redis;
 namespace FHIRProxy
 {
     public class Utils
@@ -14,6 +15,19 @@ namespace FHIRProxy
         public static readonly string AUTH_STATUS_HEADER = "fhirproxy-AuthorizationStatus";
         public static readonly string AUTH_STATUS_MSG_HEADER = "fhirproxy-AuthorizationStatusMessage";
         public static readonly string FHIR_PROXY_ROLES = "fhirproxy-roles";
+        
+        private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
+        {
+            string cacheConnection = GetEnvironmentVariable("REDISCONNECTION");
+            return ConnectionMultiplexer.Connect(cacheConnection);
+        });
+        public static ConnectionMultiplexer RedisConnection
+        {
+            get
+            {
+                return lazyConnection.Value;
+            }
+        }
         public static string genOOErrResponse(string code,string desc)
         {
 
@@ -100,6 +114,21 @@ namespace FHIRProxy
             // Create the table if it doesn't exist.
             table.CreateIfNotExistsAsync().GetAwaiter().GetResult();
             return table;
+        }
+        public static string GetEnvironmentVariable(string varname, string defval=null)
+        {
+            if (string.IsNullOrEmpty(varname)) return null;
+            string retVal = System.Environment.GetEnvironmentVariable(varname);
+            if (defval != null && retVal == null) return defval;
+            return retVal;
+        }
+        public static int GetIntEnvironmentVariable(string varname,string defval=null)
+        {
+
+            
+            string retVal = System.Environment.GetEnvironmentVariable(varname);
+            if (defval != null && retVal == null) retVal = defval;
+            return int.Parse(retVal);
         }
 
     }

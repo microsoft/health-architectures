@@ -19,6 +19,8 @@ The base pre and post processing modules included and can be configured are:
  + TransformBundlePreProcess - This processing module will transform incoming transaction bundle requests into batch bundle request and maintain UUID associations of contained resources.  This is a alternative for updating FHIR Servers unable to handle transaction based requests.</br>
  + DateSortPostProcessor - This processing module allows for date based sorting alternative on FHIR Servers that do not natively support _sort. The processor implements top level _sort=date or _sort=-date parameter for supported resources queries up to a configured maximum number of rows.</br>  
  + ProfileValidationPreProcess - This processing module adds the ability to call external profile (e.g. [US Core](https://www.hl7.org/fhir/us/core/)) and/or standard schema validation support for FHIR Servers who do not implement or support specific profile validation.
+ + ConsentOptOutFilter - This post-processing module adds the ability to deny access to FHIR Server resources for patients who have elected to OPTOUT everyone or specific individuals and/or organizations from access to their medical data.
+
 
 Check back often as more processing modules will be added. </br>
  
@@ -112,8 +114,8 @@ The utility requires the linux dialog utility [whiptail](https://howtoinstall.co
 This post process allows for date based sorting alternative on FHIR Servers that do not natively support _sort. The processor implements top level _sort=date or _sort=-date (reverse chron) query parameter for supported resource queries up to a hard maximum of 5000.</br>
 The resources supported for top level_sort=date are: Observation,DiagnosticReport,Encounter,CarePlan,CareTeam,EpisodeOfCare and Claim. Any other resources will be ignored and not sorted.</br>
 This processor is limited to process 5000 resource entries in a search-set bundle, it is imperative that you limit your query to not exceed this many resources for accurate results.
-This processor also has the potential to cause server delays in responses for large results sets use with caution and limiting parameters.
-A log warning will be logged for request that exceed the 5000 resource sort limit.</br>
+This processor also has the potential to cause server delays in responses for large results sets use with caution.  <I>Hints: Specify large _count parameter value to reduce calls to server and select limiting parameters for resource queries.</I>
+A log warning will be issued for request that exceed the 5000 resource sort limit, but no error response will be returned just the truncated data set</br>
 This process requires no additional configuration.  
 
 ## Publish Event Post-Processor
@@ -187,7 +189,7 @@ At a minimum users must be placed in one or more FHIR Participant roles in order
 12. When all users desired have been selected click the select button at the bottom of the panel.
 13. Click the Assign button.
 14. Congratulations the select users have been assigned the participant role and can now be linked to FHIR Resources
-
+[]()
 ## Linking Users in Participant Roles to FHIR Resources
 1. Make sure you have configured Participant Authorization Roles for users
 2. Obtain the FHIR Resource Id you wish to link to a AAD User principal.  Note you can use any search methods for the resources described in the FHIR specification.  It is strongly recommended to use a known Business Identifier in your query to ensure a specific and correct match.
@@ -216,6 +218,112 @@ At a minimum users must be placed in one or more FHIR Participant roles in order
     _Note: You will need to login as a user in a FHIR Administrative role to perform the assignment_
 
 5.  Your done the principal user is now connected in role to the FHIR resource.
+
+## Consent Opt-Out Filter
+
+This module adds the ability to deny access to FHIR Server resources for patients who have elected to OPTOUT everyone or specific individuals and/or organizations from access to their medical data.
+
+This module operates on the access policy that the health information of patients is accessabile automatically to authorized users, but the patient can opt out completely.
+
+It will honor any opt-out consent record(s) effective period, deny access to everyone or specific Organizations, Practitioners, RelatedPersons and Patients (Actors)
+
+This module will only filter if the appropriate OPT-OUT Consent Resources are stored in the FHIR Server and are in force.
+
+For Example:
+The following consent resource will not allow any individuals affiliated with the specified organization (66fa407d-d890-43a5-a6e3-eb82d3bfa393) access to any resources on the FHIR Server that are related to Patient (9ec3be2f-342c-4cb6-b2dd-c124747ef1bb) for the period 4/20/2020->12/31/2020:
+```
+{
+    "resourceType": "Consent",
+    "id": "7d044901-068e-470d-ac98-8f3889144476",
+    "meta": {
+        "versionId": "2",
+        "lastUpdated": "2020-07-24T16:02:42.802+00:00"
+    },
+    "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Patient wishes to withhold disclosure of all data from a timeframe to any provider.\n</p>\n</div>"
+    },
+    "status": "active",
+    "scope": {
+        "coding": [
+            {
+                "system": "http://terminology.hl7.org/CodeSystem/consentscope",
+                "code": "patient-privacy"
+            }
+        ]
+    },
+    "category": [
+        {
+            "coding": [
+                {
+                    "system": "http://loinc.org",
+                    "code": "59284-0"
+                }
+            ]
+        }
+    ],
+    "patient": {
+        "reference": "Patient/9ec3be2f-342c-4cb6-b2dd-c124747ef1bb"
+    },
+    "dateTime": "2020-05-18",
+    "organization": [
+        {
+            "reference": "Organization/66fa407d-d890-43a5-a6e3-eb82d3bfa393"
+        }
+    ],
+    "sourceAttachment": {
+        "title": "Withhold records for time frame"
+    },
+    "policyRule": {
+        "coding": [
+            {
+                "system": "http://terminology.hl7.org/CodeSystem/consentpolicycodes",
+                "code": "hipaa-restrictions"
+            }
+        ]
+    },
+    "provision": {
+        "type": "deny",
+        "period": {
+            "start": "2020-04-20T00:00:00.0000+05:00",
+            "end": "2020-12-31T23:59:00.0000+05:00"
+        },
+        "actor": [
+            {
+                "role": {
+                    "coding": [
+                        {
+                            "system": "http://terminology.hl7.org/CodeSystem/v3-ParticipationType",
+                            "code": "CST"
+                        }
+                    ]
+                },
+                "reference": {
+                    "reference": "Organization/66fa407d-d890-43a5-a6e3-eb82d3bfa393"
+                }
+            }
+        ]
+    }
+}
+```
+Notes: 
++ If no Period is specified the Consent provision will be deemed in force.  If no start date is specified the default will be the earliest supported date/time.  If no end date is specified the default will be the latest supported date/time.
++ If no Actors are specified in the Consent Provision all individuals will be prevented from access
++ If the user is not linked to a FHIR resource and specific actors are specified in the opt-out consent record, the filter will be unable to determine exclusion and will be allowed access be default policy
++ Organization is determined by the linked resource association with an organization.
++ If multiple consent records are present the most restrictive policy will be used and actor filters will be aggregated.
++ This filter only covers access updates are permitted to protect recorded data.
++ This filter does not allow exceptions on specific resources all resources related to the patient are filtered
+ 
+This process requires configuration settings on the function app:
+```
+    CONSENT_OPTOUT_CATEGORY:<A valid CodeableConcept search string to load access consent records>
+```
+
+The recommended value for category in your consent records is LOINC code 59284-0 Consent Document the parameter value would be:
+```http://loinc.org|59284-0```
+
+It is also required that users be linked to FHIR Participant roles/resources. Please see the [Linking Users in Participant Roles to FHIR Resources]() section in the Participant Access Filter Module above.
 
 ## Contributing
 
