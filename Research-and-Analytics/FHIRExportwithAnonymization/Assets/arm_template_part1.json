@@ -1,0 +1,301 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "fhirserver-url": {
+            "type": "string"
+        },
+        "fhirserver-clientid": {
+            "type": "string"
+        },
+        "fhirserver-clientSecret": {
+            "type": "securestring"
+        },
+        "utcdate": {
+            "type": "string",
+            "defaultValue": "[utcNow('yyyy-MM-dd')]"
+        },
+        "fhirauth-tenantid": {
+            "type": "string",
+            "defaultValue": "[subscription().tenantId]"
+        },
+        "AzureBatch-poolName": {
+            "type": "string",
+            "defaultValue": "fhirexport2deid"
+        },
+        "batchPoolVMSize": {
+            "defaultValue": "STANDARD_D4_V3",
+            "type": "string"
+        },
+        "IntegrationStorageAccount":{
+            "type": "string"
+        }
+    },
+    "variables": {
+        "rgLocation": "[resourceGroup().location]",
+        "resourceGroup": "[resourceGroup().name]",
+        "subscriptionid": "[subscription().subscriptionId]",
+        "tenantid": "[if(empty(parameters('fhirauth-tenantid')), subscription().tenantId, parameters('fhirauth-tenantid'))]",
+        "utcstart": "[concat(parameters('utcdate'),'T01:00:00Z')]",
+        "storageAccountName": "[if(empty(parameters('IntegrationStorageAccount')),concat(variables('resourceGroup'),'stg'),parameters('IntegrationStorageAccount'))]",
+        "datalakeName": "[concat(variables('resourceGroup'),'dlg2')]",
+        "keyVaultName": "[concat(variables('resourceGroup'),'kv')]",
+        "logicAppName": "[concat(variables('resourceGroup'),'la')]",
+        "batchName": "[concat(variables('resourceGroup'),'batch')]",
+        "factoryName": "[concat(variables('resourceGroup'),'adf')]",
+        "factoryId": "[concat('Microsoft.DataFactory/factories/', variables('factoryName'))]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2019-06-01",
+            "name": "[variables('storageAccountName')]",
+            "location": "[variables('rgLocation')]",
+            "tags": {
+            "HealthArchitestures": "FHIRToDEIDPipeline"
+            },
+            "sku": {
+                "name": "Standard_ZRS",
+                "tier": "Standard"
+            },
+            "kind": "StorageV2",
+            "properties": {
+                "networkAcls": {
+                    "bypass": "AzureServices",
+                    "virtualNetworkRules": [],
+                    "ipRules": [],
+                    "defaultAction": "Allow"
+                },
+                "supportsHttpsTrafficOnly": true,
+                "encryption": {
+                    "services": {
+                        "blob": {
+                            "keyType": "Account",
+                            "enabled": true
+                        }
+                    },
+                    "keySource": "Microsoft.Storage"
+                },
+                "accessTier": "Hot"
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts/blobServices",
+            "apiVersion": "2019-06-01",
+            "name": "[concat(variables('storageAccountName'), '/default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
+            ],
+            "sku": {
+                "name": "Standard_ZRS",
+                "tier": "Standard"
+            },
+            "properties": {
+                "cors": {
+                    "corsRules": []
+                },
+                "deleteRetentionPolicy": {
+                    "enabled": false
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+            "apiVersion": "2019-06-01",
+            "name": "[concat(variables('storageAccountName'), '/default/customactivity')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', variables('storageAccountName'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
+            ],
+            "properties": {
+                "publicAccess": "None"
+            }
+        },
+        {
+            "name": "[variables('datalakeName')]",
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2019-06-01",
+            "location": "[variables('rgLocation')]",
+            "tags": {
+            "HealthArchitestures": "FHIRToDEIDPipeline"
+            },
+            "kind": "StorageV2",
+            "sku": {
+                "name": "Standard_RAGRS",
+                "tier": "Standard"
+            },
+            "properties": {
+                "isHnsEnabled": true,
+                "supportsHttpsTrafficOnly": true,
+                "accessTier": "Hot"
+            },
+            "dependsOn": []
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts/blobServices",
+            "apiVersion": "2019-06-01",
+            "name": "[concat(variables('datalakeName'), '/default')]",
+            "dependsOn": [
+                "[variables('datalakeName')]"
+            ],
+            "sku": {
+                "name": "Standard_RAGRS",
+                "tier": "Standard"
+            },
+            "properties": {
+                "cors": {
+                    "corsRules": []
+                },
+                "deleteRetentionPolicy": {
+                    "enabled": false
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+            "apiVersion": "2019-06-01",
+            "name": "[concat(variables('datalakeName'), '/default/export')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', variables('datalakeName'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('datalakeName'))]"
+            ],
+            "properties": {
+                "publicAccess": "None"
+            }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/secrets",
+            "apiVersion": "2016-10-01",
+            "name": "[concat(variables('keyVaultName'),'/fhirserver-clientid')]",
+            "dependsOn": [],
+            "properties": {
+                "value": "[parameters('fhirserver-clientid')]",
+                "attributes": {
+                    "enabled": true
+                }
+            }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/secrets",
+            "apiVersion": "2016-10-01",
+            "name": "[concat(variables('keyVaultName'),'/fhirserver-clientsecret')]",
+            "dependsOn": [],
+            "properties": {
+                "value": "[parameters('fhirserver-clientsecret')]",
+                "attributes": {
+                    "enabled": true
+                }
+            }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/secrets",
+            "apiVersion": "2016-10-01",
+            "name": "[concat(variables('keyVaultName'),'/fhirserver-tentantid')]",
+            "dependsOn": [],
+            "properties": {
+                "value": "[variables('tenantid')]",
+                "attributes": {
+                    "enabled": true
+                }
+            }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/secrets",
+            "apiVersion": "2016-10-01",
+            "name": "[concat(variables('keyVaultName'),'/blobstorageacctstring')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
+            ],
+            "properties": {
+                "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageAccountName'),';AccountKey=',concat(listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')),'2019-06-01').keys[0].value),';EndpointSuffix=core.windows.net')]",
+                "attributes": {
+                    "enabled": true
+                }
+            }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/secrets",
+            "apiVersion": "2016-10-01",
+            "name": "[concat(variables('keyVaultName'),'/datalakestring')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('datalakeName'))]"
+            ],
+            "properties": {
+                "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('datalakeName'),';AccountKey=',concat(listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('datalakeName')),'2019-06-01').keys[0].value),';EndpointSuffix=core.windows.net')]",
+                "attributes": {
+                    "enabled": true
+                }
+            }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/secrets",
+            "apiVersion": "2016-10-01",
+            "name": "[concat(variables('keyVaultName'),'/datalakekey')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('datalakeName'))]"
+            ],
+            "properties": {
+                "value": "[concat(listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('datalakeName')),'2019-06-01').keys[0].value)]",
+                "attributes": {
+                    "enabled": true
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Batch/batchAccounts",
+            "apiVersion": "2020-03-01",
+            "name": "[variables('batchName')]",
+            "location": "[variables('rgLocation')]",
+            "tags": {
+            "HealthArchitestures": "FHIRToDEIDPipeline"
+            },
+            "properties": {
+                "poolAllocationMode": "BatchService",
+                "publicNetworkAccess": "Enabled",
+                "encryption": {
+                    "keySource": "Microsoft.Batch"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Batch/batchAccounts/pools",
+            "apiVersion": "2020-03-01",
+            "name": "[concat(variables('batchName'), '/', parameters('AzureBatch-poolName'))]",
+            
+            "dependsOn": [
+                "[resourceId('Microsoft.Batch/batchAccounts', variables('batchName'))]"
+            ],
+            "properties": {
+                "vmSize": "[parameters('batchPoolVMSize')]",
+                "interNodeCommunication": "Disabled",
+                "maxTasksPerNode": 1,
+                "taskSchedulingPolicy": {
+                    "nodeFillType": "Spread"
+                },
+                "deploymentConfiguration": {
+                    "virtualMachineConfiguration": {
+                        "imageReference": {
+                            "publisher": "microsoftwindowsserver",
+                            "offer": "windowsserver",
+                            "sku": "2016-datacenter",
+                            "version": "latest"
+                        },
+                        "nodeAgentSkuId": "batch.node.windows amd64",
+                        "windowsConfiguration": {
+                            "enableAutomaticUpdates": false
+                        }
+                    }
+                },
+                "scaleSettings": {
+                    "fixedScale": {
+                        "targetDedicatedNodes": 1,
+                        "targetLowPriorityNodes": 0,
+                        "resizeTimeout": "PT15M"
+                    }
+                }
+            }
+        }
+        
+    ],
+    "outputs": {}
+}
