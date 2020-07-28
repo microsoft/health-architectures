@@ -1,5 +1,6 @@
 ---
 layout: post
+author: Cory
 ---
 
 <small>{{ page.date | date: "%-d %B %Y" }}</small>
