@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 ---
 
 <small>{{ page.date | date: "%-d %B %Y" }}</small>
