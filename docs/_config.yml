@@ -5,4 +5,4 @@ description: Provide reference architectures and, when appropriate, implementati
 
 logo: /assets/images/logo.png
 
-include: /health-architectures/_posts
+include: /_posts
