@@ -6,3 +6,5 @@ description: Provide reference architectures and, when appropriate, implementati
 logo: /assets/images/logo.png
 
 source: /health-architectures/
+
+include: /health-architectures/_posts
