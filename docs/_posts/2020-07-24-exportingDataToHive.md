@@ -3,17 +3,6 @@ layout: post
 author: Cory
 ---
 
-<small>{{ page.date | date: "%-d %B %Y" }}</small>
-<h1>{{ page.title }}</h1>
-
-<p class="view">by {{ page.author | default: site.author }}</p>
-
-{{content}}
-
-{% if page.tags %}
-  <small>tags: <em>{{ page.tags | join: "</em> - <em>" }}</em></small>
-{% endif %}
-
 # Exporting Data to HIVE, HDFS or Azure DataBricks
 
 Last week a customer asked our team the following question, "If I want to export FHIR to Hive what is the best practice?" Turns out there is a very simple method to accomplish this task. This walkthrough post works with Hive, Hadoop, Spark, DataBricks or any other tools supporting the HDFS data sources.
@@ -32,15 +21,15 @@ We will walk through part of the instructions in this post. I encourage you to f
 
 After opening the Azure portal and navigating to your Azure API for FHIR instance, you should see the Integration tab about halfway down on the left.
 
-![FHIR Integration Button](/assets/images/IntegrationButtonHighlight.png)
+![FHIR Integration Button](../assets/images/IntegrationButtonHighlight.png)
 
 After you open the Integrations blade on your Azure API for FHIR, you will notice the storage account type is not listed on the table displaying a list of available storage accounts. You will see Name, Resource Group and Region but not Storage Account Type. Therefore, you will need to know your Azure Data Lake Gen2 account name prior to setting up the Integration.
 
-![FHIR Storage Account Type](/assets/images/FHIRExportStorageAccountType.png)
+![FHIR Storage Account Type](../assets/images/FHIRExportStorageAccountType.png)
 
 If you do know have an Azure Data Lake Gen2 account go set one up and come back to this screen. Once you have set up an Azure Data Lake Gen2 account record the name for use on the API for FHIR Integrations blade. Back on the Integrations blade type, paste or choose the Data Lake storage account name into the Export Storage Account box.
 
-![FHIR Export Storage Box](/assets/images/ExportStorageAccountBox.png)
+![FHIR Export Storage Box](../assets/images/ExportStorageAccountBox.png)
 
 Technically you have completed everything necessary for exporting to Hive or an HDFS Storage location. However, I have never met a customer who wants to export data for research or analytics who exports once. Because most customers need to export data on a regular basis our team has created the FHIR Export Quickstart for automating the export.
 
