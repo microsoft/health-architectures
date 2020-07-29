@@ -3,7 +3,7 @@ theme: jekyll-theme-minimal
 title: Microsoft Health Architectures 
 description: Provide reference architectures and, when appropriate, implementations
 
-baseurl: //health-architectures
+baseurl: /health-architectures
 
 logo: /assets/images/logo.png
 
