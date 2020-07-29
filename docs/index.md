@@ -4,6 +4,10 @@ layout: default
 
 # Microsoft Health Architectures 
 
+
+blogs
+[Link to another page](./_posts/2020-07-24-exportingDataToHive).
+
 Health Architectures is a collection of reference architectures and, when appropriate, implementations. They illustrate end-to-end best practices for using the Azure API for FHIR and related technologies. For more information on health solutions go to Azure for Health Cloud. For more information regarding the Azure Fast Healthcare Interoperability Resource (FHIR) service for health data solutions go to Azure API for FHIR.
 
 We are the Microsoft Health Cloud & Data Architectural Engineering team, which is part of Microsoft Health. We work side by side with the product teams responsible for technologies such as the Azure API for FHIR, IoMT FHIR Connector for Azure, and more. Through collaboration with the product teams, partners and customers we bring you these reference architectures.
