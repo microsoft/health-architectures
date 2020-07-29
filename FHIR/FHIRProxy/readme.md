@@ -124,6 +124,8 @@ In addition to the action date the eventhub message consists of the following in
 + Action - HTTP Verb used to modify the FHIR Server
 + Resourcetype - The type of resource affected (e.g. Patient, Observation, etc...)
 + Id - The resource logical id on the FHIR Server that was affected.
++ Version Id - The version number of the resource affected
++ LastUpdated - The date/time the affected resource was updated.
 
 You can use the data in the eventhub message to make decisions and get affected resource information to facilitate CDS or other workflows.
 

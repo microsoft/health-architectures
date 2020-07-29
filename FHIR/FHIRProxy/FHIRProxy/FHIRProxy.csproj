@@ -8,10 +8,10 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Azure.Messaging.EventHubs" Version="5.1.0" />
     <PackageReference Include="Hl7.Fhir.Specification.R4" Version="1.4.0" />
     <PackageReference Include="LazyCache" Version="2.0.4" />
     <PackageReference Include="Microsoft.Azure.Cosmos.Table" Version="1.0.7" />
-    <PackageReference Include="Microsoft.Azure.EventHubs" Version="4.2.0" />
     <PackageReference Include="Microsoft.Azure.Services.AppAuthentication" Version="1.4.0" />
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Storage" Version="3.0.10" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.2" />

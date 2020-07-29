@@ -36,13 +36,13 @@ namespace FHIRProxy
         }
         public static string FHIRResourceId(this JToken token)
         {
-            if (!token.IsNullOrEmpty()) return (string)token?["id"];
-            return null;
+            if (!token.IsNullOrEmpty()) return (string)token["id"];
+            return "";
         }
         public static string FHIRResourceType(this JToken token)
         {
-            if (!token.IsNullOrEmpty()) return (string)token?["resourceType"];
-            return null; ;
+            if (!token.IsNullOrEmpty()) return (string)token["resourceType"];
+            return "";
         }
         public static string FHIRVersionId(this JToken token)
         {
@@ -50,7 +50,7 @@ namespace FHIRProxy
             {
                 return (string)token["meta"]?["versionId"];
             }
-            return null;
+            return "";
         }
         public static string FHIRLastUpdated(this JToken token)
         {
@@ -58,7 +58,7 @@ namespace FHIRProxy
             {
                 return JsonConvert.SerializeObject(token["meta"]?["lastUpdated"]).Replace("\"","");
             }
-            return null;
+            return "";
         }
         public static string FHIRReferenceId(this JToken token)
         {    

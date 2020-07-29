@@ -97,16 +97,23 @@ namespace FHIRProxy
             //Reverse Proxy Response
             postrslt.Response = Utils.reverseProxyResponse(postrslt.Response, req, res);
             //return ActionResult
+            if (postrslt.Response.StatusCode==HttpStatusCode.NoContent)
+            {
+                return null;
+            } 
             return generateJSONResult(postrslt.Response);
         }
         private static JsonResult generateJSONResult(FHIRResponse resp)
         {
-            JObject ro = JObject.Parse(resp.ToString());
-            var jr = new JsonResult(ro);
+            string r = resp.ToString();
+            if (string.IsNullOrEmpty(r)) r = "{}";
+            JsonResult jr = new JsonResult(JObject.Parse(r));
             jr.StatusCode = (int)resp.StatusCode;
             jr.ContentType = "application/json";
             return jr;
         }
+            
+             
        
     }
 }

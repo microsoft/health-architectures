@@ -13,7 +13,8 @@
 * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 using Microsoft.AspNetCore.Http;
-using Microsoft.Azure.EventHubs;
+using Azure.Messaging.EventHubs;
+using Azure.Messaging.EventHubs.Producer;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using System;
@@ -21,6 +22,9 @@ using System.Collections.Generic;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
+using Hl7.Fhir.Model;
+using System.Runtime.CompilerServices;
+using RestSharp.Extensions;
 
 namespace FHIRProxy.postprocessors
 {
@@ -29,7 +33,7 @@ namespace FHIRProxy.postprocessors
     {
         public ProxyProcessResult Process(FHIRResponse response, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id, string hist, string vid)
         {
-            EventHubClient eventHubClient = null;
+            
             try
             {
                 if (req.Method.Equals("GET") || (int)response.StatusCode > 299) return new ProxyProcessResult(true, "", "", response);
@@ -41,49 +45,40 @@ namespace FHIRProxy.postprocessors
                     log.LogWarning($"PublishFHIREventPostProcess: EventHubConnection String or EventHub Name is not specified. Will not publish.");
                     return new ProxyProcessResult(true, "", "", response);
                 }
-                var connectionStringBuilder = new EventHubsConnectionStringBuilder(ecs)
-                {
-                    EntityPath = enm
-                };
+                JArray entries = null;
                 if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Created)
                 {
-                    eventHubClient = EventHubClient.CreateFromConnectionString(connectionStringBuilder.ToString());
                     var fhirresp = JObject.Parse(response.Content.ToString());
                     if (!fhirresp.IsNullOrEmpty() && ((string)fhirresp["resourceType"]).Equals("Bundle") && ((string)fhirresp["type"]).EndsWith("-response"))
                     {
 
-                        JArray entries = (JArray)fhirresp["entry"];
-                        if (!entries.IsNullOrEmpty())
-                        {
-                            foreach (JToken tok in entries)
-                            {
-                                
-                                 JObject entryresp = (JObject)tok["response"];
-                                var entrystatus = (string)entryresp["status"];
-                                if (entrystatus.Equals("200") || entrystatus.Equals("201"))
-                                {
-                                    var resource = (JObject)tok["resource"];
-                                    publishEvent(eventHubClient, req, resource);
-                                } else if (entrystatus.Equals("204"))
-                                {
-                                    //TODO Handle Deletes in Bundle
-                                }
-                            }
-                        
-                        }
-                    }
-                    else if (response.StatusCode == HttpStatusCode.NoContent || fhirresp.IsNullOrEmpty())
-                    {
-                        JObject stub = new JObject();
-                        stub["resourceType"] = res;
-                        stub["id"] = id;
-                        publishEvent(eventHubClient, req, stub);
+                        entries = (JArray)fhirresp["entry"];
+
                     } else
                     {
-                        publishEvent(eventHubClient, req, fhirresp);
+                        entries = new JArray();
+                        JObject stub = new JObject();
+                        stub["response"] = new JObject();
+                        stub["response"]["status"] = (int) response.StatusCode + " " + response.StatusCode.ToString();
+                        stub["resource"] = fhirresp;
+                        entries.Add(stub);
                     }
-                
                 }
+                else if (response.StatusCode == HttpStatusCode.NoContent)
+                {
+                    entries = new JArray();
+                    JObject stub = new JObject();
+                    stub["response"] = new JObject();
+                    stub["response"]["status"] = req.Method;
+                    stub["resource"] = new JObject();
+                    stub["resource"]["id"] = id;
+                    stub["resource"]["resourceType"] = res;
+                    entries.Add(stub);
+                }
+                publishBatchEvent(ecs, enm, entries,log);
+
+
+
             }
 
             catch (Exception exception)
@@ -91,23 +86,42 @@ namespace FHIRProxy.postprocessors
               log.LogError(exception,$"PublishFHIREventPostProcess Exception: {exception.Message}");
                
             }
-            finally
-            {
-                try
-                {
-                    if (eventHubClient != null) eventHubClient.Close();
-                }
-                catch (Exception) {}
-
-            }
+           
             return new ProxyProcessResult(true, "", "", response);
 
         }
-        private void publishEvent(EventHubClient eventHubClient,HttpRequest req,JObject resource)
+        private async void publishBatchEvent(string eventHubConnectionString, string eventHubName, JArray entries,ILogger log)
         {
-            string msg = "{\"action\":\"" + req.Method + "\",\"resourcetype\":\"" + resource.FHIRResourceType() + "\",\"id\":\"" + resource.FHIRResourceId() + "\",\"version\":\"" + resource.FHIRVersionId() + "\",\"lastupdated\":\"" + resource.FHIRLastUpdated() + "\"}";
-            EventData dt = new EventData(Encoding.UTF8.GetBytes(msg));
-            eventHubClient.SendAsync(dt).GetAwaiter().GetResult();
+            await using (var producerClient = new EventHubProducerClient(eventHubConnectionString, eventHubName))
+            {
+                // Create a batch of events 
+                using Azure.Messaging.EventHubs.Producer.EventDataBatch eventBatch = await producerClient.CreateBatchAsync();
+
+                if (!entries.IsNullOrEmpty())
+                {
+                    foreach (JToken tok in entries)
+                    {
+                        string entrystatus = (string)tok["response"]["status"];
+                        EventData dta = createMsg(entrystatus, tok["resource"]);
+                        if (dta != null) eventBatch.TryAdd(dta);
+                        
+                    }
+
+                }
+                // Use the producer client to send the batch of events to the event hub
+                await producerClient.SendAsync(eventBatch);
+              
+            }
+        }
+        private EventData createMsg(string status,JToken resource)
+        {
+            if (resource.IsNullOrEmpty()) return null;
+            string action = "Unknown";
+            if (status.StartsWith("200")) action = "Updated";
+            if (status.StartsWith("201")) action = "Created";
+            if (status.Contains("DELETE")) action = "Deleted";
+            string msg = "{\"action\":\"" + action + "\",\"resourcetype\":\"" + resource.FHIRResourceType() + "\",\"id\":\"" + resource.FHIRResourceId() + "\",\"version\":\"" + resource.FHIRVersionId() + "\",\"lastupdated\":\"" + resource.FHIRLastUpdated() + "\"}";
+            return new EventData(Encoding.UTF8.GetBytes(msg));
         }
     }
 }
