@@ -13,7 +13,7 @@ Health Architectures is a collection of reference architectures and, when approp
   {% for post in site.posts %}
     <li>
       <h3><a href="{{ post.url | absolute_url }}">{{ post.excerpt }} </a></h3> 
-          {{ post.title }}
+        
     </li>
   {% endfor %}
 </ul>
