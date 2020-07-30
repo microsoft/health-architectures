@@ -1,7 +1,6 @@
 ---
 layout: default
-title: about
-permalink: https://microsoft.github.io/health-architectures/about
+title: About
 ---
 
 Health Architectures is a collection of reference architectures and, when appropriate, implementations. They illustrate end-to-end best practices for using the Azure API for FHIR and related technologies. For more information on health solutions go to Azure for Health Cloud. For more information regarding the Azure Fast Healthcare Interoperability Resource (FHIR) service for health data solutions go to Azure API for FHIR.
