@@ -11,6 +11,6 @@ baseurl: /health-architectures
 
 defaults:
   - scope:
-      path: "assets/images"
+      path: "/health-architectures/assets/images"
     values:
       image: true
