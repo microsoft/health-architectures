@@ -46,7 +46,8 @@ base url = {{ baseurl }}
       <h3><a href="{{ post.url | absolute_url }}">{{ post.excerpt }} absolute url</a></h3> 
           {{ post.title }}
     </li>
-
+  {% endfor %}
+</ul>
 
 
 
