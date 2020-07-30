@@ -7,6 +7,8 @@ Health Architectures is a collection of reference architectures and, when approp
 
 <br>
 
+{{ site.title }}
+
 <h2>Latest Posts</h2>
 
 <ul>
@@ -17,6 +19,7 @@ Health Architectures is a collection of reference architectures and, when approp
     </li>
   {% endfor %}
 </ul>
+
 
 
 
