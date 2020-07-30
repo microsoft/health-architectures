@@ -34,11 +34,18 @@ base url = {{ baseurl }}
 <ul>
   {% for post in site.posts %}
     <li>
-      <h3><a href="{{ post.url | base_url }}">{{ post.excerpt }}</a></h3> 
+      <h3><a href="{{ post.url | base_url }}">{{ post.excerpt }} base url</a></h3> 
           {{ post.title }}
     </li>
   {% endfor %}
 </ul>
+
+<ul>
+  {% for post in site.posts %}
+    <li>
+      <h3><a href="{{ post.url | absolute_url }}">{{ post.excerpt }} absolute url</a></h3> 
+          {{ post.title }}
+    </li>
 
 
 
