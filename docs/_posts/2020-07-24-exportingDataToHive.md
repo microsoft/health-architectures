@@ -26,7 +26,7 @@ We will walk through part of the instructions in this post. I encourage you to f
 
 After opening the Azure portal and navigating to your Azure API for FHIR instance, you should see the Integration tab about halfway down on the left.
 
-![FHIR Integration Button](/assets/images/IntegrationButtonHighlight.png)
+![FHIR Integration Button](/health-architectures/assets/images/IntegrationButtonHighlight.png)
 
 After you open the Integrations blade on your Azure API for FHIR, you will notice the storage account type is not listed on the table displaying a list of available storage accounts. You will see Name, Resource Group and Region but not Storage Account Type. Therefore, you will need to know your Azure Data Lake Gen2 account name prior to setting up the Integration.
 
