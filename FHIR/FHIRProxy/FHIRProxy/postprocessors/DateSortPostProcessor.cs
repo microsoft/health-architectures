@@ -85,7 +85,8 @@ namespace FHIRProxy.postprocessors
         }
         public int Compare(JToken x, JToken y)
         {
-            string rt = x.FHIRResourceType();
+            string rt = x["resource"].FHIRResourceType();
+
             switch (rt)
             {
                 case "Observation":
