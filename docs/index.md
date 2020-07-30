@@ -34,7 +34,7 @@ base url = {{ baseurl }}
 <ul>
   {% for post in site.posts %}
     <li>
-      <h3><a href={{ site.github.repository_name }}>{{ post.url }}>{{ post.excerpt }}</a></h3> 
+      <h3><a href={{ site.github.repository_name }}{{ post.url }}>{{ post.excerpt }}</a></h3> 
           {{ post.title }}
     </li>
   {% endfor %}
