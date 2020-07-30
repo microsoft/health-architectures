@@ -1,12 +1,10 @@
 ---
 layout: post
 author: Cory
-excerpt_separator: <!--more-->
 ---
 
 If I want to export FHIR to Hive what is the best practice?
 
-<!--more-->
 
 # Exporting Data to HIVE, HDFS or Azure DataBricks
 
