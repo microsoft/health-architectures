@@ -8,6 +8,7 @@ Health Architectures is a collection of reference architectures and, when approp
 <br>
 
 {{ site.title }}
+{{ site.github.repository_name }}
 
 <h2>Latest Posts</h2>
 
