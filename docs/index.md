@@ -7,54 +7,16 @@ Health Architectures is a collection of reference architectures and, when approp
 
 <br>
 
-Site title = {{ site.title }} 
-
-repository name = {{ site.github.repository_name }} 
-
-relative url = {{ relative_url }}
-
-base url = {{ baseurl }}
-
-<a href="{{ "/" | absolute_url }}">{{ site.title | default: site.github.repository_name }}</a>
-
-
 <h2>Latest Posts</h2>
 
 <ul>
   {% for post in site.posts %}
     <li>
-      <h3><a href="{{ post.url }}">{{ post.excerpt }}</a></h3> 
+      <h3><a href="{{ post.url | absolute_url }}">{{ post.excerpt }} </a></h3> 
           {{ post.title }}
     </li>
   {% endfor %}
 </ul>
-
--- new -- 
-
-<ul>
-  {% for post in site.posts %}
-    <li>
-      <h3><a href="{{ post.url | base_url }}">{{ post.excerpt }} base url</a></h3> 
-          {{ post.title }}
-    </li>
-  {% endfor %}
-</ul>
-
-<ul>
-  {% for post in site.posts %}
-    <li>
-      <h3><a href="{{ post.url | absolute_url }}">{{ post.excerpt }} absolute url</a></h3> 
-          {{ post.title }}
-    </li>
-  {% endfor %}
-</ul>
-
-
-
-[Blogs](./_posts/blog.html)
-
-[Exporting Data to HIVE, HDFS or Azure DataBricks](./_posts/2020-07-24-exportingDataToHive)
-
 
 
 
