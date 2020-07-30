@@ -7,11 +7,13 @@ Health Architectures is a collection of reference architectures and, when approp
 
 <br>
 
-{{ site.title }} 
+Site title = {{ site.title }} 
 
-{{ site.github.repository_name }} 
+repository name = {{ site.github.repository_name }} 
 
-{{ relative_url }}
+relative url = {{ relative_url }}
+
+<a href="{{ "/" | absolute_url }}">{{ site.title | default: site.github.repository_name }}</a>
 
 
 <h2>Latest Posts</h2>
