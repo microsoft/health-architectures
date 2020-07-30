@@ -13,6 +13,8 @@ repository name = {{ site.github.repository_name }}
 
 relative url = {{ relative_url }}
 
+base url = {{ baseurl }}
+
 <a href="{{ "/" | absolute_url }}">{{ site.title | default: site.github.repository_name }}</a>
 
 
