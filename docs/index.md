@@ -11,9 +11,10 @@ Health Architectures is a collection of reference architectures and, when approp
 As patients move around healthcare ecosystem, their electronic health records must be available, discoverable, understandable, structured and standardized - this begins with ingesting data.  
 - [Ingesting Medical Device Data](https://github.com/microsoft/health-architectures/tree/master/Internet-Of-Things-IoT/IoMT-FHIR-Connector-for_Azure)
 - [Ingesting HL7 Records](https://github.com/microsoft/health-architectures/tree/master/HL7Conversion)
-- Ingesting FHIR Records and Bundles 
+- Ingesting FHIR Records and Bundles *(coming soon)* 
 
-### Data Exports 
+### Exporting Data 
+
 
 
 
