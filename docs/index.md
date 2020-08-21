@@ -5,7 +5,7 @@ layout: default
 # Microsoft Health Architectures 
 Health Architectures is a collection of reference architectures and, when appropriate, implementations. They illustrate end-to-end best practices for using the Azure API for FHIR and related technologies.  As you look through this site, you will see some typical 'hello world' examples as well as more complex solutions. We conduct peer reviews to bring you the best practices for using the Microsoft Health technologies. 
 
-## Soltions 
+## Solutions 
 
 ### Data Ingestion
 As patients move around healthcare ecosystem, their electronic health records must be available, discoverable, understandable, structured and standardized - this begins with ingesting data.  
