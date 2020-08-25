@@ -3,7 +3,7 @@ layout: default
 ---
 
 # Microsoft Health Architectures 
-Health Architectures is a collection of reference architectures and, when appropriate, implementations. They illustrate end-to-end best practices for using the Azure API for FHIR and related technologies.  As you look through this site, you will see some typical 'hello world' examples as well as more complex solutions. We conduct peer reviews to bring you the best practices for using the Microsoft Health technologies. 
+Health Architectures is a collection of reference architectures and, when appropriate, implementations. They illustrate end-to-end best practices for using the Azure API for FHIR and related technologies.  
 
 ## Solutions 
 
@@ -18,8 +18,8 @@ Healthcare analytics is the systematic use of observaation, encounter and care d
 - [Exporting Data](https://github.com/microsoft/health-architectures/tree/master/Research-and-Analytics/FHIRExportQuickstart)
 - [Anonymized Data Export](https://github.com/microsoft/health-architectures/tree/master/Research-and-Analytics/FHIRExportwithAnonymization)
 
-
-
+### Demo's
+Microsoft Health hosts a [fhir-server-sampes respository](https://github.com/microsoft/fhir-server-samples) contains example applications and scenarios that show use of the FHIR Server for Azure and the Azure API for FHIR.
 
 
 <br>
