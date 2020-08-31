@@ -8,3 +8,9 @@ logo: /assets/images/logo.png
 include: /_posts
 
 baseurl: /health-architectures
+
+defaults:
+  - scope:
+      path: "/health-architectures/assets/images"
+    values:
+      image: true
