@@ -152,7 +152,7 @@ echo "Starting HL7 Ingest Platform deployment..."
 		stepresult=$(az appservice plan create -g  $resourceGroupName -n $deployprefix$serviceplanSuffix --number-of-workers 2 --sku $serviceplansku)
 		#Create the Transform Function App
 		echo "Creating hl7ingest Function App ["$faname"]..."
-		fahost=$(az functionapp create --name $faname --storage-account $deployprefix$storageAccountNameSuffix  --plan $deployprefix$serviceplanSuffix  --resource-group $resourceGroupName --runtime dotnet --os-type Windows --runtime-version 2 --query defaultHostName --output tsv)
+		fahost=$(az functionapp create --name $faname --storage-account $deployprefix$storageAccountNameSuffix  --plan $deployprefix$serviceplanSuffix  --resource-group $resourceGroupName --runtime dotnet --os-type Windows --functions-version 2 --query defaultHostName --output tsv)
 		echo "Retrieving Function App Host Key..."
 		fakey=$(az rest --method post --uri "https://management.azure.com"$faresourceid"/host/default/listKeys?api-version=2018-02-01" --query "functionKeys.default" --output tsv)
 		#Add App Settings

@@ -87,7 +87,12 @@ namespace FHIRProxy
                 {
                     fhirresp = fhirClient.DeleteResource(res + (id == null ? "" : "/" + id), req.Headers);
                 }
-                else
+                else if (req.Method.Equals("POST") && !string.IsNullOrEmpty(id) && id.StartsWith("_search"))
+                {
+                    var qs = req.QueryString.HasValue ? req.QueryString.Value : null;
+                    fhirresp = fhirClient.PostCommand(res + "/" + id, requestBody, qs,req.Headers);         
+                }
+                else 
                 {
                     fhirresp = fhirClient.SaveResource(res, requestBody, req.Method, req.Headers);
                 }

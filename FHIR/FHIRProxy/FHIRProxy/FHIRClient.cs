@@ -63,7 +63,7 @@ namespace FHIRProxy
             {
                 foreach (string key in headers.Keys)
                 {
-                    if (key.StartsWith("X-"))
+                    if (key.StartsWith("X-MS"))
                         retVal.Add(new HeaderParm(key, headers[key].First()));
                 }
             }
@@ -130,7 +130,7 @@ namespace FHIRProxy
             }
 
         }
-      
+
         public FHIRResponse LoadResource(string resource, string parmstring = null, bool parse = true, IHeaderDictionary headers = null)
         {
             refreshToken();
@@ -140,7 +140,9 @@ namespace FHIRProxy
             {
                 request.AddHeader("Authorization", "Bearer " + BearerToken);
             }
-            //AddCustomHeadersToRequest(request, ToHeaderParmArray(headers));
+            
+            AddCustomHeadersToRequest(request, ToHeaderParmArray(headers));
+            
             IRestResponse response2 = _client.Execute(request);
             return new FHIRResponse(response2, parse);
         }
@@ -154,6 +156,23 @@ namespace FHIRProxy
                 request.AddHeader("Authorization", "Bearer " + BearerToken);
             }
             AddCustomHeadersToRequest(request, ToHeaderParmArray(headers));
+            IRestResponse response2 = _client.Execute(request);
+            return new FHIRResponse(response2);
+        }
+        public FHIRResponse PostCommand(string reqresource,string content,string parmstring, IHeaderDictionary headers)
+        {
+            refreshToken();
+            var request = new RestRequest(reqresource + (parmstring != null ? (!parmstring.StartsWith("?") ? "?" : "") + parmstring : ""), Method.POST);
+
+            if (BearerToken != null)
+            {
+                request.AddHeader("Authorization", "Bearer " + BearerToken);
+            }
+            AddCustomHeadersToRequest(request, ToHeaderParmArray(headers));
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            string srv = content;
+            request.AddParameter("application/x-www-form-urlencoded", srv, ParameterType.RequestBody);
+            request.RequestFormat = DataFormat.None;
             IRestResponse response2 = _client.Execute(request);
             return new FHIRResponse(response2);
         }

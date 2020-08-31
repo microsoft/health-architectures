@@ -74,13 +74,14 @@ if [ $(az group exists --name $resourceGroupName) = false ]; then
 	usage
 fi
 command -v whiptail >/dev/null 2>&1 || { echo >&2 "I require whiptail but it's not installed.  Aborting."; exit 1; }
-whiptail --separate-output --noitem --checklist "Select processor modules to enable:" 15 65 6\
+whiptail --separate-output --noitem --checklist "Select processor modules to enable:" 15 65 7\
                FHIRProxy.postprocessors.DateSortPostProcessor off \
                FHIRProxy.postprocessors.ParticipantFilterPostProcess off  \
                FHIRProxy.postprocessors.PublishFHIREventPostProcess off \
 			   FHIRProxy.postprocessors.ConsentOptOutFilter off \
                FHIRProxy.preprocessors.ProfileValidationPreProcess off\
 			   FHIRProxy.preprocessors.TransformBundlePreProcess on \
+			   FHIRProxy.preprocessors.EverythingPatientPreProcess on \
 			   2>results
 if [ $? != 0 ];
 then

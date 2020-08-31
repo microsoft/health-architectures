@@ -32,6 +32,7 @@ using System.Reflection;
 using System.Linq.Expressions;
 using System.ComponentModel.Design;
 
+
 namespace FHIRProxy
 {
     /*The basic FHIR proxy by default only validates that the user principal is authenticated (AuthN).
@@ -57,9 +58,10 @@ namespace FHIRProxy
             
             //Load Request Body
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-
-            //Call Configured Pre-Processor Modules
-            ProxyProcessResult prerslt = ProxyProcessManager.RunPreProcessors(requestBody,req, log, principal, res, id,hist,vid);
+            //Initialize Response 
+            FHIRResponse serverresponse = null;
+           //Call Configured Pre-Processor Modules
+           ProxyProcessResult prerslt = ProxyProcessManager.RunPreProcessors(requestBody,req, log, principal, res, id,hist,vid);
             
             if (!prerslt.Continue)
             {
@@ -71,16 +73,19 @@ namespace FHIRProxy
                     FHIRResponse fer = new FHIRResponse();
                     fer.StatusCode = System.Net.HttpStatusCode.InternalServerError;
                     fer.Content = Utils.genOOErrResponse("internalerror", $"A Proxy Pre-Processor halted execution for an unknown reason. Check logs. Message is {errmsg}");
-                    return generateJSONResult(fer);
+                    return genContentResult(fer, log);
                 }
-                return generateJSONResult(preresp);
+                //Do not continue, so no call to the fhir server go directly to post processing with the response from the pre-preprocessor
+                serverresponse = preresp;
+                goto PostProcessing;
             }
 
             log.LogInformation("Calling FHIR Server...");
             
             //Proxy the call to the FHIR Server
-            FHIRResponse serverresponse = FHIRClientFactory.callFHIRServer(prerslt.Request,req, log,res, id,hist,vid);
+            serverresponse = FHIRClientFactory.callFHIRServer(prerslt.Request,req, log,res, id,hist,vid);
 
+PostProcessing:
             //Call Configured Post-Processor Modules
             ProxyProcessResult postrslt = ProxyProcessManager.RunPostProcessors(serverresponse, req, log, principal, res, id,hist,vid);
                        
@@ -100,20 +105,17 @@ namespace FHIRProxy
             if (postrslt.Response.StatusCode==HttpStatusCode.NoContent)
             {
                 return null;
-            } 
-            return generateJSONResult(postrslt.Response);
+            }
+            return genContentResult(postrslt.Response, log);
         }
-        private static JsonResult generateJSONResult(FHIRResponse resp)
+        public static ContentResult genContentResult(FHIRResponse resp,ILogger log)
         {
-            string r = resp.ToString();
-            if (string.IsNullOrEmpty(r)) r = "{}";
-            JsonResult jr = new JsonResult(JObject.Parse(r));
-            jr.StatusCode = (int)resp.StatusCode;
-            jr.ContentType = "application/json";
-            return jr;
+            string r = "{}";
+            if (resp != null) r = resp.ToString();
+            int sc = (int)resp.StatusCode;
+            return new ContentResult() { Content = r, StatusCode = sc, ContentType = "application/json" };
+
         }
-            
-             
-       
+
     }
 }

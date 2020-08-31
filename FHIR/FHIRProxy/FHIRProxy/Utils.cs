@@ -67,7 +67,7 @@ namespace FHIRProxy
                 {
                     fhirresp.Headers["Location"].Value = fhirresp.Headers["Location"].Value.Replace(Environment.GetEnvironmentVariable("FS_URL"), req.Scheme + "://" + req.Host.Value + req.Path.Value.Substring(0, req.Path.Value.IndexOf(res) - 1));
                 }
-                var str = fhirresp.Content == null ? "" : (string)fhirresp.Content;
+                var str = fhirresp.Content == null ? "" : fhirresp.Content.ToString();
                 /* Fix server locations to proxy address */
                 str = str.Replace(Environment.GetEnvironmentVariable("FS_URL"), req.Scheme + "://" + req.Host.Value + (res != null ? req.Path.Value.Substring(0, req.Path.Value.IndexOf(res) - 1) : req.Path.Value));
                 foreach (string key in fhirresp.Headers.Keys)

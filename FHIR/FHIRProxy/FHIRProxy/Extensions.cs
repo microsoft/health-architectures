@@ -24,6 +24,11 @@ namespace FHIRProxy
 {
     public static class Extensions
     {
+        public static bool SafeEquals(this string source,string compare)
+        {
+            if (source==null || compare==null) return false;
+            return source.Equals(compare);
+        }
         public static string SerializeList<T>(this List<T> thelist)
         {
             if (thelist == null) return null;

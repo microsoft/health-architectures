@@ -20,7 +20,7 @@ The base pre and post processing modules included and can be configured are:
  + DateSortPostProcessor - This processing module allows for date based sorting alternative on FHIR Servers that do not natively support _sort. The processor implements top level _sort=date or _sort=-date parameter for supported resources queries up to a configured maximum number of rows.</br>  
  + ProfileValidationPreProcess - This processing module adds the ability to call external profile (e.g. [US Core](https://www.hl7.org/fhir/us/core/)) and/or standard schema validation support for FHIR Servers who do not implement or support specific profile validation.
  + ConsentOptOutFilter - This post-processing module adds the ability to deny access to FHIR Server resources for patients who have elected to OPTOUT everyone or specific individuals and/or organizations from access to their medical data.
-
+ + EverythingPatientPreProcess - This pre-preocessing module implements a limit $everything at the patient level. It returns the first 100 related resources for the Patient
 
 Check back often as more processing modules will be added. </br>
  
@@ -326,6 +326,22 @@ The recommended value for category in your consent records is LOINC code 59284-0
 ```http://loinc.org|59284-0```
 
 It is also required that users be linked to FHIR Participant roles/resources. Please see the [Linking Users in Participant Roles to FHIR Resources]() section in the Participant Access Filter Module above.
+
+## Everything Patient Pre Processor
+This pre-preocessing module implements a limit $everything at the patient level. It returns the first 100 related resources for the Patient.  The following resources are returned:
+ + Appointment
+ + CarePlan
+ + Condition
+ + DiagnosticReport
+ + Encounter
+ + Immunization
+ + MedicationRequest
+ + Observation
+ + Procedure
+
+<I>Note: this is provided as a building block and for demonstration and should not be used in production until it is modified to return full data sets with paging.</I>
+
+
 
 ## Contributing
 

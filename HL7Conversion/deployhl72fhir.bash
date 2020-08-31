@@ -246,7 +246,7 @@ echo "Starting HL72FHIR Workflow Platform deployment..."
 		stepresult=$(az appservice plan create -g  $resourceGroupName -n $deployprefix$serviceplanSuffix --number-of-workers 2 --sku B1)
 		#Create the Function App
 		echo "Creating FHIREventProcessor Function App ["$faname"]..."
-		fahost=$(az functionapp create --name $faname --storage-account $deployprefix$storageAccountNameSuffix  --plan $deployprefix$serviceplanSuffix  --resource-group $resourceGroupName --runtime dotnet --os-type Windows --runtime-version 2 --query defaultHostName --output tsv)
+		fahost=$(az functionapp create --name $faname --storage-account $deployprefix$storageAccountNameSuffix  --plan $deployprefix$serviceplanSuffix  --resource-group $resourceGroupName --runtime dotnet --os-type Windows --functions-version 2 --query defaultHostName --output tsv)
 		#Add App Settings
 		echo "Configuring FHIREventProcessor Function App ["$faname"]..."
 		stepresult=$(az functionapp config appsettings set --name $faname  --resource-group $resourceGroupName --settings FS_URL=$fsurl FS_TENANT_NAME=$fstenant FS_CLIENT_ID=$fsclientid FS_SECRET=$fssecret FS_RESOURCE=$fsaud EventHubConnection=$evconnectionString EventHubName=$evhub)

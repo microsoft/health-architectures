@@ -17,6 +17,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 
@@ -28,65 +29,68 @@ namespace FHIRProxy.preprocessors
     {
         public ProxyProcessResult Process(string requestBody, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id, string hist, string vid)
         {
-            if (string.IsNullOrEmpty(requestBody)) return new ProxyProcessResult(true, "", requestBody, null);
+            if (string.IsNullOrEmpty(requestBody) || !req.Method.Equals("POST") || !string.IsNullOrEmpty(res)) return new ProxyProcessResult(true, "", requestBody, null);
             JObject result = JObject.Parse(requestBody);
-            if (result == null || result["resourceType"] == null) return new ProxyProcessResult(true,"",requestBody,null);
-            if (!((string)result["resourceType"]).Equals("Bundle") || result["entry"] == null) return new ProxyProcessResult(true, "", requestBody, null);
-            log.LogInformation($"TransformBundleProcess: looks like a valid bundle");
-            JArray entries = (JArray)result["entry"];
-            if (entries.IsNullOrEmpty()) return new ProxyProcessResult(true, "", requestBody, null);
-            log.LogInformation($"TransformBundleProcess: Phase 1 searching for existing entries on FHIR Server...");
-            foreach (JToken tok in entries)
+            if (result == null || result["resourceType"] == null || result["type"]==null) return new ProxyProcessResult(true,"",requestBody,null);
+            string rtt = result.FHIRResourceType();
+            string bt = (string) result["type"];
+            if (rtt.Equals("Bundle") && bt.Equals("transaction"))
             {
-                if (!tok.IsNullOrEmpty() && tok["request"]["ifNoneExist"] != null)
+                log.LogInformation($"TransformBundleProcess: looks like a valid transaction bundle");
+                JArray entries = (JArray)result["entry"];
+                if (entries.IsNullOrEmpty()) return new ProxyProcessResult(true, "", requestBody, null);
+                log.LogInformation($"TransformBundleProcess: Phase 1 searching for existing entries on FHIR Server...");
+                foreach (JToken tok in entries)
                 {
-                    string resource = (string)tok["request"]["url"];
-                    string query = (string)tok["request"]["ifNoneExist"];
-                    log.LogInformation($"TransformBundleProcess:Loading Resource {resource} with query {query}");
-                    var r = FHIRClientFactory.getClient(log).LoadResource(resource, query);
-                    if (r.StatusCode == System.Net.HttpStatusCode.OK)
+                    if (!tok.IsNullOrEmpty() && tok["request"]["ifNoneExist"] != null)
                     {
-                        var rs = (JObject)r.Content;
-                        if (!rs.IsNullOrEmpty() && ((string)rs["resourceType"]).Equals("Bundle") && !rs["entry"].IsNullOrEmpty())
+                        string resource = (string)tok["request"]["url"];
+                        string query = (string)tok["request"]["ifNoneExist"];
+                        log.LogInformation($"TransformBundleProcess:Loading Resource {resource} with query {query}");
+                        var r = FHIRClientFactory.getClient(log).LoadResource(resource, query);
+                        if (r.StatusCode == System.Net.HttpStatusCode.OK)
                         {
-                            JArray respentries = (JArray)rs["entry"];
-                            string existingid = "urn:uuid:" + (string)respentries[0]["resource"]["id"];
-                            string furl = (string)tok["fullUrl"];
-                            if (!string.IsNullOrEmpty(furl)) requestBody.Replace(furl, existingid);
+                            var rs = (JObject)r.Content;
+                            if (!rs.IsNullOrEmpty() && ((string)rs["resourceType"]).Equals("Bundle") && !rs["entry"].IsNullOrEmpty())
+                            {
+                                JArray respentries = (JArray)rs["entry"];
+                                string existingid = "urn:uuid:" + (string)respentries[0]["resource"]["id"];
+                                string furl = (string)tok["fullUrl"];
+                                if (!string.IsNullOrEmpty(furl)) requestBody.Replace(furl, existingid);
+                            }
                         }
                     }
                 }
-            }
-            //reparse JSON with replacement of existing ids prepare to convert to Batch bundle with PUT to maintain relationships
-            Dictionary<string, string> convert = new Dictionary<string, string>();
-            result = JObject.Parse(requestBody);
-            result["type"] = "batch";
-            entries = (JArray)result["entry"];
-            foreach (JToken tok in entries)
-            {
-                string urn = (string)tok["fullUrl"];
-                if (!string.IsNullOrEmpty(urn) && urn.StartsWith("urn:uuid:") && !tok["resource"].IsNullOrEmpty())
+                //reparse JSON with replacement of existing ids prepare to convert to Batch bundle with PUT to maintain relationships
+                Dictionary<string, string> convert = new Dictionary<string, string>();
+                result = JObject.Parse(requestBody);
+                result["type"] = "batch";
+                entries = (JArray)result["entry"];
+                foreach (JToken tok in entries)
                 {
-                    string rt = (string)tok["resource"]["resourceType"];
-                    string rid = urn.Replace("urn:uuid:", "");
-                    tok["resource"]["id"] = rid;
-                    convert.Add(rid, rt);
-                    tok["request"]["method"] = "PUT";
-                    tok["request"]["url"] = $"{rt}?_id={rid}";
+                    string urn = (string)tok["fullUrl"];
+                    if (!string.IsNullOrEmpty(urn) && urn.StartsWith("urn:uuid:") && !tok["resource"].IsNullOrEmpty())
+                    {
+                        string rt = (string)tok["resource"]["resourceType"];
+                        string rid = urn.Replace("urn:uuid:", "");
+                        tok["resource"]["id"] = rid;
+                        convert.Add(rid, rt);
+                        tok["request"]["method"] = "PUT";
+                        tok["request"]["url"] = $"{rt}?_id={rid}";
+                    }
+
                 }
-
+                log.LogInformation($"TransformBundleProcess: Phase 2 Localizing {convert.Count} resource entries...");
+                string str = result.ToString();
+                foreach (string id1 in convert.Keys)
+                {
+                    string r1 = convert[id1] + "/" + id1;
+                    string f = "urn:uuid:" + id1;
+                    str = str.Replace(f, r1);
+                }
+                return new ProxyProcessResult(true, "", str, null);
             }
-            log.LogInformation($"TransformBundleProcess: Phase 2 Localizing {convert.Count} resource entries...");
-            string str = result.ToString();
-            foreach (string id1 in convert.Keys)
-            {
-                string r1 = convert[id1] + "/" + id1;
-                string f = "urn:uuid:" + id1;
-                str = str.Replace(f, r1);
-            }
-
-            return new ProxyProcessResult(true,"",str,null);
-
+            return new ProxyProcessResult(true, "", requestBody, null);
         }
     }
     

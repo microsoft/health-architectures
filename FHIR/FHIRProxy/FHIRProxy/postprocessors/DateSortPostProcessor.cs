@@ -36,7 +36,6 @@ namespace FHIRProxy.postprocessors
             {
                 var fhirresp = JObject.Parse(response.Content.ToString());
                 if (fhirresp.IsNullOrEmpty() || !((string)fhirresp["resourceType"]).Equals("Bundle") || !((string)fhirresp["type"]).Equals("searchset")) return new ProxyProcessResult(true, "", "", response);
-                //ss = new SortedSet<JToken>(new DateSortedIndexComparar(req.Query["_sort"].First().Contains("-date")));
                 ss = new List<JToken>();
                 addEntries((JArray)fhirresp["entry"],ss,log);
                 //Process Next Pages until out or max array
