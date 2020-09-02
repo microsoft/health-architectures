@@ -45,16 +45,27 @@ namespace FHIRProxy.preprocessors
                 {
                     ThreadPool.QueueUserWorkItem(delegate
                     {
-                        FHIRClient fhirClient = FHIRClientFactory.getClient(log);
-                        string[] s = rt.Split(":");
-                        log.LogInformation($"Loading {s[0]} resources for patient {id}");
-                        var rslt = fhirClient.LoadResource(s[0], s[1].Replace("{id}", id) + "&_count=100");
-                        var resp = JObject.Parse(rslt.Content.ToString());
-                        if (!resp.IsNullOrEmpty() && resp.FHIRResourceType().Equals("Bundle") && ((string)resp["type"]).Equals("searchset"))
+                        try
                         {
-                             addEntries((JArray)resp["entry"], ss, log,s[0]);
+                            FHIRClient fhirClient = FHIRClientFactory.getClient(log);
+                            string[] s = rt.Split(":");
+                            log.LogInformation($"Loading {s[0]} resources for patient {id}");
+                            var rslt = fhirClient.LoadResource(s[0], s[1].Replace("{id}", id) + "&_count=100");
+                            var resp = JObject.Parse(rslt.Content.ToString());
+                            if (!resp.IsNullOrEmpty() && resp.FHIRResourceType().Equals("Bundle") && ((string)resp["type"]).Equals("searchset"))
+                            {
+                                addEntries((JArray)resp["entry"], ss, log, s[0]);
+                            }
+                           
                         }
-                        countdown.Signal();
+                        catch (Exception e)
+                        {
+                            log.LogError($"Error fetching {rt} resources for patient {id}:{e.Message}");
+                        }
+                        finally
+                        {
+                            countdown.Signal();
+                        }
                     });
                     
                 }

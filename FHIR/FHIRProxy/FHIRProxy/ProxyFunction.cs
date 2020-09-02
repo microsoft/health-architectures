@@ -55,7 +55,11 @@ namespace FHIRProxy
             {
                 return new ContentResult() { Content = Utils.genOOErrResponse("auth-access", req.Headers[Utils.AUTH_STATUS_MSG_HEADER].First()), StatusCode = (int)System.Net.HttpStatusCode.Unauthorized, ContentType = "application/json" };
             }
-            
+            if (Utils.UnsupportedCommands(res))
+            {
+                return new ContentResult() { Content = Utils.genOOErrResponse("unsupported-cmd", $"The command {res} is not supported via the proxy."), StatusCode = (int)System.Net.HttpStatusCode.BadRequest, ContentType = "application/json" };
+
+            }
             //Load Request Body
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             //Initialize Response 
@@ -113,8 +117,8 @@ PostProcessing:
             string r = "{}";
             if (resp != null) r = resp.ToString();
             int sc = (int)resp.StatusCode;
-            return new ContentResult() { Content = r, StatusCode = sc, ContentType = "application/json" };
-
+            return new ContentResult() { Content = r, StatusCode = sc, ContentType = "application/json"};
+           
         }
 
     }

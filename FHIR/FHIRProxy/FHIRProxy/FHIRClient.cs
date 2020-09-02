@@ -63,7 +63,8 @@ namespace FHIRProxy
             {
                 foreach (string key in headers.Keys)
                 {
-                    if (key.StartsWith("X-MS"))
+                    if (key.StartsWith("X-MS") || key.StartsWith("Prefer") || key.StartsWith("ETag") || key.StartsWith("If-"))
+
                         retVal.Add(new HeaderParm(key, headers[key].First()));
                 }
             }
@@ -242,8 +243,7 @@ namespace FHIRProxy
         }
         public FHIRResponse(IRestResponse resp, bool parse = false) : this()
         {
-            string[] filterheaders = null;
-            if (Environment.GetEnvironmentVariable("FS_RESPONSE_HEADER_NAME") != null) filterheaders = Environment.GetEnvironmentVariable("FS_RESPONSE_HEADER_NAME").Split(",");
+            string[] filterheaders = Utils.GetEnvironmentVariable("FS_RESPONSE_HEADER_NAME", "Date,Last-Modified,ETag,Location,Content-Location").Split(",");
             string content = resp.Content;
             if (parse) this.Content = JObject.Parse(content);
             else this.Content = content;
@@ -286,7 +286,7 @@ namespace FHIRProxy
 
         }
 
-        public HeaderParm(Parameter p) : this(p.Name, p.ToString())
+        public HeaderParm(Parameter p) : this(p.Name, p.Value.ToString())
         {
 
         }

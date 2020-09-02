@@ -46,12 +46,12 @@ namespace FHIRProxy.postprocessors
                 log.LogWarning("ConsentOptOutFilter: No value for CONSENT_OPTOUT_CATEGORY in settings...Filter will not execute");
                 return new ProxyProcessResult(true, "", "", fr);
             }
-            JObject result = (fr == null ? null : JObject.Parse(fr.ToString()));
-            if (fr == null)
+            if (fr == null || fr.Content == null || string.IsNullOrEmpty(fr.Content.ToString()))
             {
                 log.LogInformation("ConsentOptOutFilter: No FHIR Response found in context...Nothing to filter");
-                return new ProxyProcessResult();
+                return new ProxyProcessResult(true, "", "", fr);
             }
+            JObject result = JObject.Parse(fr.ToString());
             //Administrator is allowed access
             if (Utils.inServerAccessRole(req, "A")) return new ProxyProcessResult(true, "", "", fr);
             ClaimsIdentity ci = (ClaimsIdentity)principal.Identity;

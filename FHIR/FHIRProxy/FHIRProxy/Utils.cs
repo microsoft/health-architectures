@@ -15,12 +15,18 @@ namespace FHIRProxy
         public static readonly string AUTH_STATUS_HEADER = "fhirproxy-AuthorizationStatus";
         public static readonly string AUTH_STATUS_MSG_HEADER = "fhirproxy-AuthorizationStatusMessage";
         public static readonly string FHIR_PROXY_ROLES = "fhirproxy-roles";
-        
+        public static readonly string UNSUPPORTED_CMDS = "$export,_operations";
         private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
         {
             string cacheConnection = GetEnvironmentVariable("REDISCONNECTION");
             return ConnectionMultiplexer.Connect(cacheConnection);
         });
+        public static bool UnsupportedCommands(string cmd)
+        {
+            if (string.IsNullOrEmpty(cmd)) return false;
+            if (UNSUPPORTED_CMDS.Contains(cmd.ToLower())) return true;
+            return false;
+        }
         public static ConnectionMultiplexer RedisConnection
         {
             get
@@ -67,11 +73,16 @@ namespace FHIRProxy
                 {
                     fhirresp.Headers["Location"].Value = fhirresp.Headers["Location"].Value.Replace(Environment.GetEnvironmentVariable("FS_URL"), req.Scheme + "://" + req.Host.Value + req.Path.Value.Substring(0, req.Path.Value.IndexOf(res) - 1));
                 }
+                if (fhirresp.Headers.ContainsKey("Content-Location"))
+                {
+                    fhirresp.Headers["Content-Location"].Value = fhirresp.Headers["Content-Location"].Value.Replace(Environment.GetEnvironmentVariable("FS_URL"), req.Scheme + "://" + req.Host.Value + req.Path.Value.Substring(0, req.Path.Value.IndexOf(res) - 1));
+                }
                 var str = fhirresp.Content == null ? "" : fhirresp.Content.ToString();
                 /* Fix server locations to proxy address */
                 str = str.Replace(Environment.GetEnvironmentVariable("FS_URL"), req.Scheme + "://" + req.Host.Value + (res != null ? req.Path.Value.Substring(0, req.Path.Value.IndexOf(res) - 1) : req.Path.Value));
                 foreach (string key in fhirresp.Headers.Keys)
                 {
+                    
                     req.HttpContext.Response.Headers[key] = fhirresp.Headers[key].Value;
                 }
                 fhirresp.Content = str;
