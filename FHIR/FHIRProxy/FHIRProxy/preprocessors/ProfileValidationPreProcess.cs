@@ -22,12 +22,13 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FHIRProxy.preprocessors
 {
     class ProfileValidationPreProcess : IProxyPreProcess
     {
-        public ProxyProcessResult Process(string requestBody, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id, string hist, string vid)
+        public async Task<ProxyProcessResult> Process(string requestBody, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id, string hist, string vid)
         {
             /*Call Resource and Profile Validation server*/
             /* Pass Validation profile names in ms-fp-profile query parameter or specify empty ms-fp-profile validation parameter for schema validation only*/

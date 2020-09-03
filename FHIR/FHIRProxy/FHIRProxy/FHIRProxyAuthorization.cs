@@ -32,12 +32,15 @@ namespace FHIRProxy
         public override Task OnExecutingAsync(FunctionExecutingContext executingContext, CancellationToken cancellationToken)
         {
             var req = executingContext.Arguments.First().Value as HttpRequest;
+            string id =  executingContext.Arguments["id"] as String;
+            if (id == null) id = "";
             ClaimsPrincipal principal = executingContext.Arguments["principal"] as ClaimsPrincipal;
             ClaimsIdentity ci = (ClaimsIdentity)principal.Identity;
            
             bool admin = ci.IsInFHIRRole(Environment.GetEnvironmentVariable("ADMIN_ROLE"));
             bool reader = ci.IsInFHIRRole(Environment.GetEnvironmentVariable("READER_ROLE"));
             bool writer = ci.IsInFHIRRole(Environment.GetEnvironmentVariable("WRITER_ROLE"));
+            bool ispostcommand = req.Method.Equals("POST") && id.Equals("_search") && reader;
             string inroles = "";
             if (admin) inroles += "A";
             if (reader) inroles += "R";
@@ -56,8 +59,9 @@ namespace FHIRProxy
                 req.Headers.Add(Utils.AUTH_STATUS_MSG_HEADER, "User/Application must be in a reader role to access");
 
             }
-            else if (!req.Method.Equals("GET") && !admin && !writer)
+            else if (!req.Method.Equals("GET") && !admin && !writer && !ispostcommand)
             {
+                
                 req.Headers.Add(Utils.AUTH_STATUS_HEADER, ((int)System.Net.HttpStatusCode.Unauthorized).ToString());
                 req.Headers.Add(Utils.AUTH_STATUS_MSG_HEADER, "User/Application must be in a writer role to update");
 

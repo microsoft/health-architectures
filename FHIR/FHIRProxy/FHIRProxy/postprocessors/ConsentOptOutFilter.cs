@@ -24,6 +24,7 @@ using System.Text;
 using StackExchange.Redis;
 using Newtonsoft.Json;
 using Hl7.FhirPath.Expressions;
+using System.Threading.Tasks;
 
 namespace FHIRProxy.postprocessors
 {
@@ -35,7 +36,7 @@ namespace FHIRProxy.postprocessors
        
         /* Opt-out: Default is for health information of patients to be included automatically, but the patient can opt out completely.
            Note: This is an access only policy, it does not prevent updates to the medical record as these could be valid */
-        public ProxyProcessResult Process(FHIRResponse response, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id, string hist, string vid)
+        public async Task<ProxyProcessResult> Process(FHIRResponse response, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id, string hist, string vid)
         {
             FHIRResponse fr = response;
             if (!req.Method.Equals("GET")) return new ProxyProcessResult(true, "", "", fr);
@@ -72,7 +73,7 @@ namespace FHIRProxy.postprocessors
                 {
                     associations.Add(practitioner.PartitionKey + "/" + practitioner.LinkedResourceId);
                     //Load organization from PractionerRoles
-                    var prs = fhirClient.LoadResource("PractitionerRole", "practitioner=" + practitioner.LinkedResourceId, true, req.Headers);
+                    var prs = await fhirClient.LoadResource("PractitionerRole", "practitioner=" + practitioner.LinkedResourceId, true, req.Headers);
                     var ro = (JObject)prs.Content;
                     if (ro.FHIRResourceType().Equals("Bundle"))
                     {
@@ -108,7 +109,7 @@ namespace FHIRProxy.postprocessors
                 {
                     foreach (JToken tok in entries)
                     {
-                        if (denyAccess(tok["resource"], fhirClient, cache, associations, consent_category, req.Headers))
+                        if (await denyAccess(tok["resource"], fhirClient, cache, associations, consent_category, req.Headers))
                         {
                             JObject denyObj = new JObject();
                             denyObj["resourceType"] = tok["resource"].FHIRResourceType();
@@ -124,7 +125,7 @@ namespace FHIRProxy.postprocessors
             }
             else if (!result.FHIRResourceType().Equals("OperationalOutcome"))
             {
-                    if (denyAccess(result, fhirClient, cache, associations, consent_category, req.Headers))
+                    if (await denyAccess(result, fhirClient, cache, associations, consent_category, req.Headers))
                     {
                             fr.Content = Utils.genOOErrResponse("access-denied", $"The patient has withheld access to this resource: {res + (id == null ? "" : "/" + id)}");
                             fr.StatusCode = System.Net.HttpStatusCode.Unauthorized;
@@ -136,7 +137,7 @@ namespace FHIRProxy.postprocessors
         }
 
 
-        private bool denyAccess(JToken resource, FHIRClient fhirclient, IDatabase cache, List<string> associations, string consentcat, IHeaderDictionary headers)
+        private async Task<bool> denyAccess(JToken resource, FHIRClient fhirclient, IDatabase cache, List<string> associations, string consentcat, IHeaderDictionary headers)
         {
             string patientId = null;
             string rt = resource.FHIRResourceType();
@@ -158,7 +159,7 @@ namespace FHIRProxy.postprocessors
             {
                 //Fetch and Cache Deny access Consent Information
                 var pid = patientId.Split("/")[1];
-                var consentrecs = fhirclient.LoadResource("Consent", "patient=" + pid + "&category=" + consentcat, true, headers);
+                var consentrecs = await fhirclient.LoadResource("Consent", "patient=" + pid + "&category=" + consentcat, true, headers);
                 var result = (JObject)consentrecs.Content;
                 if (result.FHIRResourceType().Equals("Bundle"))
                 {

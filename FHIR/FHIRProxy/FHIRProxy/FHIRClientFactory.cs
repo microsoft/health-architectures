@@ -26,6 +26,7 @@ namespace FHIRProxy
     class FHIRClientFactory
     {
         private static string _bearerToken = null;
+        private static FHIRClient _fhirclient = null;
         private static object _lock = new object();
         public static FHIRClient getClient(ILogger log)
         {
@@ -48,14 +49,15 @@ namespace FHIRProxy
                         log.LogInformation("Token is expired...Obtaining new bearer token...");
                          _bearerToken = FHIRClient.GetOAUTH2BearerToken(System.Environment.GetEnvironmentVariable("FS_RESOURCE"), System.Environment.GetEnvironmentVariable("FS_TENANT_NAME"),
                                                                   System.Environment.GetEnvironmentVariable("FS_CLIENT_ID"), System.Environment.GetEnvironmentVariable("FS_SECRET")).GetAwaiter().GetResult();
+                        _fhirclient = new FHIRClient(System.Environment.GetEnvironmentVariable("FS_URL"), _bearerToken);
                     }
                 }
             }
             /* Get a FHIR Client instance to talk to the FHIR Server */
-            return new FHIRClient(System.Environment.GetEnvironmentVariable("FS_URL"), _bearerToken);
+            return _fhirclient;
 
         }
-        public static FHIRResponse callFHIRServer(string requestBody, HttpRequest req,ILogger log, string res,string id,string hist,string vid)
+        public static async Task<FHIRResponse> callFHIRServer(string requestBody, HttpRequest req,ILogger log, string res,string id,string hist,string vid)
         {
             
 
@@ -79,22 +81,22 @@ namespace FHIRProxy
                         }
                     }
                 }
-                fhirresp = fhirClient.LoadResource(sb.ToString(), qs, false, req.Headers);
+                fhirresp = await fhirClient.LoadResource(sb.ToString(), qs, false, req.Headers);
             }
             else
             {
                 if (req.Method.Equals("DELETE"))
                 {
-                    fhirresp = fhirClient.DeleteResource(res + (id == null ? "" : "/" + id), req.Headers);
+                    fhirresp = await fhirClient.DeleteResource(res + (id == null ? "" : "/" + id), req.Headers);
                 }
                 else if (req.Method.Equals("POST") && !string.IsNullOrEmpty(id) && id.StartsWith("_search"))
                 {
                     var qs = req.QueryString.HasValue ? req.QueryString.Value : null;
-                    fhirresp = fhirClient.PostCommand(res + "/" + id, requestBody, qs,req.Headers);         
+                    fhirresp = await fhirClient.PostCommand(res + "/" + id, requestBody, qs,req.Headers);         
                 }
                 else 
                 {
-                    fhirresp = fhirClient.SaveResource(res, requestBody, req.Method, req.Headers);
+                    fhirresp = await fhirClient.SaveResource(res, requestBody, req.Method, req.Headers);
                 }
             }
             return fhirresp;

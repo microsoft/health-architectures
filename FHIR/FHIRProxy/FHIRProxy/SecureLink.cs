@@ -41,7 +41,7 @@ namespace FHIRProxy
         private static string[] validcmds = { "link", "unlink", "list" };
         [FHIRProxyAuthorization]
         [FunctionName("SecureLink")]
-        public static IActionResult Run(
+        public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "manage/{cmd}/{res}/{id}/{name}")] HttpRequest req,
             ILogger log, ClaimsPrincipal principal, string cmd, string res, string id,string name)
         {
@@ -78,7 +78,7 @@ namespace FHIRProxy
             int.TryParse(System.Environment.GetEnvironmentVariable("LINK_DAYS"), out i_link_days);
             if (i_link_days == 0) i_link_days = 365;
             //Load the resource to Link
-            var fhirresp = fhirClient.LoadResource(res + "/" + id, null, false, req.Headers);
+            var fhirresp = await fhirClient.LoadResource(res + "/" + id, null, false, req.Headers);
             var lres = _parser.Parse<Resource>((string)fhirresp.Content);
             if (lres.ResourceType == Hl7.Fhir.Model.ResourceType.OperationOutcome)
             {

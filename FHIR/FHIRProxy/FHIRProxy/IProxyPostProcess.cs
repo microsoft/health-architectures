@@ -18,7 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Text;
-
+using System.Threading.Tasks;
 namespace FHIRProxy
 {
     interface IProxyPostProcess
@@ -36,6 +36,6 @@ namespace FHIRProxy
         /// <param name="hist">The current FHIR Resource _history path from the function invocation</param>
         /// <param name="vid">The current FHIR Resource version id from the function invocation</param>
         /// <returns>ProxyProcessResult - The result of this Post Process Function</returns>
-        public ProxyProcessResult Process(FHIRResponse response, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id,string hist,string vid);
+        public Task<ProxyProcessResult> Process(FHIRResponse response, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id,string hist,string vid);
     }
 }

@@ -23,6 +23,7 @@ using System.Runtime.InteropServices;
 using System.Security.Claims;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace FHIRProxy.preprocessors
 {
@@ -31,44 +32,43 @@ namespace FHIRProxy.preprocessors
     {
         public static string[] everyresource = { "Appointment:patient={id}","CarePlan:patient={id}","Condition:patient={id}","DiagnosticReport:subject={id}","Encounter:patient={id}","Immunization:patient={id}","MedicationRequest:patient={id}","Observation:patient={id}", "Procedure:patient={id}" };
         
-        public ProxyProcessResult Process(string requestBody, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id, string hist, string vid)
+        public async Task<ProxyProcessResult> Process(string requestBody, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id, string hist, string vid)
         {
             if (req.Method.Equals("GET") && res.SafeEquals("Patient") && !string.IsNullOrEmpty(id) && hist.SafeEquals("$everything")) {
                 ConcurrentBag<JToken> ss = new ConcurrentBag<JToken>();
                 FHIRClient fhirClient = FHIRClientFactory.getClient(log);
-                var nextresult = fhirClient.LoadResource("Patient","_id=" + id);
+                var nextresult = await fhirClient.LoadResource("Patient","_id=" + id);
                 var fhirresp = JObject.Parse(nextresult.Content.ToString());
                 if (fhirresp.IsNullOrEmpty() || !fhirresp.FHIRResourceType().Equals("Bundle") || !((string)fhirresp["type"]).Equals("searchset")) return new ProxyProcessResult(false, "Patient not found", "", nextresult);
                 addEntries((JArray)fhirresp["entry"], ss, log,"Patient");
                 CountdownEvent countdown = new CountdownEvent(everyresource.Length);
                 foreach (string rt in everyresource)
                 {
-                    ThreadPool.QueueUserWorkItem(delegate
+                    ThreadPool.QueueUserWorkItem(async delegate
                     {
                         try
                         {
-                            FHIRClient fhirClient = FHIRClientFactory.getClient(log);
+                            FHIRClient fhirClient1 = FHIRClientFactory.getClient(log);
                             string[] s = rt.Split(":");
                             log.LogInformation($"Loading {s[0]} resources for patient {id}");
-                            var rslt = fhirClient.LoadResource(s[0], s[1].Replace("{id}", id) + "&_count=100");
+                            var rslt = await fhirClient1.LoadResource(s[0], s[1].Replace("{id}", id) + "&_count=100");
                             var resp = JObject.Parse(rslt.Content.ToString());
                             if (!resp.IsNullOrEmpty() && resp.FHIRResourceType().Equals("Bundle") && ((string)resp["type"]).Equals("searchset"))
                             {
                                 addEntries((JArray)resp["entry"], ss, log, s[0]);
                             }
-                           
+                            countdown.Signal();
+
                         }
                         catch (Exception e)
                         {
-                            log.LogError($"Error fetching {rt} resources for patient {id}:{e.Message}");
+                               log.LogError($"Error fetching {rt} resources for patient {id}:{e.Message}");
+                               countdown.Signal();
+
                         }
-                        finally
-                        {
-                            countdown.Signal();
-                        }
-                    });
-                    
-                }
+                        });
+
+                    }
                 countdown.Wait();
                 fhirresp["entry"] = new JArray(ss.ToArray());
                 fhirresp["link"] = new JArray();

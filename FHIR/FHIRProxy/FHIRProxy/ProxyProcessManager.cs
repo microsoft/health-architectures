@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Security.Claims;
-
+using System.Threading.Tasks;
 namespace FHIRProxy
 {
     class ProxyProcessManager
@@ -36,7 +36,7 @@ namespace FHIRProxy
         private static IAppCache cache = new CachingService();
 
         private static readonly int DEF_EXP_MINS = 1440;
-        public static ProxyProcessResult RunPostProcessors(FHIRResponse response, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id,string hist, string vid)
+        public static async Task<ProxyProcessResult> RunPostProcessors(FHIRResponse response, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id,string hist, string vid)
         {
             ProxyProcessResult rslt = new ProxyProcessResult();
             //Default to server response 
@@ -66,7 +66,7 @@ namespace FHIRProxy
                     }
                     IProxyPostProcess ip = (IProxyPostProcess)cache.GetOrAdd(cls, () => GetInstance(ic),os);
                     log.LogInformation($"ProxyProcessManager is running {cls} post-process...");
-                    rslt = ip.Process(rslt.Response,req, log, principal, res, id,hist,vid);
+                    rslt = await ip.Process(rslt.Response,req, log, principal, res, id,hist,vid);
                     if (!rslt.Continue) return rslt;
                 }
                 catch (InvalidCastException ece)
@@ -84,7 +84,7 @@ namespace FHIRProxy
             }
             return rslt;
         }
-        public static ProxyProcessResult RunPreProcessors(string requestBody, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id,string hist,string vid)
+        public static async Task<ProxyProcessResult> RunPreProcessors(string requestBody, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id,string hist,string vid)
         {
             ProxyProcessResult rslt = new ProxyProcessResult();
             rslt.Request = requestBody;
@@ -112,7 +112,7 @@ namespace FHIRProxy
                     }
                     IProxyPreProcess ip =  (IProxyPreProcess) cache.GetOrAdd(cls, () => GetInstance(ic),os);
                     log.LogInformation($"ProxyProcessManager is running {cls} pre-process...");
-                    rslt = ip.Process(rslt.Request, req, log, principal, res, id,hist,vid);
+                    rslt = await ip.Process(rslt.Request, req, log, principal, res, id,hist,vid);
                     if (!rslt.Continue) return rslt;
                 }
                 catch (InvalidCastException ece)

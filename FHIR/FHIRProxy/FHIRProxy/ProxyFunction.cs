@@ -65,7 +65,7 @@ namespace FHIRProxy
             //Initialize Response 
             FHIRResponse serverresponse = null;
            //Call Configured Pre-Processor Modules
-           ProxyProcessResult prerslt = ProxyProcessManager.RunPreProcessors(requestBody,req, log, principal, res, id,hist,vid);
+           ProxyProcessResult prerslt = await ProxyProcessManager.RunPreProcessors(requestBody,req, log, principal, res, id,hist,vid);
             
             if (!prerslt.Continue)
             {
@@ -87,11 +87,11 @@ namespace FHIRProxy
             log.LogInformation("Calling FHIR Server...");
             
             //Proxy the call to the FHIR Server
-            serverresponse = FHIRClientFactory.callFHIRServer(prerslt.Request,req, log,res, id,hist,vid);
+            serverresponse = await FHIRClientFactory.callFHIRServer(prerslt.Request,req, log,res, id,hist,vid);
 
 PostProcessing:
             //Call Configured Post-Processor Modules
-            ProxyProcessResult postrslt = ProxyProcessManager.RunPostProcessors(serverresponse, req, log, principal, res, id,hist,vid);
+            ProxyProcessResult postrslt = await ProxyProcessManager.RunPostProcessors(serverresponse, req, log, principal, res, id,hist,vid);
                        
 
             if (postrslt.Response == null)

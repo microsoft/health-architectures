@@ -22,16 +22,14 @@ using System.Collections.Generic;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
-using Hl7.Fhir.Model;
-using System.Runtime.CompilerServices;
-using RestSharp.Extensions;
+using System.Threading.Tasks;
 
 namespace FHIRProxy.postprocessors
 {
     /* Proxy Post Process to publish events for CUD events to FHIR Server */
     class PublishFHIREventPostProcess : IProxyPostProcess
     {
-        public ProxyProcessResult Process(FHIRResponse response, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id, string hist, string vid)
+        public async Task<ProxyProcessResult> Process(FHIRResponse response, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id, string hist, string vid)
         {
             
             try

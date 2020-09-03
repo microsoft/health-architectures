@@ -20,14 +20,14 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Security.Claims;
 using System.Text;
-
+using System.Threading.Tasks;
 namespace FHIRProxy.preprocessors
 {
     /* Converts Transaction Bundles to Batch bundles subtable for API for FHIR ingestion preserving relationships. 
      * Caution: assumes UUID are assigned per spec.*/
     class TransformBundlePreProcess : IProxyPreProcess
     {
-        public ProxyProcessResult Process(string requestBody, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id, string hist, string vid)
+        public async Task<ProxyProcessResult> Process(string requestBody, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id, string hist, string vid)
         {
             if (string.IsNullOrEmpty(requestBody) || !req.Method.Equals("POST") || !string.IsNullOrEmpty(res)) return new ProxyProcessResult(true, "", requestBody, null);
             JObject result = JObject.Parse(requestBody);
@@ -47,7 +47,7 @@ namespace FHIRProxy.preprocessors
                         string resource = (string)tok["request"]["url"];
                         string query = (string)tok["request"]["ifNoneExist"];
                         log.LogInformation($"TransformBundleProcess:Loading Resource {resource} with query {query}");
-                        var r = FHIRClientFactory.getClient(log).LoadResource(resource, query);
+                        var r = await FHIRClientFactory.getClient(log).LoadResource(resource, query);
                         if (r.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             var rs = (JObject)r.Content;

@@ -21,6 +21,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FHIRProxy.postprocessors
 {
@@ -28,7 +29,7 @@ namespace FHIRProxy.postprocessors
     {
         private static readonly int MAX_ARRAY_SIZE = 5000;
         private static string DATE_SORT_RESOURCES_SUPPORTED = "Observation:DiagnosticReport:Encounter:CarePlan:CareTeam:EpisodeOfCare:Claim";
-        public ProxyProcessResult Process(FHIRResponse response, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id, string hist, string vid)
+        public async Task<ProxyProcessResult> Process(FHIRResponse response, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id, string hist, string vid)
         {
             if (!req.Method.Equals("GET") || response.StatusCode != HttpStatusCode.OK || response.Content == null) return new ProxyProcessResult(true, "", "", response);
             List<JToken> ss = null;
@@ -44,7 +45,7 @@ namespace FHIRProxy.postprocessors
                 {
                     string nextpage = (string)fhirresp["link"].getFirstField()["url"];
                     FHIRClient fhirClient = FHIRClientFactory.getClient(log);
-                    var nextresult = fhirClient.LoadResource(nextpage);
+                    var nextresult = await fhirClient.LoadResource(nextpage);
                     fhirresp = JObject.Parse(nextresult.Content.ToString());
                     if (fhirresp.IsNullOrEmpty() || !fhirresp.FHIRResourceType().Equals("Bundle") || !((string)fhirresp["type"]).Equals("searchset")) return new ProxyProcessResult(false, "Next Page not Returned or server error", "", nextresult);
                     addEntries((JArray)fhirresp["entry"], ss, log);

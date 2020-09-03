@@ -18,7 +18,7 @@ using System.Collections.Specialized;
 using System.Net;
 using System.Collections.Generic;
 using System.Linq;
-using RestSharp;
+using System.Net.Http;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
@@ -26,12 +26,14 @@ using Microsoft.Azure.Services.AppAuthentication;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace FHIRProxy
 {
     public class FHIRClient
     {
-        private IRestClient _client = null;
+        private HttpClient _client = new HttpClient();
         private string auth_tenent = null;
         private string auth_client_id = null;
         private string auth_secret = null;
@@ -53,7 +55,8 @@ namespace FHIRProxy
         public string BearerToken { get; set; }
         private void init(string baseurl, string bearerToken)
         {
-            _client = new RestClient(baseurl);
+            _client.BaseAddress = new Uri(baseurl);
+            _client.Timeout = new TimeSpan(0, 0, Utils.GetIntEnvironmentVariable("FS_TIMEOUT_SECS","30"));
             BearerToken = bearerToken;
         }
         public static HeaderParm[] ToHeaderParmArray(IHeaderDictionary headers)
@@ -122,115 +125,129 @@ namespace FHIRProxy
             }
 
         }
-        private void AddCustomHeadersToRequest(RestRequest req, HeaderParm[] headers)
+        private void AddCustomHeadersToRequest(HttpRequestMessage req, HeaderParm[] headers)
         {
             if (headers == null || headers.Length == 0) return;
             foreach (HeaderParm p in headers)
             {
-                req.AddHeader(p.Name, p.Value);
+                req.Headers.Add(p.Name, p.Value);
             }
 
         }
 
-        public FHIRResponse LoadResource(string resource, string parmstring = null, bool parse = true, IHeaderDictionary headers = null)
+        public async Task<FHIRResponse> LoadResource(string resource, string parmstring = null, bool parse = true, IHeaderDictionary headers = null)
         {
             refreshToken();
-            var request = new RestRequest(resource + (parmstring != null ? (!parmstring.StartsWith("?") ? "?" :"") + parmstring : ""), Method.GET);
-            request.AddHeader("Accept", "application/json");
+            var request = new HttpRequestMessage(HttpMethod.Get,resource + (parmstring != null ? (!parmstring.StartsWith("?") ? "?" :"") + parmstring : ""));
+            request.Headers.Add("Accept", "application/json");
             if (BearerToken != null)
             {
-                request.AddHeader("Authorization", "Bearer " + BearerToken);
+                request.Headers.Add("Authorization", "Bearer " + BearerToken);
             }
             
             AddCustomHeadersToRequest(request, ToHeaderParmArray(headers));
-            
-            IRestResponse response2 = _client.Execute(request);
-            return new FHIRResponse(response2, parse);
-        }
-        public FHIRResponse DeleteResource(string resource, IHeaderDictionary headers = null)
-        {
-            refreshToken();
-            var request = new RestRequest(resource, Method.DELETE);
-            request.AddHeader("Accept", "application/json");
-            if (BearerToken != null)
-            {
-                request.AddHeader("Authorization", "Bearer " + BearerToken);
-            }
-            AddCustomHeadersToRequest(request, ToHeaderParmArray(headers));
-            IRestResponse response2 = _client.Execute(request);
-            return new FHIRResponse(response2);
-        }
-        public FHIRResponse PostCommand(string reqresource,string content,string parmstring, IHeaderDictionary headers)
-        {
-            refreshToken();
-            var request = new RestRequest(reqresource + (parmstring != null ? (!parmstring.StartsWith("?") ? "?" : "") + parmstring : ""), Method.POST);
 
+            var response = await _client.SendAsync(request);
+
+          
+            // Read Response Content (this will usually be JSON content)
+            var content = await response.Content.ReadAsStringAsync();
+
+            return new FHIRResponse(content, response.Headers, response.StatusCode, parse);
+        }
+        public async Task<FHIRResponse> DeleteResource(string resource, IHeaderDictionary headers = null)
+        {
+            refreshToken();
+            var request = new HttpRequestMessage(HttpMethod.Delete, resource);
+            request.Headers.Add("Accept", "application/json");
             if (BearerToken != null)
             {
-                request.AddHeader("Authorization", "Bearer " + BearerToken);
+                request.Headers.Add("Authorization", "Bearer " + BearerToken);
             }
             AddCustomHeadersToRequest(request, ToHeaderParmArray(headers));
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            string srv = content;
-            request.AddParameter("application/x-www-form-urlencoded", srv, ParameterType.RequestBody);
-            request.RequestFormat = DataFormat.None;
-            IRestResponse response2 = _client.Execute(request);
-            return new FHIRResponse(response2);
+            var response = await _client.SendAsync(request);
+
+            
+            // Read Response Content (this will usually be JSON content)
+            var content = await response.Content.ReadAsStringAsync();
+
+            return new FHIRResponse(content, response.Headers, response.StatusCode);
         }
-        public FHIRResponse SaveResource(string reqresource,string content, string method = "PUT", IHeaderDictionary headers = null)
+        public async Task<FHIRResponse> PostCommand(string reqresource,string srccontent,string parmstring, IHeaderDictionary headers)
+        {
+            refreshToken();
+            var request = new HttpRequestMessage(HttpMethod.Post, reqresource + (parmstring != null ? (!parmstring.StartsWith("?") ? "?" : "") + parmstring : ""));
+            if (BearerToken != null)
+            {
+                request.Headers.Add("Authorization", "Bearer " + BearerToken);
+            }
+            AddCustomHeadersToRequest(request, ToHeaderParmArray(headers));
+            request.Content = new StringContent(srccontent, Encoding.UTF8, "application/x-www-form-urlencoded");
+            
+            var response = await _client.SendAsync(request);
+
+            
+            // Read Response Content (this will usually be JSON content)
+            var content = await response.Content.ReadAsStringAsync();
+
+            return new FHIRResponse(content, response.Headers, response.StatusCode);
+        }
+        public async Task<FHIRResponse> SaveResource(string reqresource,string content, string method = "PUT", IHeaderDictionary headers = null)
         {
             var r = JObject.Parse(content);
-            return SaveResource(reqresource, r, method, headers);
+            return await SaveResource(reqresource, r, method, headers);
         }
-        public FHIRResponse SaveResource(string reqresource,JObject r, string method = "PUT", IHeaderDictionary headers = null)
+        public async Task<FHIRResponse> SaveResource(string reqresource,JObject r, string method = "PUT", IHeaderDictionary headers = null)
         {
             refreshToken();
-            Method rm = Method.PUT;
+            HttpMethod rm = HttpMethod.Put;
             switch (method)
             {
                 case "POST":
-                    rm = Method.POST;
+                    rm = HttpMethod.Post;
                     break;
                 case "PUT":
-                    rm = Method.PUT;
+                    rm = HttpMethod.Put;
                     break;
                 case "PATCH":
-                    rm = Method.PATCH;
+                    rm = HttpMethod.Patch;
                     break;
                 case "DELETE":
-                    rm = Method.DELETE;
+                    rm = HttpMethod.Delete;
                     break;
                 default:
                     throw new Exception($"{method} is not supported for SaveResource");
 
             }
             string rt = r.FHIRResourceType();
-            RestRequest request = null;
+            HttpRequestMessage request = null;
             if (string.IsNullOrEmpty(reqresource) && !string.IsNullOrEmpty(rt) && rt.Equals("Bundle"))
             {
-                if (rm != Method.POST) throw new Exception("Verb Must be POST for Bundle Processing");
-                request = new RestRequest("", rm);
+                if (rm != HttpMethod.Post) throw new Exception("Verb Must be POST for Bundle Processing");
+                request = new HttpRequestMessage(rm,"");
             }
             else
             {
                 if (string.IsNullOrEmpty(rt)) throw new Exception("Resource Type not found or is blank in content");
                 if ((!rt.Equals(reqresource))) throw new Exception("Resource Request Type must match resource type in content");
                 string id = (string)r["id"];
-                if (id == null && rm != Method.POST) throw new Exception("Must Specify resource id on modification HTTP Verbs");
-                request = new RestRequest(rt + (rm != Method.POST ? "/" + id : ""), rm);
+                if (id == null && rm != HttpMethod.Post) throw new Exception("Must Specify resource id on modification HTTP Verb");
+                request = new HttpRequestMessage(rm,rt + (rm != HttpMethod.Post ? "/" + id : ""));
             }
-            request.AddHeader("Accept", "application/json");
-            request.AddHeader("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (BearerToken != null)
             {
-                request.AddHeader("Authorization", "Bearer " + BearerToken);
+                request.Headers.Add("Authorization", "Bearer " + BearerToken);
             }
             AddCustomHeadersToRequest(request, ToHeaderParmArray(headers));
             string srv = r.ToString(Formatting.None);
-            request.AddParameter("application/json; charset=utf-8", srv, ParameterType.RequestBody);
-            request.RequestFormat = DataFormat.Json;
-            IRestResponse response2 = _client.Execute(request);
-            return new FHIRResponse(response2);
+            request.Content = new StringContent(srv, Encoding.UTF8, "application/json");
+            var response = await _client.SendAsync(request);
+
+            // Read Response Content (this will usually be JSON content)
+            var content = await response.Content.ReadAsStringAsync();
+
+            return new FHIRResponse(content, response.Headers, response.StatusCode);
         }
 
     }
@@ -241,28 +258,21 @@ namespace FHIRProxy
         {
             Headers = new Dictionary<string, HeaderParm>();
         }
-        public FHIRResponse(IRestResponse resp, bool parse = false) : this()
+        public FHIRResponse(string content, HttpResponseHeaders respheaders, HttpStatusCode status, bool parse = false) : this()
         {
             string[] filterheaders = Utils.GetEnvironmentVariable("FS_RESPONSE_HEADER_NAME", "Date,Last-Modified,ETag,Location,Content-Location").Split(",");
-            string content = resp.Content;
             if (parse) this.Content = JObject.Parse(content);
             else this.Content = content;
-            foreach (Parameter p in resp.Headers)
+            foreach(string head in filterheaders)
             {
-                if (filterheaders != null)
+                IEnumerable<string> values = null;
+                if (respheaders.TryGetValues(head,out values))
                 {
-                    if (filterheaders.Any(p.Name.Equals))
-                    {
-                        this.Headers.Add(p.Name, new HeaderParm(p));
-                    }
+                        this.Headers.Add(head,new HeaderParm(head,values.First()));
+                    
                 }
-                else
-                {
-                    this.Headers.Add(p.Name, new HeaderParm(p));
-                }
-
             }
-            this.StatusCode = resp.StatusCode;
+            this.StatusCode = status;
         }
         public IDictionary<string, HeaderParm> Headers { get; set; }
         public object Content { get; set; }
@@ -282,11 +292,6 @@ namespace FHIRProxy
     public class HeaderParm
     {
         public HeaderParm()
-        {
-
-        }
-
-        public HeaderParm(Parameter p) : this(p.Name, p.Value.ToString())
         {
 
         }
