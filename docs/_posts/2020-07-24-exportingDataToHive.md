@@ -1,6 +1,7 @@
 ---
 layout: post
 author: Cory
+tags: hive
 ---
 
 Exporting Data to HIVE, HDFS or Azure DataBricks
