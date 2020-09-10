@@ -113,7 +113,7 @@ The FHIR Export with Anonymization uses the default settings in the Anonymizatio
 2. Make sure PowerShell is run in the correct directory
 
    ```powershell
-   cd health-architectures/FHIRExportQuickStart
+   cd health-architectures\Research-and-Analytics\FHIRExportwithAnonymization
     ```
 
 3. Connect to Azure: run the following command to log in. Follow the instructions for entering the Azure username and password.
