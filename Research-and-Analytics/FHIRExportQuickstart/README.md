@@ -75,7 +75,7 @@ Before deploying make sure you have:
 2. Make sure PowerShell is in the correct directory
 
    ```powershell
-   cd health-architectures/Research-and-Analytics/FHIRExportQuickStart
+   cd health-architectures\Research-and-Analytics\FHIRExportQuickStart
     ```
 
 3. Connect to Azure: run the following command. Follow the instructions for entering the Azure username and password.
