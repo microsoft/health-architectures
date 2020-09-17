@@ -744,7 +744,7 @@
                 }
             },
             "dependsOn": [
-                "[variables('factoryId')]"
+                "[concat(variables('factoryId'), '/linkedServices/AzureKeyVault')]"
             ]
         },
         {
