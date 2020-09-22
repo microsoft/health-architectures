@@ -18,7 +18,7 @@ Healthcare analytics is the systematic use of observation, encounter and care da
 - [Exporting Data](https://github.com/microsoft/health-architectures/tree/master/Research-and-Analytics/FHIRExportQuickstart)
 - [Anonymized Data Export](https://github.com/microsoft/health-architectures/tree/master/Research-and-Analytics/FHIRExportwithAnonymization)
 
-### Code Demo's
+## Code Demo's
 Microsoft Health hosts a [fhir-server-sampes respository](https://github.com/microsoft/fhir-server-samples) contains example applications and scenarios that show use of the FHIR Server for Azure and the Azure API for FHIR.
 
 
