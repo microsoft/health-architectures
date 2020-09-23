@@ -15,25 +15,18 @@
 
 namespace FHIRProxy
 {
-    class ProxyProcessResult
+    public class HeaderParm
     {
-        public ProxyProcessResult()
+        public HeaderParm()
         {
-            Continue = true;
-        }
 
-        public ProxyProcessResult(bool cont,string errmsg,string requestBody, FHIRResponse resp)
+        }
+        public HeaderParm(string name, string value)
         {
-            Continue = cont;
-            ErrorMsg = errmsg;
-            Request = requestBody;
-            Response = resp;
+            this.Name = name;
+            this.Value = value;
         }
-
-        public bool Continue { get; set; }
-        public string ErrorMsg { get; set; }
-        public string Request { get; set; }
-        public FHIRResponse Response { get; set; }
-
+        public string Name { get; set; }
+        public string Value { get; set; }
     }
 }

@@ -19,6 +19,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+
 namespace FHIRProxy
 {
     class ProxyProcessManager
@@ -33,14 +34,17 @@ namespace FHIRProxy
          * 
          * POST_PROCESSOR_TYPES Follows the same convention and rules
          */
-        private static IAppCache cache = new CachingService();
+        private static readonly IAppCache cache = new CachingService();
 
         private static readonly int DEF_EXP_MINS = 1440;
-        public static async Task<ProxyProcessResult> RunPostProcessors(FHIRResponse response, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id,string hist, string vid)
+
+        public static async Task<ProxyProcessResult> RunPostProcessors(FHIRResponse response, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id, string hist, string vid)
         {
-            ProxyProcessResult rslt = new ProxyProcessResult();
-            //Default to server response 
-            rslt.Response = response;
+            ProxyProcessResult rslt = new ProxyProcessResult
+            {
+                //Default to server response 
+                Response = response
+            };
             //Get Configured PostProcessors
             string pps = System.Environment.GetEnvironmentVariable("POST_PROCESSOR_TYPES");
             if (string.IsNullOrEmpty(pps)) return rslt;
@@ -64,9 +68,9 @@ namespace FHIRProxy
                         os = os.AddMinutes(DEF_EXP_MINS);
 
                     }
-                    IProxyPostProcess ip = (IProxyPostProcess)cache.GetOrAdd(cls, () => GetInstance(ic),os);
+                    IProxyPostProcess ip = (IProxyPostProcess)cache.GetOrAdd(cls, () => GetInstance(ic), os);
                     log.LogInformation($"ProxyProcessManager is running {cls} post-process...");
-                    rslt = await ip.Process(rslt.Response,req, log, principal, res, id,hist,vid);
+                    rslt = await ip.Process(rslt.Response, req, log, principal, res, id, hist, vid);
                     if (!rslt.Continue) return rslt;
                 }
                 catch (InvalidCastException ece)
@@ -76,23 +80,28 @@ namespace FHIRProxy
                 catch (Exception e)
                 {
                     log.LogError(e, $"Error trying to instanciate/execute post-process {cls}: {e.Message}");
-                    FHIRResponse fhirresp = new FHIRResponse();
-                    fhirresp.StatusCode = System.Net.HttpStatusCode.InternalServerError;
-                    fhirresp.Content = Utils.genOOErrResponse("internalerror", $"Error trying to instanciate/execute post-process {cls}: {e.Message}");
-                    return new ProxyProcessResult(false, "internalerror", "",fhirresp);
+                    FHIRResponse fhirresp = new FHIRResponse
+                    {
+                        StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                        Content = Utils.genOOErrResponse("internalerror", $"Error trying to instanciate/execute post-process {cls}: {e.Message}")
+                    };
+                    return new ProxyProcessResult(false, "internalerror", "", fhirresp);
                 }
             }
             return rslt;
         }
-        public static async Task<ProxyProcessResult> RunPreProcessors(string requestBody, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id,string hist,string vid)
+
+        public static async Task<ProxyProcessResult> RunPreProcessors(string requestBody, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id, string hist, string vid)
         {
-            ProxyProcessResult rslt = new ProxyProcessResult();
-            rslt.Request = requestBody;
+            ProxyProcessResult rslt = new ProxyProcessResult
+            {
+                Request = requestBody
+            };
             //Get Configured PreProcessors
             string pps = System.Environment.GetEnvironmentVariable("PRE_PROCESSOR_TYPES");
             if (string.IsNullOrEmpty(pps)) return rslt;
             string[] types = pps.Split(",");
-            foreach(string cls in types)
+            foreach (string cls in types)
             {
                 try
                 {
@@ -105,14 +114,15 @@ namespace FHIRProxy
                         int exp = DEF_EXP_MINS;
                         int.TryParse(x[1], out exp);
                         os = os.AddMinutes(exp);
-                    } else
+                    }
+                    else
                     {
                         os = os.AddMinutes(DEF_EXP_MINS);
 
                     }
-                    IProxyPreProcess ip =  (IProxyPreProcess) cache.GetOrAdd(cls, () => GetInstance(ic),os);
+                    IProxyPreProcess ip = (IProxyPreProcess)cache.GetOrAdd(cls, () => GetInstance(ic), os);
                     log.LogInformation($"ProxyProcessManager is running {cls} pre-process...");
-                    rslt = await ip.Process(rslt.Request, req, log, principal, res, id,hist,vid);
+                    rslt = await ip.Process(rslt.Request, req, log, principal, res, id, hist, vid);
                     if (!rslt.Continue) return rslt;
                 }
                 catch (InvalidCastException ece)
@@ -121,15 +131,16 @@ namespace FHIRProxy
                 }
                 catch (Exception e)
                 {
-                    log.LogError(e,$"Error trying to instanciate/execute pre-process {cls}: {e.Message}");
+                    log.LogError(e, $"Error trying to instanciate/execute pre-process {cls}: {e.Message}");
                     FHIRResponse fhirresp = new FHIRResponse();
                     fhirresp.StatusCode = System.Net.HttpStatusCode.InternalServerError;
                     fhirresp.Content = Utils.genOOErrResponse("internalerror", $"Error trying to instanciate/execute post-process {cls}: {e.Message}");
-                    return new ProxyProcessResult(false, "internalerror", "",fhirresp);
+                    return new ProxyProcessResult(false, "internalerror", "", fhirresp);
                 }
             }
             return rslt;
         }
+
         public static object GetInstance(string strFullyQualifiedName)
         {
             Type t = Type.GetType(strFullyQualifiedName);

@@ -14,20 +14,18 @@
 */
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FHIRProxy
 {
- 
+
     class FHIRClientFactory
     {
         private static string _bearerToken = null;
         private static FHIRClient _fhirclient = null;
         private static object _lock = new object();
+        
         public static FHIRClient getClient(ILogger log)
         {
             /* Get/update/check current bearer token to authenticate the proxy to the FHIR Server
@@ -47,8 +45,8 @@ namespace FHIRProxy
                     if (FHIRClient.isTokenExpired(_bearerToken))
                     {
                         log.LogInformation("Token is expired...Obtaining new bearer token...");
-                         _bearerToken = FHIRClient.GetOAUTH2BearerToken(System.Environment.GetEnvironmentVariable("FS_RESOURCE"), System.Environment.GetEnvironmentVariable("FS_TENANT_NAME"),
-                                                                  System.Environment.GetEnvironmentVariable("FS_CLIENT_ID"), System.Environment.GetEnvironmentVariable("FS_SECRET")).GetAwaiter().GetResult();
+                        _bearerToken = FHIRClient.GetOAUTH2BearerToken(System.Environment.GetEnvironmentVariable("FS_RESOURCE"), System.Environment.GetEnvironmentVariable("FS_TENANT_NAME"),
+                                                                 System.Environment.GetEnvironmentVariable("FS_CLIENT_ID"), System.Environment.GetEnvironmentVariable("FS_SECRET")).GetAwaiter().GetResult();
                         _fhirclient = new FHIRClient(System.Environment.GetEnvironmentVariable("FS_URL"), _bearerToken);
                     }
                 }
@@ -57,13 +55,13 @@ namespace FHIRProxy
             return _fhirclient;
 
         }
-        public static async Task<FHIRResponse> callFHIRServer(string requestBody, HttpRequest req,ILogger log, string res,string id,string hist,string vid)
+
+        public static async Task<FHIRResponse> callFHIRServer(string requestBody, HttpRequest req, ILogger log, string res, string id, string hist, string vid)
         {
-            
 
             FHIRClient fhirClient = FHIRClientFactory.getClient(log);
-            
-            FHIRResponse fhirresp = null;
+
+            FHIRResponse fhirresp;
             if (req.Method.Equals("GET"))
             {
                 var qs = req.QueryString.HasValue ? req.QueryString.Value : null;
@@ -92,9 +90,9 @@ namespace FHIRProxy
                 else if (req.Method.Equals("POST") && !string.IsNullOrEmpty(id) && id.StartsWith("_search"))
                 {
                     var qs = req.QueryString.HasValue ? req.QueryString.Value : null;
-                    fhirresp = await fhirClient.PostCommand(res + "/" + id, requestBody, qs,req.Headers);         
+                    fhirresp = await fhirClient.PostCommand(res + "/" + id, requestBody, qs, req.Headers);
                 }
-                else 
+                else
                 {
                     fhirresp = await fhirClient.SaveResource(res, requestBody, req.Method, req.Headers);
                 }

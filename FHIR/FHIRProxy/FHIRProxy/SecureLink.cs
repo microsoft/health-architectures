@@ -14,21 +14,16 @@
 */
 
 using System;
-using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System.Security.Claims;
-using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc.Formatters.Internal;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
-using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 
 namespace FHIRProxy
@@ -43,7 +38,7 @@ namespace FHIRProxy
         [FunctionName("SecureLink")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "manage/{cmd}/{res}/{id}/{name}")] HttpRequest req,
-            ILogger log, ClaimsPrincipal principal, string cmd, string res, string id,string name)
+            ILogger log, ClaimsPrincipal principal, string cmd, string res, string id, string name)
         {
             log.LogInformation("SecureLink Function Invoked");
             //Is the principal authenticated
@@ -51,8 +46,8 @@ namespace FHIRProxy
             {
                 return new ContentResult() { Content = "User is not Authenticated", StatusCode = (int)System.Net.HttpStatusCode.Unauthorized };
             }
-            
-            if (!Utils.inServerAccessRole(req,"A")) 
+
+            if (!Utils.inServerAccessRole(req, "A"))
             {
                 return new ContentResult() { Content = "User does not have suffiecient rights (Administrator required)", StatusCode = (int)System.Net.HttpStatusCode.Unauthorized };
             }
@@ -65,7 +60,7 @@ namespace FHIRProxy
             {
                 return new BadRequestObjectResult("Resource must be Patient,Practitioner or RelatedPerson");
             }
-            
+
             ClaimsIdentity ci = (ClaimsIdentity)principal.Identity;
             string aadten = (string.IsNullOrEmpty(ci.Tenant()) ? "Unknown" : ci.Tenant());
             FhirJsonParser _parser = new FhirJsonParser();
@@ -90,15 +85,17 @@ namespace FHIRProxy
             switch (cmd)
             {
                 case "link":
-                    LinkEntity linkentity = new LinkEntity(res, aadten + "-" + name);
-                    linkentity.ValidUntil = DateTime.Now.AddDays(i_link_days);
-                    linkentity.LinkedResourceId = id;
+                    LinkEntity linkentity = new LinkEntity(res, aadten + "-" + name)
+                    {
+                        ValidUntil = DateTime.Now.AddDays(i_link_days),
+                        LinkedResourceId = id
+                    };
                     Utils.setLinkEntity(table, linkentity);
                     return new OkObjectResult($"Identity: {name} in directory {aadten} is now linked to {res}/{id}");
                 case "unlink":
                     LinkEntity delentity = Utils.getLinkEntity(table, res, aadten + "-" + name);
-                    if (delentity==null) return new OkObjectResult($"Resource {res}/{id} has no links to Identity {name} in directory {aadten}");
-                    Utils.deleteLinkEntity(table,delentity);
+                    if (delentity == null) return new OkObjectResult($"Resource {res}/{id} has no links to Identity {name} in directory {aadten}");
+                    Utils.deleteLinkEntity(table, delentity);
                     return new OkObjectResult($"Identity: {name} in directory {aadten} has been unlinked from {res}/{id}");
                 case "list":
                     LinkEntity entity = Utils.getLinkEntity(table, res, aadten + "-" + name);
@@ -110,7 +107,7 @@ namespace FHIRProxy
             return new OkObjectResult($"No action taken Identity: {name}");
 
         }
-      
+
 
     }
 }

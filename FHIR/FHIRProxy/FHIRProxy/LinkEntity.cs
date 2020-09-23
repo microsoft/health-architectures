@@ -1,9 +1,5 @@
-﻿using Hl7.Fhir.Rest;
-using Microsoft.WindowsAzure.Storage.Table;
+﻿using Microsoft.WindowsAzure.Storage.Table;
 using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace FHIRProxy
 {
@@ -13,7 +9,7 @@ namespace FHIRProxy
         {
 
         }
-        public LinkEntity(string resourceType,string principalId)
+        public LinkEntity(string resourceType, string principalId)
         {
             this.PartitionKey = resourceType;
             this.RowKey = principalId;

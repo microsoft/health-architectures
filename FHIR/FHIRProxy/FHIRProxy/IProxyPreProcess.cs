@@ -14,10 +14,7 @@
 */
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FHIRProxy
@@ -36,6 +33,6 @@ namespace FHIRProxy
         /// <param name="hist">The current FHIR Resource _history path from the function invocation</param>
         /// <param name="vid">The current FHIR Resource version id from the function invocation</param>
         /// <returns>ProxyProcessResult - The result of this Pre Process Function</returns>
-        public Task<ProxyProcessResult> Process(string requestBody, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id,string hist,string vid);
+        public Task<ProxyProcessResult> Process(string requestBody, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id, string hist, string vid);
     }
 }

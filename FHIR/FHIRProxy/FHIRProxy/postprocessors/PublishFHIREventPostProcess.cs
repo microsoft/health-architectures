@@ -55,8 +55,10 @@ namespace FHIRProxy.postprocessors
                     } else
                     {
                         entries = new JArray();
-                        JObject stub = new JObject();
-                        stub["response"] = new JObject();
+                        JObject stub = new JObject
+                        {
+                            ["response"] = new JObject()
+                        };
                         stub["response"]["status"] = (int) response.StatusCode + " " + response.StatusCode.ToString();
                         stub["resource"] = fhirresp;
                         entries.Add(stub);

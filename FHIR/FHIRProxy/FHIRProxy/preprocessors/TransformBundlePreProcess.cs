@@ -15,12 +15,10 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
-using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
+
 namespace FHIRProxy.preprocessors
 {
     /* Converts Transaction Bundles to Batch bundles subtable for API for FHIR ingestion preserving relationships. 

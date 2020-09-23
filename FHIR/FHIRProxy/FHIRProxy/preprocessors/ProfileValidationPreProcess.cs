@@ -60,9 +60,11 @@ namespace FHIRProxy.preprocessors
                 catch (WebException we)
                 {
                     HttpWebResponse webresponse = (System.Net.HttpWebResponse)we.Response;
-                    FHIRResponse r = new FHIRResponse();
-                    r.StatusCode = webresponse.StatusCode;
-                    r.Content = Utils.genOOErrResponse("web-exception", we.Message);
+                    FHIRResponse r = new FHIRResponse
+                    {
+                        StatusCode = webresponse.StatusCode,
+                        Content = Utils.genOOErrResponse("web-exception", we.Message)
+                    };
                     return new ProxyProcessResult(false, "web-exception", requestBody, r);
                 }
                 JObject obj = JObject.Parse(result);
@@ -71,9 +73,11 @@ namespace FHIRProxy.preprocessors
                 JArray issues = (JArray)obj["issue"];
                 if (!issues.IsNullOrEmpty())
                 {
-                    FHIRResponse resp = new FHIRResponse();
-                    resp.Content = result;
-                    resp.StatusCode = HttpStatusCode.BadRequest;
+                    FHIRResponse resp = new FHIRResponse
+                    {
+                        Content = result,
+                        StatusCode = HttpStatusCode.BadRequest
+                    };
                     return new ProxyProcessResult(false, "Validation Error", requestBody, resp);
                 }
                
