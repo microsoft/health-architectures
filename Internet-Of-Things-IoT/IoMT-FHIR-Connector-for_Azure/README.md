@@ -10,10 +10,8 @@ Here are some architectures to assist with end to end solutioning of your IoMT p
 1) [IoMT Reference Architecture](./IoMTReferenceArchitecture.md)
 2) [IoMT and Power BI](./IoMTandPowerBI.md)
 3) [IoMT and Microsoft Teams Patient App](./IoMTandTeamsPatientApp.md)
-4) [IoMT and Microsoft Teams Notifications](./IoMTandTeamsNotification.md) -- Coming Soon
-5) IoMT and Healthkit -- Coming Soon
-6) IoMT and other clouds -- Coming Soon
-7) IoMT and Azure IoT Edge -- Future
+4) IoMT and Healthkit -- Coming Soon
+5) IoMT and Azure IoT Edge -- Future
 
 
 ## More Information

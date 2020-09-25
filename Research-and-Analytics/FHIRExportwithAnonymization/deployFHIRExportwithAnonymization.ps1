@@ -47,8 +47,10 @@ Vault name must be between 3-24 alphanumeric characters. The name must begin wit
 
     # If the FHIR integration has already been setup with a storage account, then add the name of the storage account as a paramenter input. Otherwise a new storage account will be created.
     [Parameter(Mandatory = $false)]
-    [string] $IntegrationStorageAccount
+    [string] $IntegrationStorageAccount,
 
+    [Parameter(Mandatory = $false)]
+    [string] $IntegrationStorageAccountResourceGroup
 )
 
 
@@ -67,10 +69,12 @@ $KeyVaultName = $EnvironmentName + "kv"
 if([string]::IsNullOrEmpty($IntegrationStorageAccount))
 {
     $storageAccountName = $EnvironmentName + "stg"
+    $storageAccountResourceGroup = $EnvironmentName
     
 }
 else {
     $storageAccountName = $IntegrationStorageAccount
+    $storageAccountResourceGroup = $IntegrationStorageAccountResourceGroup
 }
 
 ### Logic App Name
@@ -166,8 +170,15 @@ try
     Write-Host "ARM deployment complete. Finishing up a few details."
 
     # Uploading the FHIR Tools for Anomization Code
-    $storageAcctKey = (Get-AzStorageAccountKey -ResourceGroupName $EnvironmentName -AccountName $storageAccountName)| Where-Object {$_.KeyName -eq "key1"}
+    $storageAcctKey = (Get-AzStorageAccountKey -ResourceGroupName $storageAccountResourceGroup -AccountName $storageAccountName)| Where-Object {$_.KeyName -eq "key1"}
     $storageContext = New-AzStorageContext -StorageAccountName $storageAccountName -StorageAccountKey $storageAcctKey.Value
+    
+    try {
+        Get-AzStorageContainer -Name "customactivity" -Context $storageContext    
+    }
+    catch {
+        New-AzStorageContainer -Name "customactivity" -Context $storageContext
+    }
 
     Set-AzStorageBlobContent -Context $storageContext -Container "customactivity" -File "./Assets/AdfApplication.zip" -Blob "AdfApplication/AdfApplication.zip" -Force
     Set-AzStorageBlobContent -Context $storageContext -Container "customactivity" -File "./Assets/CustomActivity.ps1" -Blob "AdfApplication/CustomActivity.ps1" -Force 
