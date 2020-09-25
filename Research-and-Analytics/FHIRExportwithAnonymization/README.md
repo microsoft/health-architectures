@@ -134,16 +134,34 @@ The FHIR Export with Anonymization uses the default settings in the Anonymizatio
     Select-AzSubscription -SubscriptionId "<SubscriptionId>"
     ```
 
-6. Create the PowerShell variables required by the template and run the following command to deploy the pipeline:
+6. If you did NOT set the IntegrationStorageAccount parameter then use this script. If you did set the IntegrationStorageAccount parameter move to the next script.
 
-```powershell
-$EnvironmentName = "<NAME HERE>" #The name must be lowercase, begin with a letter, end with a letter or digit, and not contain hyphens.
-$EnvironmentLocation = "<LOCATION HERE>" #optional input. The default is eastus2
+    Create the PowerShell variables required by the template and run the following command to deploy the pipeline:
 
-./deployFHIRExportwithAnonymization.ps1 -EnviromentName $EnvironmentName -EnvironmentLocation $EnvironmentLocation #Environment Location is optional
-```
+    ```powershell
+    $EnvironmentName = "<NAME HERE>" #The name must be lowercase, begin with a letter, end with a letter or digit, and not contain hyphens.
+    $EnvironmentLocation = "<LOCATION HERE>" #optional input. The default is eastus2
 
-This deployment process may take 5 minutes or more to complete.
+    ./deployFHIRExportwithAnonymization.ps1 -EnvironmentName $EnvironmentName -EnvironmentLocation $EnvironmentLocation #Environment Location is optional
+    ```
+
+    If you set the IntegrationStorageAccount parameter in the parameter file use this script for deployment.
+
+    Create the PowerShell variables required by the template and run the following command to deploy the pipeline:
+
+    ```powershell
+    $EnvironmentName = "<NAME HERE>" #The name must be lowercase, begin with a letter, end with a letter or digit, and not contain hyphens.
+    $EnvironmentLocation = "<LOCATION HERE>" #optional input. The default is eastus2
+    $IntegrationStorageAccount = "<INTEGRATION STORAGE ACCOUNT NAME HERE>"
+    $IntegrationStorageAccountRG = "<INTEGRATION STORAGE ACCOUNT RESOURCE GROUP HERE>"
+
+    ./deployFHIRExportwithAnonymization.ps1 -EnvironmentName $EnvironmentName -EnvironmentLocation $EnvironmentLocation `
+    -IntegrationStorageAccount $IntegrationStorageAccount `
+    -IntegrationStorageAccountResourceGroup $IntegrationStorageAccountRG
+
+    ```
+
+Deployment process may take 5 minutes or more to complete.
 
 Common errors on deployment include:
 
