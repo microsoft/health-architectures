@@ -94,6 +94,7 @@ namespace FHIREventProcessor
             log.LogInformation($"Instanciating FHIR Client Proxy");
             FHIRClient fhirClient = new FHIRClient(System.Environment.GetEnvironmentVariable("FS_URL"), _bearerToken);
             //Check for transaction bundle
+            requestBody = transformTransactionBundles(requestBody, fhirClient, log);
             var result = fhirClient.SaveResource(resourceType, requestBody, "POST", customandrestheaders.ToArray());
             if (result.StatusCode == HttpStatusCode.OK || result.StatusCode == HttpStatusCode.Created)
             {
@@ -136,7 +137,71 @@ namespace FHIREventProcessor
         
 
         }
+        private static string transformTransactionBundles(string requestBody,FHIRClient fsclient, ILogger log)
+        {
+            if (string.IsNullOrEmpty(requestBody)) return requestBody;
+            JObject result = JObject.Parse(requestBody);
+            if (result == null || result["resourceType"] == null || result["type"] == null) return requestBody;
+            string rtt = (string)result["resourceType"];
+            string bt = (string)result["type"];
+            if (rtt.Equals("Bundle") && bt.Equals("transaction"))
+            {
+                log.LogInformation($"TransformBundleProcess: looks like a valid transaction bundle");
+                JArray entries = (JArray)result["entry"];
+                if (entries==null) return requestBody;
+                log.LogInformation($"TransformBundleProcess: Phase 1 searching for existing entries on FHIR Server...");
+                foreach (JToken tok in entries)
+                {
+                    if (tok !=null && tok["request"]["ifNoneExist"] != null)
+                    {
+                        string resource = (string)tok["request"]["url"];
+                        string query = (string)tok["request"]["ifNoneExist"];
+                        log.LogInformation($"TransformBundleProcess:Loading Resource {resource} with query {query}");
+                        var r = fsclient.LoadResource(resource, query);
+                        if (r.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            var rs = (JObject)r.Content;
+                            if (rs != null && ((string)rs["resourceType"]).Equals("Bundle") && rs["entry"] != null)
+                            {
+                                JArray respentries = (JArray)rs["entry"];
+                                string existingid = "urn:uuid:" + (string)respentries[0]["resource"]["id"];
+                                string furl = (string)tok["fullUrl"];
+                                if (!string.IsNullOrEmpty(furl)) requestBody.Replace(furl, existingid);
+                            }
+                        }
+                    }
+                }
+                //reparse JSON with replacement of existing ids prepare to convert to Batch bundle with PUT to maintain relationships
+                Dictionary<string, string> convert = new Dictionary<string, string>();
+                result = JObject.Parse(requestBody);
+                result["type"] = "batch";
+                entries = (JArray)result["entry"];
+                foreach (JToken tok in entries)
+                {
+                    string urn = (string)tok["fullUrl"];
+                    if (!string.IsNullOrEmpty(urn) && urn.StartsWith("urn:uuid:") && tok["resource"] != null)
+                    {
+                        string rt = (string)tok["resource"]["resourceType"];
+                        string rid = urn.Replace("urn:uuid:", "");
+                        tok["resource"]["id"] = rid;
+                        convert.Add(rid, rt);
+                        tok["request"]["method"] = "PUT";
+                        tok["request"]["url"] = $"{rt}?_id={rid}";
+                    }
 
+                }
+                log.LogInformation($"TransformBundleProcess: Phase 2 Localizing {convert.Count} resource entries...");
+                string str = result.ToString();
+                foreach (string id1 in convert.Keys)
+                {
+                    string r1 = convert[id1] + "/" + id1;
+                    string f = "urn:uuid:" + id1;
+                    str = str.Replace(f, r1);
+                }
+                return str;
+            }
+            return requestBody;
+        }
        
     }
 }

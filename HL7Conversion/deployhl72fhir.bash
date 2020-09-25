@@ -11,6 +11,27 @@ IFS=$'\n\t'
 
 usage() { echo "Usage: $0 -i <subscriptionId> -g <resourceGroupName> -l <resourceGroupLocation> -p <prefix>" 1>&2; exit 1; }
 
+function fail {
+  echo $1 >&2
+  exit 1
+}
+
+function retry {
+  local n=1
+  local max=5
+  local delay=15
+  while true; do
+    "$@" && break || {
+      if [[ $n -lt $max ]]; then
+        ((n++))
+        echo "Command failed. Retry Attempt $n/$max in $delay seconds:" >&2
+        sleep $delay;
+      else
+        fail "The command has failed after $n attempts."
+      fi
+    }
+  done
+}
 declare defsubscriptionId=""
 declare subscriptionId=""
 declare resourceGroupName=""
@@ -252,7 +273,7 @@ echo "Starting HL72FHIR Workflow Platform deployment..."
 		stepresult=$(az functionapp config appsettings set --name $faname  --resource-group $resourceGroupName --settings FS_URL=$fsurl FS_TENANT_NAME=$fstenant FS_CLIENT_ID=$fsclientid FS_SECRET=$fssecret FS_RESOURCE=$fsaud EventHubConnection=$evconnectionString EventHubName=$evhub)
 		echo "Deploying FHIREventProcessor Function App from repo to host ["$fahost"]..."
 		#deployment from git repo
-		stepresult=$(az functionapp deployment source config-zip --name $faname --resource-group $resourceGroupName --src $deployzip)
+		stepresult=$(retry az functionapp deployment source config-zip --name $faname --resource-group $resourceGroupName --src $deployzip)
 		#Deploy HL7 FHIR Converter
 		hl7converterinstance=$deployprefix$hl7convertername$RANDOM
 		echo "Deploying FHIR Converter ["$hl7converterinstance"] to resource group ["$hl7converterrg"]..."
@@ -265,7 +286,7 @@ echo "Starting HL72FHIR Workflow Platform deployment..."
 		hl7storekey=$(az storage account keys list -g $hl7rgname -n $hl7storename --query "[?keyName=='key1'].value" --output tsv)
 		hl7sbconnection=$(az servicebus namespace authorization-rule keys list --resource-group $hl7rgname --namespace-name $hl7sbnamespace --name RootManageSharedAccessKey --query primaryConnectionString --output tsv)
 		echo "Loading FHIREventProcessor Function Keys..."
-		fakey=$(az rest --method post --uri "https://management.azure.com"$faresourceid"/host/default/listKeys?api-version=2018-02-01" --query "functionKeys.default" --output tsv)
+		fakey=$(retry az rest --method post --uri "https://management.azure.com"$faresourceid"/host/default/listKeys?api-version=2018-02-01" --query "functionKeys.default" --output tsv)
 		echo "Deploying HL72FHIR Logic App..."
 		stepresult=$(az group deployment create -g $resourceGroupName --template-file hl7tofhir/hl72fhir.json  --parameters HL7FHIRConverter_1_api_key=$hl7convertkey azureblob_1_accountName=$hl7storename azureblob_1_accessKey=$hl7storekey FHIRServerProxy_1_api_key=$fakey servicebus_1_connectionString=$hl7sbconnection servicebus_1_queue=$hl7sbqueuename)
 		echo " "
