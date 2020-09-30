@@ -1,6 +1,6 @@
-﻿/* 
+﻿/*
 * 2020 Microsoft Corp
-* 
+*
 * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS”
 * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
 * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -12,18 +12,20 @@
 * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
+
 using System.Security.Claims;
 using System.Threading.Tasks;
 
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+
 namespace FHIRProxy
 {
-    interface IProxyPostProcess
+    internal interface IProxyPostProcess
     {
-
         /// <summary>
-        /// /* Defines Interface for a ProyPostProcess Function.  Remember implementations should be as performant as possible and thread-safe since instances are reused*/
+        ///     /* Defines Interface for a ProyPostProcess Function.  Remember implementations should be as performant as possible and
+        ///     thread-safe since instances are reused*/
         /// </summary>
         /// <param name="response">The FHIR Response from the server or the previously executed process/filter</param>
         /// <param name="req">The HttpRequest instance from the Function Invocation</param>
@@ -34,6 +36,7 @@ namespace FHIRProxy
         /// <param name="hist">The current FHIR Resource _history path from the function invocation</param>
         /// <param name="vid">The current FHIR Resource version id from the function invocation</param>
         /// <returns>ProxyProcessResult - The result of this Post Process Function</returns>
-        public Task<ProxyProcessResult> Process(FHIRResponse response, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id, string hist, string vid);
+        public Task<ProxyProcessResult> Process(FHIRResponse response, HttpRequest req, ILogger log, ClaimsPrincipal principal,
+            string res, string id, string hist, string vid);
     }
 }

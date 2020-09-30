@@ -1,6 +1,6 @@
-﻿/* 
+﻿/*
 * 2020 Microsoft Corp
-* 
+*
 * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS”
 * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
 * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -19,13 +19,14 @@ namespace FHIRProxy
     {
         public HeaderParm()
         {
-
         }
+
         public HeaderParm(string name, string value)
         {
-            this.Name = name;
-            this.Value = value;
+            Name = name;
+            Value = value;
         }
+
         public string Name { get; set; }
         public string Value { get; set; }
     }
