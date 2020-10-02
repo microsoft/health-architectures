@@ -739,7 +739,7 @@
                             "referenceName": "AzureKeyVault",
                             "type": "LinkedServiceReference"
                         },
-                        "secretName": "datalakestring"
+                        "secretName": "blobstorageacctstring"
                     }
                 }
             },
