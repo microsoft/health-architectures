@@ -27,7 +27,7 @@
             "defaultValue": "STANDARD_D4_V3",
             "type": "string"
         },
-        "IntegrationStorageAccount":{
+        "IntegrationStorageAccount": {
             "type": "string"
         }
     },
@@ -47,15 +47,16 @@
     },
     "resources": [
         {
+            "condition": "[equals(variables('storageAccountName'),concat(variables('resourceGroup'),'stg'))]",
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2019-06-01",
             "name": "[variables('storageAccountName')]",
             "location": "[variables('rgLocation')]",
             "tags": {
-            "HealthArchitestures": "FHIRToDEIDPipeline"
+                "HealthArchitestures": "FHIRToDEIDPipeline"
             },
             "sku": {
-                "name": "Standard_ZRS",
+                "name": "Standard_LRS",
                 "tier": "Standard"
             },
             "kind": "StorageV2",
@@ -80,6 +81,7 @@
             }
         },
         {
+            "condition": "[equals(variables('storageAccountName'),concat(variables('resourceGroup'),'stg'))]",
             "type": "Microsoft.Storage/storageAccounts/blobServices",
             "apiVersion": "2019-06-01",
             "name": "[concat(variables('storageAccountName'), '/default')]",
@@ -87,7 +89,7 @@
                 "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
             ],
             "sku": {
-                "name": "Standard_ZRS",
+                "name": "Standard_LRS",
                 "tier": "Standard"
             },
             "properties": {
@@ -102,10 +104,10 @@
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
             "apiVersion": "2019-06-01",
-            "name": "[concat(variables('storageAccountName'), '/default/customactivity')]",
+            "name": "[concat(variables('datalakeName'), '/default/customactivity')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', variables('storageAccountName'), 'default')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', variables('datalakeName'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('datalakeName'))]"
             ],
             "properties": {
                 "publicAccess": "None"
@@ -117,7 +119,7 @@
             "apiVersion": "2019-06-01",
             "location": "[variables('rgLocation')]",
             "tags": {
-            "HealthArchitestures": "FHIRToDEIDPipeline"
+                "HealthArchitestures": "FHIRToDEIDPipeline"
             },
             "kind": "StorageV2",
             "sku": {
@@ -247,7 +249,7 @@
             "name": "[variables('batchName')]",
             "location": "[variables('rgLocation')]",
             "tags": {
-            "HealthArchitestures": "FHIRToDEIDPipeline"
+                "HealthArchitestures": "FHIRToDEIDPipeline"
             },
             "properties": {
                 "poolAllocationMode": "BatchService",
@@ -261,7 +263,7 @@
             "type": "Microsoft.Batch/batchAccounts/pools",
             "apiVersion": "2020-03-01",
             "name": "[concat(variables('batchName'), '/', parameters('AzureBatch-poolName'))]",
-            
+
             "dependsOn": [
                 "[resourceId('Microsoft.Batch/batchAccounts', variables('batchName'))]"
             ],
@@ -295,7 +297,7 @@
                 }
             }
         }
-        
+
     ],
     "outputs": {}
 }
