@@ -53,7 +53,7 @@
             "name": "[variables('storageAccountName')]",
             "location": "[variables('rgLocation')]",
             "tags": {
-                "HealthArchitestures": "FHIRToDEIDPipeline"
+                "HealthArchitectures": "FHIRToDEIDPipeline"
             },
             "sku": {
                 "name": "Standard_LRS",
@@ -119,7 +119,7 @@
             "apiVersion": "2019-06-01",
             "location": "[variables('rgLocation')]",
             "tags": {
-                "HealthArchitestures": "FHIRToDEIDPipeline"
+                "HealthArchitectures": "FHIRToDEIDPipeline"
             },
             "kind": "StorageV2",
             "sku": {
@@ -249,7 +249,7 @@
             "name": "[variables('batchName')]",
             "location": "[variables('rgLocation')]",
             "tags": {
-                "HealthArchitestures": "FHIRToDEIDPipeline"
+                "HealthArchitectures": "FHIRToDEIDPipeline"
             },
             "properties": {
                 "poolAllocationMode": "BatchService",

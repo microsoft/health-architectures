@@ -51,7 +51,7 @@
             "name": "[variables('logicAppName')]",
             "location": "[variables('rgLocation')]",
             "tags": {
-            "HealthArchitestures": "FHIRToDEIDPipeline"
+            "HealthArchitectures": "FHIRToDEIDPipeline"
             },
             "dependsOn": [
                 "[resourceId('Microsoft.DataFactory/factories', variables('factoryName'))]"
@@ -338,6 +338,9 @@
             "type": "Microsoft.DataFactory/factories",
             "apiVersion": "2018-06-01",
             "location": "[variables('rgLocation')]",
+            "tags": {
+            "HealthArchitectures": "FHIRToDEIDPipeline"
+            },
             "identity": {
                 "type": "SystemAssigned"
             },
