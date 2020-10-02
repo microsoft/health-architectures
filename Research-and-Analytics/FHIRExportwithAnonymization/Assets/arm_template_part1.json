@@ -209,7 +209,7 @@
                 "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
             ],
             "properties": {
-                "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageAccountName'),';AccountKey=',concat(listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')),'2019-06-01').keys[0].value),';EndpointSuffix=core.windows.net')]",
+                "value": "[if(equals(variables('storageAccountName'),concat(variables('resourceGroup'),'stg')),concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageAccountName'),';AccountKey=',concat(listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')),'2019-06-01').keys[0].value),';EndpointSuffix=core.windows.net'),'placeholder')]",
                 "attributes": {
                     "enabled": true
                 }
