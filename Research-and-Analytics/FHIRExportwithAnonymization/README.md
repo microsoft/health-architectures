@@ -152,6 +152,8 @@ Common errors on deployment include:
 - Azure Batch not enabled in the subscription
 - Azure Batch already deployed the max number of times in a subscription
 
+Warning: Azure Key Vault now defaults to soft-delete, a manual removal of the Azure Key Vault is required if you need to delete this deployment and start over.
+
 ## Post Deployment without pre-configured FHIR Integration Storage Account
 
 If you did not setup the FHIR Integration Storage Account prior to deployment you should now. Locate the name of the storage account from the deployment. The default is the Environment Name with 'stg' appended to the end.
