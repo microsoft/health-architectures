@@ -36,7 +36,9 @@ Before deploying the pipeline, make sure you have:
 
 - An Azure Subscription
 - Azure API for FHIR deployed with data
-- Installed latest version of the `Az` Powershell Module. Documentation for installing Azure PowerShell - <https://docs.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-4.2.0>
+- Powershell `Az` Module. Specifically `Az.Reources` 2.3.0 or higher.
+
+If you need to install the latest version of the `Az` Powershell Module. Documentation for installing Azure PowerShell - <https://docs.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-4.2.0>
 
   ```PowerShell
   Install-Module Az
@@ -134,32 +136,14 @@ The FHIR Export with Anonymization uses the default settings in the Anonymizatio
     Select-AzSubscription -SubscriptionId "<SubscriptionId>"
     ```
 
-6. If you did NOT set the IntegrationStorageAccount parameter then use this script. If you did set the IntegrationStorageAccount parameter move to the next script.
+6. Create the PowerShell variables required by the template and run the following command to deploy the pipeline:
 
-    Create the PowerShell variables required by the template and run the following command to deploy the pipeline:
+   ```powershell
+   $EnvironmentName = "<NAME HERE>" #The name must be lowercase, begin with a letter, end with a letter or digit, and not contain hyphens.
+   $EnvironmentLocation = "<LOCATION HERE>" #optional input. The default is eastus2
 
-    ```powershell
-    $EnvironmentName = "<NAME HERE>" #The name must be lowercase, begin with a letter, end with a letter or digit, and not contain hyphens.
-    $EnvironmentLocation = "<LOCATION HERE>" #optional input. The default is eastus2
-
-    ./deployFHIRExportwithAnonymization.ps1 -EnvironmentName $EnvironmentName -EnvironmentLocation $EnvironmentLocation #Environment Location is optional
-    ```
-
-    If you set the IntegrationStorageAccount parameter in the parameter file use this script for deployment.
-
-    Create the PowerShell variables required by the template and run the following command to deploy the pipeline:
-
-    ```powershell
-    $EnvironmentName = "<NAME HERE>" #The name must be lowercase, begin with a letter, end with a letter or digit, and not contain hyphens.
-    $EnvironmentLocation = "<LOCATION HERE>" #optional input. The default is eastus2
-    $IntegrationStorageAccount = "<INTEGRATION STORAGE ACCOUNT NAME HERE>"
-    $IntegrationStorageAccountRG = "<INTEGRATION STORAGE ACCOUNT RESOURCE GROUP HERE>"
-
-    ./deployFHIRExportwithAnonymization.ps1 -EnvironmentName $EnvironmentName -EnvironmentLocation $EnvironmentLocation `
-    -IntegrationStorageAccount $IntegrationStorageAccount `
-    -IntegrationStorageAccountResourceGroup $IntegrationStorageAccountRG
-
-    ```
+   ./deployFHIRExportwithAnonymization.ps1 -EnvironmentName $EnvironmentName -EnvironmentLocation $EnvironmentLocation #Environment Location is optional
+   ```
 
 Deployment process may take 5 minutes or more to complete.
 
@@ -168,13 +152,23 @@ Common errors on deployment include:
 - Azure Batch not enabled in the subscription
 - Azure Batch already deployed the max number of times in a subscription
 
-## Post Deployment
+## Post Deployment without pre-configured FHIR Integration Storage Account
 
 If you did not setup the FHIR Integration Storage Account prior to deployment you should now. Locate the name of the storage account from the deployment. The default is the Environment Name with 'stg' appended to the end.
 
 Then follow the instructions here for attaching the FHIR service to the storage account. <https://docs.microsoft.com/en-us/azure/healthcare-apis/configure-export-data>
 
 IMPORTANT: Make sure you set the permissions between the FHIR service and the storage account. Step 2b in on the 'Configure export data' link.
+
+## Post Deployment for pre-configured FHIR Integration Storage Account
+
+If you did not setup the FHIR Integration Storage Account prior to deployment, there is one setting you need to change for the Azure Data Factory to work. We need to change the connection string for the blobstorageacctstring secret in the new key vault. If you are comfortable scripting  this feel free. However, here are the instructions using the portal.
+
+Open the Azure Portal. Navigate to the new FHIR Integration Storage Account you listed in the ARM parameters file. Locate the storage account 'Access key' blade under 'Settings'. When the new blade opens copy one of the connection strings. We only need one of them either connection string will work.
+
+With the connection string copied, close that blade. Navigate to the new key vault deployed with the script. The key vault should be in the new resource group and named the resource group with 'kv' appended to the end of the name. Open the key vault, look for the 'Secrets' blade under 'Settings'. When the blade opens, click on the secret named 'blobstorageacctstring'. Then click "+ New Version". In the 'Value' box paste the connection string from the storage account. Then click the 'Create' button at the bottom the page.
+
+You are done. This will point the Azure Data Factory to the pre-configured FHIR Integration Storage Account.
 
 ### Optional Post Deployment
 
