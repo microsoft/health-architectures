@@ -17,7 +17,7 @@
             "type": "Microsoft.Web/customApis",
             "apiVersion": "2016-06-01",
             "name": "[parameters('customApis_FHIR_Server_Proxy_name')]",
-            "location": "eastus",
+            "location": "[resourceGroup().location]",
             "properties": {
                 "connectionParameters": {
                     "api_key": {

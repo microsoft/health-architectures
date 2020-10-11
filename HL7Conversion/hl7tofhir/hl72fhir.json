@@ -71,44 +71,6 @@
         "description": "Azure Service Bus Queue Name"
       }
     },
-    "LogicAppLocation": {
-      "type": "string",
-      "minLength": 1,
-      "allowedValues": [
-        "[resourceGroup().location]",
-        "eastasia",
-        "southeastasia",
-        "centralus",
-        "eastus",
-        "eastus2",
-        "westus",
-        "northcentralus",
-        "southcentralus",
-        "northeurope",
-        "westeurope",
-        "japanwest",
-        "japaneast",
-        "brazilsouth",
-        "australiaeast",
-        "australiasoutheast",
-        "southindia",
-        "centralindia",
-        "westindia",
-        "canadacentral",
-        "canadaeast",
-        "uksouth",
-        "ukwest",
-        "westcentralus",
-        "westus2",
-        "koreacentral",
-        "koreasouth",
-        "francecentral",
-        "francesouth",
-        "southafricanorth",
-        "southafricawest"
-      ],
-      "defaultValue": "[resourceGroup().location]"
-    },
     "LogicAppName": {
       "type": "string",
       "minLength": 1,
@@ -218,7 +180,7 @@
                 "connectionName": "[parameters('HL7FHIRConverter_1_Connection_Name')]"
               },
               "azureblob": {
-                "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', 'eastus', '/managedApis/', 'azureblob')]",
+                "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', resourceGroup().location, '/managedApis/', 'azureblob')]",
                 "connectionId": "[resourceId('Microsoft.Web/connections', parameters('azureblob_1_Connection_Name'))]",
                 "connectionName": "[parameters('azureblob_1_Connection_Name')]"
               },
@@ -228,7 +190,7 @@
                 "connectionName": "[parameters('FHIRServerProxy_1_Connection_Name')]"
               },
               "servicebus": {
-                "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', 'eastus', '/managedApis/', 'servicebus')]",
+                "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', resourceGroup().location, '/managedApis/', 'servicebus')]",
                 "connectionId": "[resourceId('Microsoft.Web/connections', parameters('servicebus_1_Connection_Name'))]",
                 "connectionName": "[parameters('servicebus_1_Connection_Name')]"
               }
@@ -238,7 +200,7 @@
       },
       "name": "[parameters('LogicAppName')]",
       "type": "Microsoft.Logic/workflows",
-      "location": "[parameters('LogicAppLocation')]",
+      "location": "[resourceGroup().location]",
       "tags": {
         "displayName": "LogicApp"
       },
@@ -254,7 +216,7 @@
       "type": "MICROSOFT.WEB/CONNECTIONS",
       "apiVersion": "2018-07-01-preview",
       "name": "[parameters('HL7FHIRConverter_1_Connection_Name')]",
-      "location": "eastus",
+      "location": "[resourceGroup().location]",
       "properties": {
         "api": {
           "id": "[resourceId('Microsoft.Web/customApis', 'HL7FHIRConverter')]"
@@ -269,10 +231,10 @@
       "type": "MICROSOFT.WEB/CONNECTIONS",
       "apiVersion": "2018-07-01-preview",
       "name": "[parameters('azureblob_1_Connection_Name')]",
-      "location": "eastus",
+      "location": "[resourceGroup().location]",
       "properties": {
         "api": {
-          "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', 'eastus', '/managedApis/', 'azureblob')]"
+          "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', resourceGroup().location, '/managedApis/', 'azureblob')]"
         },
         "displayName": "[parameters('azureblob_1_Connection_DisplayName')]",
         "parameterValues": {
@@ -285,7 +247,7 @@
       "type": "MICROSOFT.WEB/CONNECTIONS",
       "apiVersion": "2018-07-01-preview",
       "name": "[parameters('FHIRServerProxy_1_Connection_Name')]",
-      "location": "eastus",
+      "location": "[resourceGroup().location]",
       "properties": {
         "api": {
           "id": "[resourceId('Microsoft.Web/customApis', 'FHIRServerProxy')]"
@@ -300,10 +262,10 @@
       "type": "MICROSOFT.WEB/CONNECTIONS",
       "apiVersion": "2018-07-01-preview",
       "name": "[parameters('servicebus_1_Connection_Name')]",
-      "location": "eastus",
+      "location": "[resourceGroup().location]",
       "properties": {
         "api": {
-          "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', 'eastus', '/managedApis/', 'servicebus')]"
+          "id": "[concat(subscription().id, '/providers/Microsoft.Web/locations/', resourceGroup().location, '/managedApis/', 'servicebus')]"
         },
         "displayName": "[parameters('servicebus_1_Connection_DisplayName')]",
         "parameterValues": {
