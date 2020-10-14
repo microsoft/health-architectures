@@ -138,7 +138,7 @@
                             },
                             "type": "Http",
                             "inputs": {
-                                "body": "@concat('grant_type=client_credentials&client_id=',body('GetClientId').value,'&client_secret=',body('GetClientSecret').value,'&resource=',variables('fhirurl'))",
+                                "body": "@concat('grant_type=client_credentials&client_id=',body('GetClientId').value,'&client_secret=',encodeUriComponent(body('GetClientSecret').value),'&resource=',variables('fhirurl'))",
                                 "headers": {
                                     "Content-Type": "application/x-www-form-urlencoded"
                                 },
