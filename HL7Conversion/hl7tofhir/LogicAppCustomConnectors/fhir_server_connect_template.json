@@ -9,6 +9,44 @@
 		"fhirserverproxyhost":{
 			"defaultValue": "",
             "type": "String"
+		},
+		"connectorLocation": {
+		  "type": "string",
+		  "minLength": 1,
+		  "allowedValues": [
+			"[resourceGroup().location]",
+			"eastasia",
+			"southeastasia",
+			"centralus",
+			"eastus",
+			"eastus2",
+			"westus",
+			"northcentralus",
+			"southcentralus",
+			"northeurope",
+			"westeurope",
+			"japanwest",
+			"japaneast",
+			"brazilsouth",
+			"australiaeast",
+			"australiasoutheast",
+			"southindia",
+			"centralindia",
+			"westindia",
+			"canadacentral",
+			"canadaeast",
+			"uksouth",
+			"ukwest",
+			"westcentralus",
+			"westus2",
+			"koreacentral",
+			"koreasouth",
+			"francecentral",
+			"francesouth",
+			"southafricanorth",
+			"southafricawest"
+		  ],
+		  "defaultValue": "[resourceGroup().location]"
 		}
     },
     "variables": {},
@@ -17,7 +55,7 @@
             "type": "Microsoft.Web/customApis",
             "apiVersion": "2016-06-01",
             "name": "[parameters('customApis_FHIR_Server_Proxy_name')]",
-            "location": "eastus",
+            "location": "[parameters('connectorLocation')]",
             "properties": {
                 "connectionParameters": {
                     "api_key": {
