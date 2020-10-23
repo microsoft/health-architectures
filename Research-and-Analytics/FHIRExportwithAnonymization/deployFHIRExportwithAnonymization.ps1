@@ -65,7 +65,11 @@ the ARM templates.
 ### Key Value Name
 $KeyVaultName = $EnvironmentName + "kv"
     
-### Azure Storage Staging Account
+### Azure Batch Anynmization Code Storage Account
+$storageAccountName = $EnvironmentName + "dlg2"
+$storageAccountResourceGroup = $EnvironmentName
+
+<#
 if([string]::IsNullOrEmpty($IntegrationStorageAccount))
 {
     $storageAccountName = $EnvironmentName + "stg"
@@ -76,6 +80,7 @@ else {
     $storageAccountName = $IntegrationStorageAccount
     $storageAccountResourceGroup = $IntegrationStorageAccountResourceGroup
 }
+#>
 
 ### Logic App Name
 $logicAppName = $EnvironmentName + "la"
@@ -174,7 +179,7 @@ try
     $storageContext = New-AzStorageContext -StorageAccountName $storageAccountName -StorageAccountKey $storageAcctKey.Value
     
     try {
-        Get-AzStorageContainer -Name "customactivity" -Context $storageContext    
+        Get-AzStorageContainer -Name "customactivity" -Context $storageContext
     }
     catch {
         New-AzStorageContainer -Name "customactivity" -Context $storageContext
