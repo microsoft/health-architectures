@@ -1,6 +1,7 @@
 ---
 layout: post
 author: Dale
+tags: 'Cloud for Healthcare' fhir azure 'power apps' 'low code' development
 ---
 
 Low Code Development with Power Platform Connectors  
@@ -15,11 +16,11 @@ Two Connectors are being deployed as part of Microsoft Cloud for Healthcare, eac
 
 ## Why Create a set of Power Platform FHIR Connectors
 
-The healthcare industry is rapidly transforming health data to the emerging standard of FHIR� (Fast Healthcare Interoperability Resources). FHIR enables a robust, extensible data model with standardized semantics and data exchange that enables all systems using FHIR to work together.  By creating Low to No Code connectors for FHIR, we are opening up FHIR to citizen developers and front line workers, enabling them to create solutions that meet their needs in real time. 
+The healthcare industry is rapidly transforming health data to the emerging standard of FHIR (Fast Healthcare Interoperability Resources). FHIR enables a robust, extensible data model with standardized semantics and data exchange that enables all systems using FHIR to work together.  By creating Low to No Code connectors for FHIR, we are opening up FHIR to citizen developers and front line workers, enabling them to create solutions that meet their needs in real time. 
 
 ##  Feedback Requested 
 
-Questions, comments or needing help, please feel free to email us at mailto:HealthArchitectures@microsoft.com
+Questions, comments or needing help, please feel free to email us at HealthArchitectures@microsoft.com
 
 ## Supported FHIR Resources 
 
