@@ -1,0 +1,16 @@
+{
+  "generatedBy": "Microsoft.NET.Sdk.Functions-3.0.7",
+  "configurationSource": "attributes",
+  "bindings": [
+    {
+      "type": "serviceBusTrigger",
+      "connection": "SA_ServiceBusNamespaceFHIRUpdates",
+      "isSessionsEnabled": true,
+      "queueName": "fhirupdates",
+      "name": "myQueueItem"
+    }
+  ],
+  "disabled": false,
+  "scriptFile": "../bin/AzureFHIRCDSSyncAgent.dll",
+  "entryPoint": "Microsoft.Health.Solutions.MessageAndFileProcessors.ProcessingFHIRUpdates"
+}
