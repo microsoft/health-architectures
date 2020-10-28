@@ -11,6 +11,28 @@ IFS=$'\n\t'
 
 usage() { echo "Usage: $0 -i <subscriptionId> -g <resourceGroupName> -l <resourceGroupLocation> -p <prefix>" 1>&2; exit 1; }
 
+function fail {
+  echo $1 >&2
+  exit 1
+}
+
+function retry {
+  local n=1
+  local max=5
+  local delay=15
+  while true; do
+    "$@" && break || {
+      if [[ $n -lt $max ]]; then
+        ((n++))
+        echo "Command failed. Retry Attempt $n/$max in $delay seconds:" >&2
+        sleep $delay;
+      else
+        fail "The command has failed after $n attempts."
+      fi
+    }
+  done
+}
+
 declare defsubscriptionId=""
 declare subscriptionId=""
 declare resourceGroupName=""
@@ -144,7 +166,7 @@ fi
 echo "Enter the FHIR Server Service Client Tenant ID. Empty for MSI[]:"
 read fstenant
 if [ ! -z "$fstenant" ] ; then
-	echo "Enter the FHIR Server Se	rvice Client Application ID. Leave Empty for MSI[]:"
+	echo "Enter the FHIR Server Service Client Application ID. Leave Empty for MSI[]:"
 	read fsclientid
 	echo "Enter the FHIR Server Service Client Secret. Leave Empty for MSI[]:"
 	read fssecret
@@ -216,7 +238,7 @@ echo "Starting Secure FHIR Proxy deployment..."
 		stepresult=$(az functionapp config appsettings set --name $faname  --resource-group $resourceGroupName --settings REDISCONNECTION=$redisConnectionString ADMIN_ROLE=$roleadmin READER_ROLE=$rolereader WRITER_ROLE=$rolewriter GLOBAL_ACCESS_ROLES=$roleglobal PATIENT_ACCESS_ROLES=$rolepatient PARTICIPANT_ACCESS_ROLES=$roleparticipant STORAGEACCT=$storageConnectionString FS_URL=$fsurl FS_TENANT_NAME=$fstenant FS_CLIENT_ID=$fsclientid FS_SECRET=$fssecret FS_RESOURCE=$fsaud)
 		#deployment from publish directory
 		echo "Deploying Secure FHIR Proxy Function App from source repo to ["$fahost"]..."
-		stepresult=$(az functionapp deployment source config-zip --name $faname --resource-group $resourceGroupName --src $deployzip)
+		stepresult=$(retry az functionapp deployment source config-zip --name $faname --resource-group $resourceGroupName --src $deployzip)
 		echo "Enabling AAD Authorization and Securing the FHIR Proxy"
 		stepresult=$(az webapp auth update -g $resourceGroupName -n $faname --enabled true --action LoginWithAzureActiveDirectory --aad-allowed-token-audiences $fahost --aad-client-id $spappid --aad-client-secret $spsecret --aad-token-issuer-url $tokeniss)
 		echo " "
