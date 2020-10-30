@@ -1,0 +1,15 @@
+{
+  "generatedBy": "Microsoft.NET.Sdk.Functions-3.0.7",
+  "configurationSource": "attributes",
+  "bindings": [
+    {
+      "type": "blobTrigger",
+      "connection": "SA_FHIRLoaderStorageConnection",
+      "path": "ndjsonfiles/{name}",
+      "name": "myBlob"
+    }
+  ],
+  "disabled": false,
+  "scriptFile": "../bin/AzureFHIRCDSSyncAgent.dll",
+  "entryPoint": "Microsoft.Health.Solutions.MessageAndFileProcessors.FHIRNDJsonFileLoader"
+}
