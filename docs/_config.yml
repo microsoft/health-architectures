@@ -5,7 +5,7 @@ description: Provide reference architectures and, when appropriate, implementati
 
 logo: /assets/images/logo.png
 
-include: /_posts
+include: /_posts, /_refarch
 
 baseurl: /health-architectures
 
