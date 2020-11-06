@@ -1,7 +1,8 @@
 ---
 layout: post
+page.categories: Reference-Architecture
 author: Dale
-tags: 'Cloud for Healthcare' fhir azure 'Reference Architecture'
+tags: Cloud-for-Healthcare fhir azure Reference-Architecture
 ---
 
 # Introduction
