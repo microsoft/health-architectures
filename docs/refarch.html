@@ -15,9 +15,9 @@ Each pattern describes the problem that the pattern addresses, considerations fo
 <h2>Reference Architectures </h2>
 
 <ul>
-  {% for refarch in site.refarch %}
+  {% for posts in site.posts %}
     <li>
-      <h3><a href="{{ refarch.url | absolute_url }}">{{ refarch.excerpt }} </a></h3>
+      <h3><a href="{{ post.url | absolute_url }}">{{ post.excerpt }} </a></h3>
     </li>
   {% endfor %}
 </ul>

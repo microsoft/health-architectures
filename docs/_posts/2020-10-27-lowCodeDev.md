@@ -1,7 +1,7 @@
 ---
 layout: post
 author: Dale
-tags: 'Cloud for Healthcare' fhir azure 'power apps' 'low code' development
+tags: "Cloud for Healthcare" fhir azure "power apps" "low code development"
 ---
 
 Low Code Development with Connectors  
