@@ -26,6 +26,8 @@ Bringing FHIR data to Common Data Services, Citizen developers and Front Line us
 
 <h2>Latest Posts</h2>
 
+<p> {{ site.post }}
+
 <ul>
   {% for post in site.posts %}
     <li>
