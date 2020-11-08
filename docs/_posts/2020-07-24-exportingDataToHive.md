@@ -1,11 +1,9 @@
 ---
 layout: post
 author: Cory
+title: "Exporting Data to HIVE, HDFS or Azure DataBricks"
 tags: hive fhir azure databricks spark
 ---
-
-Exporting Data to HIVE, HDFS or Azure DataBricks
-
 
 # Exporting Data to HIVE, HDFS or Azure DataBricks
 

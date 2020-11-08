@@ -1,10 +1,9 @@
 ---
 layout: post
 author: Dale
-tags: "Cloud for Healthcare" fhir azure "power apps" "low code development"
+title: "Low Code Development with Connectors" 
+tags: "Cloud for Healthcare", fhir, azure, "power apps", "low code development"
 ---
-
-Low Code Development with Connectors  
 
 # Power Platform Connectors
 
