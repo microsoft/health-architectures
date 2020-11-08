@@ -5,8 +5,6 @@ title: "Exporting Data to HIVE, HDFS or Azure DataBricks"
 tags: hive fhir azure databricks spark
 ---
 
-# Exporting Data to HIVE, HDFS or Azure DataBricks
-
 Last week a customer asked our team the following question, "If I want to export FHIR to Hive what is the best practice?" Turns out there is a very simple method to accomplish this task. This walkthrough post works with Hive, Hadoop, Spark, DataBricks or any other tools supporting the HDFS data sources.
 
 To understand more on how Azure Data Lake Gen2 supports HDFS storage check out "Introduction to Azure Data Lake Storage Gen2" link at the bottom of this post.
