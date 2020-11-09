@@ -27,7 +27,7 @@ Bringing FHIR data to Common Data Services, Citizen developers and Front Line us
 <ul>
   {% for post in site.posts %}
     <li>
-      <h3><a href="{{ absolute_url }}">{{ post.title }}</a></h3>
+      <h3><a href="{{ post.url| absolute_url }}">{{ post.title }}</a></h3>
     </li>
   {% endfor %}
 </ul>
@@ -36,4 +36,4 @@ Bringing FHIR data to Common Data Services, Citizen developers and Front Line us
 
 We invite you to ask questions, make suggestions and share use cases which we might consider for future reference architectures or implementations.
 
-v.12
+v1
