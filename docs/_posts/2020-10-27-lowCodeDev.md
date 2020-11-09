@@ -2,10 +2,7 @@
 layout: post
 author: Dale
 title: "Low Code Development with Connectors" 
-tags: "Cloud for Healthcare", fhir, azure, "power apps", "low code development"
 ---
-
-# Power Platform Connectors
 
 A connector is a proxy or a wrapper around an API that allows the underlying service to talk to Microsoft Power Platform.  Connectors provide a way for users to leverage a set of pre-built actions and triggers to build applications and workflows.
 
