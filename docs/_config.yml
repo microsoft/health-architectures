@@ -14,3 +14,4 @@ defaults:
       path: "/health-architectures/assets/images"
     values:
       image: true
+      author: Health-Architectures
