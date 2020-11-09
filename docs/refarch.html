@@ -2,10 +2,16 @@
 layout: default
 ---
 
+post url = {{ post.url }}
+absolute url = {{ absolute_url }}
+
+
+
 <h1>Latest Posts</h1>
 
 <ul>
-  {% for posts in site.categories.architecture %}
+  {% assign architecture = site.posts | where "Tag", "architecture" %}
+  {% for posts in architecture %}
     <li>
       <h2><a href="{{ post.url | absolute_url }}">{{ post.title }} </a></h2>
       {{ post.excerpt }}
@@ -13,4 +19,4 @@ layout: default
   {% endfor %}
 </ul>
 
-v1
+v2
