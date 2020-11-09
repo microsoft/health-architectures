@@ -5,7 +5,6 @@ tag: architecture cloud health
 category: architecture
 ---
 
-# Introduction
 
 The FHIR-CDS-Sync Agent follows the Microsoft Well Architected Framework focusing on the following categories:  Availability, Data Management, Design and Implementation, Management and Monitoring, Messaging, Performance and Scalability, Resiliency and Security.  
 
