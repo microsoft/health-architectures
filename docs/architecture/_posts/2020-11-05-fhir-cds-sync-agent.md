@@ -1,8 +1,7 @@
 ---
 layout: post
 title: "FHIR-CDS Sync Agent"
-author: Dale
-tags: "Cloud-for-Healthcare", fhir, azure, "Reference-Architecture" 
+tag: architecture cloud health 
 ---
 
 # Introduction
