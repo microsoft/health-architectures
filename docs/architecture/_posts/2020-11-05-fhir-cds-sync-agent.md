@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "FHIR-CDS Sync Agent"
-tags: "Microsoft Cloud", "Cloud for Healthcare", "Reference Architecture"
+tag: architecture cloud health 
 ---
 
 # Introduction
