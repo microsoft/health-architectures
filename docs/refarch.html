@@ -5,7 +5,7 @@ layout: default
 <h1>Latest Posts</h1>
 
 <ul>
-  {% assign references = site.posts | where: "categories", "architecture" %}
+  {% assign references = site.posts | where: "tag", "architecture" %}
   {% for posts in references %}
     <li>
       <h2><a href="{{ post.url | absolute_url }}">{{ post.title }} </a></h2>
@@ -14,4 +14,4 @@ layout: default
   {% endfor %}
 </ul>
 
-v2
+v21
