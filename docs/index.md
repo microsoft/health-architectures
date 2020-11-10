@@ -6,23 +6,23 @@ layout: default
 Health Architectures is a collection of reference architectures and, where appropriate, implementations. They illustrate end-to-end best practices for using the Azure API for FHIR and related technologies.  
 
 ## Reference Architectures 
-- [FHIR-CDS Sync Agent](https://microsoft.github.io/health-architectures/refarch.html)
+- [Azure API for FHIR to Microsoft Dynamics](https://microsoft.github.io/health-architectures/refarch.html)
 
 ---
 
 ## Implementations 
 
-### Data Ingest  
-- [Ingesting Medical Device Data - IoMT](https://github.com/microsoft/health-architectures/tree/master/Internet-Of-Things-IoT/IoMT-FHIR-Connector-for_Azure)
-- [Ingesting HL7 Records](https://github.com/microsoft/health-architectures/tree/master/HL7Conversion)
-- Ingesting FHIR Records and Bundles *(coming soon)* 
+  ### Data Ingest  
+  - [Ingesting Medical Device Data - IoMT](https://github.com/microsoft/health-architectures/tree/master/Internet-Of-Things-IoT/IoMT-FHIR-Connector-for_Azure)
+  - [Ingesting HL7 Records](https://github.com/microsoft/health-architectures/tree/master/HL7Conversion)
+  - Ingesting FHIR Records and Bundles *(coming soon)* 
 
-### Research and Analytics    
-- [Exporting Data](https://github.com/microsoft/health-architectures/tree/master/Research-and-Analytics/FHIRExportQuickstart)
-- [Anonymized Data Export](https://github.com/microsoft/health-architectures/tree/master/Research-and-Analytics/FHIRExportwithAnonymization)
+  ### Research and Analytics    
+  - [Exporting Data](https://github.com/microsoft/health-architectures/tree/master/Research-and-Analytics/FHIRExportQuickstart)
+  - [Anonymized Data Export](https://github.com/microsoft/health-architectures/tree/master/Research-and-Analytics/FHIRExportwithAnonymization)
 
-### Microsoft Cloud for Healthcare  
- - [Low Code Development](https://github.com/microsoft/health-architectures/tree/master/Low-Code) 
+  ### Microsoft Cloud for Healthcare  
+   - [Low Code Development](https://github.com/microsoft/health-architectures/tree/master/Low-Code) 
 
 ---
 
