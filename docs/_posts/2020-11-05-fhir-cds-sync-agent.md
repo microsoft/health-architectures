@@ -2,7 +2,7 @@
 layout: post
 title: "FHIR-CDS Sync Agent"
 tag: architecture cloud health 
-category: architecture
+categories: architecture
 ---
 
 
