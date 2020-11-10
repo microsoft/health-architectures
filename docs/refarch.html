@@ -18,5 +18,5 @@ v1
 
 references = {{ references }}
 
-site posts = {{ site.posts }}
+site posts = {{ site.posts | where: "category", "architecture" }}
 
