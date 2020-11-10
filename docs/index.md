@@ -3,10 +3,10 @@ layout: default
 ---
 
 # Microsoft Health Architectures 
-Health Architectures is a collection of reference architectures and, when appropriate, implementations. They illustrate end-to-end best practices for using the Azure API for FHIR and related technologies.  
+Health Architectures is a collection of reference architectures and, where appropriate, implementations. They illustrate end-to-end best practices for using the Azure API for FHIR and related technologies.  
 
 ## Reference Architectures 
-- launching soon 
+- [FHIR-CDS Sync Agent](https://microsoft.github.io/health-architectures/refarch.html)
 
 ## Data Ingest Scenarios & Solutions 
 - [Ingesting Medical Device Data - IoMT](https://github.com/microsoft/health-architectures/tree/master/Internet-Of-Things-IoT/IoMT-FHIR-Connector-for_Azure)
