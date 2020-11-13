@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Continuous Patient Monitoring Enhanced Architecture 1.0"
+title: "Continuous Patient Monitoring Enhanced Architecture"
 tag: architecture cloud health 
 category: architecture
 ---
