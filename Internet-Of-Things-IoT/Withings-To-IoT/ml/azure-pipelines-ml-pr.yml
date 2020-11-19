@@ -1,0 +1,42 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
+trigger: none
+
+pool:
+  vmImage: "ubuntu-latest"
+
+variables:
+  PIP_CACHE_DIR: $(Pipeline.Workspace)/.pip
+
+steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: "3.7"
+    displayName: "Install Python"
+
+  - task: Cache@2
+    inputs:
+      key: 'python | "$(Agent.OS)" | ./ml/requirements-dev.txt'
+      restoreKeys: |
+        python | "$(Agent.OS)"
+        python
+      path: $(PIP_CACHE_DIR)
+    displayName: "Cache pip packages"
+
+  - script: |
+      python -m pip install -r requirements-dev.txt
+    workingDirectory: ./ml
+    displayName: "Install dependencies"
+
+  - script: |
+      flake8 .
+    workingDirectory: ./ml
+    displayName: "Run linters"
+
+  - script: |
+      python ./setup.py bdist_wheel
+      read -r version < ./version.txt
+      python -m pip install "./dist/h3_utils-$version-py2.py3-none-any.whl"
+    workingDirectory: ./ml
+    displayName: "Build package"

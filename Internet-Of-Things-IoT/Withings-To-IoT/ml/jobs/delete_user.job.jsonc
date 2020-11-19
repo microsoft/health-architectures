@@ -1,0 +1,24 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
+{
+  "name": "delete_user",
+  "new_cluster": {
+    "spark_version": "7.0.x-scala2.12",
+    "node_type_id": "Standard_DS3_v2",
+    "num_workers": 2
+  },
+  "libraries": [
+    {
+      "whl": "dbfs:/libs/h3_utils-{{ h3UtilsVersion }}-py2.py3-none-any.whl"
+    }
+  ],
+  "max_concurrent_runs": 10,
+  "notebook_task": {
+    "notebook_path": "/Shared/ml/jobs/delete_user",
+    "base_parameters": {
+      "silverStorageAccount": "{{ mlCaptureDataLakeName }}",
+      "silverStorageContainer": "{{ mlSilverContainerName }}"
+    }
+  }
+}

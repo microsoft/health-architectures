@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="clr-namespace:Contoso.IoMT_Client.Controls"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" 
+             mc:Ignorable="d"
+             ios:Page.UseSafeArea="true"
+             Title="Horizon 3"
+             x:Class="Contoso.IoMT_Client.DashboardPage"
+             Style="{StaticResource pageStyle}">
+  <ContentPage.Resources>
+    <ResourceDictionary Source="/DataTemplates/WithingsDataTemplate.xaml"/>
+  </ContentPage.Resources>
+  <ContentPage.Content>
+    <Grid Margin="10">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="{OnIdiom Phone=0, Tablet=310}"/>
+      </Grid.ColumnDefinitions>
+      
+      <StackLayout Grid.Row="0" Padding="0,20,0,10" >
+        <Label Text="Health Monitoring" Style="{StaticResource sectionHeading}" Padding="0,0,0,10"/>
+        <BoxView WidthRequest="100" HeightRequest=".5" Color="#CCCCCC"/>
+      </StackLayout>
+
+      <ScrollView Grid.Row="1" VerticalOptions="StartAndExpand">
+        <StackLayout>
+          <Label Text="Health Summary" Style="{StaticResource sectionSubHeading}"/>
+          <controls:WrapLayout x:Name="observationListWrapLayout"/>
+
+          <Label Text="Devices" Style="{StaticResource sectionSubHeading}"/>
+          <controls:WrapLayout x:Name="connectedDevicesWrapLayout"/>
+        </StackLayout>
+      </ScrollView>
+
+      <controls:ObservationDetailsContentView x:Name="observationDetailsContentView" Grid.Column="1" Grid.RowSpan="2" IsVisible="false"/>
+    </Grid>
+  </ContentPage.Content>
+</ContentPage>
