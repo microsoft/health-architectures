@@ -1,0 +1,61 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
+trigger: none
+
+variables:
+  - template: ./azure-pipelines-variables.yml
+
+pool:
+  vmImage: "ubuntu-latest"
+
+steps:
+  - pwsh: |
+      ./deployment/install-dependencies.ps1
+      Invoke-ScriptAnalyzer -EnableExit -Path deployment/*.ps*1
+    displayName: "Lint PowerShell"
+
+  - script: |
+      az login \
+        --service-principal \
+        --username '$(servicePrincipalAppId)' \
+        --password '$(servicePrincipalSecret)' \
+        --tenant '$(servicePrincipalTenant)' && \
+      az account set \
+        --subscription '$(servicePrincipalSubscription)'
+    displayName: "Login to Azure"
+
+  - script: |
+      validationAppName='ci$(Build.BuildId)'
+      az group create \
+        --name "$validationAppName" \
+        --location '$(appLocation)'
+      echo "##vso[task.setvariable variable=validationAppName]$validationAppName"
+    displayName: "Create temporary resource group"
+
+  - script: |
+      grep -Ev '^\s*(//.*)?$' ./deployment/azuredeploy.jsonc > ./deployment/azuredeploy.generated.json && \
+      az deployment group validate \
+        --template-file ./deployment/azuredeploy.generated.json \
+        --resource-group '$(validationAppName)' \
+        --parameters \
+            appName='$(validationAppName)' \
+            withingsClientId='$(withingsClientId)' \
+            withingsClientSecret='$(withingsClientSecret)' \
+            firebaseServerKey='$(firebaseServerKey)' \
+            iosKeyId='$(iosKeyId)' \
+            iosBundleId='$(iosBundleId)' \
+            iosTeamId='$(iosTeamId)' \
+            iosPushToken="$(iosPushToken)" \
+            b2cClientId='$(b2cClientId)' \
+            b2cTenantId='$(b2cTenantId)' \
+            b2cPolicyName='$(b2cPolicyName)' \
+            b2cTenantName='$(b2cTenantName)'
+    displayName: "Verify ARM template"
+
+  - script: |
+      az group delete \
+        --name '$(validationAppName)' \
+        --yes
+    displayName: "Clean up temporary resource group"
+    condition: always()
