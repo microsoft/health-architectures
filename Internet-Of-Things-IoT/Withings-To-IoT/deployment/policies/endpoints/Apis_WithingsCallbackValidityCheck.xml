@@ -1,0 +1,20 @@
+<!-- Copyright (c) Microsoft Corporation. -->
+<!-- Licensed under the MIT License. -->
+
+<policies>
+  <inbound>
+    <base />
+    <ip-filter action="allow">
+      <address-range from="89.30.121.0" to="89.30.121.255" />
+    </ip-filter>
+  </inbound>
+  <backend>
+    <base />
+  </backend>
+  <outbound>
+    <base />
+  </outbound>
+  <on-error>
+    <base />
+  </on-error>
+</policies>
