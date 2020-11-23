@@ -1,4 +1,4 @@
-# H3 Client Portal
+# Withings Web Client Portal
 
 Gatsby based client portal for H3.
 
