@@ -1,3 +1,3 @@
-# H3 mobile application
+# Withings mobile application
 
-> TODO!
+> Sample mobile client app (Android and iOS) for backend using Xamarin Forms
