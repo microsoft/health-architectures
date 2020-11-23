@@ -152,11 +152,12 @@
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|iPhone'">
     <CodeAnalysisRuleSet>..\..\.ruleset</CodeAnalysisRuleSet>
+<MtouchLink>SdkOnly</MtouchLink>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|iPhone'">
     <CodeAnalysisRuleSet>..\..\.ruleset</CodeAnalysisRuleSet>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <CodesignProvision>WBAClientProvisioning</CodesignProvision>
+    <CodesignProvision>iOS Team Provisioning Profile: *</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|iPhoneSimulator'">
     <CodeAnalysisRuleSet>..\..\.ruleset</CodeAnalysisRuleSet>

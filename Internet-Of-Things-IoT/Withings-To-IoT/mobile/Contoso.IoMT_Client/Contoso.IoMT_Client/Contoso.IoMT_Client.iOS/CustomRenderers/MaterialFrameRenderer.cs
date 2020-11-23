@@ -9,7 +9,9 @@ using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportRenderer(typeof(Frame), typeof(MaterialFrameRenderer))]
 
+#pragma warning disable SA1300 // Element should begin with upper-case letter
 namespace Contoso.IoMT_Client.iOS
+#pragma warning restore SA1300 // Element should begin with upper-case letter
 {
     public class MaterialFrameRenderer : FrameRenderer
     {
