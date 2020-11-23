@@ -1,0 +1,33 @@
+trigger: none
+
+pool:
+  vmImage: "windows-latest"
+
+variables:
+  npm_config_cache: $(Pipeline.Workspace)/.npm
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "12.x"
+    displayName: "Install Node.js"
+
+  - task: Cache@2
+    inputs:
+      key: 'npm | "$(Agent.OS)" | ./portal/package-lock.json'
+      restoreKeys: |
+        npm | "$(Agent.OS)"
+      path: $(npm_config_cache)
+    displayName: "Cache npm packages"
+
+  - script: npm ci
+    workingDirectory: ./portal
+    displayName: "Install dependencies"
+
+  - script: npm run lint
+    workingDirectory: ./portal
+    displayName: "Run lint"
+
+  - script: npm run build
+    workingDirectory: ./portal
+    displayName: "Run build"
