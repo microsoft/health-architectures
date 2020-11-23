@@ -22,7 +22,8 @@ declare stepresult=""
 declare listofprocessors=""
 declare enableprocessors=""
 # Initialize parameters specified from command line
-while getopts ":g:n:i" arg; do
+while getopts ":g:n:i:
+" arg; do
 	case "${arg}" in
 		n)
 			faname=${OPTARG}

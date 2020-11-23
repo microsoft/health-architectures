@@ -1,4 +1,4 @@
-# H3 backend
+# Withings IoMT backend
 
 API and background processes for the H3 platform.
 
@@ -166,9 +166,3 @@ pwsh ./deploy-api.ps1 \
   -DeploymentName "resources"
 ```
 
-## Links
-
-- Project homepage: [https://dev.azure.com/healthnext/WBA-H3](https://dev.azure.com/healthnext/WBA-H3)
-- Repository: [https://dev.azure.com/healthnext/\_git/WBA-H3](https://dev.azure.com/healthnext/_git/WBA-H3)
-- Issue tracker: [https://dev.azure.com/healthnext/WBA-H3/\_workitems/](https://dev.azure.com/healthnext/WBA-H3/_workitems/)
-- Build system: [https://dev.azure.com/healthnext/WBA-H3/\_build](https://dev.azure.com/healthnext/WBA-H3/_build)

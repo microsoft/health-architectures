@@ -1,6 +1,6 @@
-# H3 deployment
+# Withings IoMT deployment
 
-Deployment scripts and Infrastructure-as-Code for the H3 platform.
+Deployment scripts and Infrastructure-as-Code for the Withings IoMT platform.
 
 ## Table of Contents
 
@@ -73,10 +73,3 @@ cd deployment
 # Perform a lint check
 pwsh -Command 'Invoke-ScriptAnalyzer -EnableExit -Path *.ps*1'
 ```
-
-## Links
-
-- Project homepage: [https://dev.azure.com/healthnext/WBA-H3](https://dev.azure.com/healthnext/WBA-H3)
-- Repository: [https://dev.azure.com/healthnext/\_git/WBA-H3](https://dev.azure.com/healthnext/_git/WBA-H3)
-- Issue tracker: [https://dev.azure.com/healthnext/WBA-H3/\_workitems/](https://dev.azure.com/healthnext/WBA-H3/_workitems/)
-- Build system: [https://dev.azure.com/healthnext/WBA-H3/\_build](https://dev.azure.com/healthnext/WBA-H3/_build)
