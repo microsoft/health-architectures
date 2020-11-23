@@ -1,6 +1,6 @@
 {
   "project_info": {
-    "project_number": "435263059548",
+    "project_number": "[REPLACE_ME]",
     "firebase_url": "https://wba-client.firebaseio.com",
     "project_id": "wba-client",
     "storage_bucket": "wba-client.appspot.com"
@@ -8,27 +8,27 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:435263059548:android:2a3d6387417dab35901899",
+        "mobilesdk_app_id": "[REPLACE_ME]",
         "android_client_info": {
           "package_name": "com.h3.contosoiomtclient"
         }
       },
       "oauth_client": [
         {
-          "client_id": "435263059548-2kaj6pqqd0kjnforfsou1vfhsghheroq.apps.googleusercontent.com",
+          "client_id": "[REPLACE_ME]",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDxqW25ST3Ksk2GDJSt2oWRybez7EAxp-o"
+          "current_key": "[REPLACE_ME]-o"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "435263059548-2kaj6pqqd0kjnforfsou1vfhsghheroq.apps.googleusercontent.com",
+              "client_id": "[REPLACE_ME]",
               "client_type": 3
             }
           ]
