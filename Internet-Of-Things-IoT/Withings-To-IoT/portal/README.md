@@ -9,6 +9,7 @@ Gatsby based client portal for H3.
 - [Getting started](#getting-started)
   - [Clone the mono-repo](#clone-the-mono-repo)
   - [Install project dependencies](#install-project-dependencies)
+  - [Replace environment variables](#replace-environment-variables)
   - [Start the development server](#start-the-development-server)
   - [Code quality](#code-quality)
     - [Type checking](#type-checking)
