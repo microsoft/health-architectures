@@ -7,6 +7,3 @@ This repository holds the mono-repo for the Withings IoMT platform which consist
 - [Mobile client application](./mobile/README.md)
 - [Web client application](./portal/README.md)
 
-### Replace environment variables
-
-Environment variables are used to configure the needed dependencies. Search code/scripts and replace "REPLACE_ME" with corresponding values
