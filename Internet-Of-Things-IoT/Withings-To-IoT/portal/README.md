@@ -57,6 +57,16 @@ $ cd portal
 $ npm install
 ```
 
+### Replace environment variables
+
+Environment variables are used to configure the needed dependencies. The file is located in `env/.env.development`
+
+- Azure AD B2C account (includes B2C policies for forgotten passwords, sign in & sign up)
+
+- Withings account
+
+- Base endpoint path for api calls
+
 ### Start the development server
 
 To start the local development server, from your terminal run:
