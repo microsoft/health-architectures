@@ -9,6 +9,7 @@ Deployment scripts and Infrastructure-as-Code for the Withings IoMT platform.
 - [Getting started](#getting-started)
   - [Clone the mono-repo](#clone-the-mono-repo)
   - [Install project dependencies](#install-project-dependencies)
+  - [Replace environment variables](#replace-environment-variables)
   - [Run the scripts](#run-the-scripts)
   - [Code quality](#code-quality)
     - [Linting](#linting)
