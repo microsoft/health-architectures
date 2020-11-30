@@ -85,6 +85,10 @@ pwsh ./deploy.ps1 \
   -SaveLocalSettings
 ```
 
+### Replace environment variables
+
+Environment variables are used to configure the needed dependencies. Search code/scripts and replace "REPLACE_ME" with corresponding values
+
 ### Start the development server
 
 To start the local development server, from your terminal run:

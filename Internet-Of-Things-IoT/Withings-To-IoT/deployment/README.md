@@ -48,6 +48,10 @@ After cloning the mono-repo, switch to the deployment directory and install the 
 pwsh deployment/install-dependencies.ps1
 ```
 
+### Replace environment variables
+
+Environment variables are used to configure the needed dependencies. Search code/scripts and replace "REPLACE_ME" with corresponding values
+
 ### Run the scripts
 
 The following scripts are available:
