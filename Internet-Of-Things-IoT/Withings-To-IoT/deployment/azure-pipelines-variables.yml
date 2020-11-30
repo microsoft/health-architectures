@@ -5,16 +5,16 @@ variables:
   PIP_CACHE_DIR: $(Pipeline.Workspace)/.pip
   npm_config_cache: $(Pipeline.Workspace)/.npm
 
-  firebaseSenderId: "435263059548"
-  iosBundleId: com.microsoft.h3.contoso-iomt-client
-  iosKeyId: 32J8X8C3A7
-  iosTeamId: PS3NNBWS4R
+  firebaseSenderId: "[REPLACE_ME]"
+  iosBundleId: [REPLACE_ME]
+  iosKeyId: [REPLACE_ME]
+  iosTeamId: [REPLACE_ME]
   appLocation: SouthCentralUS
-  withingsClientId: 5e88175faf8c4e241ab6706b502ca04c08b083b447f1a478fb1e1593d51d24be
-  b2cClientId: 1d8cac68-2480-41a2-8862-ddb1b860f857
-  b2cTenantName: h3dev
-  b2cTenantId: 4923f76a-4c9f-403c-8db1-8d75fb37e910
+  withingsClientId: [REPLACE_ME]
+  b2cClientId: [REPLACE_ME]
+  b2cTenantName: [REPLACE_ME]
+  b2cTenantId: [REPLACE_ME]
   b2cPolicyName: B2C_1_susi
-  servicePrincipalAppId: ad50224b-e9a7-4028-9201-6c67befb9fdf
-  servicePrincipalTenant: 72f988bf-86f1-41af-91ab-2d7cd011db47
-  servicePrincipalSubscription: bd4ef697-2bb3-490e-b480-21bed150e2ba
+  servicePrincipalAppId: [REPLACE_ME]
+  servicePrincipalTenant: [REPLACE_ME]
+  servicePrincipalSubscription: [REPLACE_ME]
