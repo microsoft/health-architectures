@@ -75,7 +75,7 @@ namespace FHIRProxy
             log.LogInformation($"Instanciating FHIR Client Proxy");
             FHIRClient fhirClient = FHIRClientFactory.getClient(log);
             int i_link_days = 0;
-            int.TryParse(System.Environment.GetEnvironmentVariable("LINK_DAYS"), out i_link_days);
+            int.TryParse(System.Environment.GetEnvironmentVariable("FP-LINK-DAYS"), out i_link_days);
             if (i_link_days == 0) i_link_days = 365;
             //Load the resource to Link
             var fhirresp = await fhirClient.LoadResource(res + "/" + id, null, false, req.Headers);

@@ -9,7 +9,7 @@ IFS=$'\n\t'
 #HL72FHIR Workf Setup --- Author Steve Ordahl Principal Architect Health Data Platform
 #
 
-usage() { echo "Usage: $0 -i <subscriptionId> -g <resourceGroupName> -l <resourceGroupLocation> -p <prefix>" 1>&2; exit 1; }
+usage() { echo "Usage: $0 -i <subscriptionId> -g <resourceGroupName> -l <resourceGroupLocation> -p <prefix> -k <keyvault>" 1>&2; exit 1; }
 
 function fail {
   echo $1 >&2
@@ -36,37 +36,25 @@ declare defsubscriptionId=""
 declare subscriptionId=""
 declare resourceGroupName=""
 declare resourceGroupLocation=""
-declare storageAccountNameSuffix="store"$RANDOM
-declare storageConnectionString=""
-declare evhubnamespaceName="fehub"$RANDOM
-declare evhub="fhirevents"
-declare evconnectionString=""
-declare serviceplanSuffix="asp"
-declare faname=fhirevt$RANDOM
-declare faresourceid=""
-declare fakey=""
-declare deployzip="../FHIR/FHIREventProcessor/distribution/publish.zip"
 declare deployprefix=""
 declare defdeployprefix=""
-declare fsurl=""
-declare fsclientid=""
-declare fssecret=""
-declare fstenant=""
-declare fsaud=""
-declare fsdefaud="https://azurehealthcareapis.com"
 declare hl7storename=""
-declare hl7rgname=""
-declare hl7sbnamespace=""
 declare hl7sbqueuename=""
 declare hl7storekey=""
 declare hl7sbconnection=""
 declare hl7convertername="hl7conv"
 declare hl7converterrg=""
-declare uid=$(uuidgen)
-declare hl7convertkey=${uid//-}
+declare hl7convertkey=""
 declare hl7converterinstance=""
 declare stepresult=""
 declare fahost=""
+declare kvname=""
+declare kvexists=""
+declare fpclientid=""
+declare fptenantid=""
+declare fpsecret=""
+declare fphost=""
+declare repurls=""
 # Initialize parameters specified from command line
 while getopts ":i:g:n:l:p" arg; do
 	case "${arg}" in
@@ -83,6 +71,9 @@ while getopts ":i:g:n:l:p" arg; do
 			;;
 		l)
 			resourceGroupLocation=${OPTARG}
+			;;
+		k)
+			kvname=${OPTARG}
 			;;
 		esac
 done
@@ -140,9 +131,23 @@ if [[ -z "$deployprefix" ]]; then
     deployprefix=${deployprefix,,}
 	[[ "${deployprefix:?}" ]]
 fi
-if [ -z "$subscriptionId" ] || [ -z "$resourceGroupName" ]; then
-	echo "Either one of subscriptionId, resourceGroupName is empty"
+if [[ -z "$kvname" ]]; then
+	echo "Ente keyvault name that contains ingest and proxy configuration: "
+	read kvname
+fi
+if [ -z "$subscriptionId" ] || [ -z "$resourceGroupName" ] || [ -z "$kvname" ]; then
+	echo "Either one of subscriptionId, resourceGroupName or keyvault is empty"
 	usage
+fi
+echo "Setting subscription id..."
+#set the default subscription id
+az account set --subscription $subscriptionId
+#Check KV exists
+echo "Checking for keyvault "$kvname"..."
+kvexists=$(az keyvault list --query "[?name == '$kvname'].name" --out tsv)
+if [[ -z "$kvexists" ]]; then
+	echo "Cannot Locate Key Vault "$kvname" this deployment requires access to the proxy keyvault...Is the Proxy Installed?"
+	exit 1
 fi
 #Prompt for Converter Resource group to avoid function app conflicts
 echo "Enter a resource group name to deploy the converter to ["$deployprefix$hl7convertername"]:"
@@ -157,66 +162,8 @@ fi
 if [ -z "$hl7converterrg" ] ; then
  	 hl7converterrg=$deployprefix$hl7convertername
 fi
-#Prompt for HL7Ingest Storage and Service Bus
-echo "Enter the name of the HL7 Ingest Resource Group:"
-read hl7rgname
-if [ -z "$hl7rgname" ] ; then
-	echo "You must provide the name of the resource group that contains the HL7 ingest platform"
-	exit 1;
-fi
-echo "Enter the name of the HL7 Ingest storage account:"
-read hl7storename
-if [ -z "$hl7storename" ] ; then
-	echo "You must provide the name of the storage account of the HL7 ingest platform"
-	exit 1;
-fi
-echo "Enter the name of the HL7 ServiceBus namespace:"
-read hl7sbnamespace
-if [ -z "$hl7sbnamespace" ] ; then
-	echo "You must provide the namespace name of the service bus of the HL7 ingest platform"
-	exit 1;
-fi
-echo "Enter the name of the HL7 ServiceBus destination queue:"
-read hl7sbqueuename
-if [ -z "$hl7sbqueuename" ] ; then
-	echo "You must provide the name of the service bus queue of the HL7 ingest platform"
-	exit 1;
-fi
-#Prompt for FHIR Server Parameters
-echo "Enter the destination FHIR Server URL:"
-read fsurl
-if [ -z "$fsurl" ] ; then
-	echo "You must provide a destination FHIR Server URL"
-	exit 1;
-fi
-echo "Enter the FHIR Server Service Client Application ID:"
-read fsclientid
-if [ -z "$fsclientid" ] ; then
-	echo "You must provide a Service Client Application ID"
-	exit 1;
-fi
-echo "Enter the FHIR Server Service Client Secret:"
-read fssecret
-if [ -z "$fssecret" ] ; then
-	echo "You must provide a Service Client Secret"
-	exit 1;
-fi
-echo "Enter the FHIR Server/Service Client Audience/Resource ["$fsdefaud"]:"
-	read fsaud
-	if [ -z "$fsaud" ] ; then
-		fsaud=$fsdefaud
-	fi
-	[[ "${fsaud:?}" ]]
-echo "Enter the FHIR Server/Service Client Tenant ID:"
-read fstenant
-if [ -z "$fstenant" ] ; then
-	echo "You must provide a FHIR Server/Service Client Tenant"
-	exit 1;
-fi
 
-echo "Setting subscription id and checking resource groups..."
-#set the default subscription id
-az account set --subscription $subscriptionId
+echo "Checking resource groups..."
 
 set +e
 
@@ -242,59 +189,50 @@ if [ $(az group exists --name $hl7converterrg) = false ]; then
 else
 	echo "Using existing resource group for converter deployment..."
 fi
-#Set up variables
-faresourceid="/subscriptions/"$subscriptionId"/resourceGroups/"$resourceGroupName"/providers/Microsoft.Web/sites/"$faname
 #Start deployment
 echo "Starting HL72FHIR Workflow Platform deployment..."
 (
-		#set -x
-		#Create Storage Account
-		echo "Creating Storage Account["$deployprefix$storageAccountNameSuffix"]..."
-		stepresult=$(az storage account create --name $deployprefix$storageAccountNameSuffix --resource-group $resourceGroupName --location  $resourceGroupLocation --sku Standard_LRS --encryption-services blob --kind StorageV2)
-		echo "Retrieving Storage Account Connection String..."
-		storageConnectionString=$(az storage account show-connection-string -g $resourceGroupName -n $deployprefix$storageAccountNameSuffix --query "connectionString" --output tsv)
-		#Create EventHub Bus Namespace and Hub
-		echo "Creating FHIR Event Hub Namespace ["$evhubnamespaceName"]..."
-		stepresult=$(az eventhubs namespace create --name $evhubnamespaceName --resource-group $resourceGroupName -l $resourceGroupLocation)
-		# Create eventhub for fhirevents
-		echo "Creating FHIR Event Hub ["$evhub"]..."
-		stepresult=$(az eventhubs eventhub create --name $evhub --resource-group $resourceGroupName --namespace-name $evhubnamespaceName)
-		echo "Retrieving Event Hub Connection String..."
-		evconnectionString=$(az eventhubs namespace authorization-rule keys list --resource-group $resourceGroupName --namespace-name $evhubnamespaceName --name RootManageSharedAccessKey --query primaryConnectionString --output tsv)
-		#Create FHIREventProcessor Function App
-		#Create Service Plan
-		echo "Creating FHIREventProcessor Function App Service Plan["$deployprefix$serviceplanSuffix"]..."
-		stepresult=$(az appservice plan create -g  $resourceGroupName -n $deployprefix$serviceplanSuffix --number-of-workers 2 --sku B1)
-		#Create the Function App
-		echo "Creating FHIREventProcessor Function App ["$faname"]..."
-		fahost=$(az functionapp create --name $faname --storage-account $deployprefix$storageAccountNameSuffix  --plan $deployprefix$serviceplanSuffix  --resource-group $resourceGroupName --runtime dotnet --os-type Windows --functions-version 2 --query defaultHostName --output tsv)
-		#Add App Settings
-		echo "Configuring FHIREventProcessor Function App ["$faname"]..."
-		stepresult=$(az functionapp config appsettings set --name $faname  --resource-group $resourceGroupName --settings FS_URL=$fsurl FS_TENANT_NAME=$fstenant FS_CLIENT_ID=$fsclientid FS_SECRET=$fssecret FS_RESOURCE=$fsaud EventHubConnection=$evconnectionString EventHubName=$evhub)
-		echo "Deploying FHIREventProcessor Function App from repo to host ["$fahost"]..."
-		#deployment from git repo
-		stepresult=$(retry az functionapp deployment source config-zip --name $faname --resource-group $resourceGroupName --src $deployzip)
 		#Deploy HL7 FHIR Converter
 		hl7converterinstance=$deployprefix$hl7convertername$RANDOM
+		echo "Loading configuration settings from key vault "$kvname"..."
+		faname=$(az keyvault secret show --vault-name $kvname --name FP-HOST --query "value" --out tsv)
+		#Get and Parse HL7 Storage Account String
+		stepresult=$(az keyvault secret show --vault-name $kvname --name HL7ING-STORAGEACCT --query "value" --out tsv)
+		IFS=';' read -ra ADDR <<< $stepresult
+		for i in "${ADDR[@]}"; do
+			if [[ $i = AccountName* ]]
+			then
+			   hl7storename=${i/AccountName=/}
+			fi
+			if [[ $i = AccountKey* ]]
+			then
+			   hl7storekey=${i/AccountKey=/}
+			fi
+		done
+		IFS=$'\n\t'
+		hl7sbconnection=$(az keyvault secret show --vault-name $kvname --name HL7ING-SERVICEBUS-CONNECTION --query "value" --out tsv)
+		hl7sbqueuename=$(az keyvault secret show --vault-name $kvname --name HL7ING-QUEUENAME --query "value" --out tsv)
+		fpclientid=$(az keyvault secret show --vault-name $kvname --name FP-RBAC-CLIENT-ID --query "value" --out tsv)
+		fptenantid=$(az keyvault secret show --vault-name $kvname --name FP-RBAC-TENANT-NAME --query "value" --out tsv)
+		fpsecret=$(az keyvault secret show --vault-name $kvname --name FP-RBAC-CLIENT-SECRET --query "value" --out tsv)
+		fphost=$(az keyvault secret show --vault-name $kvname --name FP-HOST --query "value" --out tsv)
+		repurls="https://"$fphost"/.auth/login/aad/callback https://logic-apis-"$resourceGroupLocation".consent.azure-apim.net/redirect"
 		echo "Deploying FHIR Converter ["$hl7converterinstance"] to resource group ["$hl7converterrg"]..."
-		stepresult=$(az group deployment create -g $hl7converterrg --template-uri https://raw.githubusercontent.com/microsoft/FHIR-Converter/master/deploy/default-azuredeploy.json --parameters serviceName=$hl7converterinstance --parameters apiKey=$hl7convertkey)
-		echo "Deploying Custom Logic App Connector for FHIR Server..."
-		stepresult=$(az group deployment create -g $resourceGroupName --template-file hl7tofhir/LogicAppCustomConnectors/fhir_server_connect_template.json  --parameters fhirserverproxyhost=$faname".azurewebsites.net")
+		stepresult=$(az deployment group create -g $hl7converterrg --template-uri https://raw.githubusercontent.com/microsoft/FHIR-Converter/master/deploy/default-azuredeploy.json --parameters serviceName=$hl7converterinstance)
+		hl7convertkey=$(az functionapp config appsettings list --resource-group $hl7converterrg --name $hl7converterinstance --query "[?name == 'CONVERSION_API_KEYS'].value" --out tsv)
+		echo "Deploying Custom Logic App Connector for FHIR Server Proxy..."
+		stepresult=$(az deployment group create -g $resourceGroupName --template-file hl7tofhir/LogicAppCustomConnectors/fhir_server_connect_template.json  --parameters fhirserverproxyhost=$faname fhirserverproxyclientid=$fpclientid fhirserverproxytenantid=$fptenantid fhirserverproxyclientsecret=$fpsecret)
 		echo "Deploying Custom Logic App Connector for FHIR Converter..."
-		stepresult=$(az group deployment create -g $resourceGroupName --template-file hl7tofhir/LogicAppCustomConnectors/fhir_converter_connect_template.json  --parameters fhirconverterhost=$hl7converterinstance".azurewebsites.net")
-		echo "Loading HL7 Ingest connections/keys..."
-		hl7storekey=$(az storage account keys list -g $hl7rgname -n $hl7storename --query "[?keyName=='key1'].value" --output tsv)
-		hl7sbconnection=$(az servicebus namespace authorization-rule keys list --resource-group $hl7rgname --namespace-name $hl7sbnamespace --name RootManageSharedAccessKey --query primaryConnectionString --output tsv)
-		echo "Loading FHIREventProcessor Function Keys..."
-		fakey=$(retry az rest --method post --uri "https://management.azure.com"$faresourceid"/host/default/listKeys?api-version=2018-02-01" --query "functionKeys.default" --output tsv)
+		stepresult=$(az deployment group create -g $resourceGroupName --template-file hl7tofhir/LogicAppCustomConnectors/fhir_converter_connect_template.json --parameters fhirconverterhost=$hl7converterinstance".azurewebsites.net")
 		echo "Deploying HL72FHIR Logic App..."
-		stepresult=$(az group deployment create -g $resourceGroupName --template-file hl7tofhir/hl72fhir.json  --parameters HL7FHIRConverter_1_api_key=$hl7convertkey azureblob_1_accountName=$hl7storename azureblob_1_accessKey=$hl7storekey FHIRServerProxy_1_api_key=$fakey servicebus_1_connectionString=$hl7sbconnection servicebus_1_queue=$hl7sbqueuename)
+		stepresult=$(az deployment group create -g $resourceGroupName --template-file hl7tofhir/hl72fhir.json  --parameters HL7FHIRConverter_1_api_key=$hl7convertkey azureblob_1_accountName=$hl7storename azureblob_1_accessKey=$hl7storekey servicebus_1_connectionString=$hl7sbconnection servicebus_1_queue=$hl7sbqueuename)
+		set +e
+		echo "Updating callback URLs for FHIR Proxy SP from Logic App..."
+		stepresult=$(az ad app update --id $fpclientid --reply-urls $repurls)
 		echo " "
 		echo "************************************************************************************************************"
 		echo "HL72FHIR Workflow Platform has successfully been deployed to group "$resourceGroupName" on "$(date)
 		echo "Please note the following reference information for future use:"
-		echo "Your FHIR EventHub namespace is: "$evhubnamespaceName
-		echo "Your FHIR EventHub name is: "$evhub
 		echo "Your HL7 FHIR Converter Host is: "$hl7converterinstance
 		echo "Your HL7 FHIR Converter Key is: "$hl7convertkey
 		echo "Your HL7 FHIR Converter Resource Group is: "$hl7converterrg

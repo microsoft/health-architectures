@@ -43,7 +43,7 @@ namespace hl7ingest
         [FunctionName("hl7ingest")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req,
-            [Blob("%StorageAccountBlobContainer%", Connection ="StorageAccount")] CloudBlobContainer container,ILogger log)
+            [Blob("%HL7ING-STORAGEACCT-BLOB-CONTAINER%", Connection ="HL7ING-STORAGEACCT")] CloudBlobContainer container,ILogger log)
         {
             string contenttype = req.ContentType;
             log.LogInformation("hl7 ingest HTTP trigger function fired");
@@ -75,13 +75,13 @@ namespace hl7ingest
                     {
                         if (queueClient == null)
                         {
-                            queueClient = new QueueClient(Utilities.GetEnvironmentVariable("ServiceBusConnection"), Utilities.GetEnvironmentVariable("QueueName","hl7queue"));
+                            queueClient = new QueueClient(Utilities.GetEnvironmentVariable("HL7ING-SERVICEBUS-CONNECTION"), Utilities.GetEnvironmentVariable("HL7ING-QUEUENAME","hl7queue"));
                         }   
                     }
                 }
-                string messageBody = "{\"container\":\"" + Utilities.GetEnvironmentVariable("StorageAccountBlobContainer") + "\",\"filename\":\"" + ds +"\",\"msgtype\":\"" + msgtype + "\",\"msgevent\":\"" + msgtrigger + "\",\"ctlid\":\"" + cntrlid + "\"}";
+                string messageBody = "{\"container\":\"" + Utilities.GetEnvironmentVariable("HL7ING-STORAGEACCT-BLOB-CONTAINER") + "\",\"filename\":\"" + ds +"\",\"msgtype\":\"" + msgtype + "\",\"msgevent\":\"" + msgtrigger + "\",\"ctlid\":\"" + cntrlid + "\"}";
                 var message = new Message(Encoding.UTF8.GetBytes(messageBody));
-                log.LogInformation($"Sending message: {messageBody} to queue: {Utilities.GetEnvironmentVariable("QueueName","hl7queue")}");
+                log.LogInformation($"Sending message: {messageBody} to queue: {Utilities.GetEnvironmentVariable("HL7ING-QUEUENAME","hl7queue")}");
                 // Send the message to the queue
                 await queueClient.SendAsync(message);
                 return retVal;

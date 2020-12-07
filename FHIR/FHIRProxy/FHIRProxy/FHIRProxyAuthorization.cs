@@ -37,9 +37,9 @@ namespace FHIRProxy
             ClaimsPrincipal principal = executingContext.Arguments["principal"] as ClaimsPrincipal;
             ClaimsIdentity ci = (ClaimsIdentity)principal.Identity;
            
-            bool admin = ci.IsInFHIRRole(Environment.GetEnvironmentVariable("ADMIN_ROLE"));
-            bool reader = ci.IsInFHIRRole(Environment.GetEnvironmentVariable("READER_ROLE"));
-            bool writer = ci.IsInFHIRRole(Environment.GetEnvironmentVariable("WRITER_ROLE"));
+            bool admin = ci.IsInFHIRRole(Environment.GetEnvironmentVariable("FP-ADMIN-ROLE"));
+            bool reader = ci.IsInFHIRRole(Environment.GetEnvironmentVariable("FP-READER-ROLE"));
+            bool writer = ci.IsInFHIRRole(Environment.GetEnvironmentVariable("FP-WRITER-ROLE"));
             bool ispostcommand = req.Method.Equals("POST") && id.Equals("_search") && reader;
             string inroles = "";
             if (admin) inroles += "A";
@@ -68,14 +68,15 @@ namespace FHIRProxy
             }
             else
             {
+                string passheader = req.Headers["X-MS-AZUREFHIR-AUDIT-PROXY"];
+                if (string.IsNullOrEmpty(passheader)) passheader = executingContext.FunctionName;
                 //Since we are proxying with service client need to ensure authenticated proxy principal is audited
                 req.Headers.Add(Utils.AUTH_STATUS_HEADER, ((int)System.Net.HttpStatusCode.OK).ToString());
                 req.Headers.Add(Utils.FHIR_PROXY_ROLES, inroles);
                 req.Headers.Add("X-MS-AZUREFHIR-AUDIT-USERID", principal.Identity.Name);
                 req.Headers.Add("X-MS-AZUREFHIR-AUDIT-TENANT", ci.Tenant());
                 req.Headers.Add("X-MS-AZUREFHIR-AUDIT-SOURCE", req.HttpContext.Connection.RemoteIpAddress.ToString());
-                req.Headers.Add("X-MS-AZUREFHIR-AUDIT-PROXY", $"{executingContext.FunctionName}");
-               
+                req.Headers.Add("X-MS-AZUREFHIR-AUDIT-PROXY", passheader);
             }
           
             return base.OnExecutingAsync(executingContext, cancellationToken);

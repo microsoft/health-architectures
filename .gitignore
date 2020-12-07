@@ -8,3 +8,4 @@
 /HL7Conversion/SmartHL7.Message.Sender.exe
 /HL7Conversion/.vs
 /FHIR/FHIRProxy/results
+/HL7Conversion/test.bash

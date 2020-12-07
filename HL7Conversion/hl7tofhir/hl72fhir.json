@@ -43,13 +43,7 @@
     },
     "FHIRServerProxy_1_Connection_DisplayName": {
       "type": "string",
-      "defaultValue": "FHIR Server"
-    },
-    "FHIRServerProxy_1_api_key": {
-      "type": "securestring",
-      "metadata": {
-        "description": "The Function Key for this api"
-      }
+      "defaultValue": "FHIR Server Proxy"
     },
     "servicebus_1_Connection_Name": {
       "type": "string",
@@ -170,7 +164,7 @@
                 },
                 "method": "post",
                 "body": "@body('ConvertHL7WithTemplate')['fhirResource']",
-                "path": "/api/import"
+                "path": "/api/fhirproxy"
               },
               "runAfter": {
                 "ConvertHL7WithTemplate": [
@@ -290,11 +284,8 @@
         "api": {
           "id": "[resourceId('Microsoft.Web/customApis', 'FHIRServerProxy')]"
         },
-        "displayName": "[parameters('FHIRServerProxy_1_Connection_DisplayName')]",
-        "parameterValues": {
-          "api_key": "[parameters('FHIRServerProxy_1_api_key')]"
-        }
-      }
+        "displayName": "[parameters('FHIRServerProxy_1_Connection_DisplayName')]"
+       }
     },
     {
       "type": "MICROSOFT.WEB/CONNECTIONS",

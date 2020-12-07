@@ -46,14 +46,12 @@ Please note you should deploy this proxy into a tenant that you control Applicat
    + The Client Secret for the FHIR Service Client
    + The AAD Tenant ID for the FHIR Server/Service Client
    + The Audience/Resource for the FHIR Server/Service Client typically https://<I>[yourfhirservername]</I>.azurehealthcareapis.com for Azure API for FHIR
-6. [If you are running Windows 10 make sure you have enabled Windows Linux Subsystem](https://code.visualstudio.com/remote-tutorials/wsl/enable-wsl) and [Installed a Linux Distribution](https://code.visualstudio.com/remote-tutorials/wsl/install-linux)
-7. [Install Azure CLI 2.0 on Linux based System or Windows Linux Subsystem](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest)
-8. [Install jq for your environment](https://stedolan.github.io/jq/download/)
-9. [Download/Clone this repo](https://github.com/microsoft/health-architectures)
-10. Open a bash shell into the Azure CLI 2.0 environment
-11. Switch to the FHIR/FHIRproxy subdirectory of this repo ```cd FHIR/FHIRProxy```
-12. Run the ```deployfhirproxy.bash``` script and follow the prompts
-13. Congratulations you now have a Secure FHIR Proxy instance with authentication running. You can now add users/groups for authorized access (see below)
+6. [Open Azure Cloud Shell](https://shell.azure.com) you can also access this from [azure portal](https://portal.azure.com)
+7. Select Bash Shell 
+8. Clone this repo ```git clone https://github.com/microsoft/health-architectures```
+9. Switch to the FHIR/FHIRproxy subdirectory of this repo ```cd FHIR/FHIRProxy```
+10. Run the ```deployfhirproxy.bash``` script and follow the prompts
+11. Congratulations you now have a Secure FHIR Proxy instance with authentication running. You can now add users/groups for authorized access (see below)
 
 # Proxy Endpoint
 The new endpoint for your FHIR Server should now be: ```https://<secure proxy url from above>/api/fhirproxy```. You can use any supported FHIR HTTP verb and any FHIR compliant request/query
@@ -98,17 +96,16 @@ Important:  Most pre/post processing modules will require additional [configurat
 ## Enabling Pre/Post Processing Modules
 By default, no pre/post processors are configured to run.  You will need to enable and configure them following the steps below:
 
-1. [Download/Clone this repo](https://github.com/microsoft/health-architectures) (if you have not done so)
-2. Open a bash shell into the Azure CLI 2.0 environment
-3. Switch to the FHIR/FHIRproxy subdirectory of this repo ```cd FHIR/FHIRProxy```
-4. Run the ```configmodules.bash``` script and follow the prompts to launch the selector
-5. Using DOWN/UP ARROW KEYS move to the Pre/Post Processing module(s) you want to enable/disable press the SPACE bar to toggle enabled(*)
-6. To accept and configure selected processors TAB to OK and press ENTER, to abort TAB to Cancel and press ENTER
-![ConfigureModulesScreen](configmods.png)
+1. [Open Azure Cloud Shell](https://shell.azure.com) you can also access this from [azure portal](https://portal.azure.com)
+2. Select Bash Shell 
+3. Clone this repo (if needed) ```git clone https://github.com/microsoft/health-architectures```
+4. Switch to the FHIR/FHIRproxy subdirectory of this repo ```cd FHIR/FHIRProxy```
+5. Run the ```configmodules.bash``` script and follow the prompts to launch the selector
+5. Select the option number of a module to enable it (select it again to disable)
+6. To accept and configure selected processors press ENTER
 
 
-Note the utility does not read current configuration it will simply enable the modules you specify and update the function configuration. 
-The utility requires the linux dialog utility [whiptail](https://howtoinstall.co/en/ubuntu/trusty/whiptail)
+Note the utility does not read current configuration it will simply enable the modules you specify and update the function configuration. To disable all modules press enter without selecting options.  To escape menu selection and abort updates press CTRL-C 
 
 ## Date Sort Post-Processor
 This post process allows for date based sorting alternative on FHIR Servers that do not natively support _sort. The processor implements top level _sort=date or _sort=-date (reverse chron) query parameter for supported resource queries up to a hard maximum of 5000.</br>
@@ -131,27 +128,74 @@ You can use the data in the eventhub message to make decisions and get affected 
 
 This process requires two configuration settings on the function app:
 ```
-     EVENTHUB_CONNECTION: <A valid EventHub namespace connection string>
-     EVENTHUB_NAME: <A valid event hub in the specified event hub namespace connection>
+     FP-MOD-EVENTHUB-CONNECTION: <A valid EventHub namespace connection string>
+     FP-MOD-EVENTHUB-NAME: <A valid event hub in the specified event hub namespace connection>
 ```
 
 ## Profile Validation Pre-Processor
-This processor adds the ability to call external profile and/or standard schema validation support for FHIR Servers who do not implement or support specific profile validation.
+This processor adds the ability to call external profile and/or standard FHIR schema validation support for FHIR Servers who do not implement or support specific profile validation.
 This module expects external validation URLs to return an [OperationOutcome](https://www.hl7.org/fhir/operationoutcome.html) FHIR Resource.  The presence of issue entries will abort pre-processing and the FHIR Server call and the outcome will be returned to the client for resolution.
+Enforcement is via a profile enforecement policy file (detailed below)
 
-This process requires a configuration setting on the function app:
+This process requires the following configuration settings on the function app:
 ```
-    FHIRVALIDATION_URL:<A valid URL to a compliant FHIR Validation Server>
+    FP-MOD-FHIRVALIDATION-URL:<A valid URL to a compliant FHIR Validation Server>
+    FP-MOD-FHIRVALIDATION-POLICY-CONTAINER:<A valid container name in the FHIR Proxy Storage Account that contains profile enforcement file (Default is: fhirvalidator)>
+    FP-MOD-FHIRVALIDATION-POLICY-FILE:<A valid file name of profile enforcement policy file (Default is: profile_enforce_policy.json)>
 ```
 
-The health-architectures [FHIR Validator](https://github.com/microsoft/health-architectures/tree/master/FHIR/FHIRValidator) provides a Docker wrapped version of the org.hl7 FHIR Validator and can be used with this processor.  It supports FHIR R4 and [US Core](https://www.hl7.org/fhir/us/core/) profiles.  To specify a profile(s) to validate against you can pass in valid US core profile references using the ```ms-fp-profile``` query parameter.
-For example to validate a Patient resource for US Core compliance you would call the proxy with POST/PUT with the resource in the message body using the following url:
+<B>Profile Enforcement Policy File</B>
+The profile enforcement policy file is a JSON Document Object that allows you to define by resource type the profiles that the resource should be validated against before allowing write commits to your FHIR Server. The structure of the JSON Object in the file should be:
+```
+{ 
+    "enforce":[
+	    { 
+		    "resource":"<resource type>",
+		    "profiles":[	
+	            "<structure definition url>"
+		    ]
+	    }
+    ]
+}
+```
+For example the following file would enforce us-core-patient for Patient resources and us-core-condition for Condition resources:
+```
+{ 
+	"enforce":[
+		{ 
+			"resource":"Patient",
+			"profiles":[	
+				"http://hl7.org/fhir/us/core/StructureDefinition/us-core-patient"
+			]
+		},
+        { 
+			"resource":"Condition",
+			"profiles":[	
+				"http://hl7.org/fhir/us/core/StructureDefinition/us-core-condition"
+			]
+		}
+	]
+}
+```
+
+You may have multiple profiles per resource that are to be validated.  
+The proxy server will send these profiles as a collection of profile parameters on the query string to the FHIR Valadation server.
+For example:
+```
+https://<your validation server url>?profile=profileurl1&profile=profileurl2
+```
+
+
+If the policy file is not present or malformed the proxy server will call the FHIR Validator without specific profiles and the resource will be validated against R4 schema only.
+
+The health-architectures [FHIR Validator](https://github.com/microsoft/health-architectures/tree/master/FHIR/FHIRValidator) provides a Docker wrapped version of the org.hl7 FHIR Validator and can be used with this processor.  It supports FHIR R4 and [US Core](https://www.hl7.org/fhir/us/core/) profiles.
+For example to validate a Patient resource for US Core compliance you would configure the Profile Enforcement Policy file for the Patient resource and then call the proxy with POST/PUT with the resource in the message body using the following url:
 
 ```
-https://<secure proxy url from above>/api/fhirproxy/Patient?ms-fp-profile=http://hl7.org/fhir/us/core/StructureDefinition/us-core-patient
+https://<secure proxy url from above>/api/fhirproxy/Patient
 
 ```
-These profile(s) will be extracted and passed to the FHIR Validator.
+
 
 The validator also supports batch or transaction bundles as well analyzing each contained resource.  
 
@@ -319,7 +363,7 @@ Notes:
  
 This process requires configuration settings on the function app:
 ```
-    CONSENT_OPTOUT_CATEGORY:<A valid CodeableConcept search string to load access consent records>
+    FP-MOD-CONSENT-OPTOUT-CATEGORY:<A valid CodeableConcept search string to load access consent records>
 ```
 
 The recommended value for category in your consent records is LOINC code 59284-0 Consent Document the parameter value would be:

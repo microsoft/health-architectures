@@ -8,8 +8,45 @@ IFS=$'\n\t'
 #
 #FHIR Proxy Setup --- Author Steve Ordahl Principal Architect Health Data Platform
 #
-
-usage() { echo "Usage: $0 -i <subscriptionId> -g <resourceGroupName> -l <resourceGroupLocation> -p <prefix>" 1>&2; exit 1; }
+declare defsubscriptionId=""
+declare subscriptionId=""
+declare resourceGroupName=""
+declare resourceGroupLocation=""
+declare keyVaultAccountNameSuffix="kv"$RANDOM
+declare storageAccountNameSuffix="store"$RANDOM
+declare storageConnectionString=""
+declare redisAccountNameSuffix="cache"$RANDOM
+declare redisConnectionString=""
+declare redisKey=""
+declare serviceplanSuffix="asp"
+declare faname=""
+declare deffaname="sfp"$RANDOM
+declare fsurl=""
+declare fsclientid=""
+declare fssecret=""
+declare fstenant=""
+declare fsaud=""
+declare deployzip="distribution/publish.zip"
+declare deployprefix=""
+declare defdeployprefix=""
+declare stepresult=""
+declare fahost=""
+declare fakey=""
+declare faresourceid=""
+declare roleadmin="Administrator"
+declare rolereader="Reader"
+declare rolewriter="Writer"
+declare rolepatient="Patient"
+declare roleparticipant="Practitioner,RelatedPerson"
+declare roleglobal="DataScientist"
+declare spappid=""
+declare spsecret=""
+declare sptenant=""
+declare spreplyurls=""
+declare tokeniss=""
+declare preprocessors=""
+declare postprocessors=""
+declare msi=""
 
 function fail {
   echo $1 >&2
@@ -32,46 +69,11 @@ function retry {
     }
   done
 }
+function kvuri {
+	echo "@Microsoft.KeyVault(SecretUri=https://"$deployprefix$keyVaultAccountNameSuffix".vault.azure.net/secrets/"$@"/)"
+}
 
-declare defsubscriptionId=""
-declare subscriptionId=""
-declare resourceGroupName=""
-declare resourceGroupLocation=""
-declare storageAccountNameSuffix="store"$RANDOM
-declare storageConnectionString=""
-declare redisAccountNameSuffix="cache"$RANDOM
-declare redisConnectionString=""
-declare redisKey=""
-declare serviceplanSuffix="asp"
-declare faname=""
-declare deffaname="sfp"$RANDOM
-declare fsurl=""
-declare fsclientid=""
-declare fssecret=""
-declare fstenant=""
-declare fsaud=""
-declare fsdefaud="https://azurehealthcareapis.com"
-declare deployzip="distribution/publish.zip"
-declare deployprefix=""
-declare defdeployprefix=""
-declare stepresult=""
-declare fahost=""
-declare fakey=""
-declare faresourceid=""
-declare roleadmin="Administrator"
-declare rolereader="Reader"
-declare rolewriter="Writer"
-declare rolepatient="Patient"
-declare roleparticipant="Practitioner,RelatedPerson"
-declare roleglobal="DataScientist"
-declare spappid=""
-declare spsecret=""
-declare sptenant=""
-declare spreplyurls=""
-declare tokeniss=""
-declare preprocessors=""
-declare postprocessors=""
-
+usage() { echo "Usage: $0 -i <subscriptionId> -g <resourceGroupName> -l <resourceGroupLocation> -p <prefix>" 1>&2; exit 1; }
 # Initialize parameters specified from command line
 while getopts ":i:g:n:l:p" arg; do
 	case "${arg}" in
@@ -171,13 +173,13 @@ if [ ! -z "$fstenant" ] ; then
 	echo "Enter the FHIR Server Service Client Secret. Leave Empty for MSI[]:"
 	read fssecret
 fi
-echo "Enter the FHIR Server/Service Client Audience/Resource ["$fsdefaud"]:"
+echo "Enter the FHIR Server/Service Client Audience/Resource ["$fsurl"]:"
 	read fsaud
 	if [ -z "$fsaud" ] ; then
-		fsaud=$fsdefaud
+		fsaud=$fsurl
 	fi
 	[[ "${fsaud:?}" ]]
-
+echo "Setting default subscription and checking for resource group..."
 #set the default subscription id
 az account set --subscription $subscriptionId
 
@@ -200,17 +202,30 @@ faresourceid="/subscriptions/"$subscriptionId"/resourceGroups/"$resourceGroupNam
 echo "Starting Secure FHIR Proxy deployment..."
 (
 		#set -x
+		#Create Key Vault
+		echo "Creating Key Vault ["$deployprefix$keyVaultAccountNameSuffix"]..."
+		stepresult=$(az keyvault create --name $deployprefix$keyVaultAccountNameSuffix --resource-group $resourceGroupName --location  $resourceGroupLocation)
+		#Store FHIR Server Information
+		echo "Storing FHIR Server Information in Vault..."
+		stepresult=$(az keyvault secret set --vault-name $deployprefix$keyVaultAccountNameSuffix --name "FS-URL" --value $fsurl)
+		stepresult=$(az keyvault secret set --vault-name $deployprefix$keyVaultAccountNameSuffix --name "FS-TENANT-NAME" --value $fstenant)
+		stepresult=$(az keyvault secret set --vault-name $deployprefix$keyVaultAccountNameSuffix --name "FS-CLIENT-ID" --value $fsclientid)
+		stepresult=$(az keyvault secret set --vault-name $deployprefix$keyVaultAccountNameSuffix --name "FS-SECRET" --value $fssecret)
+		stepresult=$(az keyvault secret set --vault-name $deployprefix$keyVaultAccountNameSuffix --name "FS-RESOURCE" --value $fsaud)
+		
 		#Create Storage Account
 		echo "Creating Storage Account ["$deployprefix$storageAccountNameSuffix"]..."
 		stepresult=$(az storage account create --name $deployprefix$storageAccountNameSuffix --resource-group $resourceGroupName --location  $resourceGroupLocation --sku Standard_LRS --encryption-services blob)
 		echo "Retrieving Storage Account Connection String..."
 		storageConnectionString=$(az storage account show-connection-string -g $resourceGroupName -n $deployprefix$storageAccountNameSuffix --query "connectionString" --out tsv)
+		stepresult=$(az keyvault secret set --vault-name $deployprefix$keyVaultAccountNameSuffix --name "FP-STORAGEACCT" --value $storageConnectionString)
 		#Redis Cache to Support Proxy Modules
 		echo "Creating Redis Cache ["$deployprefix$redisAccountNameSuffix"]..."
 		stepresult=$(az redis create --location $resourceGroupLocation --name $deployprefix$redisAccountNameSuffix --resource-group $resourceGroupName --sku Basic --vm-size c0)
 		echo "Creating Redis Connection String..."
 		redisKey=$(az redis list-keys -g $resourceGroupName -n $deployprefix$redisAccountNameSuffix --query "primaryKey" --out tsv)
 		redisConnectionString=$deployprefix$redisAccountNameSuffix".redis.cache.windows.net:6380,password="$redisKey",ssl=True,abortConnect=False"
+		stepresult=$(az keyvault secret set --vault-name $deployprefix$keyVaultAccountNameSuffix --name "FP-REDISCONNECTION" --value $redisConnectionString)
 		#FHIR Proxy Function App
 		#Create Service Plan
 		echo "Creating Secure FHIR Proxy Function App Serviceplan["$deployprefix$serviceplanSuffix"]..."
@@ -218,6 +233,17 @@ echo "Starting Secure FHIR Proxy deployment..."
 		#Create the function app
 		echo "Creating Secure FHIR Proxy Function App ["$faname"]..."
 		fahost=$(az functionapp create --name $faname --storage-account $deployprefix$storageAccountNameSuffix  --plan $deployprefix$serviceplanSuffix  --resource-group $resourceGroupName --runtime dotnet --os-type Windows --functions-version 3 --query defaultHostName --output tsv)
+		stepresult=$(az functionapp stop --name $faname --resource-group $resourceGroupName)
+		stepresult=$(az keyvault secret set --vault-name $deployprefix$keyVaultAccountNameSuffix --name "FP-HOST" --value $fahost)
+		echo "Creating MSI for Function App..."
+		msi=$(az functionapp identity assign -g $resourceGroupName -n $faname --query "principalId" --out tsv)
+		echo "Setting KeyVault Policy to allow secret access..."
+		stepresult=$(az keyvault set-policy -n $deployprefix$keyVaultAccountNameSuffix --secret-permissions list get set --object-id $msi)
+		#Add App Settings
+		echo "Configuring Secure FHIR Proxy App ["$faname"]..."
+		stepresult=$(az functionapp config appsettings set --name $faname --resource-group $resourceGroupName --settings FP-PRE-PROCESSOR-TYPES=FHIRProxy.preprocessors.TransformBundlePreProcess FP-REDISCONNECTION=$(kvuri FP-REDISCONNECTION) FP-ADMIN-ROLE=$roleadmin FP-READER-ROLE=$rolereader FP-WRITER-ROLE=$rolewriter FP-GLOBAL-ACCESS-ROLES=$roleglobal FP-PATIENT-ACCESS-ROLES=$rolepatient FP-PARTICIPANT-ACCESS-ROLES=$roleparticipant FP-STORAGEACCT=$(kvuri FP-STORAGEACCT) FS-URL=$(kvuri FS-URL) FS-TENANT-NAME=$(kvuri FS-TENANT-NAME) FS-CLIENT-ID=$(kvuri FS-CLIENT-ID) FS-SECRET=$(kvuri FS-SECRET) FS-RESOURCE=$(kvuri FS-RESOURCE))
+		echo "Deploying Secure FHIR Proxy Function App from source repo to ["$fahost"]..."
+		stepresult=$(retry az functionapp deployment source config-zip --name $faname --resource-group $resourceGroupName --src $deployzip)
 		echo "Creating Service Principal for AAD Auth"
 		stepresult=$(az ad sp create-for-rbac -n "https://"$fahost)
 		spappid=$(echo $stepresult | jq -r '.appId')
@@ -225,29 +251,29 @@ echo "Starting Secure FHIR Proxy deployment..."
 		spsecret=$(echo $stepresult | jq -r '.password')
 		spreplyurls="https://"$fahost"/.auth/login/aad/callback"
 		tokeniss="https://sts.windows.net/"$sptenant
+		echo "Storing FHIR Proxy Client Information in Vault..."
+		stepresult=$(az keyvault secret set --vault-name $deployprefix$keyVaultAccountNameSuffix --name "FP-RBAC-NAME" --value "https://"$fahost)
+		stepresult=$(az keyvault secret set --vault-name $deployprefix$keyVaultAccountNameSuffix --name "FP-RBAC-TENANT-NAME" --value $sptenant)
+		stepresult=$(az keyvault secret set --vault-name $deployprefix$keyVaultAccountNameSuffix --name "FP-RBAC-CLIENT-ID" --value $spappid)
+		stepresult=$(az keyvault secret set --vault-name $deployprefix$keyVaultAccountNameSuffix --name "FP-RBAC-CLIENT-SECRET" --value $spsecret)
 		echo "Adding Sign-in User Read Permission on Graph API..."
 		stepresult=$(az ad app permission add --id $spappid --api 00000002-0000-0000-c000-000000000000 --api-permissions 311a71cc-e848-46a1-bdf8-97ff7156d8e6=Scope)
-		echo "Granting Admin Consent to Permission..."
-		stepresult=$(az ad app permission grant --id $spappid --api 00000002-0000-0000-c000-000000000000)
+		#echo "Granting Admin Consent to Permission..."
+		#stepresult=$(az ad app permission grant --id $spappid --api 00000002-0000-0000-c000-000000000000)
 		echo "Configuring reply urls for app..."
 		stepresult=$(az ad app update --id $spappid --reply-urls $spreplyurls)
 		echo "Adding FHIR Custom Roles to Manifest..."
 		stepresult=$(az ad app update --id $spappid --app-roles @fhirroles.json)
-		#Add App Settings
-		echo "Configuring Secure FHIR Proxy App ["$faname"]..."
-		stepresult=$(az functionapp config appsettings set --name $faname  --resource-group $resourceGroupName --settings REDISCONNECTION=$redisConnectionString ADMIN_ROLE=$roleadmin READER_ROLE=$rolereader WRITER_ROLE=$rolewriter GLOBAL_ACCESS_ROLES=$roleglobal PATIENT_ACCESS_ROLES=$rolepatient PARTICIPANT_ACCESS_ROLES=$roleparticipant STORAGEACCT=$storageConnectionString FS_URL=$fsurl FS_TENANT_NAME=$fstenant FS_CLIENT_ID=$fsclientid FS_SECRET=$fssecret FS_RESOURCE=$fsaud)
-		#deployment from publish directory
-		echo "Deploying Secure FHIR Proxy Function App from source repo to ["$fahost"]..."
-		stepresult=$(retry az functionapp deployment source config-zip --name $faname --resource-group $resourceGroupName --src $deployzip)
 		echo "Enabling AAD Authorization and Securing the FHIR Proxy"
 		stepresult=$(az webapp auth update -g $resourceGroupName -n $faname --enabled true --action LoginWithAzureActiveDirectory --aad-allowed-token-audiences $fahost --aad-client-id $spappid --aad-client-secret $spsecret --aad-token-issuer-url $tokeniss)
+		echo "Starting fhir proxy function app..."
+		stepresult=$(az functionapp start --name $faname --resource-group $resourceGroupName)
 		echo " "
 		echo "************************************************************************************************************"
 		echo "Secure FHIR Proxy Platform has successfully been deployed to group "$resourceGroupName" on "$(date)
 		echo "Please note the following reference information for future use:"
 		echo "Your secure fhir proxy host is: https://"$fahost
-		echo "Your secure fhir proxy application id is: "$spappid
-		echo "Your secure fhir proxy FHIR Server URL is: "$fsurl
+		echo "Your app configuration settings are stored securely in KeyVault: "$deployprefix$keyVaultAccountNameSuffix
 		echo "************************************************************************************************************"
 		echo " "
 )

@@ -34,13 +34,20 @@ namespace FHIRProxy.postprocessors
         private string[] _fhirSupportedResources = null;
         public FHIRCDSSyncAgentPostProcess2()
         {
-            
-            string _sbcfhirupdates = Utils.GetEnvironmentVariable("FP_FHIRUPDATES");
-            _fhirSupportedResources = Utils.GetEnvironmentVariable("FP_FHIRMappedResources", "").Split(",");
-            if (!string.IsNullOrEmpty(_sbcfhirupdates))
+            try
             {
-                ServiceBusConnectionStringBuilder sbc = new ServiceBusConnectionStringBuilder(_sbcfhirupdates);
-                _queueClient = new QueueClient(sbc);
+                string _sbcfhirupdates = Utils.GetEnvironmentVariable("SA-SERVICEBUSNAMESPACEFHIRUPDATES");
+                _fhirSupportedResources = Utils.GetEnvironmentVariable("SA-FHIRMAPPEDRESOURCES", "").Split(",");
+                if (!string.IsNullOrEmpty(_sbcfhirupdates))
+                {
+                    ServiceBusConnectionStringBuilder sbc = new ServiceBusConnectionStringBuilder(_sbcfhirupdates);
+                    sbc.EntityPath = Utils.GetEnvironmentVariable("SA-SERVICEBUSQUEUENAMEFHIRUPDATES");
+                    _queueClient = new QueueClient(sbc);
+                }
+            }
+            catch (Exception)
+            {
+
             }
         }
         public async Task<ProxyProcessResult> Process(FHIRResponse response, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id, string hist, string vid)
@@ -90,7 +97,7 @@ namespace FHIRProxy.postprocessors
                     stub["resource"]["meta"]["versionId"] = "1";
                     entries.Add(stub);
                 }
-                publishFHIREvents(entries,log);
+                await publishFHIREvents(entries,log);
 
 
 
@@ -105,7 +112,7 @@ namespace FHIRProxy.postprocessors
             return new ProxyProcessResult(true, "", "", response);
 
         }
-        private async void publishFHIREvents(JArray entries,ILogger log)
+        private async Task publishFHIREvents(JArray entries,ILogger log)
         {
          
                 if (!entries.IsNullOrEmpty())

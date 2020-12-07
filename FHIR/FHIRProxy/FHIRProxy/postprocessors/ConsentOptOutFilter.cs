@@ -41,10 +41,10 @@ namespace FHIRProxy.postprocessors
             FHIRResponse fr = response;
             if (!req.Method.Equals("GET")) return new ProxyProcessResult(true, "", "", fr);
             //Load the consent category code from settings
-            string consent_category = System.Environment.GetEnvironmentVariable("CONSENT_OPTOUT_CATEGORY");
+            string consent_category = System.Environment.GetEnvironmentVariable("FP-MOD-CONSENT-OPTOUT-CATEGORY");
             if (string.IsNullOrEmpty(consent_category))
             {
-                log.LogWarning("ConsentOptOutFilter: No value for CONSENT_OPTOUT_CATEGORY in settings...Filter will not execute");
+                log.LogWarning("ConsentOptOutFilter: No value for FP-MOD-CONSENT-OPTOUT-CATEGORY in settings...Filter will not execute");
                 return new ProxyProcessResult(true, "", "", fr);
             }
             if (fr == null || fr.Content == null || string.IsNullOrEmpty(fr.Content.ToString()))

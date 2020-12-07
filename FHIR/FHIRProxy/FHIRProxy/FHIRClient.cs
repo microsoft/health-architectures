@@ -260,7 +260,7 @@ namespace FHIRProxy
         }
         public FHIRResponse(string content, HttpResponseHeaders respheaders, HttpStatusCode status, bool parse = false) : this()
         {
-            string[] filterheaders = Utils.GetEnvironmentVariable("FS_RESPONSE_HEADER_NAME", "Date,Last-Modified,ETag,Location,Content-Location").Split(",");
+            string[] filterheaders = Utils.GetEnvironmentVariable("FS-RESPONSE-HEADER-NAME", "Date,Last-Modified,ETag,Location,Content-Location").Split(",");
             if (parse) this.Content = JObject.Parse(content);
             else this.Content = content;
             foreach(string head in filterheaders)

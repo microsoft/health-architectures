@@ -33,23 +33,23 @@ namespace FHIRProxy
             /* Get/update/check current bearer token to authenticate the proxy to the FHIR Server
              * The following parameters must be defined in environment variables:
              * To use Manged Service Identity or Service Client:
-             * FS_URL = the fully qualified URL to the FHIR Server
-             * FS_RESOURCE = the audience or resource for the FHIR Server for Azure API for FHIR should be https://azurehealthcareapis.com
+             * FS-URL = the fully qualified URL to the FHIR Server
+             * FS-RESOURCE = the audience or resource for the FHIR Server for Azure API for FHIR should be https://azurehealthcareapis.com
              * To use a Service Client Principal the following must also be specified:
-             * FS_TENANT_NAME = the GUID or UPN of the AAD tenant that is hosting FHIR Server Authentication
-             * FS_CLIENT_ID = the client or app id of the private client authorized to access the FHIR Server
-             * FS_SECRET = the client secret to pass to FHIR Server Authentication
+             * FS-TENANT-NAME = the GUID or UPN of the AAD tenant that is hosting FHIR Server Authentication
+             * FS-CLIENT-ID = the client or app id of the private client authorized to access the FHIR Server
+             * FS-SECRET = the client secret to pass to FHIR Server Authentication
             */
-            if (!string.IsNullOrEmpty(System.Environment.GetEnvironmentVariable("FS_RESOURCE")) && FHIRClient.isTokenExpired(_bearerToken))
+            if (!string.IsNullOrEmpty(System.Environment.GetEnvironmentVariable("FS-RESOURCE")) && FHIRClient.isTokenExpired(_bearerToken))
             {
                 lock (_lock)
                 {
                     if (FHIRClient.isTokenExpired(_bearerToken))
                     {
                         log.LogInformation("Token is expired...Obtaining new bearer token...");
-                         _bearerToken = FHIRClient.GetOAUTH2BearerToken(System.Environment.GetEnvironmentVariable("FS_RESOURCE"), System.Environment.GetEnvironmentVariable("FS_TENANT_NAME"),
-                                                                  System.Environment.GetEnvironmentVariable("FS_CLIENT_ID"), System.Environment.GetEnvironmentVariable("FS_SECRET")).GetAwaiter().GetResult();
-                        _fhirclient = new FHIRClient(System.Environment.GetEnvironmentVariable("FS_URL"), _bearerToken);
+                         _bearerToken = FHIRClient.GetOAUTH2BearerToken(System.Environment.GetEnvironmentVariable("FS-RESOURCE"), System.Environment.GetEnvironmentVariable("FS-TENANT-NAME"),
+                                                                  System.Environment.GetEnvironmentVariable("FS-CLIENT-ID"), System.Environment.GetEnvironmentVariable("FS-SECRET")).GetAwaiter().GetResult();
+                        _fhirclient = new FHIRClient(System.Environment.GetEnvironmentVariable("FS-URL"), _bearerToken);
                     }
                 }
             }

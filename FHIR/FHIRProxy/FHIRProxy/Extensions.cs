@@ -26,7 +26,7 @@ namespace FHIRProxy
     {
         public static bool SafeEquals(this string source,string compare)
         {
-            if (source==null || compare==null) return false;
+            if (compare==null) return false;
             return source.Equals(compare);
         }
         public static string SerializeList<T>(this List<T> thelist)
@@ -36,7 +36,7 @@ namespace FHIRProxy
         }
         public static List<T> DeSerializeList<T>(this string str)
         {
-            if (str == null) return null;
+            if (string.IsNullOrEmpty(str)) return null;
             return JsonConvert.DeserializeObject<List<T>>(str);
         }
         public static string FHIRResourceId(this JToken token)
