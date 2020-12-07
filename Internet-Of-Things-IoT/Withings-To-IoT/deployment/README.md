@@ -9,6 +9,7 @@ Deployment scripts and Infrastructure-as-Code for the Withings IoMT platform.
 - [Getting started](#getting-started)
   - [Clone the mono-repo](#clone-the-mono-repo)
   - [Install project dependencies](#install-project-dependencies)
+  - [Replace environment variables](#replace-environment-variables)
   - [Run the scripts](#run-the-scripts)
   - [Code quality](#code-quality)
     - [Linting](#linting)
@@ -47,6 +48,10 @@ After cloning the mono-repo, switch to the deployment directory and install the 
 # Install deployment dependencies
 pwsh deployment/install-dependencies.ps1
 ```
+
+### Replace environment variables
+
+Environment variables are used to configure the needed dependencies. Search code/scripts and replace "REPLACE_ME" with corresponding values
 
 ### Run the scripts
 

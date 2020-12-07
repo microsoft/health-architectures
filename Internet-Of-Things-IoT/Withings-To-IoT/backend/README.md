@@ -9,6 +9,7 @@ API and background processes for the H3 platform.
 - [Getting started](#getting-started)
   - [Clone the mono-repo](#clone-the-mono-repo)
   - [Install project dependencies](#install-project-dependencies)
+  - [Replace environment variables](#replace-environment-variables)
   - [Start the development server](#start-the-development-server)
   - [Run the end-to-end tests](#run-the-end-to-end-tests)
   - [Code quality](#code-quality)
@@ -84,6 +85,10 @@ pwsh ./deploy.ps1 \
   -AppName "<enter some app name here>" \
   -SaveLocalSettings
 ```
+
+### Replace environment variables
+
+Environment variables are used to configure the needed dependencies. Search code/scripts and replace "REPLACE_ME" with corresponding values
 
 ### Start the development server
 
