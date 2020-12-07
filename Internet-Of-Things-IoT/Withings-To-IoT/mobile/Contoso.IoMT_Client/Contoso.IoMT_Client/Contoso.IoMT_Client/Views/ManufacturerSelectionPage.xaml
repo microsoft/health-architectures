@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:Contoso.IoMT_Client.Controls"
+             mc:Ignorable="d"
+             ios:Page.UseSafeArea="true"
+             x:Class="Contoso.IoMT_Client.ManufacturerSelectionPage">
+  <ContentPage.Resources>
+    <ResourceDictionary Source="/DataTemplates/WithingsDataTemplate.xaml"/>
+  </ContentPage.Resources>
+  <ContentPage.Content>
+    <ScrollView Margin="20,0,20,0">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Label Text="Connect Your Device Account" Style="{StaticResource sectionHeading}"/>
+        <StackLayout VerticalOptions="Start" HorizontalOptions="Center" Grid.Row="1">
+          <Label Text="Sponsored" Style="{StaticResource sectionSubHeading}"/>
+          <controls:WrapLayout x:Name="supportedDevicesWrapLayout"/>
+          <Label Text="All Devices" IsVisible="false"/>
+          <controls:WrapLayout x:Name="futureDevicesWrapLayout" IsVisible="false"/>
+        </StackLayout>
+
+        <Grid Grid.Column="{OnIdiom Phone=0, Tablet=1}" Grid.Row="{OnIdiom Phone=2, Tablet=1}" Margin="0,20,0,0">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="{OnIdiom Phone=0, Tablet=250}"/>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+          <ContentView x:Name="deviceContentView" IsVisible="false">
+            <controls:ContentPresenter x:Name="deviceDetails" ItemTemplate="{StaticResource Key=withingsDeviceDataTemplate}" IsVisible="{OnIdiom Phone=false, Tablet=true}"/>
+          </ContentView>
+
+          <Button x:Name="authenticateWithManufacturer" Text="Connect your account" Clicked="AuthenticateWithManufacturer_Clicked" IsEnabled="false" Grid.Row="1" IsVisible="{OnIdiom Phone=true, Tablet=false}"
+                Style="{StaticResource defaultButtonStyle}" Margin="20" WidthRequest="{OnIdiom Tablet=250}"  HeightRequest="50"/>
+        </Grid>
+      </Grid>
+    </ScrollView>
+  </ContentPage.Content>
+</ContentPage>

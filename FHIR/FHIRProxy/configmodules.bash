@@ -26,7 +26,8 @@ declare num
 options=("FHIRProxy.postprocessors.DateSortPostProcessor" "FHIRProxy.postprocessors.ParticipantFilterPostProcess" "FHIRProxy.postprocessors.PublishFHIREventPostProcess" "FHIRProxy.postprocessors.ConsentOptOutFilter" "FHIRProxy.preprocessors.ProfileValidationPreProcess" "FHIRProxy.preprocessors.TransformBundlePreProcess" "FHIRProxy.preprocessors.EverythingPatientPreProcess")
 choices=("" "" "" "" "" "" "")
 # Initialize parameters specified from command line
-while getopts ":g:n:i" arg; do
+while getopts ":g:n:i:
+" arg; do
 	case "${arg}" in
 		n)
 			faname=${OPTARG}

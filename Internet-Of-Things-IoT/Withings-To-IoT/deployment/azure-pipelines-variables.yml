@@ -1,0 +1,20 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
+variables:
+  PIP_CACHE_DIR: $(Pipeline.Workspace)/.pip
+  npm_config_cache: $(Pipeline.Workspace)/.npm
+
+  firebaseSenderId: "[REPLACE_ME]"
+  iosBundleId: [REPLACE_ME]
+  iosKeyId: [REPLACE_ME]
+  iosTeamId: [REPLACE_ME]
+  appLocation: SouthCentralUS
+  withingsClientId: [REPLACE_ME]
+  b2cClientId: [REPLACE_ME]
+  b2cTenantName: [REPLACE_ME]
+  b2cTenantId: [REPLACE_ME]
+  b2cPolicyName: B2C_1_susi
+  servicePrincipalAppId: [REPLACE_ME]
+  servicePrincipalTenant: [REPLACE_ME]
+  servicePrincipalSubscription: [REPLACE_ME]

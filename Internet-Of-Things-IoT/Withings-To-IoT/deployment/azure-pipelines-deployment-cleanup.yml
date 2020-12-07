@@ -1,0 +1,42 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
+trigger: none
+
+schedules:
+  - cron: "0 8 * * 6"
+    displayName: "Saturday clean up of environments"
+    always: true
+    branches:
+      include:
+        - main
+
+variables:
+  - template: ./azure-pipelines-variables.yml
+
+pool:
+  vmImage: "ubuntu-latest"
+
+steps:
+  - script: |
+      az login \
+        --service-principal \
+        --username '$(servicePrincipalAppId)' \
+        --password '$(servicePrincipalSecret)' \
+        --tenant '$(servicePrincipalTenant)' && \
+      az account set \
+        --subscription '$(servicePrincipalSubscription)'
+    displayName: "Login to Azure"
+
+  - pwsh: |
+      $appName = '$(appName)'
+
+      if ($appName)
+      {
+        ./deployment/cleanup.ps1 $appName
+      }
+      else
+      {
+        ./deployment/cleanup.ps1
+      }
+    displayName: "Cleanup Azure resources"
