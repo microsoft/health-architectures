@@ -31,14 +31,12 @@ namespace H3.Integrations.Azure
         private readonly IHttp http;
         private readonly IJson json;
         private readonly string fhirUrl;
-        private readonly IEventFeed eventFeed;
 
         public FhirApiClient(
             ILoggerFactory log,
             IAccessTokenSource managedIdentity,
             IHttp http,
             IJson json,
-            IEventFeed eventFeed,
             ISettings settings)
         {
             this.log = log.CreateLogger<FhirApiClient>();
@@ -46,7 +44,6 @@ namespace H3.Integrations.Azure
             this.http = http;
             this.json = json;
             this.fhirUrl = settings.GetSetting("FHIR_SERVER_URL");
-            this.eventFeed = eventFeed;
         }
 
         public async Task<IReadOnlyCollection<Observation>> FetchObservations(string userId, string fhirUserId, DateTimeOffset? after, DateTimeOffset? before, CancellationToken cancellationToken)
@@ -106,8 +103,6 @@ namespace H3.Integrations.Azure
             var observationsToDelete = observations.Where(shouldDelete).ToArray();
 
             var deleted = await Delete(userId, observationsToDelete, cancellationToken);
-
-            await NotifyChange(deleted, ChangeDataFeedOperation.Delete, cancellationToken);
         }
 
         public async Task DeletePatient(string userId, string fhirUserId, CancellationToken cancellationToken)
@@ -122,8 +117,6 @@ namespace H3.Integrations.Azure
             };
 
             var deleted = await Delete(userId, patient, cancellationToken);
-
-            await NotifyChange(deleted, ChangeDataFeedOperation.Delete, cancellationToken);
         }
 
         private async Task<IReadOnlyCollection<T>> Delete<T>(string userId, IReadOnlyCollection<T> items, CancellationToken cancellationToken)
@@ -220,8 +213,6 @@ namespace H3.Integrations.Azure
 
             log.LogInformation("Created {count} items in bundle for user {userId}", createdItems.Length, userId);
 
-            await NotifyChange(createdItems, ChangeDataFeedOperation.Create, cancellationToken);
-
             return createdItems;
         }
 
@@ -265,23 +256,6 @@ namespace H3.Integrations.Azure
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/fhir+json"));
             request.Headers.Add("X-MS-AZUREFHIR-AUDIT-USERID", userId);
-        }
-
-        private async Task NotifyChange<T>(IReadOnlyCollection<T> items, ChangeDataFeedOperation operation, CancellationToken cancellationToken)
-            where T : IHasId
-        {
-            if (items.Count == 0)
-            {
-                return;
-            }
-
-            var messages = items.Select(item => new ChangeDataFeedMessage
-            {
-                Resource = item,
-                Operation = operation,
-            });
-
-            await eventFeed.SendMessages(messages, cancellationToken);
         }
     }
 }

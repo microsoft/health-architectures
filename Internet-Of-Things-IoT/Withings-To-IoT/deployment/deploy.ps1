@@ -343,16 +343,6 @@ Pop-Location
 
 #endregion
 
-#region ML
-
-& $projectRoot/deployment/deploy-ml.ps1 `
-  -ResourceGroupName $resourceGroup.name `
-  -DeploymentName $deploymentName `
-  -Python $python `
-  -SaveLocalSettings $SaveLocalSettings
-
-#endregion
-
 #region Backend
 
 & $projectRoot/deployment/deploy-apim.ps1 `
