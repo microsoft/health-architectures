@@ -68,7 +68,7 @@ Features of the HL7toFHIR Conversion Platform:
 5. [Open Azure Cloud Shell](https://shell.azure.com) you can also access this from [azure portal](https://portal.azure.com)
 6. Select Bash Shell 
 7. Clone this repo (if needed) ```git clone https://github.com/microsoft/health-architectures```
-8. Switch to the Managed/HL7Conversion subdirectory of this repo
+8. Switch to the HL7Conversion subdirectory of this repo
 9. Run the deployhl72fhir.bash script and follow the prompts
 10. Authenticate your FHIR Proxy Custom Connector
    + [Access Azure Portal](https://portal.azure.com)
@@ -77,7 +77,7 @@ Features of the HL7toFHIR Conversion Platform:
    + Click on Edit API Connection
    + Enter a Display name of FHIR Server Proxy
    + Click Authorize
-   + Enter the Credentials for the user account, group or service principal from step #3
+   + Enter the Credentials for the user account, group or service principal from step #4
    + Click Save
    + Click Overview make sure status is Connected 
 11. After successful deployment your converter pipeline is now tied to your ingest platform from above.  To test simply follow the test direction for HL7 Ingest above with the sample HL7 message and you should see resources from the bundle created in the destination FHIR Server
