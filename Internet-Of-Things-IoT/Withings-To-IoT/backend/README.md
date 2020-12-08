@@ -117,7 +117,7 @@ cd backend/test
 # Configure the test environment
 export API_ENDPOINT="http://localhost:8888"
 export B2C_PASSWORD="<input password for your Azure Active Directory B2C account here>"
-export B2C_USERNAME="<input password for your Azure Active Directory B2C account here>"
+export B2C_USERNAME="<input user name for your Azure Active Directory B2C account here>"
 export WITHINGS_PASSWORD="<input password for your Withings account here>"
 export WITHINGS_USERNAME="<input user name for your Withings account here>"
 export WITHINGS_USER_ID="<input user id of your Withings account here>"

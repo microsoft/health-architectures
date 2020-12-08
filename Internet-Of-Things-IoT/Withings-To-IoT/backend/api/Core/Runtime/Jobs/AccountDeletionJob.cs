@@ -29,22 +29,19 @@ namespace H3.Core.Runtime.Jobs
         private readonly IFhirClient fhirClient;
         private readonly IConsentStore consentStore;
         private readonly IVendorClient vendorClient;
-        private readonly IEventFeed eventFeed;
 
         public AccountDeletionJob(
             ILoggerFactory log,
             IExceptionFilter exceptionFilter,
             IFhirClient fhirClient,
             IConsentStore consentStore,
-            IVendorClient vendorClient,
-            IEventFeed eventFeed)
+            IVendorClient vendorClient)
         {
             this.log = log.CreateLogger<AccountDeletionJob>();
             this.exceptionFilter = exceptionFilter;
             this.fhirClient = fhirClient;
             this.consentStore = consentStore;
             this.vendorClient = vendorClient;
-            this.eventFeed = eventFeed;
         }
 
         [FunctionName(nameof(AccountDeletionWorkflow))]
@@ -56,7 +53,6 @@ namespace H3.Core.Runtime.Jobs
             await orchestrationContext.CallActivityAsync(nameof(AccountDeletionTakeLock), input);
 
             await Task.WhenAll(
-                orchestrationContext.CallActivityAsync(nameof(AccountDeletionFeed), input),
                 orchestrationContext.CallActivityAsync(nameof(AccountDeletionFhir), input),
                 orchestrationContext.CallActivityAsync(nameof(AccountDeletionVendor), input));
 
@@ -83,27 +79,6 @@ namespace H3.Core.Runtime.Jobs
                 consent.IsDeleting = true;
 
                 await consentStore.WriteConsent(consent, cancellationToken);
-            });
-        }
-
-        [FunctionName(nameof(AccountDeletionFeed))]
-        public Task AccountDeletionFeed(
-            [ActivityTrigger] IDurableActivityContext context,
-            CancellationToken cancellationToken)
-        {
-            return exceptionFilter.FilterExceptions(async () =>
-            {
-                var message = context.GetInput<StartAccountDeletionMessage>();
-                var userId = message.UserId;
-
-                var consent = await consentStore.FetchConsent(userId, cancellationToken);
-
-                if (consent?.FhirId == null)
-                {
-                    return;
-                }
-
-                await eventFeed.DeleteUser(consent.FhirId, cancellationToken);
             });
         }
 

@@ -137,19 +137,6 @@ namespace H3
                     credential: new DefaultAzureCredential()));
             });
 
-            services.AddSingleton<IEventFeed>((s) =>
-            {
-                return new EventHubFeed(
-                    client: new EventHubProducerClient(
-                        fullyQualifiedNamespace: settings.GetSetting("EH_HOSTNAME"),
-                        eventHubName: settings.GetSetting("GATEWAY_HUB_NAME"),
-                        credential: new DefaultAzureCredential()),
-                    log: s.GetRequiredService<ILoggerFactory>(),
-                    http: s.GetRequiredService<IHttp>(),
-                    json: s.GetRequiredService<IJson>(),
-                    settings);
-            });
-
             services.AddHttpClient();
             services.AddSingleton<IJson, Json>();
             services.AddSingleton<IHttp, Http>();
