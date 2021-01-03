@@ -16,6 +16,15 @@ The good news is that it is possible to achieve HIPAA compliance while also impl
 <a href="https://raw.githubusercontent.com/daemel/site/master/assets/images/Ingestion-Workflow-Architecture-and-Design.png" target="_blank"> <img src="https://raw.githubusercontent.com/daemel/site/master/assets/images/Ingestion-Workflow-Architecture-and-Design.png" alt="image"/></a>
 
 
+### Tools 
+[API for FHIR](/FHIR-Tools-HL7Converter.html)
+
+### Resources 
+- [Azure API for FHIR Procut](https://azure.microsoft.com/en-us/services/azure-api-for-fhir/)
+- [Azure API for FHIR Documentation](https://docs.microsoft.com/en-us/azure/healthcare-apis/)
+
+
+
 ### Support or Contact
 
 For more information on health solutions email us **@ <a href="mailto:HealthArchitectures@microsoft.com">HealthArchitectures</a>**

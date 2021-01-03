@@ -13,7 +13,7 @@ TBD
 
 
 ### Reference Architectures 
-[API for FHIR](site/Architectures-FHIR.html)
+[API for FHIR](/Architectures-FHIR.html)
 
 ### Resources 
 - [Azure API for FHIR Procut](https://azure.microsoft.com/en-us/services/azure-api-for-fhir/)
