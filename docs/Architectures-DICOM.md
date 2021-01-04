@@ -1,5 +1,5 @@
 ---
-title: DICOM for FHIR
+title: API for DICOM
 parent: Architectures
 has_children: true
 nav_order: 1

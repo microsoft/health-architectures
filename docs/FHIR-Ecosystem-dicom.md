@@ -1,5 +1,5 @@
 ---
-title: DICOM for FHIR
+title: API for DICOM
 parent: Ecosystem
 grand_parent: FHIR
 nav_order: 2
