@@ -17,7 +17,7 @@ The good news is that it is possible to achieve HIPAA compliance while also impl
 
 
 ### Tools 
-[API for FHIR](/FHIR-Tools-HL7Converter.html)
+[API for FHIR](/health-architectures/FHIR-Tools-HL7Converter.html)
 
 ### Resources 
 - [Azure API for FHIR Procut](https://azure.microsoft.com/en-us/services/azure-api-for-fhir/)
