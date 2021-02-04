@@ -15,6 +15,6 @@ Azure API for FHIR brings together health data from disparate systems using indu
 [API for FHIR](/health-architectures/Architectures-FHIR.html)
 
 ### Resources 
-- [Azure API for FHIR Procut](https://azure.microsoft.com/en-us/services/azure-api-for-fhir/)
+- [Azure API for FHIR Product](https://azure.microsoft.com/en-us/services/azure-api-for-fhir/)
 - [Azure API for FHIR Documentation](https://docs.microsoft.com/en-us/azure/healthcare-apis/)
 
