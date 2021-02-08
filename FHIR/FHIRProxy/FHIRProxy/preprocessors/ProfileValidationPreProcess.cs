@@ -37,13 +37,24 @@ namespace FHIRProxy.preprocessors
         private HttpClient _client = new HttpClient();
         public async Task<ProxyProcessResult> Process(string requestBody, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id, string hist, string vid)
         {
-            /*Call Resource and Profile Validation server*/
-            if (string.IsNullOrEmpty(requestBody) || req.Method.Equals("GET") || req.Method.Equals("DELETE") || string.IsNullOrEmpty(res)) return new ProxyProcessResult(true, "", requestBody, null);
             string url = Environment.GetEnvironmentVariable("FP-MOD-FHIRVALIDATION-URL");
-            if (string.IsNullOrEmpty(url)) {
+            if (string.IsNullOrEmpty(url))
+            {
                 log.LogWarning("ProfileValidationPreProcess: The validation URL is not configured....Validation will not be run");
                 return new ProxyProcessResult(true, "", requestBody, null);
             }
+            /*Call Resource and Profile Validation server*/
+            if (string.IsNullOrEmpty(requestBody) || req.Method.Equals("GET") || req.Method.Equals("DELETE") || string.IsNullOrEmpty(res)) return new ProxyProcessResult(true, "", requestBody, null);
+            try
+            {
+                var test = JObject.Parse(requestBody);
+            }
+            catch(Exception)
+            {
+                //Not Valid JSON Object return
+                return new ProxyProcessResult(true, "", requestBody, null);
+            }
+           
             /* Load Profile Enforcement Policy */
             if (!init)
             {

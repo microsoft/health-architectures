@@ -80,7 +80,7 @@ namespace FHIRProxy
             //Load the resource to Link
             var fhirresp = await fhirClient.LoadResource(res + "/" + id, null, false, req.Headers);
             var lres = _parser.Parse<Resource>((string)fhirresp.Content);
-            if (lres.ResourceType == Hl7.Fhir.Model.ResourceType.OperationOutcome)
+            if (lres.TypeName.Equals("OperationOutcome"))
             {
 
                 return new BadRequestObjectResult(lres.ToString());
