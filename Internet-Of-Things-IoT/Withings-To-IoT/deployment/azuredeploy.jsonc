@@ -129,37 +129,6 @@
         "Premium"
       ]
     },
-    "eventHubSku": {
-      "type": "string",
-      "defaultValue": "Standard",
-      "allowedValues": [
-        "Standard"
-      ]
-    },
-    "eventHubMaximumThroughput": {
-      "type": "int",
-      "defaultValue": 10,
-      "minValue": 1,
-      "maxValue": 20
-    },
-    "eventHubMessageRetentionInDays": {
-      "type": "int",
-      "defaultValue": 3,
-      "minValue": 1,
-      "maxValue": 7
-    },
-    "eventHubPartitionCount": {
-      "type": "int",
-      "defaultValue": 1,
-      "minValue": 1,
-      "maxValue": 32
-    },
-    "eventHubCaptureIntervalInSeconds": {
-      "type": "int",
-      "defaultValue": 60,
-      "minValue": 60,
-      "maxValue": 900
-    },
     "functionsSku": {
       "type": "string",
       "defaultValue": "EP1",
@@ -239,16 +208,6 @@
     }
   },
   "variables": {
-    // #region ML variables
-    "mlDatabricksName": "[concat(parameters('appName'), 'ml')]",
-    "mlDatabricksResourceGroupName": "[concat(variables('mlDatabricksName'), '-rg')]",
-    "mlEventHubNamespaceName": "[concat(variables('mlDatabricksName'), 'eh')]",
-    "mlEventHubNamespaceHostname": "[concat(variables('mlEventHubNamespaceName'), '.servicebus.windows.net')]",
-    "mlCaptureDataLakeName": "[concat(variables('mlDatabricksName'), 'lake')]",
-    "mlCaptureEventHubName": "fhirchangefeed",
-    "mlBronzeContainerName": "bronze",
-    "mlSilverContainerName": "silver",
-    // #endregion
     // #region API variables
     "apiPrefix": "api",
     "apiName": "[concat(parameters('appName'), 'api')]",
@@ -396,113 +355,6 @@
           }
         }
       ]
-    },
-    // #endregion
-    // #region ML
-    // Databricks workspace for ML compute
-    {
-      "type": "Microsoft.Databricks/workspaces",
-      "name": "[variables('mlDatabricksName')]",
-      "location": "[variables('location')]",
-      "apiVersion": "2018-04-01",
-      "sku": {
-        "name": "[parameters('databricksSku')]"
-      },
-      "properties": {
-        "ManagedResourceGroupId": "[concat(subscription().id, '/resourceGroups/', variables('mlDatabricksResourceGroupName'))]"
-      }
-    },
-    // EventHub namespace for eventing
-    {
-      "apiVersion": "2017-04-01",
-      "type": "Microsoft.EventHub/namespaces",
-      "name": "[variables('mlEventHubNamespaceName')]",
-      "location": "[variables('location')]",
-      "sku": {
-        "name": "[parameters('eventHubSku')]",
-        "tier": "[parameters('eventHubSku')]",
-        "capacity": 1
-      },
-      "properties": {
-        "isAutoInflateEnabled": true,
-        "maximumThroughputUnits": "[parameters('eventHubMaximumThroughput')]"
-      }
-    },
-    // Storage account for change data capture
-    {
-      "type": "Microsoft.Storage/storageAccounts",
-      "name": "[variables('mlCaptureDataLakeName')]",
-      "apiVersion": "2019-06-01",
-      "location": "[variables('location')]",
-      "kind": "StorageV2",
-      "sku": {
-        "name": "[parameters('storageAccountSku')]"
-      },
-      "properties": {
-        "isHnsEnabled": true,
-        "allowBlobPublicAccess": false
-      },
-      "resources": [
-        {
-          "type": "blobServices/containers",
-          "name": "[concat('default/', variables('mlBronzeContainerName'))]",
-          "apiVersion": "2019-06-01",
-          "dependsOn": [
-            "[resourceId('Microsoft.Storage/storageAccounts', variables('mlCaptureDataLakeName'))]"
-          ]
-        },
-        {
-          "type": "blobServices/containers",
-          "name": "[concat('default/', variables('mlSilverContainerName'))]",
-          "apiVersion": "2019-06-01",
-          "dependsOn": [
-            "[resourceId('Microsoft.Storage/storageAccounts', variables('mlCaptureDataLakeName'))]"
-          ]
-        }
-      ]
-    },
-    // EventHub for change data capture
-    {
-      "apiVersion": "2017-04-01",
-      "type": "Microsoft.EventHub/namespaces/eventhubs",
-      "name": "[concat(variables('mlEventHubNamespaceName'), '/', variables('mlCaptureEventHubName'))]",
-      "location": "[variables('location')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Storage/storageAccounts/blobServices/containers', variables('mlCaptureDataLakeName'), 'default', variables('mlBronzeContainerName'))]",
-        "[resourceId('Microsoft.EventHub/namespaces', variables('mlEventHubNamespaceName'))]"
-      ],
-      "properties": {
-        "messageRetentionInDays": "[parameters('eventHubMessageRetentionInDays')]",
-        "captureDescription": {
-          "enabled": true,
-          "encoding": "Avro",
-          "intervalInSeconds": "[parameters('eventHubCaptureIntervalInSeconds')]",
-          "destination": {
-            "name": "EventHubArchive.AzureBlockBlob",
-            "properties": {
-              "storageAccountResourceId": "[concat(resourceGroup().id, '/providers/Microsoft.Storage/storageAccounts/', variables('mlCaptureDataLakeName'))]",
-              "blobContainer": "[variables('mlBronzeContainerName')]",
-              "archiveNameFormat": "{Namespace}/{EventHub}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}/{PartitionId}"
-            }
-          },
-          "skipEmptyArchives": true
-        },
-        "partitionCount": "[parameters('eventHubPartitionCount')]"
-      }
-    },
-    // RBAC rule to authenticate API Azure Function to send data to change data capture EventHub
-    {
-      "type": "Microsoft.EventHub/namespaces/eventhubs/providers/roleAssignments",
-      "apiVersion": "2018-09-01-preview",
-      "name": "[concat(variables('mlEventHubNamespaceName'), '/', variables('mlCaptureEventHubName'), '/Microsoft.Authorization/', guid(concat('GatewayToEventHub', resourceGroup().name)))]",
-      "dependsOn": [
-        "[resourceId('Microsoft.EventHub/namespaces/eventhubs', variables('mlEventHubNamespaceName'), variables('mlCaptureEventHubName'))]",
-        "[resourceId('Microsoft.Web/sites', variables('apiName'))]"
-      ],
-      "properties": {
-        "roleDefinitionId": "[concat('/subscriptions/', variables('subscriptionId'), '/providers/Microsoft.Authorization/roleDefinitions/2b629674-e913-4c01-ae53-ef4638d8f975')]",
-        "principalId": "[reference(concat('Microsoft.Web/sites/', variables('apiName')), '2018-11-01', 'Full').identity.principalId]"
-      }
     },
     // #endregion
     // #region API
@@ -748,7 +600,8 @@
       ],
       "properties": {
         "roleDefinitionId": "[concat('/subscriptions/', variables('subscriptionId'), '/providers/Microsoft.Authorization/roleDefinitions/5a1fc7df-4bf1-4951-a576-89034ee01acd')]",
-        "principalId": "[reference(concat('Microsoft.Web/sites/', variables('apiName')), '2018-11-01', 'Full').identity.principalId]"
+        "principalId": "[reference(concat('Microsoft.Web/sites/', variables('apiName')), '2018-11-01', 'Full').identity.principalId]",
+        "principalType": "ServicePrincipal"
       }
     },
     // Redis Cache for API
@@ -896,14 +749,6 @@
             {
               "name": "REDIS_PASSWORD",
               "value": "[concat('@Microsoft.KeyVault(SecretUri=', reference(concat('Microsoft.KeyVault/vaults/', variables('apiSecretStoreName'), '/secrets/', variables('apiCachePasswordSecretName'))).secretUriWithVersion, ')')]"
-            },
-            {
-              "name": "EH_HOSTNAME",
-              "value": "[variables('mlEventHubNamespaceHostname')]"
-            },
-            {
-              "name": "GATEWAY_HUB_NAME",
-              "value": "[variables('mlCaptureEventHubName')]"
             },
             {
               "name": "B2C_AUDIENCE",
@@ -1100,34 +945,6 @@
     // #endregion
   ],
   "outputs": {
-    "mlDatabricksWorkspaceResourceId": {
-      "type": "string",
-      "value": "[concat(resourceGroup().id, '/providers/Microsoft.Databricks/workspaces/', variables('mlDatabricksName'))]"
-    },
-    "mlDatabricksWorkspaceHostName": {
-      "type": "string",
-      "value": "[reference(concat('Microsoft.Databricks/workspaces/', variables('mlDatabricksName'))).workspaceUrl]"
-    },
-    "mlCaptureDataLakeName": {
-      "type": "string",
-      "value": "[variables('mlCaptureDataLakeName')]"
-    },
-    "mlEventHubNamespaceName": {
-      "type": "string",
-      "value": "[variables('mlEventHubNamespaceName')]"
-    },
-    "mlCaptureEventHubName": {
-      "type": "string",
-      "value": "[variables('mlCaptureEventHubName')]"
-    },
-    "mlBronzeContainerName": {
-      "type": "string",
-      "value": "[variables('mlBronzeContainerName')]"
-    },
-    "mlSilverContainerName": {
-      "type": "string",
-      "value": "[variables('mlSilverContainerName')]"
-    },
     "portalStorageAccountResourceId": {
       "type": "string",
       "value": "[concat(resourceGroup().id, '/providers/Microsoft.Storage/storageAccounts/', variables('portalName'))]"
