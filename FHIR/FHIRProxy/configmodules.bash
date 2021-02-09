@@ -1,16 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -euo pipefail
-IFS=$'\n\t'
 
-# -e: immediately exit if any command has a non-zero exit status
-# -o: prevents errors in a pipeline from being masked
-# IFS new value is less likely to cause confusing bugs when looping arrays or arguments (e.g. $@)
-#
-# Enable/Disable Proxy Pre/Post Modules
-#
-
-usage() { echo "Usage: $0 -n <proxy name> -g <resourceGroupName> -i <subscription id>" 1>&2; exit 1; }
-
+# -e: immediately exit if any  command has a non-zero exit status
+# -u: treat references to unset variables as errors
+# -o: prevent errors in a pipeline from being masked
 
 declare resourceGroupName=""
 declare faname=""
@@ -19,12 +12,46 @@ declare postprocessors=""
 declare defsubscriptionId=""
 declare subscriptionId=""
 declare stepresult=""
-declare listofprocessors=""
-declare enableprocessors=""
-declare msg=""
-declare num
-options=("FHIRProxy.postprocessors.DateSortPostProcessor" "FHIRProxy.postprocessors.ParticipantFilterPostProcess" "FHIRProxy.postprocessors.PublishFHIREventPostProcess" "FHIRProxy.postprocessors.ConsentOptOutFilter" "FHIRProxy.preprocessors.ProfileValidationPreProcess" "FHIRProxy.preprocessors.TransformBundlePreProcess" "FHIRProxy.preprocessors.EverythingPatientPreProcess")
-choices=("" "" "" "" "" "" "")
+declare -a selectedModules
+
+declare -A modules
+modules[FHIRProxy.postprocessors.DateSortPostProcessor]="Date Sort Post Processor Module"
+modules[FHIRProxy.postprocessors.ParticipantFilterPostProcess]="Participant Filter Post Processor Module"
+modules[FHIRProxy.postprocessors.PublishFHIREventPostProcess]="Publish FHIR Events Post Processor Module"
+modules[FHIRProxy.postprocessors.ConsentOptOutFilter]="Consent Opt-Out Filter Module"
+modules[FHIRProxy.preprocessors.ProfileValidationPreProcess]="Profile Validation Pre-Processor Module"
+modules[FHIRProxy.preprocessors.TransformBundlePreProcess]="Transform Bundle Pre-Processor Module"
+modules[FHIRProxy.preprocessors.EverythingPatientPreProcess]="Everything Patient Pre-Processor Module"
+
+usage() { echo "Usage: $0 -n <proxy name> -g <resourceGroupName> -i <subscription id>" 1>&2; exit 1; }
+
+function askYesNo {
+    PROMPT=$1
+    DEFAULT=$2
+    if [ "$DEFAULT" = true ]; then
+        OPTIONS="[Y/n]"
+        DEFAULT="y"
+    else
+        OPTIONS="[y/N]"
+        DEFAULT="n"
+    fi
+    read -p "$PROMPT $OPTIONS " -n 1 -s -r INPUT
+    INPUT=${INPUT:-${DEFAULT}}
+    echo ${INPUT}
+    if [[ "$INPUT" =~ ^[yY]$ ]]; then
+        ANSWER=true
+    else
+        ANSWER=false
+    fi
+}
+
+echo "configmodules.sh "
+echo "This script with enable/disable FHIR Proxy modules"
+echo ""
+read -es -p "Press ENTER to continue." TRAP_ENTER_KEY < /dev/tty
+echo ""
+echo ""
+
 # Initialize parameters specified from command line
 while getopts ":g:n:i:
 " arg; do
@@ -78,40 +105,47 @@ if [ $(az group exists --name $resourceGroupName) = false ]; then
 	echo "Resource group with name" $resourceGroupName "could not be found."
 	usage
 fi
-menu() {
-    echo "Please select the proxy modules you want to enable:"
-    for i in ${!options[@]}; do 
-        printf "%3d%s) %s\n" $((i+1)) "${choices[i]:- }" "${options[i]}"
-    done
-    if [[ "$msg" ]]; then echo "$msg"; fi
-}
-prompt="Select an option (again to uncheck, ENTER when done): "
-while menu && read -rp "$prompt" num && [[ "$num" ]]; do
-    [[ "$num" != *[![:digit:]]* ]] &&
-    (( num > 0 && num <= ${#options[@]} )) ||
-    { msg="Invalid option: $num"; continue; }
-    ((num--)); msg="${options[num]} was ${choices[num]:+un}checked"
-    [[ "${choices[num]}" ]] && choices[num]="" || choices[num]="+"
+
+echo ""
+for key in "${!modules[@]}";
+do
+    echo "${modules[$key]}"
+    askYesNo "Install this module?" true
+    RESPONSE=$ANSWER
+    if [ "$RESPONSE" = true ]; then
+        selectedModules+=("$key")
+    fi
+
+    echo ""
+    echo ""
 done
-for i in ${!options[@]}; do 
-    if [[ "${choices[i]}" ]]; then
-		if [[ "${options[i]}" == *".preprocessors."* ]]; then
-			preprocessors+="${options[i]}",
+
+for i in ${!selectedModules[@]}; do 
+    if [[ "${selectedModules[i]}" ]]; then
+		if [[ "${selectedModules[i]}" == *".preprocessors."* ]]; then
+			preprocessors+="${selectedModules[i]}",
 		fi
-		if [[ "${options[i]}" == *".postprocessors."* ]]; then
-			postprocessors+="${options[i]}",
+		if [[ "${selectedModules[i]}" == *".postprocessors."* ]]; then
+			postprocessors+="${selectedModules[i]}",
 		fi
 	fi
 done
+
 preprocessors="${preprocessors%?}"
 postprocessors="${postprocessors%?}"
-echo "Configuring Secure FHIR Proxy App ["$faname"]..."
+
+echo "Configuring Secure FHIR Proxy ["$faname"] modules..."
 stepresult=$(az functionapp config appsettings set --name $faname --resource-group $resourceGroupName --settings FP-PRE-PROCESSOR-TYPES=$preprocessors FP-POST-PROCESSOR-TYPES=$postprocessors)
 if [ $? != 0 ];
 then
-	echo "Problem updating appsettings..."
+	echo "Encountered problem updating FHIR Proxy configuration..."
 	exit 1;
 fi
+
 echo "Pre-Processors enabled:"$preprocessors
 echo "Post-Processors enabled:"$postprocessors
-echo "Remember to check required configuration settings for each module!"
+echo ""
+echo ""
+
+echo "Some modules may require additional configuration."
+echo "Navigate to the FHIR Proxy configuration documentation located here: https://github.com/microsoft/health-architectures/tree/master/FHIR/FHIRProxy#configuration"
