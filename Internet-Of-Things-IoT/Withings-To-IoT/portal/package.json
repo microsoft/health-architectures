@@ -63,7 +63,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "7.19.0",
     "eslint-plugin-react-hooks": "2.5.1",
-    "gatsby": "^2.24.47",
+    "gatsby": "^2.32.3",
     "gatsby-plugin-alias-imports": "^1.0.5",
     "gatsby-plugin-postcss": "2.2.4",
     "gatsby-plugin-purgecss": "4.0.1",
