@@ -106,7 +106,10 @@ The FHIR Server Roles assignable to applications by default are: Resource Reader
 13. Once granted the service principal will now have access to the proxy in the roles you assigned.
 14. You can verify this by looking at the Enterprise Application blade for the proxy under user and group assignments you will see the service principal
 
-Note: You can authenticate using client_credentials flow to your new application using it's application id and secret, the resource or audience should be the application id of the FHIR proxy.  Pass the obtained token in the Authorization header of your calls to the FHIR proxy.
+Note: You can authenticate using client_credentials flow to your new application using it's application id and secret, the resource or audience should be the application id of the FHIR proxy. 
+For the FHIR Proxy this can be obtained via Enterprise Applications >> All Applications then search for you the function app. The application ID will be down on the right hand side.  Pass the obtained token in the Authorization header of your calls to the FHIR proxy. This can be done using the following auth URL: https://login.microsoftonline.com/<Tenant ID>/oauth2/authorize?resource=<Proxy Application ID>
+	
+For the FHIR API use the URL of the API's and add to the resource URL: https://login.microsoftonline.com/<Tenant ID>/oauth2/authorize/?resource=https://FHIR API.azurehealthcareapis.com
 
 ## Redirect URL
 If you wish to call the API's through Postman ensure that a redirect URL is set in the app registration. This can be done under Authentication >> Redirect URLS. A basic one to add can be: https://www.getpostman.com/oauth2/callback
