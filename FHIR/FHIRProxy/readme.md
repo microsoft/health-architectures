@@ -108,6 +108,18 @@ The FHIR Server Roles assignable to applications by default are: Resource Reader
 
 Note: You can authenticate using client_credentials flow to your new application using it's application id and secret, the resource or audience should be the application id of the FHIR proxy.  Pass the obtained token in the Authorization header of your calls to the FHIR proxy.
 
+## Redirect URL
+If you wish to call the API's through Postman ensure that a redirect URL is set in the app registration. This can be done under Authentication >> Redirect URLS. A basic one to add can be: https://www.getpostman.com/oauth2/callback
+
+## Authenticating using client credentials
+The following tutorial shows how this can be achieved: https://docs.microsoft.com/en-us/azure/healthcare-apis/access-fhir-postman-tutorial
+To call the Azure FHIR API using client credentials use the details created in the first step "Deploying your own FHIR Proxy":
+Application Client ID
+Directory Tenant ID
+Client Secret
+
+Ensure that the redirect URL is set: https://www.getpostman.com/oauth2/callback
+
 ##  Configuration
 The FHIR Proxy is configured on installation to be paired to a FHIR Server via a service client.  Default roles are added to the application and are configured for specific access in configuration settings section of the function app.
 Enablement of pre/post processing modules is accomplished via the ```configmodules.bash``` utility.</br>
