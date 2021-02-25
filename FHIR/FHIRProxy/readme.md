@@ -130,6 +130,17 @@ Ensure that the redirect URL is set to: https://www.getpostman.com/oauth2/callba
 5. Click "Send" to make an API call
 6. This should successfully call the API and return a 200 OK status
 
+## Auth URL
+If the Auth URL is not set correctly when getting a new access token this will return either a "401 unauthorized error" or an invalid token.
+
+For the FHIR API the auth URL should be:
+https://login.microsoftonline.com/<Tenant ID>/oauth2/authorize/?resource=https://<MY FHIR API>.azurehealthcareapis.com
+
+For the FHIR API Proxy the auth URL should be:
+https://login.microsoftonline.com/<Tenant ID>/oauth2/authorize?resource=<FHIR PROXY APPLICATION ID>
+		
+Note - The FHIR Proxy Application ID can be obtained from the Azure Portal >> Enterprise Applications >> Select "All Applications" from the Application Type dropdown >> Enter the FHIR Proxy name in the text box i.e. my-fhir-proxy.azurewebsites.net >> The Application ID will be shown in the right hand column
+
 ##  Configuration
 The FHIR Proxy is configured on installation to be paired to a FHIR Server via a service client.  Default roles are added to the application and are configured for specific access in configuration settings section of the function app.
 Enablement of pre/post processing modules is accomplished via the ```configmodules.bash``` utility.</br>
