@@ -31,24 +31,41 @@ namespace FHIRProxy.postprocessors
     class FHIRCDSSyncAgentPostProcess2 : IProxyPostProcess
     {
         private IQueueClient _queueClient = null;
+        private Object lockobj = new object();
         private string[] _fhirSupportedResources = null;
+        private bool initializationfailed = false;
         public FHIRCDSSyncAgentPostProcess2()
         {
-            try
-            {
-                string _sbcfhirupdates = Utils.GetEnvironmentVariable("SA-SERVICEBUSNAMESPACEFHIRUPDATES");
-                _fhirSupportedResources = Utils.GetEnvironmentVariable("SA-FHIRMAPPEDRESOURCES", "").Split(",");
-                if (!string.IsNullOrEmpty(_sbcfhirupdates))
-                {
-                    ServiceBusConnectionStringBuilder sbc = new ServiceBusConnectionStringBuilder(_sbcfhirupdates);
-                    sbc.EntityPath = Utils.GetEnvironmentVariable("SA-SERVICEBUSQUEUENAMEFHIRUPDATES");
-                    _queueClient = new QueueClient(sbc);
-                }
-            }
-            catch (Exception)
-            {
+           
+        }
+        public void InitQueueClient(ILogger log)
+        {
 
+            if (initializationfailed || _queueClient != null) return;
+            lock(lockobj)
+            {
+                if (_queueClient==null)
+                {
+                    try
+                    {
+                        string _sbcfhirupdates = Utils.GetEnvironmentVariable("SA-SERVICEBUSNAMESPACEFHIRUPDATES");
+                        _fhirSupportedResources = Utils.GetEnvironmentVariable("SA-FHIRMAPPEDRESOURCES", "").Split(",");
+                        if (!string.IsNullOrEmpty(_sbcfhirupdates))
+                        {
+                            ServiceBusConnectionStringBuilder sbc = new ServiceBusConnectionStringBuilder(_sbcfhirupdates);
+                            sbc.EntityPath = Utils.GetEnvironmentVariable("SA-SERVICEBUSQUEUENAMEFHIRUPDATES");
+                            _queueClient = new QueueClient(sbc);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        log.LogError($"FHIRCDSSyncAgentPostProcess2: Failed to inititalize queue client:{e.Message}->{e.StackTrace}");
+                        initializationfailed = true;
+                    }
+                } 
             }
+            
+            
         }
         public async Task<ProxyProcessResult> Process(FHIRResponse response, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id, string hist, string vid)
         {
@@ -59,8 +76,8 @@ namespace FHIRProxy.postprocessors
                 if (req.Method.Equals("GET") || (int)response.StatusCode > 299 ||
                     req.Method.Equals("PATCH") || req.Headers["X-MS-FHIRCDSSynAgent"] == "true")
                     return new ProxyProcessResult(true, "", "", response);
-
-               if (_queueClient==null)
+                InitQueueClient(log);
+                if (_queueClient==null)
                 {
                     log.LogWarning($"FHIRCDSSyncAgentPostProcess2: Service Bus Queue Client not initialized will not publish....Check Environment Configuration");
                     return new ProxyProcessResult(true, "", "", response);
