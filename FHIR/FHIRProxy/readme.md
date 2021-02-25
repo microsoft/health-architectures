@@ -107,21 +107,21 @@ The FHIR Server Roles assignable to applications by default are: Resource Reader
 14. You can verify this by looking at the Enterprise Application blade for the proxy under user and group assignments you will see the service principal
 
 Note: You can authenticate using client_credentials flow to your new application using it's application id and secret, the resource or audience should be the application id of the FHIR proxy. 
-For the FHIR Proxy this can be obtained via Enterprise Applications >> All Applications then search for you the function app. The application ID will be down on the right hand side.  Pass the obtained token in the Authorization header of your calls to the FHIR proxy. This can be done using the following auth URL: https://login.microsoftonline.com/<Tenant ID>/oauth2/authorize?resource=<Proxy Application ID>
+For the FHIR Proxy this can be obtained via Enterprise Applications >> All Applications then search for you the function app. The application ID will be down on the right hand side.  Pass the obtained token in the Authorization header of your calls to the FHIR proxy. This can be done using the following auth URL: ```https://login.microsoftonline.com/<Tenant ID>/oauth2/authorize?resource=<Proxy Application ID>```
 	
-For the FHIR API use the URL of the API's and add to the resource URL: https://login.microsoftonline.com/<Tenant ID>/oauth2/authorize/?resource=https://FHIR API.azurehealthcareapis.com
+For the FHIR API use the URL of the API's and add to the resource URL: ```https://login.microsoftonline.com/<Tenant ID>/oauth2/authorize/?resource=https://FHIR API.azurehealthcareapis.com```
 
 ## Redirect URL
-If you wish to call the API's through Postman ensure that a redirect URL is set in the app registration. This can be done in Azure Portal >> Authentication >> Redirect URLS. A basic one to add can be: https://www.getpostman.com/oauth2/callback
+If you wish to call the API's through Postman ensure that a redirect URL is set in the app registration. This can be done in Azure Portal >> Authentication >> Redirect URLS. A basic one to add can be: ```https://www.getpostman.com/oauth2/callback```
 Without the redirect URL set you will encounter an error when calling the API through Postman.
 
 ## Authenticating using client credentials
-The following tutorial shows how this can be achieved: https://docs.microsoft.com/en-us/azure/healthcare-apis/access-fhir-postman-tutorial
+The following tutorial shows how this can be achieved: ```https://docs.microsoft.com/en-us/azure/healthcare-apis/access-fhir-postman-tutorial```
 To call the Azure FHIR API using client credentials use the details created in the first step "Deploying your own FHIR Proxy":
 Application Client ID
 Directory Tenant ID
 Client Secret
-Ensure that the redirect URL is set to: https://www.getpostman.com/oauth2/callback
+Ensure that the redirect URL is set to: ```https://www.getpostman.com/oauth2/callback```
 
 1. Once the credentials have been added click "Get New Access Token"
 2. Click Proceed
@@ -134,12 +134,12 @@ Ensure that the redirect URL is set to: https://www.getpostman.com/oauth2/callba
 If the Auth URL is not set correctly when getting a new access token this will return either a "401 unauthorized error" or an invalid token.
 
 For the FHIR API the auth URL should be:
-https://login.microsoftonline.com/<Tenant ID>/oauth2/authorize/?resource=https://<MY FHIR API>.azurehealthcareapis.com
+```https://login.microsoftonline.com/<Tenant ID>/oauth2/authorize/?resource=https://<MY FHIR API>.azurehealthcareapis.com```
 
 For the FHIR API Proxy the auth URL should be:
-https://login.microsoftonline.com/<Tenant ID>/oauth2/authorize?resource=<FHIR PROXY APPLICATION ID>
+```https://login.microsoftonline.com/<Tenant ID>/oauth2/authorize?resource=<FHIR PROXY APPLICATION ID>```
 		
-Note - The FHIR Proxy Application ID can be obtained from the Azure Portal >> Enterprise Applications >> Select "All Applications" from the Application Type dropdown >> Enter the FHIR Proxy name in the text box i.e. my-fhir-proxy.azurewebsites.net >> The Application ID will be shown in the right hand column
+Note - The FHIR Proxy Application ID can be obtained from the Azure Portal >> Enterprise Applications >> Select "All Applications" from the Application Type dropdown >> Enter the FHIR Proxy name in the text box i.e. ```my-fhir-proxy.azurewebsites.net``` >> The Application ID will be shown in the right hand column
 
 ##  Configuration
 The FHIR Proxy is configured on installation to be paired to a FHIR Server via a service client.  Default roles are added to the application and are configured for specific access in configuration settings section of the function app.
