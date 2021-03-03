@@ -42,10 +42,7 @@ Quickstart - Create registry in portal - Azure Container Registry | [Microsoft D
 ![Portal View](/assets/images/ContainerReg1.png)
 
 
-Enable admin user on the registry (Portal or Cloud Shell) 
-
-![Portal View](/assets/images/enable-admin-portal.png)
-
+Enable admin user on the registry
 Registry authentication options - Azure Container Registry | [Microsoft Docs](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-authentication#admin-account) 
 ```bash
 $ az acr update -n <acrName> --admin-enabled true
