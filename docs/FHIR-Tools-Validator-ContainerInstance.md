@@ -23,7 +23,7 @@ Validating a resource means, checking that the following aspects of the resource
 
 ### Deploying your own FHIR Validator as a Containter Instance 
  
-#### Step 1 Download Health-Architectures Code 
+### Step 1 Download Health-Architectures Code 
 Open cloud shell, clone git repo 
 ```bash
 $ git clone https://github.com/microsoft/health-architectures.git
@@ -35,7 +35,7 @@ $ az account set --subscription "subscriptionName"
 ```
  
 
-#### Step 2 Create a Container Registry 
+### Step 2 Create a Container Registry 
 Create a container registry (Portal)
 Quickstart - Create registry in portal - Azure Container Registry | [Microsoft Docs](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-portal)
  
@@ -48,7 +48,7 @@ Registry authentication options - Azure Container Registry | [Microsoft Docs](ht
 $ az acr update -n <acrName> --admin-enabled true
 ```
 
-#### Step 3 Load the Validator Image into the Registry 
+### Step 3 Load the Validator Image into the Registry 
  
 Build Image from SmokeJumper repo (from the Cloud Shell) 
  
@@ -62,15 +62,17 @@ Enable shell script execution  (chmod +x ./filename.sh)
 $ chmod +x ./*.sh
 ```
  
-Build the Image from the Service Dockerfile 
+Build the Image from the Service Dockerfile  
+ 
 Sample:  
 ```bash
 $ az acr build --image <name of image in repository:tagnumber> --registry <name of the container repository> --file Dockerfile .
 ```
+Example:
 ```bash 
 $ az acr build --image demo/validator:v1 --registry demoregistory1 --file Dockerfile .
 ```
-#### Step 4 Create a new Container Instance
+### Step 4 Create a new Container Instance
  
 Create new Container Instance using image from above | [Microsoft Docs](https://docs.microsoft.com/en-us/azure/container-instances/container-instances-quickstart-portal)
  
@@ -82,7 +84,7 @@ Note:  You must go to Next: Networking and set the TCP Port to 8080 to allow con
 
 ![Portal View](/assets/images/container-instance-deploy.png)
 
-#### Step 5 Test 
+### Step 5 Test 
 
 ![Portal View](/assets/images/validator-test.png)
 
