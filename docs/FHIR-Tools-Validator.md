@@ -25,7 +25,7 @@ Validating a resource means, checking that the following aspects of the resource
 FHIR Validator provides a Docker based command line and web service endpoint to validate FHIR Resources.  Deployment options include:
 - Deploy locally using Docker
 - Deploy on an Azure VM using Docker
-- Deploy as an Azure Container Instance | [Document](/FHIR-Tools-Validator-ContainerInst.md)
+- [Deploy as an Azure Container Instance](/FHIR-Tools-Validator-ContainerInst.md)
 
 ### Download Code / Source 
 FHIR Validator is located on [GitHub](https://github.com/microsoft/health-architectures/tree/master/FHIR/FHIRValidator)
