@@ -99,17 +99,17 @@ After your install the Key Vault will resemble the image below.
 
 Follow the guide below to create a new OAuth token correctly. 
 
-![Portal View](/assets/images/Postmansetup.png)
+![Portal View](/assets/images/postmansetup.png)
 
 - Navigate to your FHIR Proxy collection and test a GET statement. When sending GET statement to the proxy you must use OAuth or your permission will be denied. This shows the proxy is responding. 
 
-![Portal View](/assets/images/Postmanmeta.png)
+![Portal View](/assets/images/postmanmeta.png)
 
 - Go to “Authorization” in postman and configure a New Token OAuth2.0. Using the steps below. 
 - Create a Name for the new token
 - Ensure the Grant Type is “Authorization Code” 
 
-![Portal View](/assets/images/Postmancallback.png)
+![Portal View](/assets/images/postmancallback.png)
 
 - Add the Callback URL to the app registration of the FHIR Proxy
 
@@ -121,11 +121,11 @@ Follow the guide below to create a new OAuth token correctly.
 
 - Click on your proxy and navigate to “Authentication” and add the call back URL from Postman under “Web”> Redirect URL’s. 
 
-![Portal View](/assets/images/redirectURL.png)
+![Portal View](/assets/images/redirectURl.png)
 
 - To locate the 3rd URL, go back to Postman, click on the “Authorize using browser” setting, and copy the link to Redirect URL’s. 
 
-![Portal View](/assets/images/callbackURL.png)
+![Portal View](/assets/images/CallbackURL.png)
 
 *Note: If you run into Authentication errors, it is usually OAuth and not the Proxy. Be sure to double check related fields in OAuth token for accuracy.*
 
@@ -134,7 +134,8 @@ Follow the guide below to create a new OAuth token correctly.
 ![Portal View](/assets/images/enterprise.png)
 
 - Click on the fully qualified principal.
-![Portal View](/assets/images/fully qualified.png)
+
+![Portal View](/assets/images/fullyqualified.png)
 
 *Note: The Proxy creates 2 principals. The principal that is not fully qualified is managed by Azure and registered with Key vault. The fully qualified principal is the one we need for most trouble shooting scenarios.*
 
