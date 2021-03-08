@@ -9,7 +9,6 @@ nav_order: 1
 
 ![Microsoft and FHIR](/assets/images/msft-fhir.png)
 
-Proxy 
 # FHIR Proxy Install Documentation
 
 ### Prerequisites
