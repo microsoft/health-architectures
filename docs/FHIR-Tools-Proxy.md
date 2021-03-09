@@ -74,8 +74,6 @@ In the next few steps, you will need your FHIR Server details
 
 Once these steps are complete the install will run through the automation and save the FHIR information in key vault. 
 
-*Note: If there are any errors during installation, please delete the resource group and start over. It is best to deploy this in a new resource group that way should you need to start over, you will not delete any resources from other deployments. Sometimes the script will fail. If it does, you will see where the script is “retrying” and it will indicate this. **DO NOT CANCEL** the script and it will continue to retry and install.*
-
 - The deployment will look something like this: 
 
 ![Portal View](/assets/images/DeploymentComplete.png)
