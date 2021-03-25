@@ -26,17 +26,19 @@ nav_order: 1
   - Be sure you have permissions to register resources types
   - Be sure to have Contributor permission on the resource group you are deploying to
   - Have some familiarity with bash shell
-  - Be sure to have cloned the repo as all tools needed to run the script are in Cloud Shell. This may take a few minutes.
 
 ### Install Instructions
 
-- In Bash Shell, navigate to “FHIR/FHIRProxydirectory”
-- Run the deployfhirproxy.bash script and follow the prompts -> ./deployfhirproxy.bash. If it successfully executes the script, your bash shell will look like this
+- [Open Azure Cloud Shell](https://shell.azure.com) you can also access this from azure portal
+- Select Bash Shell
+- Clone this repo ```git clone https://github.com/microsoft/health-architectures```
+- Change to the FHIR/FHIRproxy subdirectory of this repo cd FHIR/FHIRProxy ```cd ./health-architectures/FHIR/FHIRProxy/```
+- Run the deployfhirproxy.bash script and follow the prompts -> ``` ./deployfhirproxy.bash```. If it successfully executes the script, your bash shell will look like this
 
 ![Portal View](/assets/images/deployfhirproxy.png)
 
-- If you are using the Service Client with the proxy, you must be in a directory where you can perform app registrations and grant API permissions. 
-- For the Service client to work, you may use a split tenant and create the service principal in that tenant. 
+- If you are using the Service Client with the proxy, you must be authenticated against an Azure AD Tenant where you can perform app registrations and grant API permissions. 
+- For the Service client to work, you may use a secondary tenant and create the service principal in that tenant (again you must be able to perform app registrations and grant API permissions in the secondary tenant). 
 - You may use oauth code flow and it should work; service principals will need additional permissions
 
 - Next you will be asked to choose an already existing resource group or to create a new resource group. (It’s probably best to create a new resource group) Should you choose to create a new resource group, the script will ask you to provide a name for the new resource group and enter the resource group location.
