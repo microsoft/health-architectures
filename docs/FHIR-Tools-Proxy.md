@@ -38,7 +38,7 @@ nav_order: 1
 ![Portal View](/assets/images/deployfhirproxy.png)
 
 - If you are using the Service Client with the proxy, you must be authenticated against an Azure AD Tenant where you can perform app registrations and grant API permissions. 
-- For the Service client to work, you may use a secondary tenant and create the service principal in that tenant (again you must be able to perform app registrations and grant API permissions in the secondary tenant). 
+    - You may use a secondary tenant and create the service principal in that tenant (again you must be able to perform app registrations and grant API permissions in the secondary tenant). 
 - You may use oauth code flow and it should work; service principals will need additional permissions
 
 - Next you will be asked to choose an already existing resource group or to create a new resource group. (It’s probably best to create a new resource group) Should you choose to create a new resource group, the script will ask you to provide a name for the new resource group and enter the resource group location.
@@ -88,7 +88,7 @@ And lastly the script text below will confirm the script ran successfully.
 ### After the Install
 
 
-After your install the Key Vault will resemble the image below. 
+After your install Key Vault -> Settings -> Secrets will resemble the image below. 
 
 *Note: FP is an abbreviation for FHIR Proxy and FS is an abbreviation for FHIR Server*
 
