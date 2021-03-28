@@ -15,7 +15,7 @@
 # Config notes:
 # change site to health-architectures when moving
 
-title: "Table of Contents"
+title: "Health Architectures"
 remote_theme: pmarsceill/just-the-docs
 color_scheme: "light"
 search_enabled: true
