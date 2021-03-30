@@ -1,9 +1,0 @@
-**/node_modules/
-**/build/
-**/dist/
-**/public/
-**/*.egg-info/
-**/.cache/
-**/.vs/
-**/bin/
-**/obj/
