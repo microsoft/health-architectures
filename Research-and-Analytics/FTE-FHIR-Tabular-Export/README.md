@@ -2,7 +2,7 @@
 
 This code is provided to assist customers looking to transform bulk FHIR data (NDJson) into parquet format. Currently the code is a .py file designed for use with Azure DataBricks. Coming very soon is a supporting Azure Data Factory pipeline template to automate exporting data from FHIR and transforming it into parquet.
 
-For more information on how the code works visit the blog post here.
+For more information on how the code works visit the [blog post here](https://microsoft.github.io/health-architectures/Posts-FTE-FHIR-Tabular-Export.html).
 
 Comments and suggestions are welcome via the issues page. Please label comments and suggestions with 'enhancement'.
 
