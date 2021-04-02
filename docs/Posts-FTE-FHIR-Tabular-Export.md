@@ -192,7 +192,7 @@ That's it. Very simple but powerful piece of code.
 Where can I get the FTE? Right, [**here**](https://github.com/microsoft/health-architectures/tree/master/Research-and-Analytics/FTE-FHIR-Tabular-Export).
 What about automation and performance? Azure Data Factory is very useful for automation and orchestration of processes like FHIR bulk export and running the FTE process. We are working on a sample Azure Data Factory template which will automate the FHIR bulk export, arrange the input files to optimize transformation performance, and clean up the FHIR NDJson staging files.
 
-Stay tuned next week for the upcoming Azure Data Factory pipeline.
+Stay tuned in two weeks for the upcoming Azure Data Factory pipeline automation template. The automation template will pull all the pieces together.
 
 For more Azure API for FHIR architectures check out [https://aka.ms/HealthArchitectures](https://aka.ms/HealthArchitectures).
 
