@@ -1,5 +1,6 @@
 ---
 title: Microsoft Health Architectures
+has_children: false
 nav_order: 1
 ---
 
