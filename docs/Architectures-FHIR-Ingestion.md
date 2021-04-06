@@ -2,7 +2,7 @@
 title: Ingestion with FHIR
 parent: API for FHIR
 grand_parent: Architectures
-nav_order: 2
+nav_order: 1
 ---
 
 # Ingestion 
