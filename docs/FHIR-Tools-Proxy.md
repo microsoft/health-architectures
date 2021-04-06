@@ -2,7 +2,7 @@
 title: Proxy
 parent: Tools
 grand_parent: FHIR
-nav_order: 1
+nav_order: 4
 ---
 
 # Proxy Gateway
