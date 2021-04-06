@@ -1,3 +1,8 @@
+---
+title: Microsoft Health Architectures
+nav_order: 1
+---
+
 # Welcome to Microsoft Health Architectures
 
 
