@@ -2,7 +2,7 @@
 title: IoMT for FHIR
 parent: Architectures
 has_children: true
-nav_order: 1
+nav_order: 3
 ---
 
 # Internet of Medical Things (IoMT)
