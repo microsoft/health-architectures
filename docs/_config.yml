@@ -21,4 +21,3 @@ color_scheme: "light"
 search_enabled: true
 ga_tracking: G-TNN4SPQGKT
 ga_tracking_anonymize_ip: true
-theme: jekyll-theme-minimal
