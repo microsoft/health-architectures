@@ -2,7 +2,7 @@
 title: Validator - Deployment as a Container Instance
 parent: Tools
 grand_parent: FHIR
-nav_order: 1
+nav_order: 5
 ---
 
 # FHIR Validator 
