@@ -2,7 +2,7 @@
 title: API for FHIR
 parent: Architectures
 has_children: true
-nav_order: 1
+nav_order: 2
 ---
 
 # Azure API for FHIR Reference Architectures
