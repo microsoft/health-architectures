@@ -1,5 +1,5 @@
 ---
-title: Microsoft Health Architectures
+title: Welcome
 has_children: false
 nav_order: 1
 ---
