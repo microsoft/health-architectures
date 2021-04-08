@@ -60,33 +60,34 @@ For example, to see the conformance statement for the FHIR Server, use your brow
 ```https://<secure proxy url from above>/api/fhirproxy/metadata```
 
 The endpoint will authenticate/authorize your access to the FHIR server and will execute configured pre-processing routines, pass the modified request on to the FHIR Server via the configured Service Client, execute configured post-processing routines on the result, and rewrite the server response to the client. 
-The original User Principal Name and tenant are passed in custom headers to the FHIR Server for accurate security and compliance auditing.</br>
-_Note: You will need to login as a user/principal in a FHIR Reader and/or FHIR Administrative role to view. All proxy calls are auth secured including conformance_
+The original User Principal Name and tenant are passed in custom headers to the FHIR Server for accurate security and compliance auditing.
+
+_Note: You will need to login as a user/principal in a FHIR Reader and/or FHIR Administrative role to view. All proxy calls are auth secured including conformance._
 
 
 ## Adding Users/Groups to the FHIR Server Proxy
-At a minimum users must be placed in one or more FHIR server roles in order to access the FHIR Server via the Proxy. The Access roles are Administrator, Resource Reader and Resource Writer 
-1. [Login to Azure Portal](https://portal.azure.com) _Note: If you have multiple tenants make sure you switch to the directory that contains the Secure FHIR Proxy_
-2. [Access the Azure Active Directory Enterprise Application Blade](https://ms.portal.azure.com/#blade/Microsoft_AAD_IAM/StartboardApplicationsMenuBlade/AllApps/menuId/)
-3. Change the Application Type Drop Down to All Applications and click the Apply button
-4. Enter the application id or application name from above in the search box to locate the Secure FHIR Proxy application
-5. Click on the Secure FHIR Proxy application name in the list
-6. Click on Users and Groups from the left hand navigation menu
-7. Click on the +Add User button
-8. Click on the Select Role assignment box
-9. Select the access role you want to assign to specific users
+At a minimum, users must be placed in one or more FHIR Server roles in order to access the FHIR Server via the Proxy. The Access roles are Administrator, Resource Reader, and Resource Writer 
+1. [Login to Azure Portal](https://portal.azure.com) _Note: If you have multiple tenants, make sure you switch to the directory that contains the Secure FHIR Proxy._
+2. [Access the Azure Active Directory Enterprise Application Blade](https://ms.portal.azure.com/#blade/Microsoft_AAD_IAM/StartboardApplicationsMenuBlade/AllApps/menuId/).
+3. Change the Application Type Drop Down to All Applications and click the Apply button.
+4. Enter the application id or application name from above in the search box to locate the Secure FHIR Proxy application.
+5. Click on the Secure FHIR Proxy application name in the list.
+6. Click on Users and Groups from the left-hand navigation menu.
+7. Click on the +Add User button.
+8. Click on the Select Role assignment box.
+9. Select the Access role you want to assign to specific users.
    The following are the predefined FHIR Access roles:
    + Administrator - Full Privileges to Read/Write/Link resource to the FHIR Server
    + Resource Reader - Allowed to Read Resources from the FHIR Server
    + Resource Writer - Allowed to Create, Update, Delete Resources on the FHIR Server
   
-    When the role is selected click the select button at the bottom of the panel
+    When the role is selected click the Select button at the bottom of the panel.
 
-10. Select the Users assignment box
+10. Select the Users assignment box.
 11. Select and/or Search and Select registered users/guests that you want to assign the selected role too.
-12. When all users desired have been selected click the select button at the bottom of the panel.
+12. When all users desired have been selected, click the Select button at the bottom of the panel.
 13. Click the Assign button.
-14. Congratulations the select users have been assigned the access role and can now perform allowed operations against the FHIR Server
+14. Congratulations! The selected users have been assigned their Access role(s) and can now perform allowed operations against the FHIR Server.
 
 ## Adding Application Service Principals to the FHIR Server Proxy
 You can create service client principals and register for Application API Access to the proxy. This is useful for using the proxy in machine driven service workflows where a human cannot sign-in. </br>
