@@ -97,7 +97,6 @@ The original User Principal Name and tenant are passed in custom headers to the 
 
 _Note: You will need to login as a user/principal in a FHIR Reader and/or FHIR Administrative role to view. All proxy calls are auth secured including conformance._
 
-
 ## Adding Users/Groups to the FHIR Server Proxy <a name="paragraph8"></a>
 At a minimum, users must be placed in one or more FHIR Server roles in order to access the FHIR Server via the Proxy. The Access roles are Administrator, Resource Reader, and Resource Writer.
 1. [Login to Azure Portal](https://portal.azure.com) _Note: If you have multiple tenants, make sure you switch to the directory that contains the Secure FHIR Proxy._
@@ -124,6 +123,7 @@ At a minimum, users must be placed in one or more FHIR Server roles in order to 
 
 ## Adding Application Service Principals to the FHIR Server Proxy <a name="paragraph9"></a>
 You can create Service Client Principals and register for Application API Access to the proxy. This is useful for using the proxy in machine-driven service workflows where a human cannot sign in. </br>
+
 The FHIR Server roles assignable to applications by default are: Resource Reader and Resource Writer. You may add/change roles assignable to applications in the FHIR Proxy application manifest.
  
 1. [Login to Azure Portal](https://portal.azure.com) _Note: If you have multiple tenants, make sure you switch to the directory that contains the Secure FHIR Proxy._
@@ -428,8 +428,6 @@ It is also required that users be linked to FHIR Participant roles/resources. Pl
 This pre-preocessing module implements a limited $everything at the patient level. It returns the Patient and up to 5000 related resources for the Patient. Paging or other query parameters are not currently supported.
 
 <I>Notes:</br> This module is provided as a building block example. If used in production, the returned resource limitation of 5000 should be noted to end users.</br> This module should be executed after all request-modifying pre-preocessors since it will call the FHIR server and stop execution of other pre-processors</I>
-
-
 
 # Contributing <a name="contributing"></a>
 
