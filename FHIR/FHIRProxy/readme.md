@@ -20,7 +20,7 @@ The base pre- and post- processing modules that can be configured are:
  + TransformBundlePreProcess - This processing module will transform incoming transaction bundle requests into a batch bundle request and maintain UUID associations of the contained resources. This is an alternative for updating FHIR Servers unable to handle transaction-based requests.</br>
  + DateSortPostProcessor - This processing module allows for a date-based sorting alternative on FHIR Servers that do not natively support _sort. The processor implements a top level _sort=date or _sort=-date parameter for supported resource queries up to a configured maximum number of rows.</br>  
  + ProfileValidationPreProcess - This processing module adds the ability to call external profile (e.g. [US Core](https://www.hl7.org/fhir/us/core/)) and/or standard schema validation support for FHIR Servers that do not implement or support specific profile validation.
- + ConsentOptOutFilter - This post-processing module adds the ability to deny access to FHIR Server resources for patients who have elected to OPTOUT everyone or specific individuals and/or organizations from access to their medical data.
+ + ConsentOptOutFilter - This post-processing module adds the ability to deny access to FHIR Server resources for patients who have elected to OPTOUT from allowing anyone or specific individuals and/or organizations access to their medical data.
  + EverythingPatientPreProcess - This pre-processing module implements a limited $everything at the patient level. It returns up to 5000 related resources for the Patient.
 
 Check back often as more processing modules will be added. </br>
@@ -286,11 +286,11 @@ At a minimum, users must be placed in one or more FHIR Participant roles in orde
 
 ## Consent Opt-Out Filter
 
-This module adds the ability to deny access to FHIR Server resources for patients who have elected to OPTOUT everyone or specific individuals and/or organizations from access to their medical data.
+This module adds the ability to deny access to FHIR Server resources for patients who have elected to OPTOUT from allowing anyone or specific individuals and/or organizations access to their medical data.
 
 This module operates on the access policy that the health information of patients is accessabile automatically to authorized users, but the patient can opt out completely.
 
-It will honor any opt-out consent record(s) effective period, deny access to everyone or specific Organizations, Practitioners, RelatedPersons and Patients (Actors)
+It will honor any opt-out consent record(s) effective period, deny access to everyone or specific Organizations, Practitioners, RelatedPersons and Patients (Actors).
 
 This module will only filter if the appropriate OPT-OUT Consent Resources are stored in the FHIR Server and are in force.
 
@@ -372,13 +372,13 @@ The following consent resource will not allow any individuals affiliated with th
 }
 ```
 Notes: 
-+ If no Period is specified the Consent provision will be deemed in force.  If no start date is specified the default will be the earliest supported date/time.  If no end date is specified the default will be the latest supported date/time.
-+ If no Actors are specified in the Consent Provision all individuals will be prevented from access
-+ If the user is not linked to a FHIR resource and specific actors are specified in the opt-out consent record, the filter will be unable to determine exclusion and will be allowed access be default policy
++ If no Period is specified, the Consent provision will be deemed in force. If no start date is specified, the default will be the earliest supported date/time. If no end date is specified, the default will be the latest supported date/time.
++ If no Actors are specified in the Consent Provision, all individuals will be prevented from access.
++ If the user is not linked to a FHIR resource and specific actors are specified in the opt-out consent record, the filter will be unable to determine exclusion and Allowed Access will be default policy.
 + Organization is determined by the linked resource association with an organization.
-+ If multiple consent records are present the most restrictive policy will be used and actor filters will be aggregated.
-+ This filter only covers access updates are permitted to protect recorded data.
-+ This filter does not allow exceptions on specific resources all resources related to the patient are filtered
++ If multiple consent records are present, the most restrictive policy will be used and actor filters will be aggregated.
++ This filter only covers access updates that are permitted to protect recorded data.
++ This filter does not allow exceptions on specific resources; all resources related to the patient are filtered.
  
 This process requires configuration settings on the function app:
 ```
@@ -393,7 +393,7 @@ It is also required that users be linked to FHIR Participant roles/resources. Pl
 ## Everything Patient Pre Processor
 This pre-preocessing module implements a limited $everything at the patient level. It returns the Patient and up to 5000 related resources for the Patient. Paging or other query parameters are not currently supported.
 
-<I>Notes:</br> This module is provided as a building block example if used in production, returned resource limitation of 5000 should be noted to end users</br>This module should be executed after all request modifying pre-preocessors since it will call the FHIR server and stop execution of other pre-processors</I>
+<I>Notes:</br> This module is provided as a building block example. If used in production, the returned resource limitation of 5000 should be noted to end users.</br> This module should be executed after all request-modifying pre-preocessors since it will call the FHIR server and stop execution of other pre-processors</I>
 
 
 
