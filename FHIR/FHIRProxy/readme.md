@@ -131,11 +131,11 @@ By default, no pre/post processors are configured to run.  You will need to enab
 Note the utility does not read or display the current configuration. It will simply enable the modules you specify and update the function configuration. To disable all modules, press ENTER without selecting any options. To escape the menu selection and abort updates, press CTRL-C.
 
 ## Date Sort Post-Processor
-This post process allows for date based sorting alternative on FHIR Servers that do not natively support _sort. The processor implements top level _sort=date or _sort=-date (reverse chron) query parameter for supported resource queries up to a hard maximum of 5000.</br>
-The resources supported for top level_sort=date are: Observation,DiagnosticReport,Encounter,CarePlan,CareTeam,EpisodeOfCare and Claim. Any other resources will be ignored and not sorted.</br>
-This processor is limited to process 5000 resource entries in a search-set bundle, it is imperative that you limit your query to not exceed this many resources for accurate results.
-This processor also has the potential to cause server delays in responses for large results sets use with caution.  <I>Hints: Specify large _count parameter value to reduce calls to server and select limiting parameters for resource queries.</I>
-A log warning will be issued for request that exceed the 5000 resource sort limit, but no error response will be returned just the truncated data set</br>
+This post-process allows for date-based sorting alternative on FHIR Servers that do not natively support _sort. The processor implements the top level _sort=date or _sort=-date (reverse chron) query parameter for supported resource queries up to a hard maximum of 5000.</br>
+The resources supported for top level_sort=date are: Observation, DiagnosticReport, Encounter, CarePlan, CareTeam, EpisodeOfCare, and Claim. Any other resource will be ignored (and left as-is).</br>
+This processor is limited to process 5000 resource entries. In a search-set bundle, for accurate results it is imperative that you limit your query so as not to not exceed this many resources.
+This processor also has the potential to cause server delays in responses for large result sets. Use with caution! <I>Hints: Specify a large _count parameter value to reduce calls to the server and select limiting parameters for resource queries.</I>
+A log warning will be issued for requests that exceed the 5000 resource sort limit, but no error response will be returned—just the truncated data set.</br>
 This process requires no additional configuration.  
 
 ## Publish Event Post-Processor
