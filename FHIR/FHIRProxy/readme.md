@@ -78,7 +78,7 @@ Please note you should deploy this proxy into a tenant that you control for Appl
 10. Run the ```deployfhirproxy.bash``` script and follow the prompts.
 11. Congratulations! You now have a Secure FHIR Proxy instance with authentication running. You can now add users/groups for authorized access (see below).
 
-# Proxy Endpoint
+## Proxy Endpoint
 The new endpoint for your FHIR Server should now be: ```https://<secure proxy url from above>/api/fhirproxy```. You can use any supported FHIR HTTP verb and any FHIR compliant request/query.
 
 For example, to see the conformance statement for the FHIR Server, use your browser and access the following endpoint:</br>
