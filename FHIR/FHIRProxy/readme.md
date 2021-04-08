@@ -2,10 +2,10 @@
 
 ## Table of contents
 1. [Overivew](#introduction)
-    2. [Authentication and RBAC Authorization](#subparagraph1)
-    3. [Pre and Post Processing Support](#paragraph2)
-    4. [Reverse Proxy](#paragraph3)
-    5. [Architecture](#paragraph4)
+    1. [Authentication and RBAC Authorization](#subparagraph1)
+    2. [Pre and Post Processing Support](#paragraph2)
+    3. [Reverse Proxy](#paragraph3)
+    4. [Architecture](#paragraph4)
 6. [Installation] (#installation)
     7. [Deploying your own FHIR Proxy](#paragraph5)
 8. [Configuration] (#configuration)
