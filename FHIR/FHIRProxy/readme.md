@@ -55,12 +55,12 @@ Please note you should deploy this proxy into a tenant that you control for Appl
 11. Congratulations! You now have a Secure FHIR Proxy instance with authentication running. You can now add users/groups for authorized access (see below).
 
 # Proxy Endpoint
-The new endpoint for your FHIR Server should now be: ```https://<secure proxy url from above>/api/fhirproxy```. You can use any supported FHIR HTTP verb and any FHIR compliant request/query
-For example to see conformance statement for the FHIR Server, use your browser and access the following endpoint:</br>
+The new endpoint for your FHIR Server should now be: ```https://<secure proxy url from above>/api/fhirproxy```. You can use any supported FHIR HTTP verb and any FHIR compliant request/query.
+For example, to see the conformance statement for the FHIR Server, use your browser and access the following endpoint:</br>
 ```https://<secure proxy url from above>/api/fhirproxy/metadata```
 
-The endpoint will authenticate/authorize your access to the FHIR server will execute configured pre-processing routines, pass the modified request on to the FHIR Server via the configured service client, execute configured post-processing routines on the result and rewrite the server response to the client. 
-The original user principal name and tenant are passed in custom headers to the FHIR server for accurate security and compliance auditing.  
+The endpoint will authenticate/authorize your access to the FHIR server and will execute configured pre-processing routines, pass the modified request on to the FHIR Server via the configured Service Client, execute configured post-processing routines on the result, and rewrite the server response to the client. 
+The original User Principal Name and tenant are passed in custom headers to the FHIR Server for accurate security and compliance auditing.</br>
 _Note: You will need to login as a user/principal in a FHIR Reader and/or FHIR Administrative role to view. All proxy calls are auth secured including conformance_
 
 
