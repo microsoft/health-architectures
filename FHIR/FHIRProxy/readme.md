@@ -294,7 +294,6 @@ At a minimum, users must be placed in one or more FHIR Participant roles in orde
 2. Obtain the FHIR Resource Id you wish to link to an AAD User Principal. Note you can use any search methods for the resources described in the FHIR specification. It is strongly recommended to use a known Business Identifier in your query to ensure a specific and correct match.
    For example:
    To find a specific Patient in FHIR with an MRN of 1234567 you could issue the following URL in your browser:
-   
    ```https://<your fhir proxy url>/api/fhirproxy/Patient?identifier=1234567```
    
    To find a specific Practitioner with last name Smith, in this case you can use other fields to validate—like address, identifiers, etc. 
