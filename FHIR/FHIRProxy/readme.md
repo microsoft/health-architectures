@@ -111,7 +111,7 @@ The FHIR Server roles assignable to applications by default are: Resource Reader
 
 Note: You can authenticate using the client_credentials flow to your new application using its application id and secret. The resource or audience should be the application id of the FHIR Proxy. Pass the obtained token in the Authorization header of your calls to the FHIR proxy.
 
-##  Configuration
+##  Pre/Post Processor Configuration
 The FHIR Proxy is configured on installation to be paired to a FHIR Server via a Service Client. Default roles are added to the application and are configured for specific access in the Configuration Settings section of the function app.
 Enablement of pre/post processing modules is accomplished via the ```configmodules.bash``` utility.</br>
 
