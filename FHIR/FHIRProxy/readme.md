@@ -32,7 +32,7 @@ The Secure FHIR Gateway and Proxy is an Azure Function-based solution that:
  + Is integrated with Azure Active Directory for authentication and to provide Role Based Access Control</br>
  + Acts as a FHIR-specific reverse proxy rewriting responses and brokering requests to FHIR Servers</br>
 ## Authentication and RBAC Authorization <a name="paragraph1"></a>
-By default the proxy will configure and use Azure Active Directory (Azure AD) as an authentication provider. You will also need to assign users/groups and/or service principals into specific server access roles in order to access the FHIR Server via the proxy. You can also offload this responsibility to [API Management](https://azure.microsoft.com/en-us/services/api-management/).
+By default the proxy will configure and use Azure Active Directory (Azure AD) as an authentication provider. You will also need to assign users/groups and/or Service Principals into specific server access roles in order to access the FHIR Server via the proxy. You can also offload this responsibility to [API Management](https://azure.microsoft.com/en-us/services/api-management/).
 
 ## Pre and Post Processing Support
 The proxy can be configured to execute any number of logic processing modules to support a variety of pre/post conditional actions on a per-call basis. You can create custom processors by implementing the ```IProxyPreProcess``` or ```IProxyPostProcess``` interfaces in a thread safe class.
