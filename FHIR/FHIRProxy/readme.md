@@ -1,7 +1,7 @@
 # Secure FHIR Gateway and Proxy
 
 ## Table of contents
-1. [**Overivew**](#introduction)
+1. [**Overview**](#introduction)
     1. [Authentication and RBAC Authorization](#subparagraph1)
     2. [Pre and Post Processing Support](#paragraph2)
     3. [Reverse Proxy](#paragraph3)
