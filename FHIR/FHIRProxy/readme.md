@@ -289,6 +289,7 @@ At a minimum, users must be placed in one or more FHIR Participant roles in orde
 []()
 ## Linking Users in Participant Roles to FHIR Resources <a name="paragraph19"></a>
 1. Make sure you have configured Participant Authorization Roles for users.
+
 2. Obtain the FHIR Resource Id you wish to link to an AAD User Principal. Note you can use any search methods for the resources described in the FHIR specification. It is strongly recommended to use a known Business Identifier in your query to ensure a specific and correct match.
    For example:
    To find a specific Patient in FHIR with an MRN of 1234567 you could issue the following URL in your browser:
@@ -304,7 +305,8 @@ At a minimum, users must be placed in one or more FHIR Participant roles in orde
    _Note: You will need to login as a user in a FHIR Reader and/or FHIR Administrative role to view._
  
  3. You will need to obtain the participant User Principal Name for the AAD instance in your tenant that is assigned roles for the secure proxy application. Make sure the Role they are in corresponds to the FHIR Resource you are linking. 
-    For example: ```somedoctor@sometenant.onmicrosoft.com```
+For example: ```somedoctor@sometenant.onmicrosoft.com```
+
  4. Now you can link the FHIR Resource to the user principal name by entering the following URL in your browser:
     ```https://<your fhir proxy url>/api/manage/link/<ResourceName>/<ResourceID>?name=<user principal name>``` 
 
@@ -313,7 +315,7 @@ At a minimum, users must be placed in one or more FHIR Participant roles in orde
      
     _Note: You will need to login as a user in a FHIR Administrative role to perform the assignment._
 
-5.  Your done! The principal user is now in a role connected to the FHIR resource.
+5.  You're done! The principal user is now in a role connected to the FHIR resource.
 
 ## Consent Opt-Out Filter <a name="paragraph20"></a>
 
