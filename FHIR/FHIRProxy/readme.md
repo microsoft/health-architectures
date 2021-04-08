@@ -156,15 +156,15 @@ This process requires two configuration settings on the function app:
 ```
 
 ## Profile Validation Pre-Processor
-This processor adds the ability to call external profile and/or standard FHIR schema validation support for FHIR Servers who do not implement or support specific profile validation.
-This module expects external validation URLs to return an [OperationOutcome](https://www.hl7.org/fhir/operationoutcome.html) FHIR Resource.  The presence of issue entries will abort pre-processing and the FHIR Server call and the outcome will be returned to the client for resolution.
-Enforcement is via a profile enforecement policy file (detailed below)
+This processor adds the ability to call external profile and/or standard FHIR schema validation support for FHIR Servers that do not implement or support specific profile validation.
+This module expects external validation URLs to return an [OperationOutcome](https://www.hl7.org/fhir/operationoutcome.html) FHIR Resource. The presence of issue entries will abort pre-processing _and_ the FHIR Server call, and the outcome will be returned to the client for resolution.
+Enforcement is via a profile enforecement policy file (detailed below).
 
 This process requires the following configuration settings on the function app:
 ```
     FP-MOD-FHIRVALIDATION-URL:<A valid URL to a compliant FHIR Validation Server>
-    FP-MOD-FHIRVALIDATION-POLICY-CONTAINER:<A valid container name in the FHIR Proxy Storage Account that contains profile enforcement file (Default is: fhirvalidator)>
-    FP-MOD-FHIRVALIDATION-POLICY-FILE:<A valid file name of profile enforcement policy file (Default is: profile_enforce_policy.json)>
+    FP-MOD-FHIRVALIDATION-POLICY-CONTAINER:<A valid container name in the FHIR Proxy Storage Account that contains a profile enforcement file (Default is: fhirvalidator)>
+    FP-MOD-FHIRVALIDATION-POLICY-FILE:<A valid file name of the profile enforcement policy file (Default is: profile_enforce_policy.json)>
 ```
 
 <B>Profile Enforcement Policy File</B>
@@ -181,7 +181,7 @@ The profile enforcement policy file is a JSON Document Object that allows you to
     ]
 }
 ```
-For example the following file would enforce us-core-patient for Patient resources and us-core-condition for Condition resources:
+For example, the following file would enforce us-core-patient for Patient resources and us-core-condition for Condition resources:
 ```
 { 
 	"enforce":[
@@ -209,7 +209,7 @@ https://<your validation server url>?profile=profileurl1&profile=profileurl2
 ```
 
 
-If the policy file is not present or malformed the proxy server will call the FHIR Validator without specific profiles and the resource will be validated against R4 schema only.
+If the policy file is not present or malformed, the proxy server will call the FHIR Validator without specific profiles and the resource will be validated against R4 schema only.
 
 The health-architectures [FHIR Validator](https://github.com/microsoft/health-architectures/tree/master/FHIR/FHIRValidator) provides a Docker wrapped version of the org.hl7 FHIR Validator and can be used with this processor.  It supports FHIR R4 and [US Core](https://www.hl7.org/fhir/us/core/) profiles.
 For example to validate a Patient resource for US Core compliance you would configure the Profile Enforcement Policy file for the Patient resource and then call the proxy with POST/PUT with the resource in the message body using the following url:
@@ -220,7 +220,7 @@ https://<secure proxy url from above>/api/fhirproxy/Patient
 ```
 
 
-The validator also supports batch or transaction bundles as well analyzing each contained resource.  
+The validator also supports batch or transaction bundles as well for analyzing each contained resource.  
 
 ## Transform Bundle Pre-Processor
 This processing module will transform incoming transaction bundle requests into batch bundle request and maintain UUID associations of contained resources.  This is a alternative for updating FHIR Servers unable to handle transaction based requests.</br>
