@@ -2,7 +2,7 @@
 
 ## Table of contents
 1. [Overivew](#introduction)
-    2. [Authentication and RBAC Authorization](#paragraph1)
+    2. [Authentication and RBAC Authorization](#subparagraph1)
     3. [Pre and Post Processing Support](#paragraph2)
     4. [Reverse Proxy](#paragraph3)
     5. [Architecture](#paragraph4)
