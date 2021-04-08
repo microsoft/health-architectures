@@ -1,6 +1,12 @@
 # Secure FHIR Gateway and Proxy
 
-## Introduction
+# Table of contents
+1. [Introduction](#introduction)
+2. [Some paragraph](#paragraph1)
+    1. [Sub paragraph](#subparagraph1)
+3. [Another paragraph](#paragraph2)
+
+## Introduction <a name="introduction"></a>
 The Secure FHIR Gateway and Proxy is an Azure Function-based solution that:
  + Acts as an intelligent and secure gateway to FHIR Servers
  + Allows multi-tenant access and purpose-driven security policies for specialized access to a common FHIR Server
