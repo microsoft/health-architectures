@@ -91,14 +91,15 @@ The new endpoint for your FHIR Server should now be: ```https://<secure proxy ur
 For example, to see the conformance statement for the FHIR Server, use your browser and access the following endpoint:</br>
 ```https://<secure proxy url from above>/api/fhirproxy/metadata```
 
-The endpoint will authenticate/authorize your access to the FHIR server and will execute configured pre-processing routines, pass the modified request on to the FHIR Server via the configured Service Client, execute configured post-processing routines on the result, and rewrite the server response to the client. 
+The endpoint will authenticate/authorize your access to the FHIR server and will execute configured pre-processing routines, pass the modified request on to the FHIR Server via the configured Service Client, execute configured post-processing routines on the result, and rewrite the server response to the client.
+
 The original User Principal Name and tenant are passed in custom headers to the FHIR Server for accurate security and compliance auditing.
 
 _Note: You will need to login as a user/principal in a FHIR Reader and/or FHIR Administrative role to view. All proxy calls are auth secured including conformance._
 
 
 ## Adding Users/Groups to the FHIR Server Proxy <a name="paragraph8"></a>
-At a minimum, users must be placed in one or more FHIR Server roles in order to access the FHIR Server via the Proxy. The Access roles are Administrator, Resource Reader, and Resource Writer 
+At a minimum, users must be placed in one or more FHIR Server roles in order to access the FHIR Server via the Proxy. The Access roles are Administrator, Resource Reader, and Resource Writer.
 1. [Login to Azure Portal](https://portal.azure.com) _Note: If you have multiple tenants, make sure you switch to the directory that contains the Secure FHIR Proxy._
 2. [Access the Azure Active Directory Enterprise Application Blade](https://ms.portal.azure.com/#blade/Microsoft_AAD_IAM/StartboardApplicationsMenuBlade/AllApps/menuId/).
 3. Change the Application Type Drop Down to All Applications and click the Apply button.
