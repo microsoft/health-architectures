@@ -1,10 +1,28 @@
 # Secure FHIR Gateway and Proxy
 
-# Table of contents
+## Table of contents
 1. [Introduction](#introduction)
-2. [Some paragraph](#paragraph1)
+2. [Authentication and RBAC Authorization](#paragraph1)
     1. [Sub paragraph](#subparagraph1)
-3. [Another paragraph](#paragraph2)
+3. [Pre and Post Processing Support](#paragraph2)
+4. [Reverse Proxy](#paragraph2)
+5. [Architecture Overview](#paragraph2)
+6. [Deploying your own FHIR Proxy](#paragraph2)
+7. [Adding Users/Groups to the FHIR Server Proxy](#paragraph2)
+8. [Adding Application Service Principals to the FHIR Server Proxy](#paragraph2)
+9. [Pre/Post Processor Configuration](#paragraph2)
+10. [Enabling Pre/Post Processing Modules](#paragraph2)
+11. [Date Sort Post-Processor](#paragraph2)
+12. [Publish Event Post-Processor](#paragraph2)
+13. [Profile Validation Pre-Processor](#paragraph2)
+14. [Transform Bundle Pre-Processor](#paragraph2)
+15. [Participant Filter Post-Processor](#paragraph2)
+16. [How the Participant Post Processor works](#paragraph2)
+17. [Configuring Participant Authorization Roles for Users](#paragraph2)
+18. [Linking Users in Participant Roles to FHIR Resources](#paragraph2)
+19. [Consent Opt-Out Filter](#paragraph2)
+20. [Everything Patient Pre Processor](#paragraph2)
+21. [Contributing](#paragraph2)
 
 ## Introduction <a name="introduction"></a>
 The Secure FHIR Gateway and Proxy is an Azure Function-based solution that:
@@ -13,7 +31,7 @@ The Secure FHIR Gateway and Proxy is an Azure Function-based solution that:
  + Provides a consolidated approach to pre- and post- processing of FHIR Server Calls to support various access/result filtering or actions</br>
  + Is integrated with Azure Active Directory for authentication and to provide Role Based Access Control</br>
  + Acts as a FHIR-specific reverse proxy rewriting responses and brokering requests to FHIR Servers</br>
-## Authentication and RBAC Authorization
+## Authentication and RBAC Authorization <a name="paragraph1"></a>
 By default the proxy will configure and use Azure Active Directory (Azure AD) as an authentication provider. You will also need to assign users/groups and/or service principals into specific server access roles in order to access the FHIR Server via the proxy. You can also offload this responsibility to [API Management](https://azure.microsoft.com/en-us/services/api-management/).
 
 ## Pre and Post Processing Support
