@@ -82,7 +82,7 @@ At a minimum, users must be placed in one or more FHIR Server roles in order to 
    + Resource Reader - Allowed to Read Resources from the FHIR Server
    + Resource Writer - Allowed to Create, Update, Delete Resources on the FHIR Server
   
-    When the role is selected click the Select button at the bottom of the panel.
+    When the role is selected, click the Select button at the bottom of the panel.
 
 10. Select the Users assignment box.
 11. Select and/or Search and Select registered users/guests that you want to assign the selected role too.
@@ -131,21 +131,21 @@ By default, no pre/post processors are configured to run.  You will need to enab
 Note the utility does not read or display the current configuration. It will simply enable the modules you specify and update the function configuration. To disable all modules, press ENTER without selecting any options. To escape the menu selection and abort updates, press CTRL-C.
 
 ## Date Sort Post-Processor
-This post-process allows for date-based sorting alternative on FHIR Servers that do not natively support _sort. The processor implements the top level _sort=date or _sort=-date (reverse chron) query parameter for supported resource queries up to a hard maximum of 5000.</br>
-The resources supported for top level_sort=date are: Observation, DiagnosticReport, Encounter, CarePlan, CareTeam, EpisodeOfCare, and Claim. Any other resource will be ignored (and left as-is).</br>
-This processor is limited to process 5000 resource entries. In a search-set bundle, for accurate results it is imperative that you limit your query so as not to not exceed this many resources.
-This processor also has the potential to cause server delays in responses for large result sets. Use with caution! <I>Hints: Specify a large _count parameter value to reduce calls to the server and select limiting parameters for resource queries.</I>
-A log warning will be issued for requests that exceed the 5000 resource sort limit, but no error response will be returned—just the truncated data set.</br>
++ This post-process allows for date-based sorting alternative on FHIR Servers that do not natively support _sort. The processor implements the top level _sort=date or _sort=-date (reverse chron) query parameter for supported resource queries up to a hard maximum of 5000.</br>
++ The resources supported for top level_sort=date are: Observation, DiagnosticReport, Encounter, CarePlan, CareTeam, EpisodeOfCare, and Claim. Any other resource will be ignored and left unsorted.</br>
++ This processor is limited to process 5000 resource entries. In a search-set bundle, for accurate results it is imperative that you limit your query so as not to not exceed this many resources.
++ This processor also has the potential to cause server delays in responses for large result sets. Use with caution! <I>Hints: Specify a large _count parameter value to reduce calls to the server and select limiting parameters for resource queries.</I>
++ A log warning will be issued for requests that exceed the 5000 resource sort limit, but no error response will be returned—just the truncated data set.</br>
 This process requires no additional configuration.  
 
 ## Publish Event Post-Processor
-This processor will publish FHIR Server Create/Update and Delete events for affected resources to a configured eventhub.  These events can be subscribed too by any number of consumers in order to facilitate any number of orchestrated workflows. (e.g. CDS, Audits, Alerts, etc...)</br>
-In addition to the action date the eventhub message consists of the following information:
+This processor will publish FHIR Server Create/Update and Delete events for affected resources to a configured eventhub. These events can be subscribed to by any number of consumers in order to facilitate any number of orchestrated workflows (e.g. CDS, Audits, Alerts, etc.).</br>
+In addition to the action date, the eventhub message consists of the following information:
 + Action - HTTP Verb used to modify the FHIR Server
-+ Resourcetype - The type of resource affected (e.g. Patient, Observation, etc...)
++ Resourcetype - The type of resource affected (e.g. Patient, Observation, etc.)
 + Id - The resource logical id on the FHIR Server that was affected.
 + Version Id - The version number of the resource affected
-+ LastUpdated - The date/time the affected resource was updated.
++ LastUpdated - The date/time the affected resource was updated
 
 You can use the data in the eventhub message to make decisions and get affected resource information to facilitate CDS or other workflows.
 
