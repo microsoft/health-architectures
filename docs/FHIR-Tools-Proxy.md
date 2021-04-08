@@ -13,19 +13,19 @@ nav_order: 4
 
 ### Prerequisites
 
-- Ensure you have access to an Azure Subscription
+- Ensure you have access to an Azure Subscription.
 - Be sure to have previously deployed the Azure API for FHIR and have these handy:
   - FHIR Server URL
   - FHIR Server Service Client ID
   - FHIR Server Service Client Application ID
   - FHIR Server Service Client Secret
   - FHIR Server/Service Client Audience/Resource
-  - Must have permissions to register Key Vault secrets
-  - Registered a Service Client to access the FHIR Server
-  - Locate the Object ID for the Service Client and Register it with the FHIR Server
-  - Be sure you have permissions to register resources types
-  - Be sure to have Contributor permission on the resource group you are deploying to
-  - Have some familiarity with bash shell
+  - Permissions to register Key Vault secrets
+  - A registered Service Client to access the FHIR Server
+  - The Object ID registered with the FHIR Server for the Service Client 
+  - Permissions to register resources types
+  - Contributor permission on the resource group you are deploying to
+  - Familiarity with bash shell
 
 ### Install Instructions
 
