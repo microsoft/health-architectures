@@ -25,7 +25,7 @@
     14. [Everything Patient Pre Processor](#paragraph19)
 4. [**Contributing**](#contributing)
 
-## Overview <a name="introduction"></a>
+# Overview <a name="introduction"></a>
 The Secure FHIR Gateway and Proxy is an Azure Function-based solution that:
  + Acts as an intelligent and secure gateway to FHIR Servers
  + Allows multi-tenant access and purpose-driven security policies for specialized access to a common FHIR Server
@@ -57,7 +57,7 @@ All FHIR Server responses are re-written to include the proxy address as the app
 ## Architecture <a name="paragraph4"></a>
 ![Fhirproxy Arch](fhirproxy_arch.png)
 
-## Installation <a name="installation"></a>
+# Installation <a name="installation"></a>
 
 ## Deploying your own FHIR Proxy <a name="paragraph5"></a>
 
@@ -80,7 +80,7 @@ Please note you should deploy this proxy into a tenant that you control for Appl
 10. Run the ```deployfhirproxy.bash``` script and follow the prompts.
 11. Congratulations! You now have a Secure FHIR Proxy instance with authentication running. You can now add users/groups for authorized access (see below).
 
-## Configuration <a name="configuration"></a>
+# Configuration <a name="configuration"></a>
 
 ## Proxy Endpoint <a name="paragraph6"></a>
 The new endpoint for your FHIR Server should now be: ```https://<secure proxy url from above>/api/fhirproxy```. You can use any supported FHIR HTTP verb and any FHIR compliant request/query.
@@ -425,7 +425,7 @@ This pre-preocessing module implements a limited $everything at the patient leve
 
 
 
-## Contributing <a name="contributing"></a>
+# Contributing <a name="contributing"></a>
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
