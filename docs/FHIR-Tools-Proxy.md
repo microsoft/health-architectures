@@ -5,7 +5,7 @@ grand_parent: FHIR
 nav_order: 4
 ---
 
-# Proxy Gateway
+# Secure FHIR Gateway and Proxy
 
 ![Microsoft and FHIR](/assets/images/msft-fhir.png)
 
