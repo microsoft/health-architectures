@@ -7,7 +7,7 @@
     3. [Reverse Proxy](#paragraph3)
     4. [Architecture](#paragraph4)
 2. [Installation](#installation)
-    6. [Deploying your own FHIR Proxy](#paragraph6)
+    1. [Deploying your own FHIR Proxy](#paragraph6)
 3. [Configuration](#configuration)
     1. [Adding Users/Groups to the FHIR Server Proxy](#paragraph6)
     2. [Adding Application Service Principals to the FHIR Server Proxy](#paragraph7)
