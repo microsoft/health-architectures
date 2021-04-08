@@ -208,7 +208,6 @@ For example:
 https://<your validation server url>?profile=profileurl1&profile=profileurl2
 ```
 
-
 If the policy file is not present or malformed, the proxy server will call the FHIR Validator without specific profiles and the resource will be validated against R4 schema only.
 
 The health-architectures [FHIR Validator](https://github.com/microsoft/health-architectures/tree/master/FHIR/FHIRValidator) provides a Docker wrapped version of the org.hl7 FHIR Validator and can be used with this processor.  It supports FHIR R4 and [US Core](https://www.hl7.org/fhir/us/core/) profiles.
@@ -219,45 +218,43 @@ https://<secure proxy url from above>/api/fhirproxy/Patient
 
 ```
 
-
 The validator also supports batch or transaction bundles as well for analyzing each contained resource.  
 
 ## Transform Bundle Pre-Processor
-This processing module will transform incoming transaction bundle requests into batch bundle request and maintain UUID associations of contained resources.  This is a alternative for updating FHIR Servers unable to handle transaction based requests.</br>
-This processor will maintain internal logical id references when converted to batch mode, however, no transaction support will be included (e.g. Rollback for errors).  It will be the client responsibility to address any referential integrity or data issues that arise from server errors. Success or error status can be obtained using the batch-response bundle response.
+This processing module will transform incoming transaction bundle requests into batch bundle request and maintain UUID associations of contained resources. This is an alternative for updating FHIR Servers unable to handle transaction-based requests.</br>
+This processor will maintain internal logical id references when converted to batch mode, however, no transaction support will be included (e.g. Rollback for errors). It will be the client's responsibility to address any referential integrity or data issues that arise from server errors. Success or error status can be obtained using the batch-response bundle response.
 
 This processor requires no additional configuration.
 
-
 ## Participant Filter Post-Processor
-This module will filter returned resources linked to a patient to only include patients where you are the patient or are a "Practitioner of Record" (e.g. in a participant role) Note: this only filters patient based linked resources. You can use this module as a basis for building your own security filtering</br>
-
+This module will filter returned resources linked to a patient to only include records where you (the recipient) are the patient or are a "Practitioner of Record" (e.g. in a participant role). Note: this only filters patient-based linked resources. You can use this module as a basis for building your own security filtering.</br>
 
 ## How the Participant Post Processor works
 ![F H I R Proxy Seq](FHIRProxy_Seq.png)
 
 ## Configuring Participant Authorization Roles for Users
-At a minimum users must be placed in one or more FHIR Participant roles in order to appropriately filter results from the FHIR Server. The Access roles are Patient, Practitioner and RelatedPerson. _Note:The user must also be in an appropriate Access role defined above_
-1. [Login to Azure Portal](https://portal.azure.com) _Note: If you have multiple tenants make sure you switch to the directory that contains the Secure FHIR Proxy_
-2. [Access the Azure Active Directory Enterprise Application Blade](https://ms.portal.azure.com/#blade/Microsoft_AAD_IAM/StartboardApplicationsMenuBlade/AllApps/menuId/)
-3. Change the Application Type Drop Down to All Applications and click the Apply button
-4. Enter the application id from above in the search box to locate the Secure FHIR Proxy application
-5. Click on the Secure FHIR Proxy application in the list
-6. Click on Users and Groups from the left hand navigation menu
-7. Click on the +Add User button
-8. Click on the Select Role assignment box
-9. Select the access role you want to assign to specific users
+At a minimum, users must be placed in one or more FHIR Participant roles in order to appropriately filter results from the FHIR Server. The Access roles are Patient, Practitioner, and RelatedPerson. _Note:The user must also be in an appropriate Access role defined above._
+1. [Login to Azure Portal](https://portal.azure.com) _Note: If you have multiple tenants make sure you switch to the directory that contains the Secure FHIR Proxy._
+2. [Access the Azure Active Directory Enterprise Application Blade](https://ms.portal.azure.com/#blade/Microsoft_AAD_IAM/StartboardApplicationsMenuBlade/AllApps/menuId/).
+3. Change the Application Type Drop Down to All Applications and click the Apply button.
+4. Enter the application id from above in the search box to locate the Secure FHIR Proxy application.
+5. Click on the Secure FHIR Proxy application in the list.
+6. Click on Users and Groups from the left-hand navigation menu.
+7. Click on the +Add User button.
+8. Click on the Select Role assignment box.
+9. Select the Access role you want to assign to specific users.
    The following are the predefined FHIR Access roles:
-   + Patient - This user is a patient and is linked to a Patient resource in the FHIR Server
-   + Practitioner - This user is a practitioner and is linked to a Practitioner resource in the FHIR Server
-   + RelatedPerson - This user is a relative/caregiver to a patient and is linked to a RelatedPerson resource in the FHIR Server
+   + Patient - This user is a patient and is linked to a Patient resource in the FHIR Server.
+   + Practitioner - This user is a practitioner and is linked to a Practitioner resource in the FHIR Server.
+   + RelatedPerson - This user is a relative/caregiver to a patient and is linked to a RelatedPerson resource in the FHIR Server.
     
-   When the role is selected click the select button at the bottom of the panel
-10. Select the Users assignment box
+   When the role is selected, click the select button at the bottom of the panel.
+   
+10. Select the Users assignment box.
 11. Select and/or Search and Select registered users/guests that you want to assign the selected role too.
-12. When all users desired have been selected click the select button at the bottom of the panel.
+12. When all users desired have been selected, click the select button at the bottom of the panel.
 13. Click the Assign button.
-14. Congratulations the select users have been assigned the participant role and can now be linked to FHIR Resources
+14. Congratulations! The selected users have been assigned their participant role(s) and can now be linked to FHIR Resources.
 []()
 ## Linking Users in Participant Roles to FHIR Resources
 1. Make sure you have configured Participant Authorization Roles for users
