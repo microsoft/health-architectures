@@ -2,40 +2,42 @@
 
 ## Table of contents
 1. [**Overview**](#introduction)
-    1. [Authentication and RBAC Authorization](#subparagraph1)
-    2. [Pre and Post Processing Support](#paragraph2)
-    3. [Reverse Proxy](#paragraph3)
-    4. [Architecture](#paragraph4)
+    1. [What is the Secure FHIR Gateway and Proxy for Azure?](#paragraph1)
+    2. [Authentication and RBAC Authorization](#paragraph2)
+    3. [Pre and Post Processing Support](#paragraph3)
+    4. [Reverse Proxy](#paragraph4)
+    5. [Architecture](#paragraph5)
 2. [**Installation**](#installation)
     1. [Deploying your own FHIR Proxy](#paragraph6)
 3. [**Configuration**](#configuration)
-    1. [Adding Users/Groups to the FHIR Server Proxy](#paragraph6)
-    2. [Adding Application Service Principals to the FHIR Server Proxy](#paragraph7)
-    3. [Pre/Post Processor Configuration](#paragraph8)
-    4. [Enabling Pre/Post Processing Modules](#paragraph9)
-    5. [Date Sort Post-Processor](#paragraph10)
-    6. [Publish Event Post-Processor](#paragraph11)
-    7. [Profile Validation Pre-Processor](#paragraph12)
-    8. [Transform Bundle Pre-Processor](#paragraph13)
-    9. [Participant Filter Post-Processor](#paragraph14)
-    10. [How the Participant Post Processor works](#paragraph15)
-    11. [Configuring Participant Authorization Roles for Users](#paragraph16)
-    12. [Linking Users in Participant Roles to FHIR Resources](#paragraph17)
-    13. [Consent Opt-Out Filter](#paragraph18)
-    14. [Everything Patient Pre Processor](#paragraph19)
+    1. [Adding Users/Groups to the FHIR Server Proxy](#paragraph7)
+    2. [Adding Application Service Principals to the FHIR Server Proxy](#paragraph8)
+    3. [Pre/Post Processor Configuration](#paragraph9)
+    4. [Enabling Pre/Post Processing Modules](#paragraph10)
+    5. [Date Sort Post-Processor](#paragraph11)
+    6. [Publish Event Post-Processor](#paragraph12)
+    7. [Profile Validation Pre-Processor](#paragraph13)
+    8. [Transform Bundle Pre-Processor](#paragraph14)
+    9. [Participant Filter Post-Processor](#paragraph15)
+    10. [How the Participant Post Processor works](#paragraph16)
+    11. [Configuring Participant Authorization Roles for Users](#paragraph17)
+    12. [Linking Users in Participant Roles to FHIR Resources](#paragraph18)
+    13. [Consent Opt-Out Filter](#paragraph19)
+    14. [Everything Patient Pre Processor](#paragraph20)
 4. [**Contributing**](#contributing)
 
 # Overview <a name="introduction"></a>
+## What is the Secure FHIR Gateway and Proxy for Azure? <a name="paragraph1"></a>
 The Secure FHIR Gateway and Proxy is an Azure Function-based solution that:
  + Acts as an intelligent and secure gateway to FHIR Servers
  + Allows multi-tenant access and purpose-driven security policies for specialized access to a common FHIR Server
  + Provides a consolidated approach to pre- and post- processing of FHIR Server Calls to support various access/result filtering or actions</br>
  + Is integrated with Azure Active Directory for authentication and to provide Role Based Access Control</br>
  + Acts as a FHIR-specific reverse proxy rewriting responses and brokering requests to FHIR Servers</br>
-## Authentication and RBAC Authorization <a name="paragraph1"></a>
+## Authentication and RBAC Authorization <a name="paragraph2"></a>
 By default the proxy will configure and use Azure Active Directory (Azure AD) as an authentication provider. You will also need to assign users/groups and/or Service Principals into specific server access roles in order to access the FHIR Server via the proxy. You can also offload this responsibility to [API Management](https://azure.microsoft.com/en-us/services/api-management/).
 
-## Pre and Post Processing Support <a name="paragraph2"></a>
+## Pre and Post Processing Support <a name="paragraph3"></a>
 The proxy can be configured to execute any number of logic processing modules to support a variety of pre/post conditional actions on a per-call basis. You can create custom processors by implementing the ```IProxyPreProcess``` or ```IProxyPostProcess``` interfaces in a thread safe class.
 The modules are executed in a chained fashion determined by configured order. Context is continually updated so the last result is passed to the next member of the processor chain resulting in a fully processed or filtered request or post-processing result. Any configured module can stop the chain progression by issuing a do-not-continue command.
 
@@ -51,15 +53,15 @@ The base pre- and post- processing modules that can be configured are:
 Check back often as more processing modules will be added. </br>
  
 See the [Proxy Configuration](##configuration) section below for full descriptions and configuration instructions.
-## Reverse Proxy <a name="paragraph3"></a>
+## Reverse Proxy <a name="paragraph4"></a>
 All FHIR Server responses are re-written to include the proxy address as the appropriate endpoint so the FHIR Server URL is never directly exposed.
 
-## Architecture <a name="paragraph4"></a>
+## Architecture <a name="paragraph5"></a>
 ![Fhirproxy Arch](fhirproxy_arch.png)
 
 # Installation <a name="installation"></a>
 
-## Deploying your own FHIR Proxy <a name="paragraph5"></a>
+## Deploying your own FHIR Proxy <a name="paragraph6"></a>
 
 Please note you should deploy this proxy into a tenant that you control for Application Registrations, Enterprise Applications, Permissions, and Role Definitions Assignments.
 
@@ -82,7 +84,7 @@ Please note you should deploy this proxy into a tenant that you control for Appl
 
 # Configuration <a name="configuration"></a>
 
-## Proxy Endpoint <a name="paragraph6"></a>
+## Proxy Endpoint <a name="paragraph7"></a>
 The new endpoint for your FHIR Server should now be: ```https://<secure proxy url from above>/api/fhirproxy```. You can use any supported FHIR HTTP verb and any FHIR compliant request/query.
 
 For example, to see the conformance statement for the FHIR Server, use your browser and access the following endpoint:</br>
@@ -94,7 +96,7 @@ The original User Principal Name and tenant are passed in custom headers to the 
 _Note: You will need to login as a user/principal in a FHIR Reader and/or FHIR Administrative role to view. All proxy calls are auth secured including conformance._
 
 
-## Adding Users/Groups to the FHIR Server Proxy <a name="paragraph7"></a>
+## Adding Users/Groups to the FHIR Server Proxy <a name="paragraph8"></a>
 At a minimum, users must be placed in one or more FHIR Server roles in order to access the FHIR Server via the Proxy. The Access roles are Administrator, Resource Reader, and Resource Writer 
 1. [Login to Azure Portal](https://portal.azure.com) _Note: If you have multiple tenants, make sure you switch to the directory that contains the Secure FHIR Proxy._
 2. [Access the Azure Active Directory Enterprise Application Blade](https://ms.portal.azure.com/#blade/Microsoft_AAD_IAM/StartboardApplicationsMenuBlade/AllApps/menuId/).
@@ -118,7 +120,7 @@ At a minimum, users must be placed in one or more FHIR Server roles in order to 
 13. Click the Assign button.
 14. Congratulations! The selected users have been assigned their Access role(s) and can now perform allowed operations against the FHIR Server.
 
-## Adding Application Service Principals to the FHIR Server Proxy <a name="paragraph8"></a>
+## Adding Application Service Principals to the FHIR Server Proxy <a name="paragraph9"></a>
 You can create Service Client Principals and register for Application API Access to the proxy. This is useful for using the proxy in machine-driven service workflows where a human cannot sign in. </br>
 The FHIR Server roles assignable to applications by default are: Resource Reader and Resource Writer. You may add/change roles assignable to applications in the FHIR Proxy application manifest.
  
@@ -139,13 +141,13 @@ The FHIR Server roles assignable to applications by default are: Resource Reader
 
 Note: You can authenticate using the client_credentials flow to your new application using its application id and secret. The resource or audience should be the application id of the FHIR Proxy. Pass the obtained token in the Authorization header of your calls to the FHIR proxy.
 
-##  Pre/Post Processor Configuration <a name="paragraph9"></a>
+##  Pre/Post Processor Configuration <a name="paragraph10"></a>
 The FHIR Proxy is configured on installation to be paired to a FHIR Server via a Service Client. Default roles are added to the application and are configured for specific access in the Configuration Settings section of the function app.
 Enablement of pre/post processing modules is accomplished via the ```configmodules.bash``` utility.</br>
 
 Important:  Most pre/post processing modules will require additional [configuration](https://docs.microsoft.com/en-us/azure/azure-functions/functions-how-to-use-azure-function-app-settings) after enablement in order to function. Please check the details of the module for instructions.
 
-## Enabling Pre/Post Processing Modules <a name="paragraph10"></a>
+## Enabling Pre/Post Processing Modules <a name="paragraph11"></a>
 By default, no pre/post processors are configured to run.  You will need to enable and configure them following the steps below:
 
 1. [Open Azure Cloud Shell](https://shell.azure.com) you can also access this from [azure portal](https://portal.azure.com).
@@ -158,7 +160,7 @@ By default, no pre/post processors are configured to run.  You will need to enab
 
 Note the utility does not read or display the current configuration. It will simply enable the modules you specify and update the function configuration. To disable all modules, press ENTER without selecting any options. To escape the menu selection and abort updates, press CTRL-C.
 
-## Date Sort Post-Processor <a name="paragraph11"></a>
+## Date Sort Post-Processor <a name="paragraph12"></a>
 + This post-process allows for date-based sorting alternative on FHIR Servers that do not natively support _sort. The processor implements the top level _sort=date or _sort=-date (reverse chron) query parameter for supported resource queries up to a hard maximum of 5000.</br>
 + The resources supported for top level_sort=date are: Observation, DiagnosticReport, Encounter, CarePlan, CareTeam, EpisodeOfCare, and Claim. Any other resource will be ignored and left unsorted.</br>
 + This processor is limited to process 5000 resource entries. In a search-set bundle, for accurate results it is imperative that you limit your query so as not to not exceed this many resources.
@@ -166,7 +168,7 @@ Note the utility does not read or display the current configuration. It will sim
 + A log warning will be issued for requests that exceed the 5000 resource sort limit, but no error response will be returned—just the truncated data set.</br>
 This process requires no additional configuration.  
 
-## Publish Event Post-Processor <a name="paragraph12"></a>
+## Publish Event Post-Processor <a name="paragraph13"></a>
 This processor will publish FHIR Server Create/Update and Delete events for affected resources to a configured eventhub. These events can be subscribed to by any number of consumers in order to facilitate any number of orchestrated workflows (e.g. CDS, Audits, Alerts, etc.).</br>
 In addition to the action date, the eventhub message consists of the following information:
 + Action - HTTP Verb used to modify the FHIR Server
@@ -183,7 +185,7 @@ This process requires two configuration settings on the function app:
      FP-MOD-EVENTHUB-NAME: <A valid event hub in the specified event hub namespace connection>
 ```
 
-## Profile Validation Pre-Processor <a name="paragraph13"></a>
+## Profile Validation Pre-Processor <a name="paragraph14"></a>
 This processor adds the ability to call external profile and/or standard FHIR schema validation support for FHIR Servers that do not implement or support specific profile validation.
 This module expects external validation URLs to return an [OperationOutcome](https://www.hl7.org/fhir/operationoutcome.html) FHIR Resource. The presence of issue entries will abort pre-processing _and_ the FHIR Server call, and the outcome will be returned to the client for resolution.
 Enforcement is via a profile enforecement policy file (detailed below).
@@ -248,19 +250,19 @@ https://<secure proxy url from above>/api/fhirproxy/Patient
 
 The validator also supports batch or transaction bundles as well for analyzing each contained resource.  
 
-## Transform Bundle Pre-Processor <a name="paragraph14"></a>
+## Transform Bundle Pre-Processor <a name="paragraph15"></a>
 This processing module will transform incoming transaction bundle requests into batch bundle request and maintain UUID associations of contained resources. This is an alternative for updating FHIR Servers unable to handle transaction-based requests.</br>
 This processor will maintain internal logical id references when converted to batch mode, however, no transaction support will be included (e.g. Rollback for errors). It will be the client's responsibility to address any referential integrity or data issues that arise from server errors. Success or error status can be obtained using the batch-response bundle response.
 
 This processor requires no additional configuration.
 
-## Participant Filter Post-Processor <a name="paragraph15"></a>
+## Participant Filter Post-Processor <a name="paragraph16"></a>
 This module will filter returned resources linked to a patient to only include records where you (the recipient) are the patient or are a "Practitioner of Record" (e.g. in a participant role). Note: this only filters patient-based linked resources. You can use this module as a basis for building your own security filtering.</br>
 
-## How the Participant Post Processor works <a name="paragraph16"></a>
+## How the Participant Post Processor works <a name="paragraph17"></a>
 ![F H I R Proxy Seq](FHIRProxy_Seq.png)
 
-## Configuring Participant Authorization Roles for Users <a name="paragraph17"></a>
+## Configuring Participant Authorization Roles for Users <a name="paragraph18"></a>
 At a minimum, users must be placed in one or more FHIR Participant roles in order to appropriately filter results from the FHIR Server. The Access roles are Patient, Practitioner, and RelatedPerson. _Note:The user must also be in an appropriate Access role defined above._
 1. [Login to Azure Portal](https://portal.azure.com) _Note: If you have multiple tenants make sure you switch to the directory that contains the Secure FHIR Proxy._
 2. [Access the Azure Active Directory Enterprise Application Blade](https://ms.portal.azure.com/#blade/Microsoft_AAD_IAM/StartboardApplicationsMenuBlade/AllApps/menuId/).
@@ -284,7 +286,7 @@ At a minimum, users must be placed in one or more FHIR Participant roles in orde
 13. Click the Assign button.
 14. Congratulations! The selected users have been assigned their participant role(s) and can now be linked to FHIR Resources.
 []()
-## Linking Users in Participant Roles to FHIR Resources <a name="paragraph18"></a>
+## Linking Users in Participant Roles to FHIR Resources <a name="paragraph19"></a>
 1. Make sure you have configured Participant Authorization Roles for users.
 2. Obtain the FHIR Resource Id you wish to link to an AAD User Principal. Note you can use any search methods for the resources described in the FHIR specification. It is strongly recommended to use a known Business Identifier in your query to ensure a specific and correct match.
    For example:
@@ -312,7 +314,7 @@ At a minimum, users must be placed in one or more FHIR Participant roles in orde
 
 5.  Your done! The principal user is now in a role connected to the FHIR resource.
 
-## Consent Opt-Out Filter <a name="paragraph19"></a>
+## Consent Opt-Out Filter <a name="paragraph20"></a>
 
 This module adds the ability to deny access to FHIR Server resources for patients who have elected to OPTOUT from allowing anyone or specific individuals and/or organizations access to their medical data.
 
@@ -418,7 +420,7 @@ The recommended value for category in your consent records is LOINC code 59284-0
 
 It is also required that users be linked to FHIR Participant roles/resources. Please see the [Linking Users in Participant Roles to FHIR Resources]() section in the Participant Access Filter Module above.
 
-## Everything Patient Pre Processor <a name="paragraph20"></a>
+## Everything Patient Pre Processor <a name="paragraph21"></a>
 This pre-preocessing module implements a limited $everything at the patient level. It returns the Patient and up to 5000 related resources for the Patient. Paging or other query parameters are not currently supported.
 
 <I>Notes:</br> This module is provided as a building block example. If used in production, the returned resource limitation of 5000 should be noted to end users.</br> This module should be executed after all request-modifying pre-preocessors since it will call the FHIR server and stop execution of other pre-processors</I>
