@@ -1,14 +1,14 @@
 # Secure FHIR Gateway and Proxy
 
 ## Table of contents
-# 1. [Overivew](#introduction)
+1. [**Overivew**](#introduction)
     1. [Authentication and RBAC Authorization](#subparagraph1)
     2. [Pre and Post Processing Support](#paragraph2)
     3. [Reverse Proxy](#paragraph3)
     4. [Architecture](#paragraph4)
-# 2. [Installation](#installation)
+2. [**Installation**](#installation)
     1. [Deploying your own FHIR Proxy](#paragraph6)
-# 3. [Configuration](#configuration)
+3. [**Configuration**](#configuration)
     1. [Adding Users/Groups to the FHIR Server Proxy](#paragraph6)
     2. [Adding Application Service Principals to the FHIR Server Proxy](#paragraph7)
     3. [Pre/Post Processor Configuration](#paragraph8)
@@ -23,7 +23,7 @@
     12. [Linking Users in Participant Roles to FHIR Resources](#paragraph17)
     13. [Consent Opt-Out Filter](#paragraph18)
     14. [Everything Patient Pre Processor](#paragraph19)
-# 4. [Contributing](#contributing)
+4. [**Contributing**](#contributing)
 
 ## Overview <a name="introduction"></a>
 The Secure FHIR Gateway and Proxy is an Azure Function-based solution that:
