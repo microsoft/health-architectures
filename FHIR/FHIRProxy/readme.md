@@ -4,24 +4,24 @@
 The Secure FHIR Gateway and Proxy is an Azure Function-based solution that:
  + Acts as an intelligent and secure gateway to FHIR Servers
  + Allows multi-tenant access and purpose-driven security policies for specialized access to a common FHIR Server
- + Provides a consolidated approach to pre- and post- processing of FHIR Server Calls to support various access/result filtering or actions.</br>
- + Is Integrated with Azure Active Directory for authentication and to provide Role Based Access Control.</br>
- + Acts as a FHIR specific reverse proxy rewriting responses and brokering requests to FHIR Servers</br>
+ + Provides a consolidated approach to pre- and post- processing of FHIR Server Calls to support various access/result filtering or actions</br>
+ + Is integrated with Azure Active Directory for authentication and to provide Role Based Access Control</br>
+ + Acts as a FHIR-specific reverse proxy rewriting responses and brokering requests to FHIR Servers</br>
 ## Authentication and RBAC Authorization
-By default the proxy will configure and use Azure Active Directory (Azure AD) as an authentication provider.  You will also need to assign users/groups and/or service principals into specific server access roles in order to access the FHIR Server via the proxy.  You can also offload this responsibility to [API Management](https://azure.microsoft.com/en-us/services/api-management/)
+By default the proxy will configure and use Azure Active Directory (Azure AD) as an authentication provider. You will also need to assign users/groups and/or service principals into specific server access roles in order to access the FHIR Server via the proxy. You can also offload this responsibility to [API Management](https://azure.microsoft.com/en-us/services/api-management/).
 
 ## Pre and Post Processing Support
-The proxy can be configured to execute any number of logic processing modules to support a variety of pre/post conditional actions on a per call basis. You can create custom processors by implementing the ```IProxyPreProcess``` or ```IProxyPostProcess``` interfaces in a thread safe class.
-The modules are executed in a chained fashion determined by configured order.  Context is continually updated so the last result is passed to the next member of the processor chain resulting in a fully processed/filtered request or post-processing result.  Any configured module can stop the chain progression by issuing a do not continue command.
+The proxy can be configured to execute any number of logic processing modules to support a variety of pre/post conditional actions on a per-call basis. You can create custom processors by implementing the ```IProxyPreProcess``` or ```IProxyPostProcess``` interfaces in a thread safe class.
+The modules are executed in a chained fashion determined by configured order. Context is continually updated so the last result is passed to the next member of the processor chain resulting in a fully processed or filtered request or post-processing result. Any configured module can stop the chain progression by issuing a do-not-continue command.
 
-The base pre and post processing modules included and can be configured are:
- + ParticipantFilterPostProcess - This processing module will filter returned resources linked to a patient to only include patients where you are the patient or are a "Practitioner of Record" (e.g. in a participant role) Note: this only filters patient based linked resources. You can use this module as a basis for building your own security filtering</br>
- + PublishFHIREventPostProcess - This processing module will publish FHIR CUD events for resources to a configured eventhub.  These events can be subscribed too by any number of consumers in order to facilitate any number of orchestrated workflows. (e.g. CDS, Audits, Alerts, etc...)</br>
- + TransformBundlePreProcess - This processing module will transform incoming transaction bundle requests into batch bundle request and maintain UUID associations of contained resources.  This is a alternative for updating FHIR Servers unable to handle transaction based requests.</br>
- + DateSortPostProcessor - This processing module allows for date based sorting alternative on FHIR Servers that do not natively support _sort. The processor implements top level _sort=date or _sort=-date parameter for supported resources queries up to a configured maximum number of rows.</br>  
- + ProfileValidationPreProcess - This processing module adds the ability to call external profile (e.g. [US Core](https://www.hl7.org/fhir/us/core/)) and/or standard schema validation support for FHIR Servers who do not implement or support specific profile validation.
+The base pre- and post- processing modules that can be configured are:
+ + ParticipantFilterPostProcess - This processing module will filter returned resources linked to a patient to only include records where you (the receipient) are either the patient or a "Practitioner of Record" (e.g. in a participant role). Note: this only filters patient-based linked resources. You can use this module as a basis for building your own security filtering.</br>
+ + PublishFHIREventPostProcess - This processing module will publish FHIR CUD events for resources to a configured eventhub. These events can be subscribed too by any number of consumers in order to facilitate any number of orchestrated workflows (e.g. CDS, Audits, Alerts, etc.).</br>
+ + TransformBundlePreProcess - This processing module will transform incoming transaction bundle requests into a batch bundle request and maintain UUID associations of the contained resources. This is an alternative for updating FHIR Servers unable to handle transaction-based requests.</br>
+ + DateSortPostProcessor - This processing module allows for a date-based sorting alternative on FHIR Servers that do not natively support _sort. The processor implements a top level _sort=date or _sort=-date parameter for supported resource queries up to a configured maximum number of rows.</br>  
+ + ProfileValidationPreProcess - This processing module adds the ability to call external profile (e.g. [US Core](https://www.hl7.org/fhir/us/core/)) and/or standard schema validation support for FHIR Servers that do not implement or support specific profile validation.
  + ConsentOptOutFilter - This post-processing module adds the ability to deny access to FHIR Server resources for patients who have elected to OPTOUT everyone or specific individuals and/or organizations from access to their medical data.
- + EverythingPatientPreProcess - This pre-preocessing module implements a limited $everything at the patient level. It returns up to 5000 related resources for the Patient
+ + EverythingPatientPreProcess - This pre-processing module implements a limited $everything at the patient level. It returns up to 5000 related resources for the Patient.
 
 Check back often as more processing modules will be added. </br>
  
