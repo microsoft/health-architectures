@@ -1,4 +1,4 @@
-# Secure FHIR Gateway and Proxy
+# Secure FHIR Gateway and Proxy for Azure
 
 ## Table of contents
 1. [**Overview**](#introduction)
