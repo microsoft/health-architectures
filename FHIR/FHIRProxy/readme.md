@@ -112,24 +112,23 @@ The FHIR Server roles assignable to applications by default are: Resource Reader
 Note: You can authenticate using the client_credentials flow to your new application using its application id and secret. The resource or audience should be the application id of the FHIR Proxy. Pass the obtained token in the Authorization header of your calls to the FHIR proxy.
 
 ##  Configuration
-The FHIR Proxy is configured on installation to be paired to a FHIR Server via a service client.  Default roles are added to the application and are configured for specific access in configuration settings section of the function app.
+The FHIR Proxy is configured on installation to be paired to a FHIR Server via a Service Client. Default roles are added to the application and are configured for specific access in the Configuration Settings section of the function app.
 Enablement of pre/post processing modules is accomplished via the ```configmodules.bash``` utility.</br>
 
-Important:  Most pre/post processing modules will require additional [configuration](https://docs.microsoft.com/en-us/azure/azure-functions/functions-how-to-use-azure-function-app-settings) after enablement, in order to function. Please check the details of the module for instructions.
+Important:  Most pre/post processing modules will require additional [configuration](https://docs.microsoft.com/en-us/azure/azure-functions/functions-how-to-use-azure-function-app-settings) after enablement in order to function. Please check the details of the module for instructions.
 
 ## Enabling Pre/Post Processing Modules
 By default, no pre/post processors are configured to run.  You will need to enable and configure them following the steps below:
 
-1. [Open Azure Cloud Shell](https://shell.azure.com) you can also access this from [azure portal](https://portal.azure.com)
-2. Select Bash Shell 
-3. Clone this repo (if needed) ```git clone https://github.com/microsoft/health-architectures```
-4. Switch to the FHIR/FHIRproxy subdirectory of this repo ```cd FHIR/FHIRProxy```
-5. Run the ```configmodules.bash``` script and follow the prompts to launch the selector
-5. Select the option number of a module to enable it (select it again to disable)
-6. To accept and configure selected processors press ENTER
+1. [Open Azure Cloud Shell](https://shell.azure.com) you can also access this from [azure portal](https://portal.azure.com).
+2. Select Bash Shell.
+3. Clone this repo (if needed) ```git clone https://github.com/microsoft/health-architectures```.
+4. Switch to the FHIR/FHIRproxy subdirectory of this repo ```cd FHIR/FHIRProxy```.
+5. Run the ```configmodules.bash``` script and follow the prompts to launch the selector.
+5. Select the option number of a pre/post processing module to enable it (select it again to disable).
+6. To accept and configure selected processors press ENTER.
 
-
-Note the utility does not read current configuration it will simply enable the modules you specify and update the function configuration. To disable all modules press enter without selecting options.  To escape menu selection and abort updates press CTRL-C 
+Note the utility does not read or display the current configuration. It will simply enable the modules you specify and update the function configuration. To disable all modules, press ENTER without selecting any options. To escape the menu selection and abort updates, press CTRL-C.
 
 ## Date Sort Post-Processor
 This post process allows for date based sorting alternative on FHIR Servers that do not natively support _sort. The processor implements top level _sort=date or _sort=-date (reverse chron) query parameter for supported resource queries up to a hard maximum of 5000.</br>
