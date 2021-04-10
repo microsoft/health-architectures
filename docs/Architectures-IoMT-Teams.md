@@ -2,7 +2,7 @@
 title: IoMT with Teams
 parent: IoMT for FHIR
 grand_parent: Architectures
-nav_order: 2
+nav_order: 3
 ---
 
 # IoMT Connector for Azure and Microsoft Teams Notifications

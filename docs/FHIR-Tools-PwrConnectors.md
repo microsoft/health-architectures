@@ -2,7 +2,7 @@
 title: Power Platform Connectors
 parent: Tools
 grand_parent: FHIR
-nav_order: 1
+nav_order: 4
 ---
 
 # Power Platform App and Automation Connector Setup 

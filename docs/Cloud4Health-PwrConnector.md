@@ -1,7 +1,7 @@
 ---
 title: Power Platform Connectors 
 parent: Cloud for Healthcare
-nav_order: 1
+nav_order: 2
 ---
 
 # Power Platform Connectors for Azure API for FHIR
