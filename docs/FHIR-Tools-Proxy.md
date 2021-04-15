@@ -10,12 +10,7 @@ nav_order: 4
 ![Microsoft and FHIR](/assets/images/msft-fhir.png)
 
 ### Introduction
-The Secure FHIR Gateway and Proxy is an Azure Function-based solution that:
- + Acts as an intelligent and secure gateway to FHIR Servers
- + Allows multi-tenant access and purpose-driven security policies for specialized access to a common FHIR Server
- + Provides a consolidated approach to pre- and post- processing of FHIR Server Calls to support various access/result filtering or actions</br>
- + Is integrated with Azure Active Directory for authentication and to provide Role Based Access Control</br>
- + Acts as a FHIR-specific reverse proxy rewriting responses and brokering requests to FHIR Servers</br>
+The Secure FHIR Gateway and Proxy is an Azure Function-based solution that provides critical support for [Azure FHIR Server](https://docs.microsoft.com/en-us/azure/healthcare-apis/fhir/) instances (FHIR Servers). The proxy acts as an intelligent and secure gateway to FHIR Servers, allowing multi-tenant access and purpose-driven security policies for specialized access to a common FHIR Server. The proxy also provides a consolidated approach to pre- and post- processing of FHIR Server Calls to support various access/result filtering and other actions. The proxy is integrated with Azure Active Directory for authentication and to provide Role Based Access Control. In addition, it acts as a FHIR-specific reverse proxy—rewriting responses and brokering requests to FHIR Servers.
 
 # FHIR Proxy Install Documentation
 
@@ -62,7 +57,7 @@ The Secure FHIR Gateway and Proxy is an Azure Function-based solution that:
 ![Portal View](/assets/images/functionappname.png)
 
 In the next few steps, you will need your FHIR Server details:
-- Enter the FHIR Server URL
+- Enter the FHIR Server URL.
 
 ![Portal View](/assets/images/FHIRURL.png)
 
@@ -126,11 +121,11 @@ Follow the guide below to create a new OAuth token correctly.
 
 ![Portal View](/assets/images/appregistration.png)
 
-- Click on your proxy and navigate to “Authentication” and add the call back URL from Postman under “Web”> Redirect URL’s. 
+- Click on your proxy and navigate to “Authentication” and add the call back URL from Postman under “Web”> Redirect URLs. 
 
 ![Portal View](/assets/images/redirectURl.png)
 
-- To locate the 3rd URL, go back to Postman, click on the “Authorize using browser” setting, and copy the link to Redirect URL’s. 
+- To locate the 3rd URL, go back to Postman, click on the “Authorize using browser” setting, and copy the link to Redirect URLs. 
 
 ![Portal View](/assets/images/CallbackURL.png)
 
