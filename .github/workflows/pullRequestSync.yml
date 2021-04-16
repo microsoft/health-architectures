@@ -17,7 +17,7 @@ jobs:
         ado_organization: 'smokejumpers'
         ado_project: 'HealthArchitectures'
         ado_area_path: "HealthArchitectures\\GithubIssuesPRs"
-        ado_wit: 'Feature' 
+        ado_wit: 'User Story' 
         ado_new_state: 'New'
         ado_active_state: 'Active'
         ado_close_state: 'Closed'
