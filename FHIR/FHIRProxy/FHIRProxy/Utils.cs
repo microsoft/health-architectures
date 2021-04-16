@@ -18,7 +18,7 @@ namespace FHIRProxy
         public static readonly string UNSUPPORTED_CMDS = "$export,_operations";
         private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
         {
-            string cacheConnection = GetEnvironmentVariable("REDISCONNECTION");
+            string cacheConnection = GetEnvironmentVariable("FP-REDISCONNECTION");
             return ConnectionMultiplexer.Connect(cacheConnection);
         });
         public static bool UnsupportedCommands(string cmd)
@@ -43,7 +43,7 @@ namespace FHIRProxy
         //Server Roles are "A"dmin,"R"eader,"W"riter
         public static bool inServerAccessRole(HttpRequest req,string role)
         {
-            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("AUTHFREEPASS"))) return true;
+            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("FP-AUTHFREEPASS"))) return true;
             string s = req.Headers[Utils.FHIR_PROXY_ROLES];
             if (string.IsNullOrEmpty(s) || string.IsNullOrEmpty(role)) return false;
             return s.Contains(role);
@@ -51,7 +51,7 @@ namespace FHIRProxy
         }
         public static bool isServerAccessAuthorized(HttpRequest req)
         {
-            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("AUTHFREEPASS"))) return true;
+            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("FP-AUTHFREEPASS"))) return true;
             if (req.Headers.ContainsKey(AUTH_STATUS_HEADER))
             {
                 var h = req.Headers[AUTH_STATUS_HEADER];
@@ -71,15 +71,15 @@ namespace FHIRProxy
             {
                 if (fhirresp.Headers.ContainsKey("Location"))
                 {
-                    fhirresp.Headers["Location"].Value = fhirresp.Headers["Location"].Value.Replace(Environment.GetEnvironmentVariable("FS_URL"), req.Scheme + "://" + req.Host.Value + req.Path.Value.Substring(0, req.Path.Value.IndexOf(res) - 1));
+                    fhirresp.Headers["Location"].Value = fhirresp.Headers["Location"].Value.Replace(Environment.GetEnvironmentVariable("FS-URL"), req.Scheme + "://" + req.Host.Value + req.Path.Value.Substring(0, req.Path.Value.IndexOf(res) - 1));
                 }
                 if (fhirresp.Headers.ContainsKey("Content-Location"))
                 {
-                    fhirresp.Headers["Content-Location"].Value = fhirresp.Headers["Content-Location"].Value.Replace(Environment.GetEnvironmentVariable("FS_URL"), req.Scheme + "://" + req.Host.Value + req.Path.Value.Substring(0, req.Path.Value.IndexOf(res) - 1));
+                    fhirresp.Headers["Content-Location"].Value = fhirresp.Headers["Content-Location"].Value.Replace(Environment.GetEnvironmentVariable("FS-URL"), req.Scheme + "://" + req.Host.Value + req.Path.Value.Substring(0, req.Path.Value.IndexOf(res) - 1));
                 }
                 var str = fhirresp.Content == null ? "" : fhirresp.Content.ToString();
                 /* Fix server locations to proxy address */
-                str = str.Replace(Environment.GetEnvironmentVariable("FS_URL"), req.Scheme + "://" + req.Host.Value + (res != null ? req.Path.Value.Substring(0, req.Path.Value.IndexOf(res) - 1) : req.Path.Value));
+                str = str.Replace(Environment.GetEnvironmentVariable("FS-URL"), req.Scheme + "://" + req.Host.Value + (res != null ? req.Path.Value.Substring(0, req.Path.Value.IndexOf(res) - 1) : req.Path.Value));
                 foreach (string key in fhirresp.Headers.Keys)
                 {
                     
@@ -114,7 +114,7 @@ namespace FHIRProxy
         }
         public static CloudTable getTable()
         {
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(Environment.GetEnvironmentVariable("STORAGEACCT"));
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(Environment.GetEnvironmentVariable("FP-STORAGEACCT"));
 
             // Create the table client.
             CloudTableClient tableClient = storageAccount.CreateCloudTableClient();

@@ -140,6 +140,7 @@ namespace FHIRProxy
             refreshToken();
             var request = new HttpRequestMessage(HttpMethod.Get,resource + (parmstring != null ? (!parmstring.StartsWith("?") ? "?" :"") + parmstring : ""));
             request.Headers.Add("Accept", "application/json");
+            
             if (BearerToken != null)
             {
                 request.Headers.Add("Authorization", "Bearer " + BearerToken);
@@ -177,12 +178,20 @@ namespace FHIRProxy
         {
             refreshToken();
             var request = new HttpRequestMessage(HttpMethod.Post, reqresource + (parmstring != null ? (!parmstring.StartsWith("?") ? "?" : "") + parmstring : ""));
+            string ct = "application/x-www-form-urlencoded";
+            if (headers.TryGetValue("Content-Type", out Microsoft.Extensions.Primitives.StringValues ctvalues))
+            {
+                ct = ctvalues.First();
+            }
             if (BearerToken != null)
             {
                 request.Headers.Add("Authorization", "Bearer " + BearerToken);
             }
+            request.Content = new StringContent(srccontent, Encoding.UTF8, ct);
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue(ct);
+            request.Headers.Add("Accept", "application/json");
             AddCustomHeadersToRequest(request, ToHeaderParmArray(headers));
-            request.Content = new StringContent(srccontent, Encoding.UTF8, "application/x-www-form-urlencoded");
+           
             
             var response = await _client.SendAsync(request);
 
@@ -260,7 +269,7 @@ namespace FHIRProxy
         }
         public FHIRResponse(string content, HttpResponseHeaders respheaders, HttpStatusCode status, bool parse = false) : this()
         {
-            string[] filterheaders = Utils.GetEnvironmentVariable("FS_RESPONSE_HEADER_NAME", "Date,Last-Modified,ETag,Location,Content-Location").Split(",");
+            string[] filterheaders = Utils.GetEnvironmentVariable("FS-RESPONSE-HEADER-NAME", "Date,Last-Modified,ETag,Location,Content-Location").Split(",");
             if (parse) this.Content = JObject.Parse(content);
             else this.Content = content;
             foreach(string head in filterheaders)

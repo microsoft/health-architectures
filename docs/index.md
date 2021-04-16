@@ -1,40 +1,34 @@
 ---
-layout: default
+title: About
+has_children: false
+nav_order: 1
 ---
 
-# Microsoft Health Architectures 
-Health Architectures is a collection of reference architectures and, when appropriate, implementations. They illustrate end-to-end best practices for using the Azure API for FHIR and related technologies.  
-
-## Scenarios & Solutions 
-
-### Data Ingest Scenarios & Solutions 
-Electronic health records must be available and discoverable, across healthcare systems.   
-- [Ingesting Medical Device Data - IoMT](https://github.com/microsoft/health-architectures/tree/master/Internet-Of-Things-IoT/IoMT-FHIR-Connector-for_Azure)
-- [Ingesting HL7 Records](https://github.com/microsoft/health-architectures/tree/master/HL7Conversion)
-- Ingesting FHIR Records and Bundles *(coming soon)* 
-
-### Research and Analytics Scenarios & Soluitions   
-Healthcare analytics is the systematic use of observation, encounter and care data to create meaningful insights. While FHIR supports the ability to export data, healthcare architectures focuses on de-identification and analytics through proven platforms such as [PowerBI](https://docs.microsoft.com/en-us/power-query/connectors/fhir/fhir), [DataBricks](https://azure.microsoft.com/en-us/free/databricks) and [Azure Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics).  
-- [Exporting Data](https://github.com/microsoft/health-architectures/tree/master/Research-and-Analytics/FHIRExportQuickstart)
-- [Anonymized Data Export](https://github.com/microsoft/health-architectures/tree/master/Research-and-Analytics/FHIRExportwithAnonymization)
-
-## Code Demo's
-Microsoft Health hosts a [fhir-server-sampes respository](https://github.com/microsoft/fhir-server-samples) contains example applications and scenarios that show use of the FHIR Server for Azure and the Azure API for FHIR.
+# Welcome to Microsoft Health Architectures
 
 
-<br>
+![Microsoft and FHIR](/assets/images/msft-fhir.png)
+
+Microsoft Health Architectures is a collection of reference architectures and, where appropriate, implementations. They illustrate end-to-end best practices for using the Azure API for FHIR and related technologies.  All content and blog posts can be found in the Table of Contents or via Search.  
 
 
-<h2>Latest Posts</h2>
-
-<ul>
-  {% for post in site.posts %}
-    <li>
-      <h3><a href="{{ post.url | absolute_url }}">{{ post.excerpt }} </a></h3>
-    </li>
-  {% endfor %}
-</ul>
+[View Repo on GitHub](https://github.com/microsoft/health-architectures){: .btn }
 
 
+### Overview 
 
-We invite you to ask questions, make suggestions and share use cases which we might consider for future reference architectures or implementations.
+We are the Microsoft Health Cloud & Data Architectural Engineering team, which is part of Microsoft Health. We work side by side with the product teams responsible for technologies such as the Azure API for FHIR, IoMT FHIR Connector for Azure, DICOM for FHIR, Microsoft Cloud for Healthcare and more. 
+
+<a href="https://raw.githubusercontent.com/daemel/site/master/assets/images/Architecture-Customer-Ready.png" target="_blank"> <img src="https://raw.githubusercontent.com/daemel/site/master/assets/images/Architecture-Customer-Ready.png" alt="image"/></a>
+
+
+As we work with customers, partners, and co-workers, we frequently come across requests for references architectures & code for end to end implementations. For example, how can I pick up HL7v2 messages generated in my environment from my EMR (Electronic Medical Record), Lab System, Scheduling System, etc. then ingest them into FHIR near real-time? These questions and scenarios then become the basis for our reference architectures. Of course, we remove customer specific data, then generalize the design for greater suitability and impact.
+
+As you look through this repository, which will be updated over time, you will see some typical 'hello world' examples as well as more complex solutions. We conduct peer reviews to bring you the best practices for using the Microsoft Health technologies.
+
+### Support or Contact
+
+We invite you to ask questions, make suggestions and share use cases which we might consider for future reference architectures or implementations, email us **@ <a href="mailto:HealthArchitectures@microsoft.com">HealthArchitectures</a>**
+
+
+For more information on health solutions go to **[Azure for Health Cloud](https://azure.microsoft.com/en-us/industries/healthcare/)**. For more information regarding the Azure Fast Healthcare Interoperability Resource (FHIR) service for health data solutions go to **[Azure API for FHIR](https://azure.microsoft.com/en-us/services/azure-api-for-fhir/)**

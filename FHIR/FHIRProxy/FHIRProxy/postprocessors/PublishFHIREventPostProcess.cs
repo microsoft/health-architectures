@@ -36,8 +36,8 @@ namespace FHIRProxy.postprocessors
             {
                 if (req.Method.Equals("GET") || (int)response.StatusCode > 299) return new ProxyProcessResult(true, "", "", response);
 
-                string ecs = Environment.GetEnvironmentVariable("EVENTHUB_CONNECTION");
-                string enm = Environment.GetEnvironmentVariable("EVENTHUB_NAME");
+                string ecs = Environment.GetEnvironmentVariable("FP-MOD-EVENTHUB-CONNECTION");
+                string enm = Environment.GetEnvironmentVariable("FP-MOD-EVENTHUB-NAME");
                 if (string.IsNullOrEmpty(ecs) || string.IsNullOrEmpty(enm))
                 {
                     log.LogWarning($"PublishFHIREventPostProcess: EventHubConnection String or EventHub Name is not specified. Will not publish.");
@@ -73,7 +73,7 @@ namespace FHIRProxy.postprocessors
                     stub["resource"]["resourceType"] = res;
                     entries.Add(stub);
                 }
-                publishBatchEvent(ecs, enm, entries,log);
+                await publishBatchEvent(ecs, enm, entries,log);
 
 
 
@@ -88,7 +88,7 @@ namespace FHIRProxy.postprocessors
             return new ProxyProcessResult(true, "", "", response);
 
         }
-        private async void publishBatchEvent(string eventHubConnectionString, string eventHubName, JArray entries,ILogger log)
+        private async Task publishBatchEvent(string eventHubConnectionString, string eventHubName, JArray entries,ILogger log)
         {
             await using (var producerClient = new EventHubProducerClient(eventHubConnectionString, eventHubName))
             {

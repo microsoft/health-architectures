@@ -21,8 +21,13 @@ declare subscriptionId=""
 declare stepresult=""
 declare listofprocessors=""
 declare enableprocessors=""
+declare msg=""
+declare num
+options=("FHIRProxy.postprocessors.FHIRCDSSyncAgentPostProcess2" "FHIRProxy.postprocessors.DateSortPostProcessor" "FHIRProxy.postprocessors.ParticipantFilterPostProcess" "FHIRProxy.postprocessors.PublishFHIREventPostProcess" "FHIRProxy.postprocessors.ConsentOptOutFilter" "FHIRProxy.preprocessors.ProfileValidationPreProcess" "FHIRProxy.preprocessors.TransformBundlePreProcess" "FHIRProxy.preprocessors.EverythingPatientPreProcess")
+choices=("" "" "" "" "" "" "" "")
 # Initialize parameters specified from command line
-while getopts ":g:n:i" arg; do
+while getopts ":g:n:i:
+" arg; do
 	case "${arg}" in
 		n)
 			faname=${OPTARG}
@@ -73,34 +78,35 @@ if [ $(az group exists --name $resourceGroupName) = false ]; then
 	echo "Resource group with name" $resourceGroupName "could not be found."
 	usage
 fi
-command -v whiptail >/dev/null 2>&1 || { echo >&2 "I require whiptail but it's not installed.  Aborting."; exit 1; }
-whiptail --separate-output --noitem --checklist "Select processor modules to enable:" 15 65 7\
-               FHIRProxy.postprocessors.DateSortPostProcessor off \
-               FHIRProxy.postprocessors.ParticipantFilterPostProcess off  \
-               FHIRProxy.postprocessors.PublishFHIREventPostProcess off \
-			   FHIRProxy.postprocessors.ConsentOptOutFilter off \
-               FHIRProxy.preprocessors.ProfileValidationPreProcess off\
-			   FHIRProxy.preprocessors.TransformBundlePreProcess on \
-			   FHIRProxy.preprocessors.EverythingPatientPreProcess on \
-			   2>results
-if [ $? != 0 ];
-then
-	echo "Cancelled..."
-	exit 1;
-fi
-while read choice
-do
-  if [[ "$choice" == *".preprocessors."* ]]; then
-	preprocessors+=$choice,
-  fi
-  if [[ "$choice" == *".postprocessors."* ]]; then
-	postprocessors+=$choice,
-  fi
-done < results
-preprocessors=$(echo $preprocessors | sed 's/.$//')
-postprocessors=$(echo $postprocessors | sed 's/.$//')
+menu() {
+    echo "Please select the proxy modules you want to enable:"
+    for i in ${!options[@]}; do 
+        printf "%3d%s) %s\n" $((i+1)) "${choices[i]:- }" "${options[i]}"
+    done
+    if [[ "$msg" ]]; then echo "$msg"; fi
+}
+prompt="Select an option (again to uncheck, ENTER when done): "
+while menu && read -rp "$prompt" num && [[ "$num" ]]; do
+    [[ "$num" != *[![:digit:]]* ]] &&
+    (( num > 0 && num <= ${#options[@]} )) ||
+    { msg="Invalid option: $num"; continue; }
+    ((num--)); msg="${options[num]} was ${choices[num]:+un}checked"
+    [[ "${choices[num]}" ]] && choices[num]="" || choices[num]="+"
+done
+for i in ${!options[@]}; do 
+    if [[ "${choices[i]}" ]]; then
+		if [[ "${options[i]}" == *".preprocessors."* ]]; then
+			preprocessors+="${options[i]}",
+		fi
+		if [[ "${options[i]}" == *".postprocessors."* ]]; then
+			postprocessors+="${options[i]}",
+		fi
+	fi
+done
+preprocessors="${preprocessors%?}"
+postprocessors="${postprocessors%?}"
 echo "Configuring Secure FHIR Proxy App ["$faname"]..."
-stepresult=$(az functionapp config appsettings set --name $faname  --resource-group $resourceGroupName --settings PRE_PROCESSOR_TYPES=$preprocessors POST_PROCESSOR_TYPES=$postprocessors)
+stepresult=$(az functionapp config appsettings set --name $faname --resource-group $resourceGroupName --settings FP-PRE-PROCESSOR-TYPES=$preprocessors FP-POST-PROCESSOR-TYPES=$postprocessors)
 if [ $? != 0 ];
 then
 	echo "Problem updating appsettings..."

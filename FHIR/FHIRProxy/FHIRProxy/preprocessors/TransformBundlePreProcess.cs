@@ -30,7 +30,16 @@ namespace FHIRProxy.preprocessors
         public async Task<ProxyProcessResult> Process(string requestBody, HttpRequest req, ILogger log, ClaimsPrincipal principal, string res, string id, string hist, string vid)
         {
             if (string.IsNullOrEmpty(requestBody) || !req.Method.Equals("POST") || !string.IsNullOrEmpty(res)) return new ProxyProcessResult(true, "", requestBody, null);
-            JObject result = JObject.Parse(requestBody);
+            JObject result = null;
+            try
+            {
+                result = JObject.Parse(requestBody);
+            }
+            catch (Exception e)
+            {
+                log.LogError($"TransformBundleProcess: Unable to parse JSON Object from request body:{e.Message}");
+                result = null;
+            }
             if (result == null || result["resourceType"] == null || result["type"]==null) return new ProxyProcessResult(true,"",requestBody,null);
             string rtt = result.FHIRResourceType();
             string bt = (string) result["type"];

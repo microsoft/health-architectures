@@ -27,11 +27,11 @@ namespace FHIRProxy
          * The Configuration format is FULLY_QUALIFIED_CLASS_NAME:CACHE_EXPIRATION_IN_MINUTES, comma separated entries.
          * The Expiration is optional and defaults to 1440 minutes cache expiration time.
          * Processors will be evicted from cache at configured expiration time from creation. To allow for garbage collection and management.  
-         * For example to instanciate SamplePreProcessor with Cache Expiration of 30 minutes and ProfileValidationPreProcessor with default expiration the environment vairable PRE_PROCESSOR_TYPES
+         * For example to instanciate SamplePreProcessor with Cache Expiration of 30 minutes and ProfileValidationPreProcessor with default expiration the environment vairable FP-PRE-PROCESSOR-TYPES
          * would be set as follows:
-         * PRE_PROCESSOR_TYPES="FHIRProxy.preprocessors.SamplePreProcessor:30,FHIRProxy.preprocessors.ProfileValidationPreProcessor"
+         * FP-PRE-PROCESSOR-TYPES="FHIRProxy.preprocessors.SamplePreProcessor:30,FHIRProxy.preprocessors.ProfileValidationPreProcessor"
          * 
-         * POST_PROCESSOR_TYPES Follows the same convention and rules
+         * FP-POST-PROCESSOR-TYPES Follows the same convention and rules
          */
         private static IAppCache cache = new CachingService();
 
@@ -42,7 +42,7 @@ namespace FHIRProxy
             //Default to server response 
             rslt.Response = response;
             //Get Configured PostProcessors
-            string pps = System.Environment.GetEnvironmentVariable("POST_PROCESSOR_TYPES");
+            string pps = System.Environment.GetEnvironmentVariable("FP-POST-PROCESSOR-TYPES");
             if (string.IsNullOrEmpty(pps)) return rslt;
             string[] types = pps.Split(",");
             foreach (string cls in types)
@@ -89,7 +89,7 @@ namespace FHIRProxy
             ProxyProcessResult rslt = new ProxyProcessResult();
             rslt.Request = requestBody;
             //Get Configured PreProcessors
-            string pps = System.Environment.GetEnvironmentVariable("PRE_PROCESSOR_TYPES");
+            string pps = System.Environment.GetEnvironmentVariable("FP-PRE-PROCESSOR-TYPES");
             if (string.IsNullOrEmpty(pps)) return rslt;
             string[] types = pps.Split(",");
             foreach(string cls in types)

@@ -1,6 +1,6 @@
 # FHIR Validator
 
-FHIR Validator provides a Docker based command line and web service endpoint to validate FHIR Resources. Validation of resources against any profile IGs provided is also supported. It is based on the [FHIR Validator from HL7](http://hl7.org/fhir/validator/)  
+FHIR Validator provides an Docker based command line and web service endpoint to validate FHIR Resources. Validation of resources against any profile IGs provided is also supported. It is based on the [FHIR Validator from HL7](http://hl7.org/fhir/validator/)  
 
 ## Deploying your own FHIR Validator
 

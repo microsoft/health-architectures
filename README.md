@@ -19,8 +19,13 @@ We have organized this repo into areas which map to our offering for FHIR and re
 Topics include:  
     *   How to generate events when create, read, update, or delete (CRUD) operations take place in FHIR
     *   How to export data from FHIR for research, analytics, machine learning, etc.  
-    *   How to secure resources in FHIR and/or process data on egress (i.e. anonymization)
+
+    *   How to secure resources in FHIR and/or process data on egress (i.e. anonymization) and ingress (i.e proxy)
 2.  For capabilities around our Internet of Medical Things (IoMT) offering look [here.](https://github.com/Microsoft/iomt-fhir)  
+
+    *   How to secure resources in FHIR and/or process data on egress (i.e. anonymization) and ingress (i.e proxy)
+2.  For capabilities around our Internet of Medical Things (IoMT) offering look [here.](http://github.com/microsoft/health-architectures/tree/master/IoMT)  
+
 Topics include:  
     *   How to configure the IoMT FHIR Connector and process telemetry data  
     *   How to integrate IoMT data with FHIR and using Microsoft Power BI to create a dashboard  

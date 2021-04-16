@@ -46,8 +46,8 @@ namespace FHIRProxy.postprocessors
             List<string> resourceidentities = new List<string>();
             List<string> inroles = ci.Roles();
             List<string> fhirresourceroles = new List<string>();
-            fhirresourceroles.AddRange(Environment.GetEnvironmentVariable("PARTICIPANT_ACCESS_ROLES").Split(","));
-            fhirresourceroles.AddRange(Environment.GetEnvironmentVariable("PATIENT_ACCESS_ROLES").Split(","));
+            fhirresourceroles.AddRange(Environment.GetEnvironmentVariable("FP-PARTICIPANT-ACCESS-ROLES").Split(","));
+            fhirresourceroles.AddRange(Environment.GetEnvironmentVariable("FP-PATIENT-ACCESS-ROLES").Split(","));
             Dictionary<string, bool> porcache = new Dictionary<string,bool>();
             FHIRClient fhirClient = FHIRClientFactory.getClient(log);
             var table = Utils.getTable();
@@ -63,7 +63,7 @@ namespace FHIRProxy.postprocessors
                     }
                 }
             }
-            if (!admin && !ci.IsInFHIRRole(Environment.GetEnvironmentVariable("GLOBAL_ACCESS_ROLES")))
+            if (!admin && !ci.IsInFHIRRole(Environment.GetEnvironmentVariable("FP-GLOBAL-ACCESS-ROLES")))
             {
                 if (((string)result["resourceType"]).Equals("Bundle"))
                 {
