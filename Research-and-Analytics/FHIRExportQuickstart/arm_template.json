@@ -56,7 +56,7 @@
         {
             "type": "Microsoft.KeyVault/vaults/secrets",
             "apiVersion": "2016-10-01",
-            "name": "[concat(variables('keyVaultName'),'/fhirserver-tentantid')]",
+            "name": "[concat(variables('keyVaultName'),'/fhirserver-tenantid')]",
             "dependsOn": [],
             "properties": {
                 "value": "[variables('tenantid')]",
