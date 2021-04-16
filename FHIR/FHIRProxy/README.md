@@ -53,7 +53,7 @@ The base pre- and post- processing modules that can be configured are:
 
 Check back often as more processing modules will be added. </br>
  
-See the [Proxy Configuration](##configuration) section below for full descriptions and configuration instructions.
+See the [Proxy Configuration](#configuration) section below for full descriptions and configuration instructions.
 ## Reverse Proxy <a name="paragraph4"></a>
 All FHIR Server responses are re-written to include the proxy address as the appropriate endpoint so the FHIR Server URL is never directly exposed.
 
@@ -67,7 +67,7 @@ All FHIR Server responses are re-written to include the proxy address as the app
 Please note you should deploy this proxy into a tenant that you control for Application Registrations, Enterprise Applications, Permissions, and Role Definitions Assignments.
 
 1. [Get or Obtain a valid Azure Subscription](https://azure.microsoft.com/en-us/free/).</br>
-   _Note: Skip to Step 5 if you already have a FHIR Server/Service Client deployed_
+   _Note: Skip to Step 5 if you already have a FHIR Server/Service Client deployed._
 2. [Deploy an Azure API for FHIR instance](https://docs.microsoft.com/en-us/azure/healthcare-apis/fhir-paas-portal-quickstart).
 3. [Register a Service Client to Access the FHIR Server](https://docs.microsoft.com/en-us/azure/healthcare-apis/register-service-azure-ad-client-app).
 4. [Find the Object Id for the Service Client and register it with the FHIR Server](https://docs.microsoft.com/en-us/azure/healthcare-apis/find-identity-object-ids).
@@ -75,7 +75,7 @@ Please note you should deploy this proxy into a tenant that you control for Appl
    + The Client/Application ID for the FHIR Service Client
    + The Client Secret for the FHIR Service Client
    + The AAD Tenant ID for the FHIR Server/Service Client
-   + The Audience/Resource for the FHIR Server/Service Client (typically https://<I>[yourfhirservername]</I>.azurehealthcareapis.com for Azure API for FHIR).
+   + The Audience/Resource for the FHIR Server/Service Client (typically https://[yourfhirservername].azurehealthcareapis.com for Azure API for FHIR).
 6. [Open Azure Cloud Shell](https://shell.azure.com). You can also access this from [azure portal](https://portal.azure.com).
 7. Select Bash Shell.
 8. Clone this repo ```git clone https://github.com/microsoft/health-architectures```.
@@ -141,7 +141,7 @@ The FHIR Server roles assignable to applications by default are: Resource Reader
 13. Once granted the Service Principal will now have access to the proxy in the roles you assigned.
 14. You can verify this by looking at the Enterprise Application blade for the proxy. Under User and Group Assignments you will see the Service Principal.
 
-Note: You can authenticate using the client_credentials flow to your new application using its application id and secret. The resource or audience should be the application id of the FHIR Proxy. Pass the obtained token in the Authorization header of your calls to the FHIR proxy.
+_Note: You can authenticate using the ```client_credentials``` flow to your new application using its application id and secret. The resource or audience should be the application id of the FHIR Proxy. Pass the obtained token in the Authorization header of your calls to the FHIR proxy._
 
 ##  Pre/Post Processor Configuration <a name="paragraph10"></a>
 The FHIR Proxy is configured on installation to be paired to a FHIR Server via a Service Client. Default roles are added to the application and are configured for specific access in the Configuration Settings section of the function app.
