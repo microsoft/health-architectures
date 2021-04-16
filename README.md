@@ -1,4 +1,5 @@
-# Introduction 
+# Introduction
+
 Health Architectures is a collection of reference architectures and, when appropriate, implementations. They illustrate end-to-end best practices for using the Azure API for FHIR and related technologies. Below is the holistic conceptual end to end architecture for Azure API for FHIR.
 ![Microsoft Health Concecptual](./ConceptualArchitectureCore.png)
 For more information on health solutions go to [Azure for Health Cloud.](https://azure.microsoft.com/en-us/industries/healthcare/) For more information regarding the Azure Fast Healthcare Interoperability Resource (FHIR) service for health data solutions go to [Azure API for FHIR.](https://azure.microsoft.com/en-us/services/azure-api-for-fhir/)
@@ -11,31 +12,27 @@ As you look through this repository, which will be updated over time, you will s
 
 We invite you to ask questions, make suggestions and share use cases which we might consider for future reference architectures or implementations.
 
-
 # Getting Started
+
 We have organized this repo into areas which map to our offering for FHIR and related technologies.
 
-1.  For capabilities central to our FHIR offerings look [here.](http://github.com/microsoft/health-architectures/tree/master/FHIR)  
+1. For capabilities central to our FHIR offerings look [here.](http://github.com/microsoft/health-architectures/tree/master/FHIR)  
 Topics include:  
-    *   How to generate events when create, read, update, or delete (CRUD) operations take place in FHIR
-    *   How to export data from FHIR for research, analytics, machine learning, etc.  
-
-    *   How to secure resources in FHIR and/or process data on egress (i.e. anonymization) and ingress (i.e proxy)
-2.  For capabilities around our Internet of Medical Things (IoMT) offering look [here.](https://github.com/Microsoft/iomt-fhir)  
-
-    *   How to secure resources in FHIR and/or process data on egress (i.e. anonymization) and ingress (i.e proxy)
-2.  For capabilities around our Internet of Medical Things (IoMT) offering look [here.](http://github.com/microsoft/health-architectures/tree/master/IoMT)  
-
+    * How to generate events when create, read, update, or delete (CRUD) operations take place in FHIR
+    * How to export data from FHIR for research, analytics, machine learning, etc.  
+    * How to secure resources in FHIR and/or process data on egress (i.e. anonymization) and ingress (i.e proxy)
+  
+2. For capabilities around our Internet of Medical Things (IoMT) offering look [here.](https://github.com/Microsoft/iomt-fhir)  
 Topics include:  
-    *   How to configure the IoMT FHIR Connector and process telemetry data  
-    *   How to integrate IoMT data with FHIR and using Microsoft Power BI to create a dashboard  
-    *   How to integrate IoMT data with FHIR and using Microsoft Teams to create notifications
-3.  For capabilities around ingesting HL7v2 and converting messages to FHIR look [here.](http://github.com/microsoft/health-architectures/tree/master/HL7Conversion)  
+    * How to configure the IoMT FHIR Connector and process telemetry data  
+    * How to integrate IoMT data with FHIR and using Microsoft Power BI to create a dashboard  
+    * How to integrate IoMT data with FHIR and using Microsoft Teams to create notifications
+3. For capabilities around ingesting HL7v2 and converting messages to FHIR look [here.](http://github.com/microsoft/health-architectures/tree/master/HL7Conversion)  
 Topics include:  
-    *   How to ingest HL7v2 from your on-premises system and deliver to Azure for conversion and storage to FHIR   
- 
+    * How to ingest HL7v2 from your on-premises system and deliver to Azure for conversion and storage to FHIR
 
 # How to set-up a demonstration environment
+
 We have provided code solutions alongside the reference architectures. While we have tested our code with our OSS & managed FHIR offerings many should be able to deploy against other FHIR deployments (if compliant and at the R4 level).
 
 You can use your existing deployment of our API for FHIR or FHIR Server or you can deploy a sandbox/demo environment by deploying our FHIR server samples as described [here.](http://aka.ms/fhircore)
