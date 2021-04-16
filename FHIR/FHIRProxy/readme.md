@@ -176,7 +176,7 @@ This processor will publish FHIR Server Create/Update and Delete events for affe
 In addition to the Action Date, the eventhub message consists of the following information:
 + Action - HTTP Verb used to modify the FHIR Server
 + Resourcetype - The type of resource affected (e.g. Patient, Observation, etc.)
-+ Id - The resource logical id on the FHIR Server that was affected.
++ Id - The resource logical id on the FHIR Server that was affected
 + Version Id - The version number of the resource affected
 + LastUpdated - The date/time the affected resource was updated
 
@@ -257,7 +257,7 @@ The validator also supports batch or transaction bundles as well for analyzing e
 
 ## Transform Bundle Pre-Processor <a name="paragraph15"></a>
 This processing module will transform incoming transaction bundle requests into batch bundle request and maintain UUID associations of contained resources. This is an alternative for updating FHIR Servers unable to handle transaction-based requests.</br>
-This processor will maintain internal logical id references when converted to batch mode, however, no transaction support will be included (e.g. Rollback for errors). It will be the client's responsibility to address any referential integrity or data issues that arise from server errors. Success or error status can be obtained using the batch-response bundle response.
+This processor will maintain internal logical id references when converted to batch mode; however, no transaction support will be included (e.g. Rollback for errors). It will be the client's responsibility to address any referential integrity or data issues that arise from server errors. Success or error status can be obtained using the batch-response bundle response.
 
 This processor requires no additional configuration.
 
@@ -430,7 +430,7 @@ It is also required that users be linked to FHIR Participant roles/resources. Pl
 ## Everything Patient Pre Processor <a name="paragraph21"></a>
 This pre-processing module implements a limited ```$everything``` at the patient level. It returns the Patient and up to 5000 related resources for the Patient. Paging or other query parameters are not currently supported.
 
-<I>Notes:</br> This module is provided as a building block example. If used in production, the returned resource limitation of 5000 should be noted to end users.</br> This module should be executed after all request-modifying pre-processors since it will call the FHIR server and stop execution of other pre-processors</I>
+<I>Notes:</br> This module is provided as a building block example. If used in production, the returned resource limitation of 5000 should be noted to end users.</br> This module should be executed after all request-modifying pre-processors since it will call the FHIR server and stop execution of other pre-processors.</I>
 
 # Contributing <a name="contributing"></a>
 
