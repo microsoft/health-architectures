@@ -46,10 +46,10 @@ The base pre- and post- processing modules that can be configured are:
  + **ParticipantFilterPostProcess** - This processing module will filter returned resources linked to a patient to only include records where you (the recipient) are either the patient or a "Practitioner of Record" (e.g. in a participant role). _Note: this only filters patient-based linked resources. You can use this module as a basis for building your own security filtering._</br>
  + **PublishFHIREventPostProcess** - This processing module will publish FHIR CUD events for resources to a configured eventhub. These events can be subscribed too by any number of consumers in order to facilitate any number of orchestrated workflows (e.g. CDS, Audits, Alerts, etc.).</br>
  + **TransformBundlePreProcess** - This processing module will transform incoming transaction bundle requests into a batch bundle request and maintain UUID associations of the contained resources. This is an alternative for updating FHIR Servers unable to handle transaction-based requests.</br>
- + **DateSortPostProcessor** - This processing module allows for a date-based sorting alternative on FHIR Servers that do not natively support _sort. The processor implements a top level _sort=date or _sort=-date parameter for supported resource queries up to a configured maximum number of rows.</br>  
+ + **DateSortPostProcessor** - This processing module allows for a date-based sorting alternative on FHIR Servers that do not natively support _sort. The processor implements a top level ```_sort=date``` or ```_sort=-date``` parameter for supported resource queries up to a configured maximum number of rows.</br>  
  + **ProfileValidationPreProcess** - This processing module adds the ability to call external profile (e.g. [US Core](https://www.hl7.org/fhir/us/core/)) and/or standard schema validation support for FHIR Servers that do not implement or support specific profile validation.
  + **ConsentOptOutFilter** - This post-processing module adds the ability to deny access to FHIR Server resources for patients who have elected to OPTOUT from allowing anyone or specific individuals and/or organizations access to their medical data.
- + **EverythingPatientPreProcess** - This pre-processing module implements a limited $everything at the patient level. It returns up to 5000 related resources for the Patient.
+ + **EverythingPatientPreProcess** - This pre-processing module implements a limited ```$everything``` at the patient level. It returns up to 5000 related resources for the Patient.
 
 Check back often as more processing modules will be added. </br>
  
@@ -324,7 +324,7 @@ At a minimum, users must be placed in one or more FHIR Participant roles in orde
 
 This module adds the ability to deny access to FHIR Server resources for patients who have elected to OPTOUT from allowing anyone (including specific individuals and/or organizations) access to their medical data.
 
-This module operates on the access policy that the health information of patients is accessabile automatically to authorized users, but the patient can opt out completely.
+This module operates on the access policy that the health information of patients is accessible automatically to authorized users, but the patient can opt out completely.
 
 It will honor any OPT-OUT Consent Record during its effective period, or it will deny access to everyone, or to specific Organizations, Practitioners, RelatedPersons and Patients (Actors).
 
@@ -425,7 +425,7 @@ This process requires configuration settings on the function app:
 The recommended value for category in your consent records is LOINC code 59284-0 Consent Document the parameter value would be:
 ```http://loinc.org|59284-0```.
 
-It is also required that users be linked to FHIR Participant roles/resources. Please see the [Linking Users in Participant Roles to FHIR Resources]() section in the Participant Access Filter Module above.
+It is also required that users be linked to FHIR Participant roles/resources. Please see the [Linking Users in Participant Roles to FHIR Resources](#paragraph19) section in the Participant Access Filter Module above.
 
 ## Everything Patient Pre Processor <a name="paragraph21"></a>
 This pre-processing module implements a limited ```$everything``` at the patient level. It returns the Patient and up to 5000 related resources for the Patient. Paging or other query parameters are not currently supported.
