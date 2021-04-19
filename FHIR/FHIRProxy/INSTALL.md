@@ -1,18 +1,5 @@
----
-title: Proxy
-parent: Tools
-grand_parent: FHIR
-nav_order: 4
----
-
-# Secure FHIR Gateway and Proxy
-
-![Microsoft and FHIR](/assets/images/msft-fhir.png)
-
-### Introduction
-The Secure FHIR Gateway and Proxy is an Azure Function-based solution that provides critical support for [Azure FHIR Server](https://docs.microsoft.com/en-us/azure/healthcare-apis/fhir/) instances (FHIR Servers). The proxy acts as an intelligent and secure gateway to FHIR Servers, allowing multi-tenant access and purpose-driven security policies for specialized access to a common FHIR Server. The proxy also provides a consolidated approach to pre- and post- processing of FHIR Server Calls to support various access/result filtering and other actions. The proxy is integrated with Azure Active Directory for authentication and to provide Role-Based Access Control. In addition, it acts as a FHIR-specific reverse proxy rewriting responses and brokering requests to FHIR Servers.
-
-# FHIR Proxy Install Documentation
+# Secure FHIR Gateway and Proxy for Azure
+## Install Documentation
 
 ### Prerequisites
 
