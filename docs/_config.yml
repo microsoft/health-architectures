@@ -15,7 +15,7 @@
 # Config notes:
 # change site to health-architectures when moving
 
-site.title: "Microsoft Health Architectures"
+title: "Microsoft Health Architectures"
 remote_theme: pmarsceill/just-the-docs
 color_scheme: "light"
 search_enabled: true
