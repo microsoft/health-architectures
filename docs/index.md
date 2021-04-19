@@ -1,5 +1,6 @@
 ---
 title: About
+{% seo title=false %}
 has_children: false
 nav_order: 1
 ---
