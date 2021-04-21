@@ -5,7 +5,8 @@ grand_parent: Azure FHIR Architectures
 nav_order: 3
 ---
 
-# IoMT Connector for Azure and Microsoft Teams Notifications
+# IoMT FHIR Connector for Azure and Microsoft Teams Notifications
+
 When combining the IoMT Connector for Azure, Azure API for FHIR, and Microsoft Teams customers can enable multiple care solutions. Below is the IoMT to MS Teams Notification conceptual architecture for enabling IoMT connector, FHIR and Microsoft Teams Patient App. We can even embed Power BI Dashboards inside the Microsoft Teams client. For more information on embedding Power BI in Microsoft Team visit here.
 
 IoMT Connector and Team Reference Architecture

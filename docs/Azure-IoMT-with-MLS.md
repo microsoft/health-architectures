@@ -5,7 +5,8 @@ grand_parent: Azure FHIR Architectures
 nav_order: 1
 ---
 
-# IoMT FHIR Connector for Azure Reference Architecture
+# IoMT FHIR Connector for Azure Machine Learning Service
+
 The IoMT Connector for Azure enables IoT devices seamless integration with FHIR services. This reference architecture is designed to accelerate adoption of IoMT projects. This solution utilizes Azure DataBricks for the ML compute. However, Azure ML Services with Kubernetes or a partner ML solution could fit into the Machine Learning Scoring Environment.
 
 The 4 line colors show the different parts of the data journey.
