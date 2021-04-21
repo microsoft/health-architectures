@@ -5,7 +5,7 @@ has_children: true
 nav_order: 3
 ---
 
-# Internet of Medical Things (IoMT)
+# Azure Internet of Medical Things (IoMT) FHIR Connector
 
 ![Microsoft and FHIR](/assets/images/msft-fhir.png)
 
