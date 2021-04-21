@@ -1,5 +1,5 @@
 ---
-title: IoMT with Azure Machine Learning Service
+title: Azure IoMT with Machine Learning Service
 parent: Azure IoMT FHIR Connector
 grand_parent: Azure FHIR Architectures
 nav_order: 1
