@@ -6,6 +6,8 @@ nav_order: 1
 
 # Welcome to Microsoft Health Architectures
 
+{{ site.title }}
+{{ page.title }}
 
 ![Microsoft and FHIR](/assets/images/msft-fhir.png)
 
