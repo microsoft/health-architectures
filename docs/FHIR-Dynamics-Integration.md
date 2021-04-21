@@ -1,7 +1,7 @@
 ---
 title: FHIR Dynamics Integration
 parent: Azure FHIR Cloud for Healthcare
-grandparent: Azure FHIR Architectures
+grand_parent: Azure FHIR Architectures
 nav_order: 1
 ---
 
