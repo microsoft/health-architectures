@@ -5,7 +5,7 @@ grand_parent: Azure FHIR Architectures
 nav_order: 2
 ---
 
-# IoMT FHIR Connector for Azure and Microsoft Power BI
+# IoMT FHIR Connector for Azure and Microsoft PowerBI
 
 Microsoft Power BI is a powerful business intelligence/ analytics tool which when combined with FHIR & IoT can change the way providers care for patients.
 
