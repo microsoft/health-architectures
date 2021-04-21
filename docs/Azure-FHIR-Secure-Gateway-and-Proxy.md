@@ -4,7 +4,7 @@ parent: Azure FHIR Utilities
 nav_order: 3
 ---
 
-# Azure FHIR Secure FHIR Gateway and Proxy
+# Azure FHIR Secure Gateway and Proxy
 
 ![Microsoft and FHIR](/assets/images/msft-fhir.png)
 
