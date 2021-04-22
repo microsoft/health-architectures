@@ -2,7 +2,7 @@
 title: Azure IoMT FHIR Connector
 parent: Azure FHIR Architectures
 has_children: true
-nav_order: 3
+nav_order: 4
 ---
 
 # Azure Internet of Medical Things (IoMT) FHIR Connector
