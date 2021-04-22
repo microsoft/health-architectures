@@ -1,7 +1,8 @@
 ---
 title: Azure FHIR Validator Container Instance
-parent: Azure FHIR Architectures
-nav_order: 3
+parent: Azure FHIR Validator
+grand_parent: Azure FHIR Utilities
+nav_order: 1
 ---
 
 # Azure FHIR Validator - Deployment as a Container Instance 
