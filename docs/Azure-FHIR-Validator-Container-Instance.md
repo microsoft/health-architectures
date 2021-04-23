@@ -1,7 +1,7 @@
 ---
 title: Azure FHIR Validator Container Instance
 parent: Azure FHIR Validator
-grand_parent: FHIR Utilities for Azure
+grand_parent: FHIR Utilities
 nav_order: 1
 ---
 

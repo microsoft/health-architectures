@@ -1,5 +1,5 @@
 ---
-title: FHIR Utilities for Azure
+title: FHIR Utilities
 has_children: true
 nav_order: 4
 ---

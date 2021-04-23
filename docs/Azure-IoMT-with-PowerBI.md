@@ -1,7 +1,7 @@
 ---
 title: Azure IoMT with PowerBI
 parent: Azure IoMT FHIR Connector
-grand_parent: FHIR Architectures for Azure
+grand_parent: FHIR Architectures
 nav_order: 2
 ---
 

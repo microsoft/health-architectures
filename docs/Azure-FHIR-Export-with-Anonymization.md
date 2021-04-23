@@ -1,6 +1,6 @@
 ---
 title: Azure FHIR Export with Anonymization
-parent: FHIR Architectures for Azure
+parent: FHIR Architectures
 nav_order: 2
 ---
 

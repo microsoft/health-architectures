@@ -1,6 +1,6 @@
 ---
 title: Azure FHIR HL7 Converter
-parent: FHIR Utilities for Azure
+parent: FHIR Utilities
 nav_order: 2
 ---
 

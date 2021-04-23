@@ -1,5 +1,5 @@
 ---
-title: FHIR Architectures for Azure
+title: FHIR Architectures
 has_children: true
 nav_order: 3
 ---
