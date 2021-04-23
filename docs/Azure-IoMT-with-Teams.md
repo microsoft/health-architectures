@@ -1,7 +1,7 @@
 ---
 title: Azure IoMT with Teams
 parent: Azure IoMT FHIR Connector
-grand_parent: Azure FHIR Architectures
+grand_parent: FHIR Architectures for Azure
 nav_order: 3
 ---
 

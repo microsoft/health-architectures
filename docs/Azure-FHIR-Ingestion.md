@@ -1,6 +1,6 @@
 ---
 title: Azure FHIR Ingestion
-parent: Azure FHIR Architectures
+parent: FHIR Architectures for Azure
 nav_order: 1
 ---
 

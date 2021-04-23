@@ -1,6 +1,6 @@
 ---
 title: Azure FHIR Validator
-parent: Azure FHIR Utilities
+parent: FHIR Utilities for Azure
 has_children: true
 nav_order: 1
 ---

@@ -1,6 +1,6 @@
 ---
 title: Azure FHIR Cloud for Healthcare
-parent: Azure FHIR Architectures
+parent: FHIR Architectures for Azure
 nav_order: 4
 has_children: true
 ---

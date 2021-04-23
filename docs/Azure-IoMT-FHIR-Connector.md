@@ -1,6 +1,6 @@
 ---
 title: Azure IoMT FHIR Connector
-parent: Azure FHIR Architectures
+parent: FHIR Architectures for Azure
 has_children: true
 nav_order: 3
 ---

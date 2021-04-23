@@ -1,6 +1,6 @@
 ---
 title: Azure FHIR Secure Gateway and Proxy
-parent: Azure FHIR Utilities
+parent: FHIR Utilities for Azure
 nav_order: 3
 ---
 
