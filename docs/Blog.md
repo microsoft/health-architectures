@@ -1,7 +1,7 @@
 ---
 title: Blog
 has_children: true
-nav_order: 6
+nav_order: 7
 ---
 
 # Microsoft Health Architectures Blog Posts
