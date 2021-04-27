@@ -1,5 +1,5 @@
 ---
-title: Azure FHIR Cloud for Healthcare
+title: Microsoft Cloud for Healthcare
 nav_order: 3
 has_children: true
 ---
