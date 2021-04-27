@@ -4,7 +4,7 @@ nav_order: 3
 has_children: true
 ---
 
-# Azure FHIR Cloud for Healthcare
+# Microsoft Cloud for Healthcare
 
 ![Microsoft Dynamics and FHIR](/assets/images/msft-dynamics-fhir.png)
 
