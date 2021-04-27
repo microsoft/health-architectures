@@ -4,7 +4,7 @@ has_children: true
 nav_order: 4
 ---
 
-# FHIR
+# FHIR Architectures
 
 ![FHIR](/assets/images/icon-fhir-64.png) 
 
