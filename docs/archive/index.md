@@ -6,6 +6,7 @@ nav_order: 1
 
 # Welcome to Microsoft Health Architectures
 
+
 ![Microsoft and FHIR](/assets/images/msft-fhir.png)
 
 Microsoft Health Architectures is a collection of reference architectures and, where appropriate, implementations. They illustrate end-to-end best practices for using the Azure API for FHIR and related technologies.  All content and blog posts can be found in the Table of Contents or via Search.  
