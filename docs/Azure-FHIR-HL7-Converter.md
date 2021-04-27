@@ -1,10 +1,10 @@
 ---
-title: Azure FHIR HL7 Converter
+title: FHIR HL7 Converter
 parent: FHIR Utilities
 nav_order: 2
 ---
 
-# Azure FHIR HL7 Converter 
+# FHIR HL7 Converter 
 
 ![Microsoft and FHIR](/assets/images/msft-fhir.png)
 
