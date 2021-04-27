@@ -1,11 +1,10 @@
 ---
-title: Azure FHIR Validator Container Instance
-parent: Azure FHIR Validator
-grand_parent: FHIR Utilities
+title: FHIR Validator Container Instance
+parent: FHIR Utilities
 nav_order: 1
 ---
 
-# Azure FHIR Validator - Deployment as a Container Instance 
+# FHIR Validator - Deployment as a Container Instance 
 
 ![Microsoft and FHIR](/assets/images/msft-fhir.png)
 
