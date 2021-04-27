@@ -1,7 +1,6 @@
 ---
-title: Azure FHIR Power Platform Connectors 
-parent: Azure FHIR Cloud for Healthcare
-grand_parent: FHIR Architectures
+title: FHIR Power Platform Connectors 
+parent: Microsoft Cloud for Healthcare
 nav_order: 2
 ---
 
