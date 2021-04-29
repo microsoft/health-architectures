@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" >
+
+  <DataTemplate x:Key="withingsDeviceDataTemplate">
+    <Frame Padding="13,11,5,11"
+           HasShadow="True"
+           HeightRequest="{OnIdiom Tablet=200, Phone=160}"
+           BorderColor="{Binding Path=IsSelected, Converter={StaticResource SelectedToColorValueConverter}}"
+           >
+
+      <Grid BackgroundColor="{StaticResource devicePanelBackgroundColor}">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Image Source="{Binding Path=Identifier.Type.Coding, Converter={StaticResource ModelToImageSourceValueConverter}}"
+                 Grid.Row="0"/>
+        <StackLayout Orientation="Vertical" Grid.Row="1" IsVisible="False">
+          <StackLayout.Triggers>
+            <DataTrigger TargetType="StackLayout" Binding="{Binding ShowExtraInfo}" Value="True">
+              <Setter Property="IsVisible" Value="True"/>
+            </DataTrigger>
+          </StackLayout.Triggers>
+          <Image Source="{Binding Path=Identifier.System, Converter={StaticResource ManufacturerToImageSourceValueConverter}}"/>
+          <Label Text="{Binding Path=Display}" Style="{StaticResource tileDeviceTypeText}" HorizontalTextAlignment="Center" />
+        </StackLayout>
+        <CheckBox Color="{StaticResource headingLabelColor}" IsChecked="True" IsEnabled="False"
+                    Grid.Row="2" IsVisible="{Binding Path=IsConnected}" HorizontalOptions="Center"/>
+      </Grid>
+    </Frame>
+  </DataTemplate>
+
+  <DataTemplate x:Key="withingsObservationDataTemplate">
+    <Frame Padding="13,11,5,11" HasShadow="True"
+           WidthRequest="{OnIdiom Tablet=200, Phone=130}"
+           HeightRequest="{OnIdiom Tablet=220, Phone=160}"
+           BorderColor="{Binding Path=IsSelected, Converter={StaticResource SelectedToColorValueConverter}}">
+
+      <Grid BackgroundColor="{StaticResource devicePanelBackgroundColor}">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="30"/>
+          <RowDefinition Height="{OnIdiom Tablet=120, Phone=65}"/>
+          <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <StackLayout Orientation="Vertical" Grid.Row="0" Spacing="3">
+          <Label Text="{Binding Path=Category}" Style="{StaticResource tileHeading}" />
+          <Label Text="{Binding Path=LastReadingTime}" Style="{StaticResource tileSubHeading}"/>
+        </StackLayout>
+
+        <microcharts:ChartView x:Name="Chart" Grid.Row="1" Chart="{Binding Path=Chart}"
+                               MinimumHeightRequest="{OnIdiom Tablet=120, Phone=65}"/>
+
+        <StackLayout Orientation="Vertical" Grid.Row="2">
+          <StackLayout Orientation="Horizontal" Spacing="0">
+            <Label Text="{Binding Path=DisplayText}" Style="{StaticResource tileValueText}"
+                   TextColor="{Binding Path=Category,Converter={StaticResource CodeToValueColorValueConverter}}"/>
+            <Label Text="{Binding Path=Units}" Style="{StaticResource tileValueUnitsText}"
+                   TextColor="{Binding Path=Category,Converter={StaticResource CodeToUnitsColorValueConverter}}"/>
+          </StackLayout>
+          <Label Text="{Binding Path=ObservationStatus}"
+                 Style="{StaticResource tileValueUnitsText}"
+                 TextColor="{Binding Path=Code.Text,Converter={StaticResource CodeToValueColorValueConverter}}"/>
+        </StackLayout>
+      </Grid>
+    </Frame>
+  </DataTemplate>
+</ResourceDictionary>

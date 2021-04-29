@@ -1,0 +1,33 @@
+{
+  "name": "h3-e2e-tests",
+  "private": true,
+  "description": "h3-backend end-to-end tests",
+  "version": "0.0.1",
+  "author": "@microsoft",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://healthnext@dev.azure.com/healthnext/WBA-H3/_full/WBA-H3"
+  },
+  "dependencies": {
+    "@wdio/cli": "^6.4.2",
+    "@wdio/local-runner": "^6.4.2",
+    "@wdio/mocha-framework": "^6.4.0",
+    "@wdio/spec-reporter": "^6.4.0",
+    "@wdio/sync": "^6.4.0",
+    "envalid": "^6.0.2",
+    "should": "^13.2.3",
+    "timespan": "^2.3.0",
+    "wdio-docker-service": "^2.4.0"
+  },
+  "devDependencies": {
+    "eslint": "6.8.0",
+    "eslint-plugin-mocha": "^8.0.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "1.19.1"
+  },
+  "scripts": {
+    "lint": "eslint test --ext js --max-warnings=0",
+    "test": "wdio run wdio.conf.js"
+  }
+}

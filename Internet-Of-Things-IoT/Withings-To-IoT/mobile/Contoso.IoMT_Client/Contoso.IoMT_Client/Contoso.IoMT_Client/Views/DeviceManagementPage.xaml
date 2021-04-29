@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:Contoso.IoMT_Client.Controls"
+             mc:Ignorable="d"
+             ios:Page.UseSafeArea="true"
+             x:Class="Contoso.IoMT_Client.DeviceManagementPage">
+  <ContentPage.Resources>
+    <ResourceDictionary Source="/DataTemplates/WithingsDataTemplate.xaml"/>
+  </ContentPage.Resources>
+  <ContentPage.Content>
+    <ScrollView Margin="10">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Button Text="&lt; Back to Dashboard" x:Name="backtoDashboradButton" IsVisible="false"
+                Clicked="BacktoDashboradButton_Clicked" Style="{StaticResource defaultButtonStyle}"/>
+        <StackLayout VerticalOptions="Start" HorizontalOptions="Center" Grid.Row="1">
+          <Label Text="Connected Withings Devices:"/>
+          <controls:WrapLayout x:Name="connectedDevicesWrapLayout"/>
+          <Label Text="Disconnected Withings Devices:"/>
+          <controls:WrapLayout x:Name="disconnectedDevicesWrapLayout"/>
+        </StackLayout>
+
+        <Grid Grid.Column="{OnIdiom Phone=0, Tablet=1}" Grid.Row="{OnIdiom Phone=2, Tablet=1}" Margin="0,20,0,0">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="{OnIdiom Phone=0, Tablet=250}"/>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+          <ContentView x:Name="deviceContentView" IsVisible="false">
+            <controls:ContentPresenter x:Name="deviceDetails" ItemTemplate="{StaticResource Key=withingsDeviceDataTemplate}" IsVisible="{OnIdiom Phone=false, Tablet=true}"/>
+          </ContentView>
+
+          <StackLayout Orientation="Vertical" Margin="20,10" WidthRequest="200" Grid.Row="2">
+            <Label>
+              <Label.FormattedText>
+                <FormattedString>
+                  <Span Text="Disconnect Withings account"
+                  TextColor="Blue"
+                  TextDecorations="Underline">
+                    <Span.GestureRecognizers>
+                      <TapGestureRecognizer Tapped="OnDisconnectTapped"/>
+                    </Span.GestureRecognizers>
+                  </Span>
+                </FormattedString>
+              </Label.FormattedText>
+            </Label>
+            <Button x:Name="actionButton" Text="Select Device" Clicked="ConnectDisconnectDevice" IsEnabled="false" 
+                Style="{StaticResource defaultButtonStyle}" IsVisible="{OnIdiom Phone=true, Tablet=false}"/>
+          </StackLayout>
+        </Grid>
+      </Grid>
+    </ScrollView>
+  </ContentPage.Content>
+</ContentPage>

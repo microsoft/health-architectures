@@ -1,0 +1,19 @@
+{
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "forwardPorts": [
+    8888,
+    8000
+  ],
+  "extensions": [
+    "ms-azure-devops.azure-pipelines",
+    "ms-azuretools.vscode-azurefunctions",
+    "ms-dotnettools.csharp",
+    "ms-python.python",
+    "ms-vscode.powershell",
+    "ms-vscode.vscode-node-azure-pack",
+    "msazurermtools.azurerm-vscode-tools"
+  ]
+}
