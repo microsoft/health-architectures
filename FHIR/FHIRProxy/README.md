@@ -15,7 +15,7 @@
 # Overview <a name="overview"></a>
 
 ## What is FHIR Proxy? <a name="paragraph1"></a>
-FHIR Proxy is a gatekeeping server application that works in conjunction with [Azure API for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/fhir/overview)/[FHIR Server for Azure](https://github.com/microsoft/fhir-server) (FHIR Server). When FHIR Proxy is deployed alongside FHIR Server in the same Azure Tenant, the FHIR Proxy becomes the public endpoint for the FHIR Server – standing in front of the FHIR Server’s API and acting as a checkpoint in the exchange of FHIR data to/from the FHIR Server.
+FHIR Proxy is a gatekeeping server application that works in conjunction with [Azure API for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/fhir/overview)/[FHIR Server for Azure](https://github.com/microsoft/fhir-server) (FHIR Server). When FHIR Proxy is deployed alongside FHIR Server in the same Azure Tenant, FHIR Proxy becomes the public endpoint for the FHIR Server – standing in front of the FHIR Server’s API and acting as a checkpoint in the exchange of FHIR data to/from the FHIR Server.
 
 ## What is the purpose of FHIR Proxy? <a name="paragraph2"></a>
 FHIR Proxy gives FHIR Server administrators an extra set of controls for filtering, transforming, and/or redistributing information as it passes into and out of the FHIR Server. This enhanced control in the transfer of FHIR data is accomplished via FHIR Proxy’s services in three key areas:
