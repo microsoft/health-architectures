@@ -48,7 +48,7 @@ Please see the [installation guide](https://github.com/microsoft/health-architec
 
 # Configuration <a name="configuration"></a>
 
-Please see the [installation guide](https://github.com/microsoft/health-architectures/FHIR/FHIRProxy/CONFIG.md) for instructions on how to configure FHIR Proxy.
+Please see the [configuration guide](https://github.com/microsoft/health-architectures/FHIR/FHIRProxy/CONFIG.md) for instructions on how to configure FHIR Proxy.
 
 # Contributing <a name="contributing"></a>
 
