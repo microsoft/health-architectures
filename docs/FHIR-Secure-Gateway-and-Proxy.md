@@ -1,15 +1,15 @@
 ---
-title: FHIR Secure Gateway and Proxy
+title: FHIR Proxy
 parent: FHIR Utilities
 nav_order: 3
 ---
 
-# FHIR Secure Gateway and Proxy
+# FHIR Proxy
 
 ![Microsoft and FHIR](/assets/images/msft-fhir.png)
 
 ### Introduction
-The Secure FHIR Gateway and Proxy is an Azure Function-based solution that provides critical support for [Azure FHIR Server](https://docs.microsoft.com/en-us/azure/healthcare-apis/fhir/) instances (FHIR Servers). The proxy acts as an intelligent and secure gateway to FHIR Servers, allowing multi-tenant access and purpose-driven security policies for specialized access to a common FHIR Server. The proxy also provides a consolidated approach to pre- and post- processing of FHIR Server Calls to support various access/result filtering and other actions. The proxy is integrated with Azure Active Directory for authentication and to provide Role-Based Access Control. In addition, it acts as a FHIR-specific reverse proxy rewriting responses and brokering requests to FHIR Servers.
+The FHIR Proxy is an Azure Function-based solution that provides critical support for [Azure FHIR Server](https://docs.microsoft.com/en-us/azure/healthcare-apis/fhir/) instances (FHIR Servers). The proxy acts as an intelligent and secure gateway to FHIR Servers, allowing multi-tenant access and purpose-driven security policies for specialized access to a common FHIR Server. The proxy also provides a consolidated approach to pre- and post- processing of FHIR Server Calls to support various access/result filtering and other actions. The proxy is integrated with Azure Active Directory for authentication and to provide Role-Based Access Control. In addition, it acts as a FHIR-specific reverse proxy rewriting responses and brokering requests to FHIR Servers.
 
 # FHIR Proxy Install Documentation
 
@@ -33,8 +33,7 @@ The Secure FHIR Gateway and Proxy is an Azure Function-based solution that provi
 
 - [Open Azure Cloud Shell](https://shell.azure.com) (you can also access this from Azure Portal).
 - Select Bash Shell.
-- Clone this repo ```git clone https://github.com/microsoft/health-architectures```.
-- Change to the FHIR/FHIRproxy subdirectory of this repo (cd FHIR/FHIRProxy) ```cd ./health-architectures/FHIR/FHIRProxy/```.
+- Clone this repo ```git clone https://github.com/microsoft/fhir-proxy```.
 - Run the deployfhirproxy.bash script and follow the prompts -> ``` ./deployfhirproxy.bash```. If it successfully executes the script, your bash shell will look like this:
 
 ![Portal View](/assets/images/deployfhirproxy.png)
