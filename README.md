@@ -1,4 +1,4 @@
-UPDATE - As of 06/01/2021, FHIR Proxy is now in its own dedicated repository at <https://github.com/microsoft/fhir-proxy>.  
+**UPDATE** - As of 06/01/2021, FHIR Proxy is now in its own dedicated repository at <https://github.com/microsoft/fhir-proxy>.  
 
 # Introduction
 
