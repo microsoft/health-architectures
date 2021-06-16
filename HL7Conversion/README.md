@@ -56,14 +56,14 @@ Infrastructure deployment that will create a logic app based workflow that perfo
 Features of the HL7toFHIR Conversion Platform:
   +  Highly Scalable, Secure and Flexible conversion process implementation
   +  Custom Connectors to the FHIR Converter and FHIR Server via the secure FHIR Proxy for easy access to these resources via logic app workflows
-  +  You can also provide a central ingest point and event bus to support virtually unlimited event driven workflow and orchestration scenarios by enabling the [PublishFHIREventPostProcess module of the FHIR Proxy](https://github.com/microsoft/health-architectures/tree/master/FHIR/FHIRProxy#publish-event-post-processor)
+  +  You can also provide a central ingest point and event bus to support virtually unlimited event driven workflow and orchestration scenarios by enabling the [PublishFHIREventPostProcess module of the FHIR Proxy](https://github.com/microsoft/fhir-proxy#publish-event-post-processor)
 ![Converter Ingest](hl72fhir.png)
 
 ### <a name="convert"></a> Deploying your own HL7toFHIR Conversion Workflow
 1. [Deploy the HL7 Ingest Platform](#ingest)
-2. [Deploy the FHIR Proxy](https://github.com/microsoft/health-architectures/tree/master/FHIR/FHIRProxy)
-3. [Enable the TransformBundlePreProcess on the FHIRProxy](https://github.com/microsoft/health-architectures/tree/master/FHIR/FHIRProxy#transform-bundle-pre-processor)
-4. [Place a user account, group or service principal in the appropriate access role for the FHIR Proxy](https://github.com/microsoft/health-architectures/tree/master/FHIR/FHIRProxy#adding-usersgroups-for-access-to-the-fhir-server-proxy)
+2. [Deploy the FHIR Proxy](https://github.com/microsoft/fhir-proxy)
+3. [Enable the TransformBundlePreProcess on the FHIRProxy](https://github.com/microsoft/fhir-proxy#transform-bundle-pre-processor)
+4. [Place a user account, group or service principal in the appropriate access role for the FHIR Proxy](https://github.com/microsoft/fhir-proxy#adding-usersgroups-for-access-to-the-fhir-server-proxy)
    This account will be used to allow logic app connectors and cooresponding orchestrations access to FHIR Services via the FHIR Proxy client
 5. [Open Azure Cloud Shell](https://shell.azure.com) you can also access this from [azure portal](https://portal.azure.com)
 6. Select Bash Shell 
@@ -86,5 +86,5 @@ Features of the HL7toFHIR Conversion Platform:
 ![Sample Converter Run](samplerun.png)
 
 
-FHIR® is the registered trademark of HL7 and is used with the permission of HL7</br>
+FHIRï¿½ is the registered trademark of HL7 and is used with the permission of HL7</br>
 HAPI is an open source tool set developed by [University Health Network](http://www.uhn.ca/)
