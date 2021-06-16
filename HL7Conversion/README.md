@@ -63,7 +63,7 @@ Features of the HL7toFHIR Conversion Platform:
 1. [Deploy the HL7 Ingest Platform](#ingest)
 2. [Deploy the FHIR Proxy](https://github.com/microsoft/fhir-proxy)
 3. [Enable the TransformBundlePreProcess on the FHIRProxy](https://github.com/microsoft/fhir-proxy#transform-bundle-pre-processor)
-4. [Place a user account, group or service principal in the appropriate access role for the FHIR Proxy](https://github.com/microsoft/fhir-proxy#adding-usersgroups-for-access-to-the-fhir-server-proxy)
+4. [Place a user account, group or service principal in the appropriate access role for the FHIR Proxy](https://https://github.com/microsoft/fhir-proxy#adding-usersgroups-to-the-fhir-server-proxy)
    This account will be used to allow logic app connectors and cooresponding orchestrations access to FHIR Services via the FHIR Proxy client
 5. [Open Azure Cloud Shell](https://shell.azure.com) you can also access this from [azure portal](https://portal.azure.com)
 6. Select Bash Shell 
