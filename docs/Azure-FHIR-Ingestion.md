@@ -12,7 +12,7 @@ However, with technology rapidly changing and growing, adopting it may seem like
 
 The good news is that it is possible to achieve HIPAA compliance while also implementing cloud technologies to store and utilize health data to make smarter decisions.  We’ve innovated the way healthcare organizations can enrich, normalize and unify protected health information (PHI) from on-premise systems into and through Fast Healthcare Interoperability Resources (FHIR).   
 
-<a href="https://raw.githubusercontent.com/daemel/site/master/assets/images/Ingestion-Workflow-Architecture-and-Design.png" target="_blank"> <img src="https://raw.githubusercontent.com/daemel/site/master/assets/images/Ingestion-Workflow-Architecture-and-Design.png" alt="image"/></a>
+![Ingestion Workflow Architecture and Design](/assets/images/Ingestion-Workflow-Architecture-and-Design.png)
 
 
 ### Tools 
