@@ -68,7 +68,7 @@ resource             | FHIR Endpoint          | URL
 
 
 ## API for FHIR access via Microsoft FHIR-Proxy 
-Creating Postman collections for [Microsoft's FHIR-Proxy](https://github.com/microsoft/fhir-proxy) and its various components can be daunting when starting from scratch. The ./fhir-proxy directory in this repo contains a sample Postman Environment to help users get started. 
+Creating Postman collections for [Microsoft's FHIR-Proxy](https://github.com/microsoft/fhir-proxy) and its various components can be daunting when starting from scratch. The ```./fhir-proxy``` directory in this repo contains a sample Postman Environment to help users get started. 
 
 __NOTE__ All FHIR-Proxy Postman configurations can be found in the Key Vault installed during setup. 
 
