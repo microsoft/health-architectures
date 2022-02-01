@@ -22,7 +22,7 @@ In order to access Azure API for FHIR, make sure you have assigned the "FHIR Dat
 
 
 ## Auth - AAD and Tokens 
-Azure API for FHIR is secured by Azure AD. The default authentication cannot be disabled. To access Azure API for FHIR, you must get an Azure AD access token first. For more information, see [Microsoft identity platform access tokens](https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens).
+Azure API for FHIR is secured by Azure AD, and this as the default platform for authentication cannot be disabled. To access Azure API for FHIR, you must get an Azure AD access token first. For more information, see [Microsoft identity platform access tokens](https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens).
 
 The POST request AuthorizeGetToken has the following:
 
