@@ -16,7 +16,7 @@ The Postman [Environments](https://learning.postman.com/docs/sending-requests/ma
 
 __NOTES__ 
 - Recommendation is to register a [Service Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-service-azure-ad-client-app) or [Confidential Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) application (to represent Postman in AAD).
-- Be sure to register a reply URL of https://www.getpostman.com/oauth2/callback in your client application registration.
+- Be sure to register https://www.getpostman.com/oauth2/callback as the reply URL in your client application registration.
 
 In order to access Azure API for FHIR, make sure you have assigned the "FHIR Data Contributor" roll to the client application and to your own user account. For more information, see [Configure Azure RBAC for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/configure-azure-rbac).
 
