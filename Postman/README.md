@@ -6,7 +6,7 @@ Azure API for FHIR makes a REST API available for client applications to access 
 
 A tutorial for using Postman with Azure API for FHIR is available on [docs.microsoft.com](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/access-fhir-postman-tutorial).
 
-The Postman [Environments](https://learning.postman.com/docs/sending-requests/managing-environments/) and [Collections](https://learning.postman.com/docs/getting-started/creating-the-first-collection/#:~:text=Postman%20Collections%20are%20a%20group,particular%20request%20in%20your%20history.) offered in this repo have been tested with Postman v8 (online and desktop client).
+The Postman [Environments](https://learning.postman.com/docs/sending-requests/managing-environments/) and [Collections](https://learning.postman.com/docs/getting-started/creating-the-first-collection/#:~:text=Postman%20Collections%20are%20a%20group,particular%20request%20in%20your%20history.) offered in this repo have been tested with **Postman v8** (online and desktop client).
 
 
 ### Prerequisites
