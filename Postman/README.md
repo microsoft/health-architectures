@@ -24,7 +24,7 @@ In order to access Azure API for FHIR, make sure you have assigned the "FHIR Dat
 ## Auth - AAD and Tokens 
 Azure API for FHIR is secured by Azure AD, and this as the default platform for authentication cannot be disabled. To access Azure API for FHIR, you must get an Azure AD access token first. For more information, see [Microsoft identity platform access tokens](https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens).
 
-The POST request AuthorizeGetToken has the following:
+To obtain an access token via Postman, you prepare a ```POST AuthorizeGetToken``` request. For the ```POST AuthorizeGetToken``` request to succeed, the following must be :
 
 URL: https://login.microsoftonline.com/{{tenantid}}/oauth2/token
 
@@ -39,7 +39,9 @@ Test to set the ```bearerToken``` variable
 var jsonData = JSON.parse(responseBody);
 postman.setEnvironmentVariable("bearerToken", jsonData.access_token);
 ```
-On clicking Send you should see a response with the Azure AD access token, which is saved to the variable ```accessToken``` automatically. You can then use it in all FHIR service API requests.
+On clicking Send you should see a response with the Azure AD access token, which is saved to the variable ```accessToken``` automatically. You can then use it in all subsequent FHIR service API requests. 
+
+Note that access tokens expire after 60 minutes. To obtain a token refresh, simply send another ```POST AuthorizeGetToken``` request.
 
 See [FHIR-CALLS](./docs/fhirCalls.md) for additional information about this Postman collection. 
 
