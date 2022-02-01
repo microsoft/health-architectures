@@ -39,7 +39,7 @@ Test to set the ```bearerToken``` variable
 var jsonData = JSON.parse(responseBody);
 postman.setEnvironmentVariable("bearerToken", jsonData.access_token);
 ```
-On clicking ```Send``` you should see a response with the Azure AD access token, which is saved to the variable ```accessToken``` automatically. You can then use it in all subsequent API requests made to Azure API for FHIR. 
+On clicking ```Send``` you should see a response with the Azure AD access token, which is saved to the variable ```accessToken``` automatically. You can then use it in all subsequent API calls made to Azure API for FHIR. 
 
 __Note:__ Access tokens expire after 60 minutes. To obtain a token refresh, simply make another ```POST AuthorizeGetToken``` call and the token will be valid for another 60 minutes.
 
