@@ -47,15 +47,15 @@ See [FHIR-CALLS](./docs/fhirCalls.md) for additional information about this Post
 
  
 ## Azure API for FHIR access
-To access Azure API for FHIR, we'll need to create or update the following variables.
+To access Azure API for FHIR (hereto called the "FHIR server"), we'll need to create or update the following variables.
 
 - ```fhirurl``` – The FHIR service full URL. For example, https://xxx.azurehealthcareapis.com. It's located from the FHIR service overview menu option.
 - ```bearerToken``` – The variable to store the Azure Active Directory (Azure AD) access token in the script. Leave it blank.
 - FHIR server URL (for example, https://MYACCOUNT.azurehealthcareapis.com)
 - Identity provider Authority for your FHIR server (for example, https://login.microsoftonline.com/{TENANT-ID})
 - Audience, which is usually the URL of the FHIR server (for example, https://<FHIR-SERVER-NAME>.azurehealthcareapis.com or https://azurehealthcareapis.com).
-- client_id or application ID of the confidential client application used for accessing the FHIR service.
-- client_secret or application secret of the confidential client application.
+- ```client_id``` or application ID of the confidential client application used for accessing the FHIR server.
+- ```client_secret``` or application secret of the confidential client application.
 
 Postman Env variable | Azure Setting          | Variable Type 
 ---------------------|------------------------|--------------
