@@ -85,7 +85,7 @@ resource             | FHIR Endpoint          | URL
 ## Testing Setup 
 Testing FHIR-Proxy/Azure API for FHIR with Postman begins simply by adding values to the Environment variables.
 
-1) Download the sampes environments in either [API-FHIR](https://github.com/daemel/fhir-postman/tree/main/api-for-fhir) or [FHIR-Proxy](https://github.com/daemel/fhir-postman/tree/main/fhir-proxy).   
+1) Download the samples environments in either [API-FHIR](https://github.com/daemel/fhir-postman/tree/main/api-for-fhir) or [FHIR-Proxy](https://github.com/daemel/fhir-postman/tree/main/fhir-proxy).   
 
 2) Open Postman (web or client), import the Environment (ie api-for-fhir-postman_environment.json) and the Collections (FHIR-CALLS.postman_collection.json).
 
