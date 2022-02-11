@@ -8,18 +8,39 @@ A tutorial for using Postman with Azure API for FHIR is available on [docs.micro
 
 The Postman [Environments](https://learning.postman.com/docs/sending-requests/managing-environments/) and [Collections](https://learning.postman.com/docs/getting-started/creating-the-first-collection/#:~:text=Postman%20Collections%20are%20a%20group,particular%20request%20in%20your%20history.) offered in this repo have been tested with **Postman v8** (online and desktop client).
 
-
 ### Prerequisites
 + An Azure API for FHIR endpoint. To deploy Azure API for FHIR (a managed service), you can use the [Azure portal](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/fhir-paas-portal-quickstart), [PowerShell](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/fhir-paas-powershell-quickstart), or [Azure CLI](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/fhir-paas-cli-quickstart).
 
-+ A registered [client application](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) to access Azure API for FHIR (this application registration will represent Postman in Azure Active Directory).
+### Instructions for creating an App Registration for Postman in AAD__ 
 
-__NOTES__ 
-- Recommendation is to register a [Service Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-service-azure-ad-client-app) or [Confidential Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) application (to represent Postman in AAD).
-- Be sure to register https://www.getpostman.com/oauth2/callback as the reply URL in your client application registration.
+You will need to create a registered [client application](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) for Postman to access Azure API for FHIR (this application registration will represent Postman in Azure Active Directory).
 
-In order to access Azure API for FHIR, make sure you have assigned the "FHIR Data Contributor" roll to the client application and to your own user account. For more information, see [Configure Azure RBAC for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/configure-azure-rbac).
+1. In Azure Portal, go to **Azure Active Directory** -> **App registrations** and make a **New registration**. 
+2. Under **Redirect URI (optional)** select **Web** and then enter https://www.getpostman.com/oauth2/callback.
+3. Click **Register**.
+4. Then, click on your newly created App Registration and you will be taken to the app's **Overview** blade.
+5. Click on **API Permissions**.
+6. Click on **Add a permission**.
+7. Select the **My APIs** tab.
+8. Click on the FHIR-Proxy instance that you deployed.
+9. Click on **Delegated permissions**.
+10. Scroll down and select **user_impersonation**.
+11. Click **Add permissions**.
+12. When back in the **API permissions** blade, click **Add a permission** (again).
+13. Select **APIs my organization uses** tab.
+14. Type in "Azure Healthcare APIs" and select the item in the list.
+15. Scroll down and select **user_impersonation**.
+16. Click **Add permissions**.
+17. When back in the **API permissions** base blade, click **Certificates and secrets**.
+18. Click **New client secret**.
+19. Enter a name for the secret in the **Description** field.
+20. Click **Add**.
+21. Copy the secret **Value** and securely store it somewhere.
 
+- For more information on registering client applications in AAD, please review the [Service Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-service-azure-ad-client-app) or [Confidential Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) documentation for Azure API for FHIR.
+- Be sure to register https://www.getpostman.com/oauth2/callback as the reply URL in your client application registration! (see above).
+
+__Note:__ In order to access Azure API for FHIR directly (i.e., bypassing FHIR-Proxy), make sure you have assigned the "FHIR Data Contributor" roll in the Postman application registration *App roles** blade. For more information, see [Configure Azure RBAC for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/configure-azure-rbac).
 
 ## Auth - AAD and Tokens 
 Azure API for FHIR is secured by Azure AD, and this cannot be disabled as this is the default platform for authentication. To access Azure API for FHIR, you must get an Azure AD access token first. For more information, see [Microsoft identity platform access tokens](https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens).
