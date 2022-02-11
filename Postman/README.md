@@ -45,7 +45,7 @@ __Note:__ In order to access Azure API for FHIR directly (i.e., bypassing FHIR-P
 
 ### Instructions for setting up a Postman environment.
 
-1. Copy the JSON formatted text from below and paste into a text editor of your choice.
+1. Copy the JSON formatted Postman environment template for Azure API for FHIR from below and paste into a text editor of your choice.
 
 ```
 {
@@ -91,16 +91,103 @@ __Note:__ In order to access Azure API for FHIR directly (i.e., bypassing FHIR-P
 
 2. Save the file in your local desktop environment (accessible from Postman) as "api-for-fhir.postman_environment.json". This file is also accessible in this repo [here](./api-for-fhir/api-for-fhir.postman_environment.json).
 
-3. Create a new Postman Workspace (or select an existing one if already created).
+3. Copy the JSON formatted Postman environment template for FHIR-Proxy from below and paste into a text editor of your choice.
 
-4. Click the ```Import``` button next to your workspace name. 
+```
+{
+	"id": "225b239b-1eb3-46fe-bf41-77e4c7ea339d",
+	"name": "fhir-proxy",
+	"values": [
+		{
+			"key": "tenantId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "clientId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "clientSecret",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "bearerToken",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "resource",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "fhirurl",
+			"value": "",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2021-08-12T02:06:11.383Z",
+	"_postman_exported_using": "Postman/8.10.0"
+}
+```
+4. Save the file in your local desktop environment (accessible from Postman) as "api-for-fhir.postman_environment.json". This file is also accessible in this repo [here](./fhir-proxy/fhir-proxy.postman_environment.json).
 
-5. Import the ```Azure API for FHIR Template.postman_environment.json``` file that you saved to your desktop environment.
+5. Create a new Postman Workspace (or select an existing one if already created).
+
+6. Click the ```Import``` button next to your workspace name. 
+
+7. Import the ```api-for-fhir.postman_environment.json``` file that you saved to your desktop environment.
     + Add the file to Postman using the ```Upload Files``` button or paste in the contents of the file using the ```Raw text``` tab.
 
-6. Access the ```FHIR-CALLS.postman-collection.json``` file available in this repo [here](./api-for-fhir/FHIR-CALLS.postman_collection.json) and save the file to your desktop environment. Import the file into Postman.
+8. Import the ```fhir-proxy.postman_environment.json``` file that you saved to your desktop environment.
     + Add the file to Postman using the ```Upload Files``` button or paste in the contents of the file using the ```Raw text``` tab.
 
+8. Access the ```FHIR-CALLS.postman-collection.json``` file available in this repo [here](./api-for-fhir/FHIR-CALLS.postman_collection.json) and save the file to your desktop environment. Then import the file into Postman.
+    + Add the file to Postman using the ```Upload Files``` button or paste in the contents of the file using the ```Raw text``` tab.
+
+9. 6. Access the ```FHIR_Search.postman_collection.json``` file available in this repo [here](./api-for-fhir/FHIR_Search.postman_collection.json) and save the file to your desktop environment. Then import the file into Postman.
+    + Add the file to Postman using the ```Upload Files``` button or paste in the contents of the file using the ```Raw text``` tab.
+
+Now you will need to configure your two Postman environments by retrieving values for `tenantId`, `clientId`, `clientSecret`, `fhirurl`, and `resource` from Azure Portal for Azure API for FHIR and FHIR-Proxy, respectively. Then you will populate the two postman environment templates in Postman.
+ 
+## Postman environment setup for Azure API for FHIR access
+To access Azure API for FHIR, we'll need to create or update the following Postman environment variables.
+
+- ```fhirurl``` – The FHIR service full URL. For example, https://xxx.azurehealthcareapis.com. It's located in the FHIR service overview menu option.
+- ```bearerToken``` – The variable to store the Azure Active Directory (Azure AD) access token in the script. Leave it blank.
+- FHIR server URL (for example, https://MYACCOUNT.azurehealthcareapis.com)
+- Identity provider Authority for your FHIR server (for example, https://login.microsoftonline.com/{TENANT-ID})
+- Audience, which is usually the URL of the FHIR server (for example, https://<FHIR-SERVER-NAME>.azurehealthcareapis.com or https://azurehealthcareapis.com).
+- ```client_id``` or application ID of the confidential client application used for accessing the FHIR server.
+- ```client_secret``` or application secret of the confidential client application.
+
+Postman Env variable | Azure Setting          | Variable Type 
+---------------------|------------------------|--------------
+tenantId             | Azure AD Tenant ID     | GUID 
+clientId             | Azure AD Client ID     | GUID
+clientSecret         | Azure AD Client Secret | Secret 
+bearerToken          | Auto-Populated         | Token
+fhirurl              | FHIR Endpoint          | URL
+resource             | FHIR Endpoint          | URL
+
+
+## Postman environemtn setup for Azure API for FHIR access via Microsoft FHIR-Proxy 
+If you haven't already imported the environment, the ```./fhir-proxy``` directory in this repo contains a sample Postman Environment to help users get started. 
+
+__NOTE__ All FHIR-Proxy Postman configurations can be found in the Key Vault installed during setup. 
+
+Postman Env variable | Azure Setting          | Variable Type 
+---------------------|------------------------|--------------
+tenantId             | Azure AD Tenant ID     | GUID 
+clientId             | Azure AD Client ID     | GUID
+clientSecret         | Azure AD Client Secret | Secret 
+bearerToken          | Auto-Populated         | Token
+fhirurl              | FHIR Endpoint          | URL
+resource             | FHIR Endpoint          | URL
 
 ## Auth - AAD and Tokens 
 Azure API for FHIR is secured by Azure AD, and this cannot be disabled as this is the default platform for authentication. To access Azure API for FHIR, you must get an Azure AD access token first. For more information, see [Microsoft identity platform access tokens](https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens).
@@ -126,51 +213,14 @@ __Note:__ Access tokens expire after 60 minutes. To obtain a token refresh, simp
 
 See [FHIR-CALLS](./docs/fhirCalls.md) for additional information about this Postman collection. 
 
- 
-## Azure API for FHIR access
-To access Azure API for FHIR (hereto called the "FHIR server"), we'll need to create or update the following Postman environment variables.
-
-- ```fhirurl``` – The FHIR service full URL. For example, https://xxx.azurehealthcareapis.com. It's located from the FHIR service overview menu option.
-- ```bearerToken``` – The variable to store the Azure Active Directory (Azure AD) access token in the script. Leave it blank.
-- FHIR server URL (for example, https://MYACCOUNT.azurehealthcareapis.com)
-- Identity provider Authority for your FHIR server (for example, https://login.microsoftonline.com/{TENANT-ID})
-- Audience, which is usually the URL of the FHIR server (for example, https://<FHIR-SERVER-NAME>.azurehealthcareapis.com or https://azurehealthcareapis.com).
-- ```client_id``` or application ID of the confidential client application used for accessing the FHIR server.
-- ```client_secret``` or application secret of the confidential client application.
-
-Postman Env variable | Azure Setting          | Variable Type 
----------------------|------------------------|--------------
-tenantId             | Azure AD Tenant ID     | GUID 
-clientId             | Azure AD Client ID     | GUID
-clientSecret         | Azure AD Client Secret | Secret 
-bearerToken          | Auto-Populated         | Token
-fhirurl              | FHIR Endpoint          | URL
-resource             | FHIR Endpoint          | URL
-
-
-## API for FHIR access via Microsoft FHIR-Proxy 
-Creating Postman collections for [Microsoft's FHIR-Proxy](https://github.com/microsoft/fhir-proxy) and its various components can be daunting when starting from scratch. The ```./fhir-proxy``` directory in this repo contains a sample Postman Environment to help users get started. 
-
-__NOTE__ All FHIR-Proxy Postman configurations can be found in the Key Vault installed during setup. 
-
-Postman Env variable | Azure Setting          | Variable Type 
----------------------|------------------------|--------------
-tenantId             | Azure AD Tenant ID     | GUID 
-clientId             | Azure AD Client ID     | GUID
-clientSecret         | Azure AD Client Secret | Secret 
-bearerToken          | Auto-Populated         | Token
-fhirurl              | FHIR Endpoint          | URL
-resource             | FHIR Endpoint          | URL
-
-
 ## Testing Setup 
 Testing FHIR-Proxy/Azure API for FHIR with Postman begins simply by adding values to the Environment variables.
 
-1) Download the samples environments in either [API-FHIR](https://github.com/daemel/fhir-postman/tree/main/api-for-fhir) or [FHIR-Proxy](https://github.com/daemel/fhir-postman/tree/main/fhir-proxy).   
+1) If you haven't already, download the sample environments for either [Azure API for FHIR](./api-for-fhir/api-for-fhir.postman_environment.json) or [FHIR-Proxy](./fhir-proxy/fhir-proxy.postman_environment.json).   
 
-2) Open Postman (web or client), import the Environment (ie api-for-fhir-postman_environment.json) and the Collections (FHIR-CALLS.postman_collection.json).
+2) Open Postman (web or client), import the environments (ie api-for-fhir-postman_environment.json) and the Collections (`FHIR-CALLS.postman_collection.json` and `FHIR_Search.postman_collection.json`).
 
-3) Go to Environments in Postman, select the Environment (api-fhir or fhir-proxy) and enter in the variable information (skip the bearer token) from your Client Application and the FHIR Service.
+3) Go to Environments in Postman, select the Environment (api-fhir or fhir-proxy) and enter in the variable information (skip the bearer token) from Azure Portal.
 
 The completed Environment should look something like this
 
