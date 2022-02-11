@@ -1,4 +1,4 @@
-# Sample Postman Environments and Collections 
+# Postman Setup + sample Postman environments and collections 
 
 
 ## Overview 
@@ -43,7 +43,7 @@ Be sure to register https://www.getpostman.com/oauth2/callback as the reply URL 
 
 __Note:__ In order to access Azure API for FHIR directly (i.e., bypassing FHIR-Proxy), make sure you have assigned the "FHIR Data Contributor" roll in the Postman application registration *App roles** blade. For more information, see [Configure Azure RBAC for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/configure-azure-rbac).
 
-### Instructions for setting up a Postman environment.
+### Instructions for preparing Postman Environment and Collections files
 
 1. Copy the JSON formatted Postman environment template for Azure API for FHIR from below and paste into a text editor of your choice.
 
