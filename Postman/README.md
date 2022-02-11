@@ -175,8 +175,8 @@ fhirurl              | FHIR Endpoint          | URL
 resource             | FHIR Endpoint          | URL
 
 
-## Postman environemtn setup for Azure API for FHIR access via Microsoft FHIR-Proxy 
-If you haven't already imported the environment, the ```./fhir-proxy``` directory in this repo contains a sample Postman Environment to help users get started. 
+## Postman environment setup for Azure API for FHIR access via Microsoft FHIR-Proxy 
+If you haven't already imported the Postman environment file for FHIR-Proxy, the ```./fhir-proxy``` directory in this repo contains a sample Postman Environment to help users get started. 
 
 __NOTE__ All FHIR-Proxy Postman configurations can be found in the Key Vault installed during setup. 
 
