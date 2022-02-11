@@ -37,10 +37,70 @@ You will need to create a registered [client application](https://docs.microsoft
 20. Click **Add**.
 21. Copy the secret **Value** and securely store it somewhere.
 
-- For more information on registering client applications in AAD, please review the [Service Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-service-azure-ad-client-app) or [Confidential Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) documentation for Azure API for FHIR.
-- Be sure to register https://www.getpostman.com/oauth2/callback as the reply URL in your client application registration! (see above).
+For more information on registering client applications in AAD, please review the [Service Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-service-azure-ad-client-app) and [Confidential Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) documentation for Azure API for FHIR. 
+
+Be sure to register https://www.getpostman.com/oauth2/callback as the reply URL in your client application registration! (see above).
 
 __Note:__ In order to access Azure API for FHIR directly (i.e., bypassing FHIR-Proxy), make sure you have assigned the "FHIR Data Contributor" roll in the Postman application registration *App roles** blade. For more information, see [Configure Azure RBAC for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/configure-azure-rbac).
+
+### Instructions for setting up a Postman environment.
+
+1. Copy the JSON formatted text from below and paste into a text editor of your choice.
+
+```
+{
+	"id": "225b239b-1eb3-46fe-bf41-77e4c7ea339d",
+	"name": "api-fhir",
+	"values": [
+		{
+			"key": "tenantId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "clientId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "clientSecret",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "bearerToken",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "resource",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "fhirurl",
+			"value": "",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2021-08-12T02:06:11.383Z",
+	"_postman_exported_using": "Postman/8.10.0"
+}
+```
+
+2. Save the file in your local desktop environment (accessible from Postman) as "api-for-fhir.postman_environment.json". This file is also accessible in this repo [here](./api-for-fhir/api-for-fhir.postman_environment.json).
+
+3. Create a new Postman Workspace (or select an existing one if already created).
+
+4. Click the ```Import``` button next to your workspace name. 
+
+5. Import the ```Azure API for FHIR Template.postman_environment.json``` file that you saved to your desktop environment.
+    + Add the file to Postman using the ```Upload Files``` button or paste in the contents of the file using the ```Raw text``` tab.
+
+6. Access the ```FHIR-CALLS.postman-collection.json``` file available in this repo [here](./api-for-fhir/FHIR-CALLS.postman_collection.json) and save the file to your desktop environment. Import the file into Postman.
+    + Add the file to Postman using the ```Upload Files``` button or paste in the contents of the file using the ```Raw text``` tab.
+
 
 ## Auth - AAD and Tokens 
 Azure API for FHIR is secured by Azure AD, and this cannot be disabled as this is the default platform for authentication. To access Azure API for FHIR, you must get an Azure AD access token first. For more information, see [Microsoft identity platform access tokens](https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens).
