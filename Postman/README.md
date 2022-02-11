@@ -41,7 +41,7 @@ For more information on registering client applications in AAD, please review th
 
 Be sure to register https://www.getpostman.com/oauth2/callback as the reply URL in your client application registration! (see above).
 
-__Note:__ In order to access Azure API for FHIR directly (i.e., bypassing FHIR-Proxy), make sure you have assigned the "FHIR Data Contributor" roll in the Postman application registration *App roles** blade. For more information, see [Configure Azure RBAC for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/configure-azure-rbac).
+__Note:__ In order to access Azure API for FHIR directly (i.e., bypassing FHIR-Proxy), make sure you have assigned the "FHIR Data Contributor" roll in the Postman application registration *App roles** blade. Also, make sure that you have assigned the "FHIR Data Contributor" role to your own user account. For more information, see [Configure Azure RBAC for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/configure-azure-rbac).
 
 ### Instructions for preparing Postman Environment and Collections files
 
@@ -152,7 +152,7 @@ __Note:__ In order to access Azure API for FHIR directly (i.e., bypassing FHIR-P
 9. 6. Access the ```FHIR_Search.postman_collection.json``` file available in this repo [here](./api-for-fhir/FHIR_Search.postman_collection.json) and save the file to your desktop environment. Then import the file into Postman.
     + Add the file to Postman using the ```Upload Files``` button or paste in the contents of the file using the ```Raw text``` tab.
 
-Now you will need to configure your two Postman environments by retrieving values for `tenantId`, `clientId`, `clientSecret`, `fhirurl`, and `resource` from Azure Portal for Azure API for FHIR and FHIR-Proxy, respectively. Then you will populate the two postman environment templates in Postman.
+Now you will need to configure your two Postman environments by retrieving values for `tenantId`, `clientId`, `clientSecret`, `fhirurl`, and `resource` from Azure Portal for Azure API for FHIR and FHIR-Proxy, respectively. Then you will populate the two environment templates (api-for-fhir and fhir-proxy) in Postman.
  
 ## Postman environment setup for Azure API for FHIR access
 To access Azure API for FHIR, we'll need to create or update the following Postman environment variables.
