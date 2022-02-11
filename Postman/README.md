@@ -220,9 +220,9 @@ Testing FHIR-Proxy/Azure API for FHIR with Postman begins simply by adding value
 
 2) Open Postman (web or client), import the environments (ie api-for-fhir-postman_environment.json) and the Collections (`FHIR-CALLS.postman_collection.json` and `FHIR_Search.postman_collection.json`).
 
-3) Go to Environments in Postman, select the Environment (api-fhir or fhir-proxy) and enter in the variable information (skip the bearer token) from Azure Portal.
+3) Go to Environments in Postman, select the Environment (api-fhir or fhir-proxy) and enter in the variable information from Azure Portal (skip the `bearerToken` for now).
 
-The completed Environment should look something like this
+The completed Environment should look something like this:
 
 Environment variables ![Environment_variables](./docs/images/environment_variables_example.png)
 
