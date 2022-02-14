@@ -10,9 +10,17 @@
 + Postman installed - desktop or web client. For information about how to install Postman, please visit [here](https://www.getpostman.com/).
 
 ### Getting started
-In this 
+To set up Postman for testing Azure API for FHIR, we will walk through the following steps:
 
-### Instructions for creating an App Registration for Postman in AAD 
+1. Create an App Registration for Postman in AAD 
+2. Import environment and collection files into Postman
+3. Configure two Postman environments:
+	a. One Postman environment for making API calls directly to Azure API for FHIR
+	b. Another Postman environment for making API calls to Azure API for FHIR through FHIR-Proxy
+4. Get an authorization token from AAD
+5. Practice making API calls to Azure API for FHIR
+
+### Step 1 - Create an App Registration for Postman in AAD 
 
 You will need to create a registered [client application](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) for Postman to access Azure API for FHIR (this application registration will represent Postman in Azure Active Directory).
 
@@ -44,7 +52,7 @@ Be sure to register https://www.getpostman.com/oauth2/callback as the reply URL 
 
 __Note:__ In order to access Azure API for FHIR directly (i.e., bypassing FHIR-Proxy), make sure you have assigned the "FHIR Data Contributor" role in the Postman application registration **App roles** blade. Also, make sure that you have assigned the "FHIR Data Contributor" role to your own user account. For more information, see [Configure Azure RBAC for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/configure-azure-rbac).
 
-### Instructions for preparing Postman Environment and Collections files
+### Step 2 - Import environment and collection files into Postman
 
 1. Copy the JSON formatted Postman environment template for Azure API for FHIR from below and paste into a text editor of your choice.
 
@@ -155,8 +163,8 @@ __Note:__ In order to access Azure API for FHIR directly (i.e., bypassing FHIR-P
 
 Now you will need to configure your two Postman environments (`api-for-fhir` and `fhir-proxy`) by retrieving values for `tenantId`, `clientId`, `clientSecret`, `fhirurl`, and `resource` from Azure Portal for Azure API for FHIR and FHIR-Proxy, respectively. Then you will populate the two environments (`api-for-fhir` and `fhir-proxy`) in Postman.
  
-## Postman environment setup for Azure API for FHIR access
-Before you can access Azure API for FHIR, you'll need to create or update the following Postman environment variables.
+### Step 3 - Configure Postman environments
+Before you can access Azure API for FHIR (hereto "FHIR service"), you'll need to create or update the following Postman environment variables.
 
 - ```fhirurl``` – The FHIR service full URL. For example, https://xxx.azurehealthcareapis.com. It's located in the FHIR service overview menu option.
 - ```bearerToken``` – The variable to store the Azure Active Directory (Azure AD) access token in the script. Leave it blank.
@@ -175,11 +183,10 @@ bearerToken          | Auto-Populated         | Token
 fhirurl              | FHIR Endpoint          | URL
 resource             | FHIR Endpoint          | URL
 
-
-## Postman environment setup for Azure API for FHIR access via Microsoft FHIR-Proxy 
+#### Postman environment setup for Azure API for FHIR access via Microsoft FHIR-Proxy 
 If you haven't already imported the Postman environment file for FHIR-Proxy, the ```./fhir-proxy``` directory in this repo contains a sample Postman Environment to help users get started. 
 
-__NOTE__ All FHIR-Proxy Postman configurations can be found in the Key Vault installed during setup. 
+__NOTE__ All FHIR-Proxy Postman configuration parameter values can be found in the Key Vault installed during setup. 
 
 Postman Env variable | Azure Setting          | Variable Type 
 ---------------------|------------------------|--------------
@@ -190,7 +197,7 @@ bearerToken          | Auto-Populated         | Token
 fhirurl              | FHIR Endpoint          | URL
 resource             | FHIR Endpoint          | URL
 
-## Auth - AAD and Tokens 
+### Step 4 - Get an authorization token from AAD
 Azure API for FHIR is secured by Azure AD, and this cannot be disabled as this is the default platform for authentication. To access Azure API for FHIR, you must get an Azure AD access token first. For more information, see [Microsoft identity platform access tokens](https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens).
 
 To obtain an access token via Postman, you will need to send a ```POST AuthorizeGetToken``` request. For the ```POST AuthorizeGetToken``` request to succeed, the call must be set up as follows with the ```{{}}``` parameter values stored in the Postman environment:
@@ -212,7 +219,7 @@ On clicking ```Send``` you should see a response with the Azure AD access token,
 
 __Note:__ Access tokens expire after 60 minutes. To obtain a token refresh, simply make another ```POST AuthorizeGetToken``` call and the token will be valid for another 60 minutes.
 
-## Testing Setup 
+### Testing Setup 
 Testing FHIR-Proxy/Azure API for FHIR with Postman begins simply by adding values for the Postman environment variables in your two Postman environments (`api-for-fhir` and `fhir-proxy`).
 
 1) If you haven't already, download the sample environment templates for both [Azure API for FHIR](./api-for-fhir/api-for-fhir.postman_environment.json) and [FHIR-Proxy](./fhir-proxy/fhir-proxy.postman_environment.json).   
@@ -243,11 +250,11 @@ FHIR Calls ![FHIR_Calls](./docs/images/fhir-calls_token.png)
 
 The rest of the calls use the token from the step above to Authenticate requests to the FHIR Service.  
 
-## Resources 
+### Resources 
 
 A tutorial for using Postman with Azure API for FHIR is available on [docs.microsoft.com](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/access-fhir-postman-tutorial).
  
-## FAQ's / Issues 
+### FAQ's / Issues 
 
 403 - Unauthorized:  Check the Azure RBAC for FHIR service [link](https://docs.microsoft.com/en-us/azure/healthcare-apis/fhir/configure-azure-rbac-for-fhir)
 
