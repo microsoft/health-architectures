@@ -6,7 +6,7 @@
 
 ### Prerequisites
 + An Azure API for FHIR endpoint. To deploy Azure API for FHIR (a managed service), you can use the [Azure portal](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/fhir-paas-portal-quickstart), [PowerShell](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/fhir-paas-powershell-quickstart), or [Azure CLI](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/fhir-paas-cli-quickstart).
-+ Postman installed. For information about installing Postman, please visit [here](https://www.getpostman.com/).
++ Postman installed - desktop or web client. For information about how to install Postman, please visit [here](https://www.getpostman.com/).
 
 ### Instructions for creating an App Registration for Postman in AAD 
 
