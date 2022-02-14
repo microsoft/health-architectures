@@ -10,7 +10,7 @@
 + **Postman** installed - desktop or web client. Please visit [here](https://www.getpostman.com/) for information about how to install Postman. 
 
 ### Getting started
-To set up Postman for testing Azure API for FHIR, we will walk through the following steps.
+To set up Postman for testing Azure API for FHIR, you will go through the following steps:
 
 **Step 1:** Create an App Registration for Postman in AAD  
 **Step 2:** Import environment and collection files into Postman  
