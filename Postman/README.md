@@ -54,8 +54,6 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 
 For more information on registering client applications in AAD, please review the [Service Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-service-azure-ad-client-app) and [Confidential Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) documentation for Azure API for FHIR. 
 
-__Note:__ In order to access Azure API for FHIR directly (i.e., bypassing FHIR-Proxy), make sure you have assigned the "FHIR Data Contributor" role in the Postman application registration **App roles** blade. Also, make sure that you have assigned the "FHIR Data Contributor" role to your own user account. For more information, see [Configure Azure RBAC for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/configure-azure-rbac).
-
 ## Step 2 - Assign user/app roles for Azure API for FHIR and FHIR-Proxy  
 
 1. Go to your Azure API for FHIR instance in your resource group -> **Access Control (IAM)** blade.
@@ -77,6 +75,8 @@ __Note:__ In order to access Azure API for FHIR directly (i.e., bypassing FHIR-P
 17. Type in your name or username, highlight it, and click **Select**.
 18. Under **Review + assign**, click **Review + assign**.
 19. Give the Postman application registration the **FHIR Data Contributor** role for FHIR-Proxy (repeat #13-18 for Postman).
+
+For more information on assigning user/app roles, see [Configure Azure RBAC for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/configure-azure-rbac).
 
 ## Step 3 - Import environment and collection files into Postman
 
