@@ -4,12 +4,12 @@
 ## Overview 
 [Azure API for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/overview) makes a REST API available for client applications to access and interact with FHIR data. When testing data connectivity between Azure API for FHIR and a client app, it is convenient to use an API testing utility to send requests, view responses, and debug issues. One of the most popular API testing tools is [Postman](https://www.postman.com/), and in this repo we provide a basic set of data files and instructions to help you get started using Postman to test Azure API for FHIR.
 
-### Prerequisites
+## Prerequisites
 + An **Azure API for FHIR endpoint**. To deploy Azure API for FHIR (a managed service), you can use the [Azure portal](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/fhir-paas-portal-quickstart), [PowerShell](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/fhir-paas-powershell-quickstart), or [Azure CLI](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/fhir-paas-cli-quickstart).
 + **FHIR-Proxy** deployed along with Azure API for FHIR. To learn more about FHIR-Proxy, please visit [here](https://github.com/microsoft/fhir-proxy).
 + **Postman** installed - desktop or web client. Please visit [here](https://www.getpostman.com/) for information about how to install Postman. 
 
-### Getting started
+## Getting started
 To set up Postman for testing Azure API for FHIR, you will go through the following steps:
 
 **Step 1:** Create an App Registration for Postman in AAD  
