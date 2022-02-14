@@ -41,7 +41,7 @@ For more information on registering client applications in AAD, please review th
 
 Be sure to register https://www.getpostman.com/oauth2/callback as the reply URL in your client application registration! (see above).
 
-__Note:__ In order to access Azure API for FHIR directly (i.e., bypassing FHIR-Proxy), make sure you have assigned the "FHIR Data Contributor" roll in the Postman application registration *App roles** blade. Also, make sure that you have assigned the "FHIR Data Contributor" role to your own user account. For more information, see [Configure Azure RBAC for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/configure-azure-rbac).
+__Note:__ In order to access Azure API for FHIR directly (i.e., bypassing FHIR-Proxy), make sure you have assigned the "FHIR Data Contributor" role in the Postman application registration *App roles** blade. Also, make sure that you have assigned the "FHIR Data Contributor" role to your own user account. For more information, see [Configure Azure RBAC for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/configure-azure-rbac).
 
 ### Instructions for preparing Postman Environment and Collections files
 
