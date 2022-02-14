@@ -16,7 +16,7 @@ To set up Postman for testing Azure API for FHIR, we'll walk through the followi
 **Step 2:** Import environment and collection files into Postman  
 **Step 3:** Configure two Postman environments: 
 1. One Postman environment for making API calls directly to Azure API for FHIR  
-2. Another Postman environment for making API calls to Azure API for FHIR through FHIR-Proxy  
+2. Another Postman environment for making API calls through FHIR-Proxy to Azure API for FHIR  
 
 **Step 4:** Get an authorization token from AAD  
 **Step 5:** Testing setup and practice making API calls to Azure API for FHIR  
