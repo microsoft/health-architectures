@@ -237,15 +237,15 @@ Environment variables ![Environment_variables](./docs/images/environment_variabl
 
 Remember to set your "active" environment before going to the next step ![Environment_variables](./docs/images/environment_selection.png).
 
-4) Go to Collections, select the `FHIR Calls` collection to open it then select List Metadata. It should look like this example: 
+5) Go to Collections, select the `FHIR Calls` collection to open it then select List Metadata. It should look like this example: 
 
 FHIR Calls ![FHIR_Calls](./docs/images/fhir-calls01.png)
 
-5) Click `Send` (see above) to test the FHIR URL setup and the basic functions of your Azure API for FHIR. This command does not use Auth (by design) and it returns your FHIR Service Capability Statement. 
+6) Click `Send` (see above) to test the FHIR URL setup and the basic functions of your Azure API for FHIR. This command does not use Auth (by design) and it returns your FHIR Service Capability Statement. 
 
 FHIR Calls ![FHIR_Calls](./docs/images/fhir-calls_metadata.png)
 
-6) Next select `POST AuthorizeGetToken`. Note there are values in the call tabs: Authorization, Headers, Body, and Tests. This will call the Azure AD Tenant with your ClientID, ClientSecret, and Resource in the Body to obtain a Token.  On receipt of the Token, it is parsed into the bearerToken value. The result should look like this: 
+7) Next select `POST AuthorizeGetToken`. Note there are values in the call tabs: Authorization, Headers, Body, and Tests. This will call the Azure AD Tenant with your ClientID, ClientSecret, and Resource in the Body to obtain a Token.  On receipt of the Token, it is parsed into the bearerToken value. The result should look like this: 
 
 FHIR Calls ![FHIR_Calls](./docs/images/fhir-calls_token.png)
 
