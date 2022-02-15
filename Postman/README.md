@@ -1,6 +1,5 @@
 # Postman Setup + sample Postman environments and collections 
 
-
 ## Overview 
 When testing data connectivity between [Azure API for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/overview) and a client app, it is useful to have an API testing utility to send requests, view responses, and debug issues. One of the most popular API testing tools is [Postman](https://www.postman.com/), and in this guide we provide instructions and a basic set of data files to help you get started using Postman to test Azure API for FHIR.
 
@@ -26,55 +25,60 @@ To set up Postman for testing Azure API for FHIR, we'll walk through these steps
 
 Before you can use Postman to make API calls to Azure API for FHIR, you will need to create a registered [client application](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) to represent Postman in Azure Active Directory.
 
-1. In Azure Portal, go to **Azure Active Directory** -> **App registrations** and make a **New registration**. 
-2. Under **Redirect URI (optional)** select **Web** and then enter https://www.getpostman.com/oauth2/callback.
-3. Click **Register**.
-4. Then, click on your newly created App Registration and you will be taken to the app's **Overview** blade.
-5. Click on **API Permissions**.
-6. Click on **Add a permission**.
-7. Select the **My APIs** tab.
-8. Click on the FHIR-Proxy instance that you deployed.
-9. Click on **Delegated permissions**.
-10. Scroll down and select **user_impersonation**.
-11. Click **Add permissions**.
-12. When back in the **API permissions** blade, click on the FHIR-Proxy instance again. 
-13. Click on the **Application permissions** box on the right.
-14. Select **Resource Reader** and click **Update permissions**.
-15. When back in the **API permissions** blade for your Postman app registration, click **Add a permission** (again).
-16. Select **APIs my organization uses** tab.
-17. Type in "Azure Healthcare APIs" and select the item in the list.
-18. Scroll down and select **user_impersonation**.
-19. Click **Add permissions**.
-20. Make sure to set **Grant admin consent** (blue checkmark) for all API permissions.
-20. When back in the **API permissions** blade, click **Certificates and secrets**.
-21. Click **New client secret**.
-22. Enter a name for the secret in the **Description** field.
-21. Click **Add**.
-22. Copy the secret **Value** and securely store it somewhere (you will need this later when you configure your Postman environment).
+1. In Azure Portal, go to **Azure Active Directory** -> **App registrations** and make a **New registration**.
+2. Type in a name for your application registration. 
+3. Scroll down, and under **Redirect URI (optional)** select **Web** and then enter https://www.getpostman.com/oauth2/callback.
+4. Click **Register**.
+5. Then, click on your newly created App Registration and you will be taken to the app's **Overview** blade.
+6. Click on **API Permissions**.
+7. Click on **Add a permission**.
+8. Select the **My APIs** tab.
+9. Click on the FHIR-Proxy instance that you deployed.
+10. Click on **Delegated permissions**.
+11. Scroll down and select **user_impersonation**.
+12. Click **Add permissions**.
+13. When back in the **API permissions** blade, click on the FHIR-Proxy instance again. 
+14. Click on the **Application permissions** box on the right.
+15. Select **Resource Reader** and click **Add permissions**.
+16. Make sure to set **Grant admin consent** (blue checkmark) for all API permissions.
+17. When back in the **API permissions** blade for your Postman app registration, click **Add a permission** (again).
+18. Select **APIs my organization uses** tab.
+19. Type in "Azure Healthcare APIs" and select the item in the list.
+20. Scroll down and select **user_impersonation**.
+21. Click **Add permissions**.
+22. Make sure to set **Grant admin consent** (blue checkmark) for all API permissions.
+23. When back in the **API permissions** blade, click **Certificates and secrets**.
+24. Click **New client secret**.
+25. Enter a name for the secret in the **Description** field.
+26. Click **Add**.
+27. Copy the secret **Value** and securely store it somewhere (you will need this later when you configure your Postman environment).
 
 For more information on registering client applications in AAD, please review the [Service Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-service-azure-ad-client-app) and [Confidential Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) documentation for Azure API for FHIR. 
 
 ## Step 2 - Assign user/app roles to Postman for Azure API for FHIR and FHIR-Proxy  
 
 1. Go to your Azure API for FHIR instance in your resource group -> **Access Control (IAM)** blade.
-2. Select **FHIR Data Contributor**.
-3. In the **Members** tab, select **User, group, or service principal**.
-4. Type in the name of your Postman app registration, highlight it, and click **Select**.
-5. Under the **Review + assign** tab, click **Review + assign**.
-6. When back in the **Access Control (IAM)** blade, select **FHIR Data Contributor** (again).
-7. Select **FHIR Data Contributor**.
-8. In the **Members** tab, select **User, group, or service principal**.
-9. Type in your name or username, highlight it, and click **Select**.
-10. Under the **Review + assign** tab, click **Review + assign**.
-11. Now go to **Azure Active Directory** -> **Enterprise applications**.
-12. Search for your FHIR-Proxy function app and select it from the list.
-13. Go to FHIR-Proxy **Enterprise Application** -> **Users and groups** blade.
-14. Under the **Role** tab, select **FHIR Data Contributor**.
-15. In the **Members** tab, select **User, group, or service principal**.
-16. Select **Add user/group** and then click on **+ Select members**.
-17. Type in your name or username, highlight it, and click **Select**.
-18. Under **Review + assign**, click **Review + assign**.
-19. Give the Postman application registration the **FHIR Data Contributor** role for FHIR-Proxy (repeat #13-18 for Postman).
+2. Click on the **Roles** tab.
+3. Click on **+ Add** -> **Add role assignment**.
+4. Under the **Role** tab, select **FHIR Data Contributor** and then click **Next**.
+5. Under the **Members** tab, select **User, group, or service principal**.
+6. Click on **+ Select members**.
+7. Type in the name of your Postman app registration in the **Select** field, highlight it, and click **Select**.
+8. Under the **Review + assign** tab, click **Review + assign**.
+9. When back in the **Access Control (IAM)** blade, under the **Roles** tab select **FHIR Data Contributor** (again) and then click **+ Add** -> **Add role assignment** (again).
+10. Select **FHIR Data Contributor** under the **Role** tab and click **Next**.
+11. Under the **Members** tab, select **User, group, or service principal**.
+12. Click on **+ Select members**, type in your name or username, highlight it, and click **Select**.
+13. Under the **Review + assign** tab, click **Review + assign**.
+14. Now go to **Azure Active Directory** -> **Enterprise applications**.
+15. Search for your FHIR-Proxy function app and select it from the list. It might be easiest to search by **Created on** date.
+16. You will be taken to the **Overview** blade for your FHIR-Proxy Enterprise Application.
+17. Go to the **Users and groups** blade.
+18. Under **Add Assignment**, click on **None Selected** under **Users**.
+19. Under **Users**, type in your name or username in the search field, click on it, and then click **Select**.
+20. Click on **None Selected** under **Select a role**.
+21. Under **Select a role**, click on **Resource Writer** and then click **Select**.
+22. Under **Add Assignment**, click on **Assign**.
 
 For more information on assigning user/app roles, see [Configure Azure RBAC for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/configure-azure-rbac).
 
