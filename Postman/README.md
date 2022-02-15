@@ -26,7 +26,7 @@ To set up Postman for testing Azure API for FHIR, we'll walk through these steps
 Before you can use Postman to make API calls to Azure API for FHIR, you will need to create a registered [client application](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) to represent Postman in Azure Active Directory.
 
 1. In Azure Portal, go to **Azure Active Directory** -> **App registrations** and make a **New registration**.
-2. Type in a name for your application registration. 
+2. Type in a name for your application registration in the **Name** field. 
 3. Scroll down, and under **Redirect URI (optional)** select **Web** and then enter https://www.getpostman.com/oauth2/callback.
 4. Click **Register**.
 5. Then, click on your newly created App Registration and you will be taken to the app's **Overview** blade.
