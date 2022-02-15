@@ -37,21 +37,23 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 10. Click on **Delegated permissions**.
 11. Scroll down and select **user_impersonation**.
 12. Click **Add permissions**.
-13. When back in the **API permissions** blade, click on the FHIR-Proxy instance again. 
-14. Click on the **Application permissions** box on the right.
-15. Select **Resource Reader** and click **Add permissions**.
-16. Make sure to set **Grant admin consent** (blue checkmark) for all API permissions.
-17. When back in the **API permissions** blade for your Postman app registration, click **Add a permission** (again).
-18. Select **APIs my organization uses** tab.
-19. Type in "Azure Healthcare APIs" and select the item in the list.
-20. Scroll down and select **user_impersonation**.
-21. Click **Add permissions**.
-22. Make sure to set **Grant admin consent** (blue checkmark) for all API permissions.
-23. When back in the **API permissions** blade, click **Certificates and secrets**.
-24. Click **New client secret**.
-25. Enter a name for the secret in the **Description** field.
-26. Click **Add**.
-27. Copy the secret **Value** and securely store it somewhere (you will need this later when you configure your Postman environment).
+13. Make sure to click **Grant admin consent** (blue checkmark).
+14. When back in the **API permissions** blade, click on **Add a permission** (again). 
+15. Repeat #8 and 9.
+16. Click on the **Application permissions** box on the right.
+17. Select **Resource Reader** and click **Add permissions**.
+18. Make sure to click **Grant admin consent** (blue checkmark).
+19. When back in the **API permissions** blade for your Postman app registration, click **Add a permission** (again).
+20. Select **APIs my organization uses** tab.
+21. Type in "Azure Healthcare APIs" and select the item in the list.
+22. Scroll down and select **user_impersonation**.
+23. Click **Add permissions**.
+24. Make sure to click **Grant admin consent** (blue checkmark).
+25. When back in the **API permissions** blade, click **Certificates and secrets**.
+26. Click **New client secret**.
+27. Enter a name for the secret in the **Description** field.
+28. Click **Add**.
+29. Copy the secret **Value** and securely store it somewhere (you will need this later when you configure your Postman environment).
 
 For more information on registering client applications in AAD, please review the [Service Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-service-azure-ad-client-app) and [Confidential Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) documentation for Azure API for FHIR. 
 
