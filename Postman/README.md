@@ -32,7 +32,6 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 <img src="./docs/images/Screenshot_2022-02-15_141049_edit2.png" height="328">
 
 3. Scroll down, and under **Redirect URI (optional)** select **Web** and then enter https://www.getpostman.com/oauth2/callback. Click **Register**. 
-
 <img src="./docs/images/Screenshot_2022-02-15_141049_edit2_next.png" height="328"> 
 
 4. Then, click on your newly created App Registration and you will be taken to the **Overview** blade.  
