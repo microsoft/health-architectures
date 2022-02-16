@@ -37,7 +37,7 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 4. Then, click on your newly created App Registration and you will be taken to the **Overview** blade.  
 <img src="./docs/images/Screenshot_2022-02-15_141337_edit2.png" height="328">  
 
-5. Click on **API Permissions** and then click on **Add a permission**.  
+5. Click on **API Permissions** and then click on **+ Add a permission**.  
 <img src="./docs/images/Screenshot_2022-02-15_141418_edit2.png" height="328">
 
 6. Select the **My APIs** tab and then click on the FHIR-Proxy instance that you deployed. 
@@ -53,7 +53,7 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 <img src="./docs/images/Screenshot_2022-02-15_141810_edit2.png" height="328">  
 <img src="./docs/images/Screenshot_2022-02-15_141828_edit2.png" height="328">  
 
-10. When back in the **API permissions** blade for your Postman app registration, click on **Add a permission** (again). 
+10. When back in the **API permissions** blade for your Postman app registration, click on **+ Add a permission** (again). 
 11. Repeat #6. 
 
 12. Under **Request API permissions**, click on the **Application permissions** box on the right. 
@@ -65,7 +65,7 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 14. Make sure to click **Grant admin consent** again (blue checkmark).
 <img src="./docs/images/Screenshot_2022-02-15_141828_edit2_next3b.png" height="328">
 
-15. When back in the **API permissions** blade for your Postman app registration, click **Add a permission** (again). 
+15. When back in the **API permissions** blade for your Postman app registration, click **+ Add a permission** (again). 
 
 16. Under **Request API permissions**, select the **APIs my organization uses** tab. Type in "Azure Healthcare APIs" and select the item in the list. 
 <img src="./docs/images/Screenshot_2022-02-15_141828_edit2_next4.png" height="328">
