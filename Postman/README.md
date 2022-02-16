@@ -144,7 +144,7 @@ For more information on assigning user/app roles, see [Configure Azure RBAC for 
 
 2. Access the Postman environment template for FHIR-Proxy [here](./fhir-proxy/fhir-proxy.postman_environment.json). Save the file in your local environment.
 
-3. Create a new Postman Workspace (or select an existing one if already created).
+3. In Postman, create a new Workspace (or select an existing one if already created).
 
 4. Click the ```Import``` button next to your workspace name. 
 <img src="./docs/images/Screenshot_2022-02-16_095332_edit2.png" height="228">
