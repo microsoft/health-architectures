@@ -200,7 +200,7 @@ Now you will need to get an access token from AAD in order to connect with Azure
 
 <img src="./docs/images/Screenshot_2022-02-16_171631_edit2.png" height="328">
 
-On clicking ```Send```, you should recieve a response like shown below in the **Body** tab. The access token itself is automatically saved to the ```bearerToken``` variable in the Postman environment. 
+On clicking ```Send```, you should receive a response like shown below in the **Body** tab. The access token itself is automatically saved to the ```bearerToken``` variable in the Postman environment. 
 
 ```
 {
