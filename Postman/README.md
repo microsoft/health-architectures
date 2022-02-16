@@ -76,7 +76,7 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 
 18. Make sure to click the **Grant admin consent** again (blue checkmark). 
 
-19. When back in the **API permissions** blade, click **Certificates and secrets**. Click **New client secret**. 
+19. Now click on **Certificates and secrets**. Click **New client secret**. 
 <img src="./docs/images/Screenshot_2022-02-15_141926_edit2.png" height="328">
 
 20. Under **Add a client secret** enter a name for the secret in the **Description** field. Click **Add**. 
