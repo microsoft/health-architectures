@@ -112,7 +112,7 @@ For more information on registering client applications in AAD, please review th
 8. In **Add role assignment** under the **Role** tab, select **FHIR Data Contributor** and click **Next**. 
 <img src="./docs/images/Screenshot_2022-02-15_143643_edit2_next2.png" height="328">
 
-9. Under the **Members** tab, select **User, group, or service principal**. Click on **+ Select members** type in your name or username in the **Select** field on the right. Highlight your name, click **Select**, and then click **Next**. 
+9. Under the **Members** tab, click on **+ Select members**. Type in your name or username in the **Select** field on the right. Highlight your name, click **Select**, and then click **Next**. 
 <img src="./docs/images/Screenshot_2022-02-15_144144_edit2.png" height="328">
 
 10. Under the **Review + assign** tab, click **Review + assign**. 
