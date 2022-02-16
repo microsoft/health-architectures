@@ -216,12 +216,6 @@ FHIR Calls ![FHIR_Calls](./docs/images/fhir-calls01.png)
 
 FHIR Calls ![FHIR_Calls](./docs/images/fhir-calls_metadata.png)
 
-3) Next select `POST AuthorizeGetToken`. Note there are values in the call tabs: Authorization, Headers, Body, and Tests. This will call the Azure AD Tenant with your ClientID, ClientSecret, and Resource in the Body to obtain a Token. On receipt of the Token, it is parsed into the bearerToken value. The result should look like this: 
-
-FHIR Calls ![FHIR_Calls](./docs/images/fhir-calls_token.png)
-
-__Note:__ Access tokens expire after 60 minutes. To obtain a token refresh, simply make another ```POST AuthorizeGetToken``` call and the token will be valid for another 60 minutes.
-
 ### Resources 
 
 A tutorial for using Postman with Azure API for FHIR is available on [docs.microsoft.com](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/access-fhir-postman-tutorial).
