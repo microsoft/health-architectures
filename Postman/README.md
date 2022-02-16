@@ -57,7 +57,7 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 
 For more information on registering client applications in AAD, please review the [Service Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-service-azure-ad-client-app) and [Confidential Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) documentation for Azure API for FHIR. 
 
-## Step 2 - Assign user/app roles in Azure API for FHIR and FHIR-Proxy for Postman
+## Step 2 - Assign user/app roles for Postman in Azure API for FHIR and FHIR-Proxy
 
 1. In Azure Portal, go to **Home** -> **Resource groups** and find the resource group containing your Azure API for FHIR instance.
 2. Click on your Azure API for FHIR instance in the list.
