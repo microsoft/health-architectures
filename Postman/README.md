@@ -68,7 +68,7 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 
 15. When back in the **API permissions** blade for your Postman app registration, click **Add a permission** (again). 
 
-16. Under **Request API permissions** select **APIs my organization uses** tab. Type in "Azure Healthcare APIs" and select the item in the list. 
+16. Under **Request API permissions** select the **APIs my organization uses** tab. Type in "Azure Healthcare APIs" and select the item in the list. 
 <img src="./docs/images/Screenshot_2022-02-15_141828_edit2_next4.png" height="328">
 
 17. Scroll down and select **user_impersonation** and click **Add permissions**. 
