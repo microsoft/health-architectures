@@ -93,7 +93,7 @@ For more information on registering client applications in AAD, please review th
 <img src="./docs/images/Screenshot_2022-02-15_142434_edit2.png" height="328">
 
 3. Go to the **Access Control (IAM)** blade. Click on the **Roles** tab.
-<img src="./docs/images/Screenshot_2022-02-15_142519_edit2.png" height="328">
+<img src="./docs/images/Screenshot_2022-02-15_142519_edit2_next.png" height="328">
 
 4. Click on the **Roles** tab.
 5. Click on **+ Add** -> **Add role assignment**.
