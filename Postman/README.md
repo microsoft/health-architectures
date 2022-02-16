@@ -41,7 +41,7 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 14. When back in the **API permissions** blade, click on **Add a permission** (again). 
 15. Repeat #8 and 9.
 16. Click on the **Application permissions** box on the right.
-17. Select **Resource Reader** and click **Add permissions**.
+17. Select **Resource Reader** and **Resource Writer**. Click **Add permissions**.
 18. Make sure to click **Grant admin consent** (blue checkmark).
 19. When back in the **API permissions** blade for your Postman app registration, click **Add a permission** (again).
 20. Select **APIs my organization uses** tab.
