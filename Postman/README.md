@@ -106,10 +106,10 @@ For more information on registering client applications in AAD, please review th
 6. Under the **Review + assign** tab, click **Review + assign**. 
 <img src="./docs/images/Screenshot_2022-02-15_143643_edit2.png" height="328">
 
-7. When back in the **Access Control (IAM)** blade, under the **Roles** tab select **FHIR Data Contributor** (again) and then click **+ Add** -> **Add role assignment** (again). 
+7. When back in the **Access Control (IAM)** blade, click **+ Add** -> **Add role assignment** (again). 
 <img src="./docs/images/Screenshot_2022-02-15_143643_edit2_next.png" height="328">
 
-8. In **Add role assignment** under the **Role** tab, select **FHIR Data Contributor** and click **Next**. 
+8. In **Add role assignment** under the **Role** tab, select **FHIR Data Contributor** (again) and click **Next**. 
 <img src="./docs/images/Screenshot_2022-02-15_143643_edit2_next2.png" height="328">
 
 9. Under the **Members** tab, click on **+ Select members**. Type in your name or username in the **Select** field on the right. Highlight your name, click **Select**, and then click **Next**. 
@@ -121,7 +121,7 @@ For more information on registering client applications in AAD, please review th
 11. Now go to **Azure Active Directory** -> **Enterprise applications**. Search for your FHIR-Proxy function app name in the list and click on it. It might be easiest to search by the **Created on** date. 
 <img src="./docs/images/Screenshot_2022-02-15_144433_edit2.png" height="328">
 
-12. You will be taken to the **Overview** blade for your FHIR-Proxy Enterprise Application. Click on **Users and groups**. 
+12. You will be taken to the **Overview** blade in Enterprise Applications for FHIR-Proxy. Click on **Users and groups**. 
 <img src="./docs/images/Screenshot_2022-02-15_144621_edit2.png" height="328">
 
 13. Click on **+Add user/group**. 
