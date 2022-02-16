@@ -220,7 +220,7 @@ __Note:__ Access tokens expire after 60 minutes. To obtain a token refresh, simp
 
 ## Step 6 - Test setup and practice making API calls to Azure API for FHIR 
 
-1) Click on `Collections` on the left, select the `FHIR Calls` collection and then select `List Metadata`. It should look like this example: 
+1) In Postman, click on `Collections` on the left, select the `FHIR Calls` collection and then select `List Metadata`. It should look like this example: 
 
 FHIR Calls ![FHIR_Calls](./docs/images/fhir-calls01.png)
 
