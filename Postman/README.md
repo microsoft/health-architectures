@@ -212,35 +212,20 @@ On clicking ```Send``` you should see a response with the Azure AD access token,
 __Note:__ Access tokens expire after 60 minutes. To obtain a token refresh, simply make another ```POST AuthorizeGetToken``` call and the token will be valid for another 60 minutes.
 
 ## Step 6 - Test setup and practice making API calls to Azure API for FHIR 
-Testing FHIR-Proxy/Azure API for FHIR with Postman begins simply by adding values for the Postman environment variables in your two Postman environments (`api-for-fhir` and `fhir-proxy`).
 
-1) If you haven't already, download the sample environment templates for both [Azure API for FHIR](./api-for-fhir/api-for-fhir.postman_environment.json) and [FHIR-Proxy](./fhir-proxy/fhir-proxy.postman_environment.json).   
-
-2) Open Postman (web or client) and import the Postman environment templates and collections files (`FHIR-CALLS.postman_collection.json` and `FHIR_Search.postman_collection.json`).
-
-3) Go to Environments in Postman, select the `api-for-fhir` Environment, and enter in the variable information from Azure Portal (skip the `bearerToken` for now).
-
-4) Go to Environments in Postman, select the `fhir-proxy` Environment, and enter in the variable information from Azure Portal (skip the `bearerToken` for now).
-
-The completed `api-for-fhir` Postman environment should look something like this:
-
-Environment variables ![Environment_variables](./docs/images/environment_variables_example.png)
-
-Remember to set your "active" environment before going to the next step ![Environment_variables](./docs/images/environment_selection.png).
-
-5) Go to Collections, select the `FHIR Calls` collection to open it then select List Metadata. It should look like this example: 
+1) Go to Collections, select the `FHIR Calls` collection to open it then select List Metadata. It should look like this example: 
 
 FHIR Calls ![FHIR_Calls](./docs/images/fhir-calls01.png)
 
-6) Click `Send` (see above) to test the FHIR URL setup and the basic functions of your Azure API for FHIR. This command does not use Auth (by design) and it returns your FHIR Service Capability Statement. 
+2) Click `Send` (see above) to test the FHIR URL setup and the basic functions of your Azure API for FHIR. This command does not use Auth (by design) and it returns your FHIR Service Capability Statement. 
 
 FHIR Calls ![FHIR_Calls](./docs/images/fhir-calls_metadata.png)
 
-7) Next select `POST AuthorizeGetToken`. Note there are values in the call tabs: Authorization, Headers, Body, and Tests. This will call the Azure AD Tenant with your ClientID, ClientSecret, and Resource in the Body to obtain a Token.  On receipt of the Token, it is parsed into the bearerToken value. The result should look like this: 
+3) Next select `POST AuthorizeGetToken`. Note there are values in the call tabs: Authorization, Headers, Body, and Tests. This will call the Azure AD Tenant with your ClientID, ClientSecret, and Resource in the Body to obtain a Token.  On receipt of the Token, it is parsed into the bearerToken value. The result should look like this: 
 
 FHIR Calls ![FHIR_Calls](./docs/images/fhir-calls_token.png)
 
-The rest of the calls use the token from the step above to Authenticate requests to the FHIR Service.  
+__Note:__ Access tokens expire after 60 minutes. To obtain a token refresh, simply make another ```POST AuthorizeGetToken``` call and the token will be valid for another 60 minutes.
 
 ### Resources 
 
