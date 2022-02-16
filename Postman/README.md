@@ -64,25 +64,26 @@ For more information on registering client applications in AAD, please review th
 3. Go to the **Access Control (IAM)** blade.
 4. Click on the **Roles** tab.
 5. Click on **+ Add** -> **Add role assignment**.
-6. Under the **Role** tab, select **FHIR Data Contributor** and then click **Next**.
+6. In **Add role assignment** under the **Role** tab, scroll down in the list and select **FHIR Data Contributor**. Then click **Next**.
 7. Under the **Members** tab, select **User, group, or service principal**.
 8. Click on **+ Select members**.
-9. Type in the name of your Postman app registration in the **Select** field, highlight it, and click **Select**.
+9. Type in the name of your Postman app registration in the **Select** field, highlight it, and click **Select**. Then click **Next**.
 10. Under the **Review + assign** tab, click **Review + assign**.
 11. When back in the **Access Control (IAM)** blade, under the **Roles** tab select **FHIR Data Contributor** (again) and then click **+ Add** -> **Add role assignment** (again).
 12. Select **FHIR Data Contributor** under the **Role** tab and click **Next**.
 13. Under the **Members** tab, select **User, group, or service principal**.
-14. Click on **+ Select members**, type in your name or username, highlight it, and click **Select**.
+14. Click on **+ Select members**, type in your name or username, highlight it, and click **Select**. Then click **Next**.
 15. Under the **Review + assign** tab, click **Review + assign**.
 16. Now go to **Azure Active Directory** -> **Enterprise applications**.
-17. Search for your FHIR-Proxy function app and select it from the list. It might be easiest to search by **Created on** date.
+17. Search for your FHIR-Proxy function app name in the list and click on it. It might be easiest to search by the **Created on** date.
 18. You will be taken to the **Overview** blade for your FHIR-Proxy Enterprise Application.
-19. Go to the **Users and groups** blade.
-20. Under **Add Assignment**, click on **None Selected** under **Users**.
-21. Under **Users**, type in your name or username in the search field, click on it, and then click **Select**.
-22. Click on **None Selected** under **Select a role**.
-23. Under **Select a role**, click on **Resource Writer** and then click **Select**.
-24. Under **Add Assignment**, click on **Assign**.
+19. Click on **Users and groups**.
+20. Click on **+Add user/group**.
+21. In **Add Assignment** under **Users**, click on **None Selected**.
+22. Under **Users** on the right side, type in your name or username in the search field, click on it, and then click **Select**.
+23. In **Add Assignment**, click on **None Selected** under **Select a role**.
+24. Under **Select a role** on the right side, click on **Resource Writer** and then click **Select**.
+25. Under **Add Assignment**, click on **Assign**.
 
 For more information on assigning user/app roles, see [Configure Azure RBAC for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/configure-azure-rbac).
 
