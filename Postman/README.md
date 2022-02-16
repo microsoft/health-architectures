@@ -213,15 +213,15 @@ __Note:__ Access tokens expire after 60 minutes. To obtain a token refresh, simp
 
 ## Step 6 - Test setup and practice making API calls to Azure API for FHIR 
 
-1) Go to Collections, select the `FHIR Calls` collection to open it then select List Metadata. It should look like this example: 
+1) Go to Collections, select the `FHIR Calls` collection and then select `List Metadata`. It should look like this example: 
 
 FHIR Calls ![FHIR_Calls](./docs/images/fhir-calls01.png)
 
-2) Click `Send` (see above) to test the FHIR URL setup and the basic functions of your Azure API for FHIR. This command does not use Auth (by design) and it returns your FHIR Service Capability Statement. 
+2) Click `Send` to test the FHIR URL setup and the basic functions of your Azure API for FHIR. This command does not use Auth (by design) and it returns your FHIR Service Capability Statement. 
 
 FHIR Calls ![FHIR_Calls](./docs/images/fhir-calls_metadata.png)
 
-3) Next select `POST AuthorizeGetToken`. Note there are values in the call tabs: Authorization, Headers, Body, and Tests. This will call the Azure AD Tenant with your ClientID, ClientSecret, and Resource in the Body to obtain a Token.  On receipt of the Token, it is parsed into the bearerToken value. The result should look like this: 
+3) Next select `POST AuthorizeGetToken`. Note there are values in the call tabs: Authorization, Headers, Body, and Tests. This will call the Azure AD Tenant with your ClientID, ClientSecret, and Resource in the Body to obtain a Token. On receipt of the Token, it is parsed into the bearerToken value. The result should look like this: 
 
 FHIR Calls ![FHIR_Calls](./docs/images/fhir-calls_token.png)
 
