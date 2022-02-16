@@ -192,24 +192,11 @@ Populate the above parameter values in your `api-for-fhir` Postman environment.
 Populate the above parameter values in your `fhir-proxy` Postman environment. 
 
 ## Step 5 - Get an authorization token from AAD
-Azure API for FHIR is secured by Azure AD, and this cannot be disabled as this is the default platform for authentication. To access Azure API for FHIR, you must get an Azure AD access token first. For more information, see [Microsoft identity platform access tokens](https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens).
+To access Azure API for FHIR, you must get an Azure AD access token first. For more information, see [Microsoft identity platform access tokens](https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens).
 
-To obtain an access token via Postman, you will need to send a ```POST AuthorizeGetToken``` request. For the ```POST AuthorizeGetToken``` request to succeed, the call must be set up as follows with the ```{{}}``` parameter values stored in the Postman environment:
+To obtain an access token via Postman, you will need to send a ```POST AuthorizeGetToken``` request. The ```POST AuthorizeGetToken``` is already configured as part of the FHIR CALLS and FHIR Search collections that you imported into Postman.
 
-URL: https://login.microsoftonline.com/{{tenantid}}/oauth2/token
-
-Body tab set to x-www-form-urlencoded and key value pairs:
-- grant_type: Client_Credentials
-- client_id: {{clientid}}
-- client_secret: {{clientsecret}}
-- resource: {{fhirurl}}
-
-Test to set the ```bearerToken``` variable
-```json
-var jsonData = JSON.parse(responseBody);
-postman.setEnvironmentVariable("bearerToken", jsonData.access_token);
-```
-On clicking ```Send``` you should see a response with the Azure AD access token, which is saved to the variable ```accessToken``` automatically. You can then use it in subsequent API calls made to Azure API for FHIR. 
+On clicking ```Send```, you should see a response with the Azure AD access token, which is saved to the variable ```bearerToken``` automatically. You can then use the token in subsequent API calls made to Azure API for FHIR. 
 
 __Note:__ Access tokens expire after 60 minutes. To obtain a token refresh, simply make another ```POST AuthorizeGetToken``` call and the token will be valid for another 60 minutes.
 
