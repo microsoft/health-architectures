@@ -25,7 +25,7 @@ To set up Postman for testing Azure API for FHIR, we'll walk through these steps
 
 Before you can use Postman to make API calls to Azure API for FHIR, you will need to create a registered [client application](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) to represent Postman in Azure Active Directory.
 
-1. In Azure Portal, go to **Azure Active Directory** -> **App registrations** and make a **New registration**. 
+1. In Azure Portal, go to **Azure Active Directory** -> **App registrations** and click **New registration**. 
 <img src="./docs/images/Screenshot_2022-02-11_065619_edit2.png" height="328">
 
 2. Type in a name for your application registration in the **Name** field. 
@@ -35,7 +35,7 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 
 <img src="./docs/images/Screenshot_2022-02-15_141049_edit2_next.png" height="328"> 
 
-4. Then, click on your newly created App Registration and you will be taken to the app's **Overview** blade.  
+4. Then, click on your newly created App Registration and you will be taken to the **Overview** blade.  
 <img src="./docs/images/Screenshot_2022-02-15_141337_edit2.png" height="328">  
 
 5. Click on **API Permissions** and then click on **Add a permission**.  
@@ -44,7 +44,7 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 6. Select the **My APIs** tab and then click on the FHIR-Proxy instance that you deployed. 
 <img src="./docs/images/Screenshot_2022-02-15_141517_edit2.png" height="328">
 
-7. Under **Request API permissions** click on **Delegated permissions**. 
+7. Under **Request API permissions**, click on **Delegated permissions**. 
 <img src="./docs/images/Screenshot_2022-02-15_141624_edit2.png" height="328">
 
 8. Scroll down and select **user_impersonation** and click **Add permissions**. 
@@ -54,10 +54,10 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 <img src="./docs/images/Screenshot_2022-02-15_141810_edit2.png" height="328">  
 <img src="./docs/images/Screenshot_2022-02-15_141828_edit2.png" height="328">  
 
-10. When back in the **API permissions** blade, click on **Add a permission** (again). 
+10. When back in the **API permissions** blade for your Postman app registration, click on **Add a permission** (again). 
 11. Repeat #6. 
 
-12. Under **Request API permissions** click on the **Application permissions** box on the right. 
+12. Under **Request API permissions**, click on the **Application permissions** box on the right. 
 <img src="./docs/images/Screenshot_2022-02-15_141828_edit2_next.png" height="328">
 
 13. Select **Resource Reader** and **Resource Writer**. Click **Add permissions**. 
@@ -68,7 +68,7 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 
 15. When back in the **API permissions** blade for your Postman app registration, click **Add a permission** (again). 
 
-16. Under **Request API permissions** select the **APIs my organization uses** tab. Type in "Azure Healthcare APIs" and select the item in the list. 
+16. Under **Request API permissions**, select the **APIs my organization uses** tab. Type in "Azure Healthcare APIs" and select the item in the list. 
 <img src="./docs/images/Screenshot_2022-02-15_141828_edit2_next4.png" height="328">
 
 17. Scroll down and select **user_impersonation** and click **Add permissions**. 
@@ -79,7 +79,7 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 19. Now click on **Certificates and secrets**. Click **New client secret**. 
 <img src="./docs/images/Screenshot_2022-02-15_141926_edit2.png" height="328">
 
-20. Under **Add a client secret** enter a name for the secret in the **Description** field. Click **Add**. 
+20. Under **Add a client secret**, enter a name for the secret in the **Description** field. Click **Add**. 
 <img src="./docs/images/Screenshot_2022-02-15_142102_edit2.png" height="328">
 
 21. Copy the secret **Value** and securely store it somewhere (you will need this when you configure your Postman environment). 
@@ -89,7 +89,7 @@ For more information on registering client applications in AAD, please review th
 
 ## Step 2 - Assign user/app roles for Postman in Azure API for FHIR and FHIR-Proxy
 
-1. In Azure Portal, go to **Home** -> **Resource groups** and find the resource group containing your Azure API for FHIR instance. Click on your Azure API for FHIR instance in the list. 
+1. In Azure Portal, go to **Home** -> **Resource groups** and find the resource group containing your Azure API for FHIR instance. Click on your Azure API for FHIR instance. 
 <img src="./docs/images/Screenshot_2022-02-15_142434_edit2.png" height="328">
 
 3. Go to the **Access Control (IAM)** blade. Click on the **Roles** tab.
