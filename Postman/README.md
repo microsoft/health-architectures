@@ -214,7 +214,7 @@ On clicking ```Send```, you should receive a response like shown below in the **
 }
 ```
 
-You can now use the token in subsequent API calls to Azure API for FHIR - either passing through FHIR-Proxy (using the `fhir-proxy` environment in Postman) or directly into Azure API for FHIR (using the `api-for-fhir` environment in Postman). For more information, see [Microsoft identity platform access tokens](https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens).
+You can now use the token in subsequent API calls to Azure API for FHIR - either passing through FHIR-Proxy (with the `fhir-proxy` environment active in Postman) or directly into Azure API for FHIR (with the `api-for-fhir` environment active in Postman). For more information about access tokens in AAD, see [Microsoft identity platform access tokens](https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens).
 
 __Note:__ Access tokens expire after 60 minutes. To obtain a token refresh, simply make another ```POST AuthorizeGetToken``` call and you will receive a new token valid for another 60 minutes.
 
