@@ -64,7 +64,7 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 <img src="./docs/images/Screenshot_2022-02-15_141828_edit2_next2a.png" height="328">
 
 14. Make sure to click **Grant admin consent** again (blue checkmark).
-<img src="./docs/images/Screenshot_2022-02-15_141828_edit2_next3.png" height="328">
+<img src="./docs/images/Screenshot_2022-02-15_141828_edit2_next3a.png" height="328">
 
 15. When back in the **API permissions** blade for your Postman app registration, click **Add a permission** (again). 
 
