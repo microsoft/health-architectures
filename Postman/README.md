@@ -117,7 +117,7 @@ Now you will need to configure your two Postman environments (`api-for-fhir` and
 1. For the `api-for-fhir` Postman environment, you will need to retrieve the following values: 
 
 - `tenantId` - AAD tenant ID 
-- `clientId` - Application (client) ID assigned in the AAD application registration for Postman 
+- `clientId` - Application (client) ID in the AAD application registration for Postman 
 - `clientSecret` - Client secret stored for Postman (see Step 1 #29 above) 
 - `fhirurl` - Azure API for FHIR endpoint - e.g. https://<azure_api_for_fhir_app_name>.azurehealthcareapis.com 
 - `resource` - Azure API for FHIR endpoint - e.g. https://<azure_api_for_fhir_app_name>.azurehealthcareapis.com 
@@ -127,10 +127,10 @@ Populate the above parameter values in your `api-for-fhir` Postman environment.
 2. For the `fhir-proxy` Postman environment, you will need to retrieve the following values: 
 
 - `tenantId` - AAD tenant ID
-- `clientId` - Application (client) ID assigned in the AAD application registration for Postman 
+- `clientId` - Application (client) ID in the AAD application registration for Postman 
 - `clientSecret` - Client secret stored for Postman (see Step 1 #29 above) 
 - `fhirurl` - FHIR-Proxy endpoint appended with `/fhir` - e.g. https://<fhir_proxy_app_name>.azurehealthcareapis.com/fhir 
-- `resource` - Application (client) ID assigned in the AAD application registration for FHIR-Proxy 
+- `resource` - Application (client) ID in the AAD application registration for FHIR-Proxy 
 
 Populate the above parameter values in your `fhir-proxy` Postman environment. 
 
