@@ -74,7 +74,7 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 17. Scroll down and select **user_impersonation** and click **Add permissions**. 
 <img src="./docs/images/Screenshot_2022-02-15_141828_edit2_next5.png" height="328">
 
-18. Make sure to click the **Grant admin consent** again (blue checkmark). 
+18. Make sure to click **Grant admin consent** again (blue checkmark). 
 
 19. Now click on **Certificates and secrets**. Click **New client secret**. 
 <img src="./docs/images/Screenshot_2022-02-15_141926_edit2.png" height="328">
@@ -89,9 +89,12 @@ For more information on registering client applications in AAD, please review th
 
 ## Step 2 - Assign user/app roles for Postman in Azure API for FHIR and FHIR-Proxy
 
-1. In Azure Portal, go to **Home** -> **Resource groups** and find the resource group containing your Azure API for FHIR instance.
-2. Click on your Azure API for FHIR instance in the list.
-3. Go to the **Access Control (IAM)** blade.
+1. In Azure Portal, go to **Home** -> **Resource groups** and find the resource group containing your Azure API for FHIR instance. Click on your Azure API for FHIR instance in the list. 
+<img src="./docs/images/Screenshot_2022-02-15_142434_edit2.png" height="328">
+
+3. Go to the **Access Control (IAM)** blade. Click on the **Roles** tab.
+<img src="./docs/images/Screenshot_2022-02-15_142519_edit2.png" height="328">
+
 4. Click on the **Roles** tab.
 5. Click on **+ Add** -> **Add role assignment**.
 6. In **Add role assignment** under the **Role** tab, scroll down in the list and select **FHIR Data Contributor**. Then click **Next**.
