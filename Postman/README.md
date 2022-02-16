@@ -194,7 +194,8 @@ Populate the above parameter values in your `fhir-proxy` Postman environment.
 ## Step 5 - Get an authorization token from AAD
 To access Azure API for FHIR, you must get an Azure AD access token first. For more information, see [Microsoft identity platform access tokens](https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens).
 
-To obtain an access token via Postman, you will need to send a ```POST AuthorizeGetToken``` request. The ```POST AuthorizeGetToken``` is already configured as part of the FHIR CALLS and FHIR Search collections that you imported into Postman.
+To obtain an access token via Postman, you will need to send a ```POST AuthorizeGetToken``` request. The ```POST AuthorizeGetToken``` is already configured as part of the FHIR CALLS collection that you imported into Postman (see below). 
+<img src="./docs/images/Screenshot_2022-02-16_171631_edit2.png" height="228">
 
 On clicking ```Send```, you should see a response with the Azure AD access token, which is saved to the variable ```bearerToken``` automatically. You can then use the token in subsequent API calls made to Azure API for FHIR. 
 
