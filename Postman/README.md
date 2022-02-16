@@ -53,7 +53,7 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 26. Click **New client secret**.
 27. Enter a name for the secret in the **Description** field.
 28. Click **Add**.
-29. Copy the secret **Value** and securely store it somewhere (you will need this later when you configure your Postman environment).
+29. Copy the secret **Value** and securely store it somewhere (you will need this when you configure your Postman environment).
 
 For more information on registering client applications in AAD, please review the [Service Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-service-azure-ad-client-app) and [Confidential Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) documentation for Azure API for FHIR. 
 
@@ -89,9 +89,9 @@ For more information on assigning user/app roles, see [Configure Azure RBAC for 
 
 ## Step 3 - Import environment and collection files into Postman
 
-1. Access the Postman environment template for Azure API for FHIR [here](./api-for-fhir/api-for-fhir.postman_environment.json). Save the file in your local desktop environment for later use.
+1. Access the Postman environment template for Azure API for FHIR [here](./api-for-fhir/api-for-fhir.postman_environment.json). Save the file in your local environment.
 
-2. Access the Postman environment template for FHIR-Proxy [here](./fhir-proxy/fhir-proxy.postman_environment.json). Save the file in your local desktop environment for later use.
+2. Access the Postman environment template for FHIR-Proxy [here](./fhir-proxy/fhir-proxy.postman_environment.json). Save the file in your local environment.
 
 3. Create a new Postman Workspace (or select an existing one if already created).
 
@@ -104,10 +104,10 @@ For more information on assigning user/app roles, see [Configure Azure RBAC for 
     + Add the file to Postman using the ```Upload Files``` button or paste in the contents of the file using the ```Raw text``` tab.
 
 7. Access the ```FHIR-CALLS.postman-collection.json``` file available in this repo [here](./api-for-fhir/FHIR-CALLS.postman_collection.json) and save the file to your desktop environment. Then import the file into Postman.
-    + Add the file to Postman using the ```Upload Files``` button or paste in the contents of the file using the ```Raw text``` tab.
+    + Add the file to Postman using the ```Upload Files``` button or paste the contents of the file using the ```Raw text``` tab.
 
 8. Access the ```FHIR_Search.postman_collection.json``` file available in this repo [here](./api-for-fhir/FHIR_Search.postman_collection.json) and save the file to your desktop environment. Then import the file into Postman.
-    + Add the file to Postman using the ```Upload Files``` button or paste in the contents of the file using the ```Raw text``` tab.
+    + Add the file to Postman using the ```Upload Files``` button or paste the contents of the file using the ```Raw text``` tab.
 
 Now you will need to configure your two Postman environments (`api-for-fhir` and `fhir-proxy`) by retrieving values for `tenantId`, `clientId`, `clientSecret`, `fhirurl`, and `resource` from Azure Portal for Azure API for FHIR and FHIR-Proxy, respectively. Then you will populate the two environments (`api-for-fhir` and `fhir-proxy`) in Postman.
  
