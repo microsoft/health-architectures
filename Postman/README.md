@@ -200,7 +200,21 @@ Now you will need to get an access token from AAD in order to connect with Azure
 
 <img src="./docs/images/Screenshot_2022-02-16_171631_edit2.png" height="328">
 
-On clicking ```Send```, you should see a response like shown below. The access token is automatically saved to the variable ```bearerToken```. You can then use the token in subsequent API calls to Azure API for FHIR for the next 60 minutes.
+On clicking ```Send```, you should see a response like shown below. The access token is automatically saved to the variable ```bearerToken```. 
+
+```
+{
+    "token_type": "Bearer",
+    "expires_in": "3599",
+    "ext_expires_in": "3599",
+    "expires_on": "XXXXXXXXXX",
+    "not_before": "XXXXXXXXXX",
+    "resource": "XXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+    "access_token": "XXXXXXXXXXXX..."
+}
+```
+
+You can then use the token in subsequent API calls to Azure API for FHIR for the next 60 minutes.
 
 For more information, see [Microsoft identity platform access tokens](https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens).
 
