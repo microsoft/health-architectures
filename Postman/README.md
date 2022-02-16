@@ -181,7 +181,7 @@ Now you will need to configure your two Postman environments (`api-for-fhir` and
 
 Populate the above parameter values in your `api-for-fhir` Postman environment. Leave `bearerToken` blank. Make sure to click `Save` to save the `api-for-fhir` enviroment values!  
 
-<img src="./docs/images/Screenshot_2022-02-16_104920_edit2.png" height="228">
+<img src="./docs/images/Screenshot_2022-02-16_104920_edit2.png" height="328">
 
 2. For the `fhir-proxy` Postman environment, you will need to retrieve the following values: 
 
@@ -193,12 +193,12 @@ Populate the above parameter values in your `api-for-fhir` Postman environment. 
 
 Populate the above parameter values in your `fhir-proxy` Postman environment. Leave `bearerToken` blank. Make sure to click `Save` to save the `fhir-proxy` enviroment values!  
 
-<img src="./docs/images/Screenshot_2022-02-16_105208_edit2.png" height="228">
+<img src="./docs/images/Screenshot_2022-02-16_105208_edit2.png" height="328">
 
 ## Step 5 - Get an access token from AAD
 Now you will need to get an access token from AAD in order to connect with Azure API for FHIR. To obtain an access token via Postman, you will send a ```POST AuthorizeGetToken``` request. The ```POST AuthorizeGetToken``` request is already configured as part of the FHIR CALLS collection that you imported into Postman (see below).  
 
-<img src="./docs/images/Screenshot_2022-02-16_171631_edit2.png" height="228">
+<img src="./docs/images/Screenshot_2022-02-16_171631_edit2.png" height="328">
 
 On clicking ```Send```, you should see a response like shown below. The access token is automatically saved to the variable ```bearerToken```. You can then use the token in subsequent API calls to Azure API for FHIR for the next 60 minutes.
 
