@@ -29,33 +29,61 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 <img src="./docs/images/Screenshot_2022-02-11_065619_edit2.png" height="328">
 
 2. Type in a name for your application registration in the **Name** field. 
-3. Scroll down, and under **Redirect URI (optional)** select **Web** and then enter https://www.getpostman.com/oauth2/callback.
-4. Click **Register**.
-5. Then, click on your newly created App Registration and you will be taken to the app's **Overview** blade.
-6. Click on **API Permissions**.
-7. Click on **Add a permission**.
-8. Select the **My APIs** tab.
-9. Click on the FHIR-Proxy instance that you deployed.
-10. Click on **Delegated permissions**.
-11. Scroll down and select **user_impersonation**.
-12. Click **Add permissions**.
-13. Make sure to click **Grant admin consent** (blue checkmark).
-14. When back in the **API permissions** blade, click on **Add a permission** (again). 
-15. Repeat #8 and 9.
-16. Click on the **Application permissions** box on the right.
-17. Select **Resource Reader** and **Resource Writer**. Click **Add permissions**.
-18. Make sure to click **Grant admin consent** (blue checkmark).
-19. When back in the **API permissions** blade for your Postman app registration, click **Add a permission** (again).
-20. Select **APIs my organization uses** tab.
-21. Type in "Azure Healthcare APIs" and select the item in the list.
-22. Scroll down and select **user_impersonation**.
-23. Click **Add permissions**.
-24. Make sure to click **Grant admin consent** (blue checkmark).
-25. When back in the **API permissions** blade, click **Certificates and secrets**.
-26. Click **New client secret**.
-27. Enter a name for the secret in the **Description** field.
-28. Click **Add**.
-29. Copy the secret **Value** and securely store it somewhere (you will need this when you configure your Postman environment).
+<img src="./docs/images/Screenshot_2022-02-15_141049_edit2.png" height="328">
+
+3. Scroll down, and under **Redirect URI (optional)** select **Web** and then enter https://www.getpostman.com/oauth2/callback. Click **Register**. 
+
+<img src="./docs/images/Screenshot_2022-02-15_141049_edit2_next.png" height="328"> 
+
+4. Then, click on your newly created App Registration and you will be taken to the app's **Overview** blade.  
+<img src="./docs/images/Screenshot_2022-02-15_141337_edit2.png" height="328">  
+
+5. Click on **API Permissions** and then click on **Add a permission**.  
+<img src="./docs/images/Screenshot_2022-02-15_141418_edit2.png" height="328">
+
+6. Select the **My APIs** tab and then click on the FHIR-Proxy instance that you deployed. 
+<img src="./docs/images/Screenshot_2022-02-15_141517_edit2.png" height="328">
+
+7. Under **Request API permissions** click on **Delegated permissions**. 
+<img src="./docs/images/Screenshot_2022-02-15_141624_edit2.png" height="328">
+
+8. Scroll down and select **user_impersonation** and click **Add permissions**. 
+<img src="./docs/images/Screenshot_2022-02-15_141706_edit2.png" height="328">
+
+9. Make sure to click **Grant admin consent** (blue checkmark). 
+<img src="./docs/images/Screenshot_2022-02-15_141810_edit2.png" height="328">  
+<img src="./docs/images/Screenshot_2022-02-15_141828_edit2.png" height="328">  
+
+10. When back in the **API permissions** blade, click on **Add a permission** (again). 
+11. Repeat #6. 
+
+12. Under **Request API permissions** click on the **Application permissions** box on the right. 
+<img src="./docs/images/Screenshot_2022-02-15_141828_edit2_next.png" height="328">
+
+13. Select **Resource Reader** and **Resource Writer**. Click **Add permissions**. 
+<img src="./docs/images/Screenshot_2022-02-15_141828_edit2_next2a.png" height="328">
+
+14. Make sure to click **Grant admin consent** (blue checkmark).
+<img src="./docs/images/Screenshot_2022-02-15_141828_edit2_next3.png" height="328">
+
+15. When back in the **API permissions** blade for your Postman app registration, click **Add a permission** (again). 
+
+16. Under **Request API permissions** select **APIs my organization uses** tab. Type in "Azure Healthcare APIs" and select the item in the list. 
+<img src="./docs/images/Screenshot_2022-02-15_141828_edit2_next4.png" height="328">
+
+18. Scroll down and select **user_impersonation** and click **Add permissions**. 
+<img src="./docs/images/Screenshot_2022-02-15_141828_edit2_next5.png" height="328">
+
+20. Make sure to click the **Grant admin consent** again (blue checkmark). 
+
+21. When back in the **API permissions** blade, click **Certificates and secrets**. Click **New client secret**. 
+<img src="./docs/images/Screenshot_2022-02-15_141926_edit2.png" height="328">
+
+23. Under **Add a client secret** enter a name for the secret in the **Description** field. Click **Add**. 
+<img src="./docs/images/Screenshot_2022-02-15_142102_edit2.png" height="328">
+
+25. Copy the secret **Value** and securely store it somewhere (you will need this when you configure your Postman environment). 
+<img src="./docs/images/Screenshot_2022-02-15_142159_edit2.png" height="328">
 
 For more information on registering client applications in AAD, please review the [Service Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-service-azure-ad-client-app) and [Confidential Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) documentation for Azure API for FHIR. 
 
