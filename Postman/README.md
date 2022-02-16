@@ -150,17 +150,20 @@ For more information on assigning user/app roles, see [Configure Azure RBAC for 
 <img src="./docs/images/Screenshot_2022-02-16_095332_edit2.png" height="228">
 
 5. Import the ```api-for-fhir.postman_environment.json``` file that you saved to your local environment.
-    + Add the file to Postman using the ```Upload Files``` button or paste in the contents of the file using the ```Raw text``` tab.
+    + Add the file to Postman using the ```Upload Files``` button or paste in the contents of the file using the ```Raw text``` tab. 
+<img src="./docs/images/Screenshot_2022-02-16_095516_edit2.png" height="228">
 
 6. Import the ```fhir-proxy.postman_environment.json``` file that you saved to your local environment.
-    + Add the file to Postman using the ```Upload Files``` button or paste in the contents of the file using the ```Raw text``` tab.
+    + Add the file to Postman using the ```Upload Files``` button or paste in the contents of the file using the ```Raw text``` tab. 
+<img src="./docs/images/Screenshot_2022-02-16_095625_edit2.png" height="228">
 
 7. Access the ```FHIR-CALLS.postman-collection.json``` file available in this repo [here](./api-for-fhir/FHIR-CALLS.postman_collection.json) and save the file to your local environment. Then import the file into Postman.
-    + Add the file to Postman using the ```Upload Files``` button or paste the contents of the file using the ```Raw text``` tab.
+    + Add the file to Postman using the ```Upload Files``` button or paste the contents of the file using the ```Raw text``` tab. 
+<img src="./docs/images/Screenshot_2022-02-16_104345_edit2.png" height="228">
 
 8. Access the ```FHIR_Search.postman_collection.json``` file available in this repo [here](./api-for-fhir/FHIR_Search.postman_collection.json) and save the file to your local environment. Then import the file into Postman.
-    + Add the file to Postman using the ```Upload Files``` button or paste the contents of the file using the ```Raw text``` tab.
-
+    + Add the file to Postman using the ```Upload Files``` button or paste the contents of the file using the ```Raw text``` tab. 
+<img src="./docs/images/Screenshot_2022-02-16_104427_edit2.png" height="228">
 
  
 ## Step 4 - Configure Postman environments
