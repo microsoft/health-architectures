@@ -129,7 +129,7 @@ For more information on registering client applications in AAD, please review th
 13. Click on **+Add user/group**. 
 <img src="./docs/images/Screenshot_2022-02-15_151041_edit2.png" height="328">
 
-14. In **Add Assignment**, on the left under **Users** click on **None Selected**. Then under **Users** on the right side, type in your name or username in the search field, click on it, and then click **Select**. 
+14. In **Add Assignment**, on the left under **Users**, click on **None Selected**. Then under **Users** on the right side, type in your name or username in the search field, click on it, and then click **Select**. 
 <img src="./docs/images/Screenshot_2022-02-15_151408_edit2.png" height="328">
 
 15. In **Add Assignment**, click on **None Selected** under **Select a role**. On the right side, click on **Resource Writer** and then click **Select**. 
