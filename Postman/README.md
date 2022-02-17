@@ -148,7 +148,7 @@ For more information on assigning user/app roles, see [Configure Azure RBAC for 
 
 3. In Postman, create a new Workspace (or select an existing one if already created).
 
-4. Click the ```Import``` button next to your workspace name. 
+4. Click the ```Import``` button next to the workspace name. 
 <img src="./docs/images/Screenshot_2022-02-16_095332_edit2.png" height="228">
 
 5. Import the ```api-for-fhir.postman_environment.json``` file that you saved to your local environment.
