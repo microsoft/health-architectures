@@ -142,28 +142,28 @@ For more information on assigning user/app roles, see [Configure Azure RBAC for 
 
 ## Step 3 - Import environment and collection files into Postman
 
-1. Access the Postman environment template for Azure API for FHIR [here](./api-for-fhir/api-for-fhir.postman_environment.json). Save the file in your local environment.
+1. Access the Postman environment template for Azure API for FHIR [here](./api-for-fhir/api-for-fhir.postman_environment.json). Save the file in your local desktop.
 
-2. Access the Postman environment template for FHIR-Proxy [here](./fhir-proxy/fhir-proxy.postman_environment.json). Save the file in your local environment.
+2. Access the Postman environment template for FHIR-Proxy [here](./fhir-proxy/fhir-proxy.postman_environment.json). Save the file in your local desktop.
 
 3. In Postman, create a new Workspace (or select an existing one if already created).
 
 4. Click the ```Import``` button next to the workspace name. 
 <img src="./docs/images/Screenshot_2022-02-16_095332_edit2.png" height="228">
 
-5. Import the ```api-for-fhir.postman_environment.json``` file that you saved to your local environment.
+5. Import the ```api-for-fhir.postman_environment.json``` file that you saved to your local desktop.
     + Add the file to Postman using the ```Upload Files``` button. Then click `Import`. 
 <img src="./docs/images/Screenshot_2022-02-16_095516_edit2.png" height="228">
 
-6. Import the ```fhir-proxy.postman_environment.json``` file that you saved to your local environment.
+6. Import the ```fhir-proxy.postman_environment.json``` file that you saved to your local desktop.
     + Add the file to Postman using the ```Upload Files``` button. Then click `Import`. 
 <img src="./docs/images/Screenshot_2022-02-16_095625_edit2.png" height="228">
 
-7. Access the ```FHIR-CALLS.postman-collection.json``` file available in this repo [here](./api-for-fhir/FHIR-CALLS.postman_collection.json) and save the file to your local environment. Then import the file into Postman.
+7. Access the ```FHIR-CALLS.postman-collection.json``` file available in this repo [here](./api-for-fhir/FHIR-CALLS.postman_collection.json) and save the file to your local desktop. Then import the file into Postman.
     + Add the file to Postman using the ```Upload Files``` button. Then click `Import`. 
 <img src="./docs/images/Screenshot_2022-02-16_104345_edit2.png" height="228">
 
-8. Access the ```FHIR_Search.postman_collection.json``` file available in this repo [here](./api-for-fhir/FHIR_Search.postman_collection.json) and save the file to your local environment. Then import the file into Postman.
+8. Access the ```FHIR_Search.postman_collection.json``` file available in this repo [here](./api-for-fhir/FHIR_Search.postman_collection.json) and save the file to your local desktop. Then import the file into Postman.
     + Add the file to Postman using the ```Upload Files``` button. Then click `Import`. 
 <img src="./docs/images/Screenshot_2022-02-16_104427_edit2.png" height="228">
 
