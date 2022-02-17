@@ -90,7 +90,7 @@ For more information on registering client applications in AAD, please review th
 
 ## Step 2 - Assign user/app roles for Postman in Azure API for FHIR and FHIR-Proxy
 
-1. In Azure Portal, go to **Home** -> **Resource groups** and find the resource group containing your Azure API for FHIR instance. Go to the resource group and click on your Azure API for FHIR app name in the list. 
+1. In Azure Portal, go to **Home** -> **Resource groups** and find the resource group containing your Azure API for FHIR instance. When in the resource group **Overview**, click on your Azure API for FHIR app name in the list. 
 <img src="./docs/images/Screenshot_2022-02-15_142434_edit2.png" height="328">
 
 2. Go to the **Access Control (IAM)** blade. Click on the **Roles** tab.
