@@ -188,7 +188,7 @@ Populate the above parameter values in your `api-fhir` Postman environment. Leav
 - `tenantId` - AAD tenant ID (same as above) 
 - `clientId` - Application (client) ID for Postman service client (same as above) 
 - `clientSecret` - Client secret stored for Postman (same as above) 
-- `fhirurl` - FHIR-Proxy endpoint appended with `/fhir` - e.g. https://<fhir_proxy_app_name>.azurehealthcareapis.com/fhir (go to **Resource Group** -> **Overview** -> **Name** -> **URL**)
+- `fhirurl` - FHIR-Proxy endpoint appended with `/fhir` - e.g. https://<fhir_proxy_app_name>.azurehealthcareapis.com/fhir (go to **Resource Group** -> **Overview** -> **Name** -> **URL**; make sure to append `/fhir` on the end when adding to Postman)
 - `resource` - Application (client) ID in the AAD service client for FHIR-Proxy (go to **AAD** -> **App registrations** -> **Name** -> **Overview**)
 
 Populate the above parameter values in your `fhir-proxy` Postman environment. Leave `bearerToken` blank. Make sure to click `Save` to retain the `fhir-proxy` environment values.  
@@ -196,9 +196,9 @@ Populate the above parameter values in your `fhir-proxy` Postman environment. Le
 <img src="./docs/images/Screenshot_2022-02-16_105208_edit2.png" height="328">
 
 ## Step 5 - Get an access token from AAD
-In order to connect with Azure API for FHIR, you will need to get an access token from AAD. To obtain an access token via Postman, you can send a ```POST AuthorizeGetToken``` request. The ```POST AuthorizeGetToken``` call is already configured as part of the FHIR CALLS collection that you imported into Postman (see below).  
+In order to connect with Azure API for FHIR, you will need to get an access token from AAD. To obtain an access token via Postman, you can send a ```POST AuthorizeGetToken``` request. The ```POST AuthorizeGetToken``` call is already configured as part of the FHIR CALLS collection that you just imported into Postman (see below).  
 
-__Important:__ Be sure to make one of the environments active (`api-for-fhir` or `fhir-proxy`) by selecting from the dropdown menu above the `Send` button. In the image below, `fhir-proxy` is shown as the active environment.
+__Important:__ Be sure to make one of the environments active (`api-fhir` or `fhir-proxy`) by selecting from the dropdown menu above the `Send` button. In the image below, `fhir-proxy` is shown as the active environment.
 
 <img src="./docs/images/Screenshot_2022-02-16_171631_edit2.png" height="328">
 
@@ -216,7 +216,7 @@ On clicking ```Send```, you should receive a response in the **Body** tab like s
 }
 ```
 
-You can now use the token in subsequent API calls to Azure API for FHIR - either passing through FHIR-Proxy (with the `fhir-proxy` environment active in Postman) or directly into Azure API for FHIR (with the `api-for-fhir` environment active in Postman). For more information about access tokens in AAD, see [Microsoft identity platform access tokens](https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens).
+You can now use the token in subsequent API calls to Azure API for FHIR - either passing through FHIR-Proxy (with the `fhir-proxy` environment active in Postman) or directly into Azure API for FHIR (with the `api-fhir` environment active in Postman). For more information about access tokens in AAD, see [Microsoft identity platform access tokens](https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens).
 
 __Note:__ Access tokens expire after 60 minutes. To obtain a token refresh, simply make another ```POST AuthorizeGetToken``` call and you will receive a new token valid for another 60 minutes.
 
