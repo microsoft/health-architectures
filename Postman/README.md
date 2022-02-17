@@ -39,7 +39,7 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 4. Then, click on your newly created App Registration and you will be taken to the **Overview** blade.  
 <img src="./docs/images/Screenshot_2022-02-15_141337_edit2.png" height="328">  
 
-5. Click on **API Permissions** and then click on **+ Add a permission**.  
+5. Click on **API Permissions** and then click on **+Add a permission**.  
 <img src="./docs/images/Screenshot_2022-02-15_141418_edit2.png" height="328">
 
 6. Select the **My APIs** tab and then click on the FHIR-Proxy instance that you deployed. 
@@ -55,7 +55,7 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 <img src="./docs/images/Screenshot_2022-02-15_141810_edit2.png" height="328">  
 <img src="./docs/images/Screenshot_2022-02-15_141828_edit2.png" height="328">  
 
-10. When back in the **API permissions** blade for your Postman app registration, click on **+ Add a permission** (again). 
+10. When back in the **API permissions** blade for your Postman app registration, click on **+Add a permission** (again). 
 11. Repeat #6. 
 
 12. Under **Request API permissions**, click on the **Application permissions** box on the right. 
@@ -67,7 +67,7 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 14. Make sure to click **Grant admin consent** again (blue checkmark).
 <img src="./docs/images/Screenshot_2022-02-15_141828_edit2_next3b.png" height="328">
 
-15. When back in the **API permissions** blade for your Postman app registration, click **+ Add a permission** (again). 
+15. When back in the **API permissions** blade for your Postman app registration, click **+Add a permission** (again). 
 
 16. Under **Request API permissions**, select the **APIs my organization uses** tab. Type in "Azure Healthcare APIs" and select the item in the list. 
 <img src="./docs/images/Screenshot_2022-02-15_141828_edit2_next4.png" height="328">
@@ -96,13 +96,13 @@ For more information on registering client applications in AAD, please review th
 2. Go to the **Access Control (IAM)** blade. Click on the **Roles** tab.
 <img src="./docs/images/Screenshot_2022-02-15_142519_edit2_next.png" height="328">
 
-3. Click on **+ Add** -> **Add role assignment**. 
+3. Click on **+Add** -> **Add role assignment**. 
 <img src="./docs/images/Screenshot_2022-02-15_142726_edit2.png" height="328">
 
 4. In **Add role assignment** under the **Role** tab, scroll down in the list and select **FHIR Data Contributor**. Then click **Next**. 
 <img src="./docs/images/Screenshot_2022-02-15_143124_edit2.png" height="328">
 
-5. Under the **Members** tab, click on **+ Select members**. Type in the name of your Postman app registration in the **Select** field on the right. Highlight your Postman registration, and click **Select**. Then click **Next**. 
+5. Under the **Members** tab, click on **+Select members**. Type in the name of your Postman app registration in the **Select** field on the right. Highlight your Postman registration, and click **Select**. Then click **Next**. 
 <img src="./docs/images/Screenshot_2022-02-15_143459_edit2.png" height="328">
 
 6. Under the **Review + assign** tab, click **Review + assign**. 
@@ -114,7 +114,7 @@ For more information on registering client applications in AAD, please review th
 8. In **Add role assignment** under the **Role** tab, select **FHIR Data Contributor** (again) and click **Next**. 
 <img src="./docs/images/Screenshot_2022-02-15_143643_edit2_next2.png" height="328">
 
-9. Under the **Members** tab, click on **+ Select members**. Type in your name or username in the **Select** field on the right. Highlight your name, click **Select**, and then click **Next**. 
+9. Under the **Members** tab, click on **+Select members**. Type in your name or username in the **Select** field on the right. Highlight your name, click **Select**, and then click **Next**. 
 <img src="./docs/images/Screenshot_2022-02-15_144144_edit2.png" height="328">
 
 10. Under the **Review + assign** tab, click **Review + assign**. 
