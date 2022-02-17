@@ -36,26 +36,26 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 3. Scroll down, and under **Redirect URI (optional)** select **Web** and then enter https://www.getpostman.com/oauth2/callback. Click **Register**. 
 <img src="./docs/images/Screenshot_2022-02-15_141049_edit2_next.png" height="328"> 
 
-4. Then, click on your newly created App Registration and you will be taken to the **Overview** blade.  
+4. Then, you will see a list containing your newly created app registration for Postman. Click on the list item and you will be taken to the **Overview** blade for your Postman service client in AAD.  
 <img src="./docs/images/Screenshot_2022-02-15_141337_edit2.png" height="328">  
 
 5. Click on **API Permissions** and then click on **+Add a permission**.  
 <img src="./docs/images/Screenshot_2022-02-15_141418_edit2.png" height="328">
 
-6. Select the **My APIs** tab and then click on the FHIR-Proxy instance that you deployed. 
+6. Select the **My APIs** tab and you will see a list containing the FHIR-Proxy instance that you deployed. Click on the FHIR-Proxy's app name.
 <img src="./docs/images/Screenshot_2022-02-15_141517_edit2.png" height="328">
 
 7. Under **Request API permissions**, click on **Delegated permissions**. 
 <img src="./docs/images/Screenshot_2022-02-15_141624_edit2.png" height="328">
 
-8. Scroll down and select **user_impersonation** and click **Add permissions**. 
+8. Scroll down and select **user_impersonation**. Then click **Add permissions**. 
 <img src="./docs/images/Screenshot_2022-02-15_141706_edit2.png" height="328">
 
-9. Make sure to click **Grant admin consent** (blue checkmark). 
+9. When back in the **API permissions** blade, make sure to click **Grant admin consent** (blue checkmark). 
 <img src="./docs/images/Screenshot_2022-02-15_141810_edit2.png" height="328">  
 <img src="./docs/images/Screenshot_2022-02-15_141828_edit2.png" height="328">  
 
-10. When back in the **API permissions** blade for your Postman app registration, click on **+Add a permission** (again). 
+10. Now, in the **API permissions** blade, click on **+Add a permission** (again). 
 11. Repeat #6. 
 
 12. Under **Request API permissions**, click on the **Application permissions** box on the right. 
@@ -64,10 +64,10 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 13. Select **Resource Reader** and **Resource Writer**. Click **Add permissions**. 
 <img src="./docs/images/Screenshot_2022-02-15_141828_edit2_next2a.png" height="328">
 
-14. Make sure to click **Grant admin consent** again (blue checkmark).
+14. When back in the **API permissions** blade, make sure to click **Grant admin consent** again (blue checkmark).
 <img src="./docs/images/Screenshot_2022-02-15_141828_edit2_next3b.png" height="328">
 
-15. When back in the **API permissions** blade for your Postman app registration, click **+Add a permission** (again). 
+15. Now, in the **API permissions** blade, click **+Add a permission** (again). 
 
 16. Under **Request API permissions**, select the **APIs my organization uses** tab. Type in "Azure Healthcare APIs" and select the item in the list. 
 <img src="./docs/images/Screenshot_2022-02-15_141828_edit2_next4.png" height="328">
@@ -75,7 +75,7 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 17. Scroll down and select **user_impersonation** and click **Add permissions**. 
 <img src="./docs/images/Screenshot_2022-02-15_141828_edit2_next5.png" height="328">
 
-18. Make sure to click **Grant admin consent** again (blue checkmark). 
+18. When back in the **API permissions** blade, make sure to click **Grant admin consent** again (blue checkmark). 
 
 19. Now click on **Certificates and secrets**. Click **+ New client secret**. 
 <img src="./docs/images/Screenshot_2022-02-15_141926_edit2.png" height="328">
@@ -83,7 +83,7 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 20. Under **Add a client secret**, enter a name for the secret in the **Description** field. Click **Add**. 
 <img src="./docs/images/Screenshot_2022-02-15_142102_edit2.png" height="328">
 
-21. Copy the secret **Value** and securely store it somewhere (you will need this when you configure your Postman environment). 
+21. Copy the secret **Value** and securely store it somewhere (you will need this when you configure your Postman environments). 
 <img src="./docs/images/Screenshot_2022-02-15_142159_edit2.png" height="328">
 
 For more information on registering client applications in AAD, please review the [Service Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-service-azure-ad-client-app) and [Confidential Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) documentation for Azure API for FHIR. 
@@ -102,7 +102,7 @@ For more information on registering client applications in AAD, please review th
 4. In **Add role assignment** under the **Role** tab, scroll down in the list and select **FHIR Data Contributor**. Then click **Next**. 
 <img src="./docs/images/Screenshot_2022-02-15_143124_edit2.png" height="328">
 
-5. Under the **Members** tab, click on **+Select members**. Type in the name of your Postman app registration in the **Select** field on the right. Highlight your Postman registration, and click **Select**. Then click **Next**. 
+5. Under the **Members** tab, click on **+Select members**. Type in the name of your Postman app registration in the **Select** field on the right. Highlight your Postman service client name and click **Select**. Then click **Next**. 
 <img src="./docs/images/Screenshot_2022-02-15_143459_edit2.png" height="328">
 
 6. Under the **Review + assign** tab, click **Review + assign**. 
@@ -132,7 +132,7 @@ For more information on registering client applications in AAD, please review th
 14. In **Add Assignment**, on the left under **Users**, click on **None Selected**. Then under **Users** on the right side, type in your name or username in the search field, click on it, and then click **Select**. 
 <img src="./docs/images/Screenshot_2022-02-15_151408_edit2.png" height="328">
 
-15. In **Add Assignment**, click on **None Selected** under **Select a role**. On the right side, click on **Resource Writer** and then click **Select**. 
+15. In **Add Assignment**, under **Select a role** click on **None Selected**. On the right side, click on **Resource Writer** and then click **Select**. 
 <img src="./docs/images/Screenshot_2022-02-15_151625_edit2.png" height="328">
 
 16. Back in **Add Assignment**, click on **Assign**. 
