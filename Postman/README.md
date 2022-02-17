@@ -202,7 +202,7 @@ __Important:__ Be sure to make one of the environments active (`api-for-fhir` or
 
 <img src="./docs/images/Screenshot_2022-02-16_171631_edit2.png" height="328">
 
-On clicking ```Send```, you should receive a response like shown below in the **Body** tab. The access token is automatically saved to the ```bearerToken``` variable in the Postman environment. 
+On clicking ```Send```, you should receive a response in the **Body** tab like shown below. The access token is automatically saved to the ```bearerToken``` variable in the Postman environment. 
 
 ```
 {
