@@ -169,7 +169,7 @@ For more information on assigning user/app roles, see [Configure Azure RBAC for 
 
  
 ## Step 4 - Configure Postman environments
-Now you will need to configure your two Postman environments (`api-fhir` and `fhir-proxy`). 
+Now you will configure your two Postman environments (`api-fhir` and `fhir-proxy`). 
 
 1. For the `api-fhir` Postman environment, you will need to retrieve the following values: 
 
