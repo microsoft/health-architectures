@@ -222,13 +222,23 @@ __Note:__ Access tokens expire after 60 minutes. To obtain a token refresh, simp
 
 ## Step 6 - Test Postman setup and get Azure API for FHIR capabilities statement 
 
-1) In Postman, click on `Collections` on the left, select the `FHIR Calls` collection and then select `List Metadata`. It should look like this example: 
+1. In Postman, click on `Collections` on the left, select the `FHIR Calls` collection, and then select the `GET List Metadata` call. Your Postman interface should look something like this: 
 
-FHIR Calls ![FHIR_Calls](./docs/images/fhir-calls01.png)
+<img src="./docs/images/Screenshot_2022-02-17_101024_edit2.png" height="328">
 
-2) Click `Send` to test the FHIR URL setup and the basic functions of your Azure API for FHIR. This command does not use Auth (by design) and it returns your FHIR Service Capability Statement. 
+2. Click `Send` to test that Azure API for FHIR and FHIR-Proxy are functioning on a basic level. The `GET List Metadata` call returns the Azure API for FHIR server's Capability Statement. If you receive an error, there should be information in the response indicating the cause of the error. If you receive a response like shown below, this means your setup has passed the first test. 
 
-FHIR Calls ![FHIR_Calls](./docs/images/fhir-calls_metadata.png)
+<img src="./docs/images/Screenshot_2022-02-17_101116_edit2.png" height="328">
+
+3. Click on `POST Save Patient` in the `FHIR CALLS` collection and press `Send`. If you get a response like shown below, this means you succeeded in populating Azure API for FHIR with a Patient Resource. This indicates that your setup is fully functional. 
+
+<img src="./docs/images/Screenshot_2022-02-17_101224_edit2.png" height="328">
+
+4. Try `GET List Patients` in the `FHIR CALLS` collection and press `Send`. If the response is as shown below, this means you successfully queried Azure API for FHIR for a list of every Patient Resource stored on the FHIR server. 
+
+<img src="./docs/images/Screenshot_2022-02-17_101255_edit2.png" height="328">
+
+5. Now you can experiment with other sample calls or your own FHIR API calls.
 
 ### Resources 
 
