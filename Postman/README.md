@@ -179,7 +179,7 @@ Now you will need to configure your two Postman environments (`api-for-fhir` and
 - `fhirurl` - Azure API for FHIR endpoint - e.g. https://<azure_api_for_fhir_app_name>.azurehealthcareapis.com 
 - `resource` - Azure API for FHIR endpoint - e.g. https://<azure_api_for_fhir_app_name>.azurehealthcareapis.com 
 
-Populate the above parameter values in your `api-for-fhir` Postman environment. Leave `bearerToken` blank. Make sure to click `Save` to save the `api-for-fhir` enviroment values!  
+Populate the above parameter values in your `api-for-fhir` Postman environment. Leave `bearerToken` blank. Make sure to click `Save` to retain the `api-for-fhir` enviroment values.  
 
 <img src="./docs/images/Screenshot_2022-02-16_104920_edit2.png" height="328">
 
@@ -191,16 +191,16 @@ Populate the above parameter values in your `api-for-fhir` Postman environment. 
 - `fhirurl` - FHIR-Proxy endpoint appended with `/fhir` - e.g. https://<fhir_proxy_app_name>.azurehealthcareapis.com/fhir 
 - `resource` - Application (client) ID in the AAD application registration for FHIR-Proxy 
 
-Populate the above parameter values in your `fhir-proxy` Postman environment. Leave `bearerToken` blank. Make sure to click `Save` to save the `fhir-proxy` enviroment values!  
+Populate the above parameter values in your `fhir-proxy` Postman environment. Leave `bearerToken` blank. Make sure to click `Save` to retain the `fhir-proxy` enviroment values.  
 
 <img src="./docs/images/Screenshot_2022-02-16_105208_edit2.png" height="328">
 
 ## Step 5 - Get an access token from AAD
-Now you will need to get an access token from AAD in order to connect with Azure API for FHIR. To obtain an access token via Postman, you will send a ```POST AuthorizeGetToken``` request. The ```POST AuthorizeGetToken``` request is already configured as part of the FHIR CALLS collection that you imported into Postman (see below).  
+Now you will need to get an access token from AAD in order to connect with Azure API for FHIR. To obtain an access token via Postman, you will need to send a ```POST AuthorizeGetToken``` request. The ```POST AuthorizeGetToken``` request is already configured as part of the FHIR CALLS collection that you imported into Postman (see below).  
 
 <img src="./docs/images/Screenshot_2022-02-16_171631_edit2.png" height="328">
 
-On clicking ```Send```, you should receive a response like shown below in the **Body** tab. The access token itself is automatically saved to the ```bearerToken``` variable in the Postman environment. 
+On clicking ```Send```, you should receive a response like shown below in the **Body** tab. The access token is automatically saved to the ```bearerToken``` variable in the Postman environment. 
 
 ```
 {
