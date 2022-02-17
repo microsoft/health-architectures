@@ -21,7 +21,7 @@ To set up Postman for testing Azure API for FHIR, we'll walk through these steps
 2. Another for making API calls via FHIR-Proxy to Azure API for FHIR 
 
 **Step 5:** Get an authorization token from AAD  
-**Step 6:** Test Postman setup and confirm Azure API for FHIR is working
+**Step 6:** Test Azure API for FHIR with Postman
 
 ## Step 1 - Create an App Registration for Postman in AAD 
 
@@ -220,7 +220,7 @@ You now have a valid access token in both of your Postman environments and can u
 
 __Note:__ Access tokens expire after 60 minutes. To obtain a token refresh, simply make another ```POST AuthorizeGetToken``` call and you will receive a new token valid for another 60 minutes.
 
-## Step 6 - Test Postman setup and confirm Azure API for FHIR is working 
+## Step 6 - Test Azure API for FHIR with Postman 
 
 1. In Postman, click on `Collections` on the left, select the `FHIR Calls` collection, and then select the `GET List Metadata` call. Your Postman interface should look something like this: 
 
