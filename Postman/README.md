@@ -120,7 +120,7 @@ For more information on registering client applications in AAD, please review th
 10. Under the **Review + assign** tab, click **Review + assign**. 
 <img src="./docs/images/Screenshot_2022-02-15_144245_edit2.png" height="328">
 
-11. Now go to **Azure Active Directory** -> **Enterprise applications**. Search for your FHIR-Proxy function app name in the list and click on it. It might be easiest to search by the **Created on** date. 
+11. Now go to **Azure Active Directory** -> **Enterprise applications**. Search for your FHIR-Proxy function app name, and click on it in the list. It might be easiest to search by the **Created on** date. 
 <img src="./docs/images/Screenshot_2022-02-15_144433_edit2.png" height="328">
 
 12. You will be taken to the **Overview** blade in Enterprise Applications for FHIR-Proxy. Click on **Users and groups**. 
