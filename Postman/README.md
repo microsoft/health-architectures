@@ -176,8 +176,8 @@ Now you will configure your two Postman environments (`api-fhir` and `fhir-proxy
 - `tenantId` - AAD tenant ID 
 - `clientId` - Application (client) ID for Postman service client (go to **AAD** -> **App registrations** -> **Name** -> **Overview**) 
 - `clientSecret` - Client secret stored for Postman (see Step 1 #29 above) 
-- `fhirurl` - Azure API for FHIR endpoint - e.g. https://<azure_api_for_fhir_app_name>.azurehealthcareapis.com (go to **Resource Group** -> **Overview** -> **Name** -> **FHIR metadata endpoint** and copy *without* "/metadata" on the end)
-- `resource` - Azure API for FHIR endpoint - e.g. https://<azure_api_for_fhir_app_name>.azurehealthcareapis.com (same as above)
+- `fhirurl` - Azure API for FHIR endpoint - e.g. `https://<azure_api_for_fhir_app_name>.azurehealthcareapis.com` (go to **Resource Group** -> **Overview** -> **Name** -> **FHIR metadata endpoint** and copy *without* "/metadata" on the end)
+- `resource` - Azure API for FHIR endpoint - e.g. `https://<azure_api_for_fhir_app_name>.azurehealthcareapis.com` (same as above)
 
 Populate the above parameter values in your `api-fhir` Postman environment. Leave `bearerToken` blank. Make sure to click `Save` to retain the `api-fhir` environment values.  
 
@@ -188,7 +188,7 @@ Populate the above parameter values in your `api-fhir` Postman environment. Leav
 - `tenantId` - AAD tenant ID (same as above) 
 - `clientId` - Application (client) ID for Postman service client (same as above) 
 - `clientSecret` - Client secret stored for Postman (same as above) 
-- `fhirurl` - FHIR-Proxy endpoint appended with `/fhir` - e.g. https://<fhir_proxy_app_name>.azurehealthcareapis.com/fhir (go to **Resource Group** -> **Overview** -> **Name** -> **URL**; make sure to append `/fhir` on the end when adding to Postman)
+- `fhirurl` - FHIR-Proxy endpoint appended with `/fhir` - e.g. `https://<fhir_proxy_app_name>.azurehealthcareapis.com/fhir` (go to **Resource Group** -> **Overview** -> **Name** -> **URL**; make sure to append `/fhir` on the end)
 - `resource` - Application (client) ID in the AAD service client for FHIR-Proxy (go to **AAD** -> **App registrations** -> **Name** -> **Overview**)
 
 Populate the above parameter values in your `fhir-proxy` Postman environment. Leave `bearerToken` blank. Make sure to click `Save` to retain the `fhir-proxy` environment values.  
