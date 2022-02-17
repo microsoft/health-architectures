@@ -151,11 +151,11 @@ For more information on assigning user/app roles, see [Configure Azure RBAC for 
 4. Click the ```Import``` button next to the workspace name. 
 <img src="./docs/images/Screenshot_2022-02-16_095332_edit2.png" height="228">
 
-5. Import the ```api-for-fhir.postman_environment.json``` file that you just saved.
+5. Import the ```api-for-fhir.postman_environment.json``` file that you just saved locally.
     + Add the file to Postman using the ```Upload Files``` button. Then click `Import`. 
 <img src="./docs/images/Screenshot_2022-02-16_095516_edit2.png" height="228">
 
-6. Import the ```fhir-proxy.postman_environment.json``` file that you just saved.
+6. Import the ```fhir-proxy.postman_environment.json``` file that you just saved locally.
     + Add the file to Postman using the ```Upload Files``` button. Then click `Import`. 
 <img src="./docs/images/Screenshot_2022-02-16_095625_edit2.png" height="228">
 
