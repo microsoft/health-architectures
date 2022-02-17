@@ -102,7 +102,7 @@ For more information on registering client applications in AAD, please review th
 4. In **Add role assignment** under the **Role** tab, scroll down in the list and select **FHIR Data Contributor**. Then click **Next**. 
 <img src="./docs/images/Screenshot_2022-02-15_143124_edit2.png" height="328">
 
-5. Under the **Members** tab, click on **+Select members**. Type in the name of your Postman app registration in the **Select** field on the right. Highlight your Postman service client name and click **Select**. Then click **Next**. 
+5. Under the **Members** tab, click on **+Select members**. Type in the name of your Postman sevice client in the **Select** field on the right. Highlight the name and click **Select**. Then click **Next**. 
 <img src="./docs/images/Screenshot_2022-02-15_143459_edit2.png" height="328">
 
 6. Under the **Review + assign** tab, click **Review + assign**. 
