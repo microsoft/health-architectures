@@ -179,7 +179,7 @@ Now you will need to configure your two Postman environments (`api-for-fhir` and
 - `fhirurl` - Azure API for FHIR endpoint - e.g. https://<azure_api_for_fhir_app_name>.azurehealthcareapis.com 
 - `resource` - Azure API for FHIR endpoint - e.g. https://<azure_api_for_fhir_app_name>.azurehealthcareapis.com 
 
-Populate the above parameter values in your `api-for-fhir` Postman environment. Leave `bearerToken` blank. Make sure to click `Save` to retain the `api-for-fhir` enviroment values.  
+Populate the above parameter values in your `api-for-fhir` Postman environment. Leave `bearerToken` blank. Make sure to click `Save` to retain the `api-for-fhir` environment values.  
 
 <img src="./docs/images/Screenshot_2022-02-16_104920_edit2.png" height="328">
 
@@ -191,7 +191,7 @@ Populate the above parameter values in your `api-for-fhir` Postman environment. 
 - `fhirurl` - FHIR-Proxy endpoint appended with `/fhir` - e.g. https://<fhir_proxy_app_name>.azurehealthcareapis.com/fhir 
 - `resource` - Application (client) ID in the AAD service client for FHIR-Proxy (go to **AAD** -> **App registrations** -> **Name** -> **Overview**)
 
-Populate the above parameter values in your `fhir-proxy` Postman environment. Leave `bearerToken` blank. Make sure to click `Save` to retain the `fhir-proxy` enviroment values.  
+Populate the above parameter values in your `fhir-proxy` Postman environment. Leave `bearerToken` blank. Make sure to click `Save` to retain the `fhir-proxy` environment values.  
 
 <img src="./docs/images/Screenshot_2022-02-16_105208_edit2.png" height="328">
 
