@@ -1,7 +1,7 @@
 # Postman Setup + sample Postman environments and collections 
 
 ## Overview 
-When testing data connectivity between [Azure API for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/overview) and a client app, it is useful to have an API testing utility to send requests, view responses, and debug issues. One of the most popular API testing tools is [Postman](https://www.postman.com/), and in this guide we provide instructions and a basic set of data files to help you get started using Postman to test Azure API for FHIR.
+When testing data connectivity between [Azure API for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/overview) and a client app, it is useful to have an API testing utility to send requests, view responses, and debug issues. One of the most popular API testing tools is [Postman](https://www.postman.com/), and in this guide we provide instructions plus a basic set of data files to help you get up and running with Postman for testing Azure API for FHIR.
 
 ## Prerequisites
 + [Contributor](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles) role in your Azure Subscription
@@ -25,18 +25,18 @@ To set up Postman for testing Azure API for FHIR, we'll walk through these steps
 
 ## Step 1 - Create an App Registration for Postman in AAD 
 
-Before you can use Postman to make API calls to Azure API for FHIR, you will need to create a registered [client application](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) to represent Postman in Azure Active Directory.
+Before you can use Postman to make API calls to Azure API for FHIR, you will need to create a registered [service client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) to represent Postman in Azure Active Directory.
 
 1. In Azure Portal, go to **Azure Active Directory** -> **App registrations** and click **New registration**. 
 <img src="./docs/images/Screenshot_2022-02-11_065619_edit2.png" height="328">
 
-2. Type in a name for your Postman application registration in the **Name** field. 
+2. Type in a name for your Postman service client in the **Name** field. 
 <img src="./docs/images/Screenshot_2022-02-15_141049_edit2.png" height="328">
 
 3. Scroll down, and under **Redirect URI (optional)** select **Web** and then enter https://www.getpostman.com/oauth2/callback. Click **Register**. 
 <img src="./docs/images/Screenshot_2022-02-15_141049_edit2_next.png" height="328"> 
 
-4. Then, you will see a list containing your newly created app registration for Postman. Click on the list item and you will be taken to the **Overview** blade for your Postman service client in AAD.  
+4. You will see a list containing your newly registered service client for Postman. Click on the app name and you will be taken to the **Overview** blade for your Postman service client in AAD.  
 <img src="./docs/images/Screenshot_2022-02-15_141337_edit2.png" height="328">  
 
 5. Click on **API Permissions** and then click on **+Add a permission**.  
@@ -108,7 +108,7 @@ For more information on registering client applications in AAD, please review th
 6. Under the **Review + assign** tab, click **Review + assign**. 
 <img src="./docs/images/Screenshot_2022-02-15_143643_edit2.png" height="328">
 
-7. When back in the **Access Control (IAM)** blade, click **+ Add** -> **Add role assignment** (again). 
+7. When back in the **Access Control (IAM)** blade, click **+Add** -> **Add role assignment** (again). 
 <img src="./docs/images/Screenshot_2022-02-15_143643_edit2_next.png" height="328">
 
 8. In **Add role assignment** under the **Role** tab, select **FHIR Data Contributor** (again) and click **Next**. 
