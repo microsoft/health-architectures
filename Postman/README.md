@@ -25,18 +25,18 @@ To set up Postman for testing Azure API for FHIR, we'll walk through these steps
 
 ## Step 1 - Create an App Registration for Postman in AAD 
 
-Before you can use Postman to make API calls to Azure API for FHIR, you will need to create a registered [service client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) to represent Postman in Azure Active Directory.
+Before you can use Postman to make API calls to Azure API for FHIR, you will need to create a registered [client application](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) to represent Postman in Azure Active Directory.
 
 1. In Azure Portal, go to **Azure Active Directory** -> **App registrations** and click **New registration**. 
 <img src="./docs/images/Screenshot_2022-02-11_065619_edit2.png" height="328">
 
-2. Type in a name for your Postman service client in the **Name** field. 
+2. Type in a name for your Postman client app in the **Name** field. 
 <img src="./docs/images/Screenshot_2022-02-15_141049_edit2.png" height="328">
 
 3. Scroll down, and under **Redirect URI (optional)**, select **Web** and then enter https://www.getpostman.com/oauth2/callback. Click **Register**. 
 <img src="./docs/images/Screenshot_2022-02-15_141049_edit2_next.png" height="328"> 
 
-4. You will see a list containing your newly registered service client for Postman. Click on the app name and you will be taken to the **Overview** blade for your Postman service client in AAD.  
+4. You will see a list containing your newly registered client app for Postman. Click on the app name and you will be taken to the **Overview** blade for your Postman client app in AAD.  
 <img src="./docs/images/Screenshot_2022-02-15_141337_edit2.png" height="328">  
 
 5. Click on **API Permissions** and then click on **+Add a permission**.  
@@ -102,7 +102,7 @@ For more information on registering client applications in AAD, please review th
 4. In **Add role assignment** under the **Role** tab, scroll down in the list and select **FHIR Data Contributor**. Then click **Next**. 
 <img src="./docs/images/Screenshot_2022-02-15_143124_edit2.png" height="328">
 
-5. Under the **Members** tab, click on **+Select members**. Type in the name of your Postman sevice client in the **Select** field on the right. Highlight the name and click **Select**. Then click **Next**. 
+5. Under the **Members** tab, click on **+Select members**. Type in the name of your Postman client app in the **Select** field on the right. Highlight the name and click **Select**. Then click **Next**. 
 <img src="./docs/images/Screenshot_2022-02-15_143459_edit2.png" height="328">
 
 6. Under the **Review + assign** tab, click **Review + assign**. 
@@ -120,7 +120,7 @@ For more information on registering client applications in AAD, please review th
 10. Under the **Review + assign** tab, click **Review + assign**. 
 <img src="./docs/images/Screenshot_2022-02-15_144245_edit2.png" height="328">
 
-11. Now go to **Azure Active Directory** -> **Enterprise applications**. Search for your FHIR-Proxy function app name, and click on it in the list. It might be easiest to search by the **Created on** date. 
+11. Now go to **Azure Active Directory** -> **Enterprise applications**. Search for your FHIR-Proxy function app name and click on it in the list. It might be easiest to search by the **Created on** date. 
 <img src="./docs/images/Screenshot_2022-02-15_144433_edit2.png" height="328">
 
 12. You will be taken to the FHIR-Proxy **Overview** blade in Enterprise Applications. Click on **Users and groups**. 
@@ -129,7 +129,7 @@ For more information on registering client applications in AAD, please review th
 13. Click on **+Add user/group**. 
 <img src="./docs/images/Screenshot_2022-02-15_151041_edit2.png" height="328">
 
-14. In **Add Assignment**, on the left under **Users**, click on **None Selected**. Then under **Users** on the right side, type in your name or username in the search field, click on it, and then click **Select**. 
+14. In **Add Assignment**, on the left under **Users**, click on **None Selected**. Then under **Users** on the right side, type in your name or username in the search field. Click on your name, and then click **Select**. 
 <img src="./docs/images/Screenshot_2022-02-15_151408_edit2.png" height="328">
 
 15. In **Add Assignment**, under **Select a role**, click on **None Selected**. On the right side, click on **Resource Writer** and then click **Select**. 
