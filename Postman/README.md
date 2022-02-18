@@ -33,7 +33,7 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 2. Type in a name for your Postman service client in the **Name** field. 
 <img src="./docs/images/Screenshot_2022-02-15_141049_edit2.png" height="328">
 
-3. Scroll down, and under **Redirect URI (optional)** select **Web** and then enter https://www.getpostman.com/oauth2/callback. Click **Register**. 
+3. Scroll down, and under **Redirect URI (optional)**, select **Web** and then enter https://www.getpostman.com/oauth2/callback. Click **Register**. 
 <img src="./docs/images/Screenshot_2022-02-15_141049_edit2_next.png" height="328"> 
 
 4. You will see a list containing your newly registered service client for Postman. Click on the app name and you will be taken to the **Overview** blade for your Postman service client in AAD.  
