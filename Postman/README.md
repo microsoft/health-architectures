@@ -14,7 +14,7 @@ When testing data connectivity between [Azure API for FHIR](https://docs.microso
 To set up Postman for testing Azure API for FHIR, we'll walk through these steps:
 
 **Step 1:** Create an App Registration for Postman in AAD  
-**Step 2:** Assign app roles to Postman for Azure API for FHIR and FHIR-Proxy  
+**Step 2:** Assign user/app roles for using Postman with Azure API for FHIR and FHIR-Proxy  
 **Step 3:** Import environment templates and collection files into Postman  
 **Step 4:** Enter parameter values for two Postman environments: 
 1. One for making API calls directly to Azure API for FHIR  
