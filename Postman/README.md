@@ -135,7 +135,7 @@ For more information on registering client applications in AAD, please review th
 15. In **Add Assignment**, under **Select a role**, click **None Selected**. On the right side, click on **Resource Writer** and then click **Select**. 
 <img src="./docs/images/Screenshot_2022-02-15_151625_edit2.png" height="328">
 
-16. Back in **Add Assignment**, click on **Assign**. 
+16. Back in **Add Assignment**, click **Assign**. 
 <img src="./docs/images/Screenshot_2022-02-15_151738_edit2.png" height="328">
 
 For more information on assigning user/app roles, see [Configure Azure RBAC for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/configure-azure-rbac).
