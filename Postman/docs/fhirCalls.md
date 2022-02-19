@@ -1,14 +1,14 @@
-# FHIR Calls collection 
+# FHIR Calls collection for Postman 
 
 ## Commands 
-The following commands are available in the FHIR Calls collection [link](../api-for-fhir/FHIR-CALLS.postman_collection.json)
+The following commands are available in the FHIR Calls collection for Postman ([link](../api-for-fhir/FHIR-CALLS.postman_collection.json)).
 
 Retreive the FHIR Service Capability statement 
 ```json
 "name": "List Metadata",
 ```
 
-Obtain Authorization Toke 
+Obtain Authorization Token 
 ```json
 "name": "AuthorizeGetToken",
 ```
