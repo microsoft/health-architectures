@@ -246,6 +246,6 @@ A tutorial for using Postman with Azure API for FHIR is available on [docs.micro
  
 ### FAQ's / Issues 
 
-403 - Unauthorized:  Check the Azure RBAC for FHIR service [link](https://docs.microsoft.com/en-us/azure/healthcare-apis/fhir/configure-azure-rbac-for-fhir)
+403 - Unauthorized:  Check the Azure RBAC for Azure API for FHIR ([link](https://docs.microsoft.com/en-us/azure/healthcare-apis/fhir/configure-azure-rbac-for-fhir)).
 
   
