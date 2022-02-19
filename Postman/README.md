@@ -142,9 +142,9 @@ For more information on assigning user/app roles, see [Configure Azure RBAC for 
 
 ## Step 3 - Import environment and collection files into Postman
 
-1. Access the Postman environment template for Azure API for FHIR [here](./api-for-fhir/api-for-fhir.postman_environment.json). Save the file locally.
+1. Access the Postman environment template for Azure API for FHIR [here](./api-for-fhir/api-for-fhir.postman_environment.json). Save the file locally (click on `Raw` and then do a **Save as** from your browser).
 
-2. Access the Postman environment template for FHIR-Proxy [here](./fhir-proxy/fhir-proxy.postman_environment.json). Save the file locally.
+2. Access the Postman environment template for FHIR-Proxy [here](./fhir-proxy/fhir-proxy.postman_environment.json). Save the file locally (click on `Raw` and then do a **Save as** from your browser).
 
 3. In Postman, create a new Workspace (or select an existing one if already created).
 
