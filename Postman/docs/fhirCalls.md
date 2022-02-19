@@ -1,7 +1,7 @@
-# FHIR Calls collection for Postman 
+# FHIR CALLS collection for Postman 
 
 ## Commands 
-The following commands are available in the FHIR Calls collection for Postman ([link](../api-for-fhir/FHIR-CALLS.postman_collection.json)).
+The following commands are available in the `FHIR CALLS` collection for Postman ([link](../api-for-fhir/FHIR-CALLS.postman_collection.json)).
 
 Retreive the FHIR Service Capability statement 
 ```json
