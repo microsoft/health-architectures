@@ -1,4 +1,4 @@
-# Postman Setup + sample Postman environments and collections 
+# Postman setup + sample Postman environments and collections 
 
 ## Overview 
 When testing data connectivity between [Azure API for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/overview) and a remote client app, it is useful to have an API testing utility to send requests, view responses, and debug issues. One of the most popular API testing tools is [Postman](https://www.postman.com/), and in this guide we provide instructions plus a basic set of data files to help you get up and running with Postman as a testing platform for Azure API for FHIR.
@@ -88,7 +88,7 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 
 For more information on registering client applications in AAD, please review the [Service Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-service-azure-ad-client-app) and [Confidential Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) documentation for Azure API for FHIR. 
 
-## Step 2 - Assign user/app roles for Postman in Azure API for FHIR and FHIR-Proxy
+## Step 2 - Assign user/app roles for using Postman with Azure API for FHIR and FHIR-Proxy
 
 1. In Azure Portal, go to **Home** -> **Resource groups** and find the resource group containing your Azure API for FHIR instance. When in the resource group **Overview**, click on your Azure API for FHIR app name in the list. 
 <img src="./docs/images/Screenshot_2022-02-15_142434_edit2.png" height="328">
