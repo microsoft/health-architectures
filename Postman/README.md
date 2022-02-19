@@ -196,7 +196,9 @@ Populate the above parameter values in your `fhir-proxy` Postman environment as 
 <img src="./docs/images/Screenshot_2022-02-16_105208_edit2.png" height="328">
 
 ## Step 5 - Get an access token from AAD
-In order to connect to Azure API for FHIR, you will need to get an access token first. AAD guards access to Azure API for FHIR and FHIR-Proxy, and to obtain an access token from AAD via Postman, you can send a ```POST AuthorizeGetToken``` request. The ```POST AuthorizeGetToken``` call comes pre-configured as part of the FHIR CALLS collection that you imported earlier.  
+In order to connect to Azure API for FHIR, you will need to get an access token first. AAD guards access to Azure API for FHIR and FHIR-Proxy, and to obtain an access token from AAD via Postman, you can send a ```POST AuthorizeGetToken``` request. The ```POST AuthorizeGetToken``` call comes pre-configured as part of the FHIR CALLS collection that you imported earlier. 
+
+In Postman, click on `Collections` on the left, select the `FHIR CALLS` collection, and then select the `POST AuthorizeGetToken` call. Press `Send` on the right.
 
 __Important:__ Be sure to make one of the environments active (`api-fhir` or `fhir-proxy`) by selecting from the dropdown menu above the `Send` button. In the image below, `fhir-proxy` is shown as the active environment.
 
@@ -222,7 +224,7 @@ __Note:__ Access tokens expire after 60 minutes. To obtain a token refresh, simp
 
 ## Step 6 - Test Azure API for FHIR with Postman 
 
-1. In Postman, click on `Collections` on the left, select the `FHIR Calls` collection, and then select the `GET List Metadata` call. Your Postman interface should look something like this: 
+1. In Postman, click on `Collections` on the left, select the `FHIR CALLS` collection, and then select the `GET List Metadata` call. Your Postman interface should look something like this: 
 
 <img src="./docs/images/Screenshot_2022-02-17_101024_edit2.png" height="328">
 
