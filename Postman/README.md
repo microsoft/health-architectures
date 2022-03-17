@@ -16,10 +16,7 @@ To set up Postman for testing Azure API for FHIR, we'll walk through these steps
 **Step 1:** Create an App Registration for Postman in AAD  
 **Step 2:** Assign Azure RBAC roles to Postman  
 **Step 3:** Import environment templates and collection files into Postman  
-**Step 4:** Enter parameter values for two Postman environments: 
-1. One for making API calls directly to Azure API for FHIR  
-2. Another for making API calls via FHIR-Proxy to Azure API for FHIR 
-
+**Step 4:** Enter parameter values for the Postman environment 
 **Step 5:** Get an authorization token from AAD  
 **Step 6:** Test Azure API for FHIR with Postman
 
