@@ -56,7 +56,9 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 <img src="./docs/images/Screenshot_2022-02-15_141828_edit2.png" height="328">  
 
 10. Now, in the **API permissions** blade, click on **+Add a permission** (again). 
-11. Repeat #6. 
+
+11. Select the **My APIs** tab (again). Click on the FHIR-Proxy app name.
+<img src="./docs/images/Screenshot_2022-02-15_141517_edit2.png" height="328">
 
 12. Under **Request API permissions**, click on the **Application permissions** box on the right. 
 <img src="./docs/images/Screenshot_2022-02-15_141828_edit2_next.png" height="328">
@@ -142,53 +144,34 @@ For more information on assigning user/app roles, see [Configure Azure RBAC for 
 
 ## Step 3 - Import environment and collection files into Postman
 
-1. Access the Postman environment template for Azure API for FHIR [here](./api-for-fhir/api-for-fhir.postman_environment.json). Save the file locally (click on `Raw` and then do a **Save as** from your browser).
+1. Access the Postman environment template for FHIR-Proxy [here](./fhir-proxy/fhir-proxy.postman_environment.json). Save the file locally (click on `Raw` and then do a **Save as** from your browser).
 
-2. Access the Postman environment template for FHIR-Proxy [here](./fhir-proxy/fhir-proxy.postman_environment.json). Save the file locally (click on `Raw` and then do a **Save as** from your browser).
+2. In Postman, create a new Workspace (or select an existing one if already created).
 
-3. In Postman, create a new Workspace (or select an existing one if already created).
-
-4. Click the ```Import``` button next to the workspace name. 
+3. Click the ```Import``` button next to the workspace name. 
 <img src="./docs/images/Screenshot_2022-02-16_095332_edit2.png" height="228">
 
-5. Import the ```api-for-fhir.postman_environment.json``` file that you just saved locally.
-    + Add the file to Postman using the ```Upload Files``` button. Then click `Import`. 
-<img src="./docs/images/Screenshot_2022-02-16_095516_edit2.png" height="228">
-
-6. Import the ```fhir-proxy.postman_environment.json``` file that you just saved locally.
+4. Import the ```fhir-proxy.postman_environment.json``` file that you just saved locally.
     + Add the file to Postman using the ```Upload Files``` button. Then click `Import`. 
 <img src="./docs/images/Screenshot_2022-02-16_095625_edit2.png" height="228">
 
-7. Access the ```FHIR-CALLS.postman-collection.json``` file available in this repo [here](./api-for-fhir/FHIR-CALLS.postman_collection.json) and save the file locally. Then import the file into Postman.
+5. Access the ```FHIR-CALLS.postman-collection.json``` file available in this repo [here](./api-for-fhir/FHIR-CALLS.postman_collection.json) and save the file locally. Then import the file into Postman.
     + Add the file to Postman using the ```Upload Files``` button. Then click `Import`. 
 <img src="./docs/images/Screenshot_2022-02-16_104345_edit2.png" height="228">
 
-8. Access the ```FHIR_Search.postman_collection.json``` file available in this repo [here](./api-for-fhir/FHIR_Search.postman_collection.json) and save the file locally. Then import the file into Postman.
+6. Access the ```FHIR_Search.postman_collection.json``` file available in this repo [here](./api-for-fhir/FHIR_Search.postman_collection.json) and save the file locally. Then import the file into Postman.
     + Add the file to Postman using the ```Upload Files``` button. Then click `Import`. 
 <img src="./docs/images/Screenshot_2022-02-16_104427_edit2.png" height="228">
 
  
 ## Step 4 - Configure Postman environments
-Now you will configure your two Postman environments (`api-fhir` and `fhir-proxy`). 
+Now you will configure your Postman environment (`fhir-proxy`). 
 
-1. For the `api-fhir` Postman environment, you will need to retrieve the following values: 
+1. For the `fhir-proxy` Postman environment, you will need to retrieve the following values: 
 
-- `tenantId` - AAD tenant ID (go to **AAD** -> **Overview** -> **Tenant ID**)
+- `tenantId` - AAD tenant ID (go to **AAD** -> **Overview** -> **Tenant ID**) 
 - `clientId` - Application (client) ID for Postman client app (go to **AAD** -> **App registrations** -> **Name** -> **Overview** -> **Application (client) ID**) 
 - `clientSecret` - Client secret stored for Postman (see Step 1 #21 above) 
-- `resource` - Azure API for FHIR endpoint - e.g. `https://<azure_api_for_fhir_app_name>.azurehealthcareapis.com` (same as `fhirurl`) 
-- `fhirurl` - Azure API for FHIR endpoint - e.g. `https://<azure_api_for_fhir_app_name>.azurehealthcareapis.com` (go to **Resource Group** -> **Overview** -> **Name** -> **FHIR metadata endpoint** and copy *without* "/metadata" on the end)
-
-
-Populate the above parameter values in your `api-fhir` Postman environment as shown below. Leave `bearerToken` blank. Make sure to click `Save` to retain the `api-fhir` environment values.  
-
-<img src="./docs/images/Screenshot_2022-02-16_104920_edit2.png" height="328">
-
-2. For the `fhir-proxy` Postman environment, you will need to retrieve the following values: 
-
-- `tenantId` - AAD tenant ID (same as above) 
-- `clientId` - Application (client) ID for Postman client app (same as above) 
-- `clientSecret` - Client secret stored for Postman (same as above) 
 - `resource` - Application (client) ID in the AAD client app for FHIR-Proxy (go to **AAD** -> **App registrations** -> **Name** -> **Overview** -> **Application (client) ID**) 
 - `fhirurl` - FHIR-Proxy endpoint appended with `/fhir` - e.g. `https://<fhir_proxy_app_name>.azurewebsites.net/fhir` (go to **Resource Group** -> **Overview** -> **Name** -> **URL**; make sure to append `/fhir` on the end when inputting into the Postman environment)
 
@@ -198,11 +181,11 @@ Populate the above parameter values in your `fhir-proxy` Postman environment as 
 <img src="./docs/images/Screenshot_2022-02-16_105208_edit2.png" height="328">
 
 ## Step 5 - Get an access token from AAD
-In order to connect to Azure API for FHIR, you will need to get an access token first. AAD guards access to Azure API for FHIR and FHIR-Proxy, and to obtain an access token from AAD via Postman, you can send a ```POST AuthorizeGetToken``` request. The ```POST AuthorizeGetToken``` call comes pre-configured as part of the `FHIR CALLS` collection that you imported earlier. 
+In order to connect to Azure API for FHIR, you will need to get an access token first. To obtain an access token from AAD via Postman, you can send a ```POST AuthorizeGetToken``` request. The ```POST AuthorizeGetToken``` call comes pre-configured as part of the `FHIR CALLS` collection that you imported earlier. 
 
 In Postman, click on `Collections` on the left, select the `FHIR CALLS` collection, and then select `POST AuthorizeGetToken`. Press `Send` on the right.
 
-__Important:__ Be sure to make one of the environments active (`api-fhir` or `fhir-proxy`) by selecting from the dropdown menu above the `Send` button. In the image below, `fhir-proxy` is shown as the active environment.
+__Important:__ Be sure to make the `fhir-proxy` environment active by selecting from the dropdown menu above the `Send` button. In the image below, `fhir-proxy` is shown as the active environment.
 
 <img src="./docs/images/Screenshot_2022-02-16_171631_edit2.png" height="328">
 
@@ -220,7 +203,7 @@ On clicking ```Send```, you should receive a response in the **Body** tab like s
 }
 ```
 
-You now have a valid access token in both of your Postman environments and can use the token in subsequent API calls to Azure API for FHIR - either passing through FHIR-Proxy (with the `fhir-proxy` environment active in Postman) or directly into Azure API for FHIR (with the `api-fhir` environment active in Postman). For more information about access tokens in AAD, see [Microsoft identity platform access tokens](https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens).
+You now have a valid access token in your Postman environment and can use the token in subsequent API calls to Azure API for FHIR - passing through FHIR-Proxy on the way in. For more information about access tokens in AAD, see [Microsoft identity platform access tokens](https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens).
 
 __Note:__ Access tokens expire after 60 minutes. To obtain a token refresh, simply make another ```POST AuthorizeGetToken``` call and you will receive a new token valid for another 60 minutes.
 
