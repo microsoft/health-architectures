@@ -8,7 +8,7 @@ When testing data connectivity between [Azure API for FHIR](https://docs.microso
 + [Application Administrator](https://docs.microsoft.com/en-us/azure/active-directory/roles/permissions-reference#all-roles) role in your Azure Active Directory (AAD) tenant
 + **Azure API for FHIR** deployed. To deploy Azure API for FHIR (PaaS), we recommend using the [FHIR-Starter Quickstart ARM template](https://github.com/microsoft/fhir-starter/tree/main/quickstarts), which allows you to deploy [Azure API for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/overview), [FHIR-Proxy](https://github.com/microsoft/fhir-proxy), and [FHIR-Bulk Loader](https://github.com/microsoft/fhir-loader) all in one pass.
 + **FHIR-Proxy** deployed and set up with AAD authentication and app roles for connecting to Azure API for FHIR. To learn more about FHIR-Proxy (OSS), please visit [here](https://github.com/microsoft/fhir-proxy). For information about setting up FHIR Proxy AAD authentication and app roles, please see [here](https://github.com/microsoft/fhir-starter/tree/main/quickstarts) (Steps 2 and 3 - midway through page).
-+ **Postman** installed - desktop or web client. See [here](https://www.getpostman.com/) for information about installing Postman. 
++ **Postman** installed - desktop or web client. Information about installing Postman is available [here](https://www.getpostman.com/). 
 
 ## Getting started
 To set up Postman for testing Azure API for FHIR, we'll walk through these steps:
