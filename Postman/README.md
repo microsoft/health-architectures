@@ -14,7 +14,7 @@ When testing data connectivity between [Azure API for FHIR](https://docs.microso
 To set up Postman for testing Azure API for FHIR, we'll walk through these steps:
 
 **Step 1:** Create an App Registration for Postman in AAD  
-**Step 2:** Assign Azure RBAC roles to Postman  
+**Step 2:** Assign Azure RBAC roles for Postman  
 **Step 3:** Import an environment template and collection files into Postman  
 **Step 4:** Enter parameter values for the Postman environment 
 **Step 5:** Get an authorization token from AAD  
