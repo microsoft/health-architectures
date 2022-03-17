@@ -82,7 +82,7 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 20. Under **Add a client secret**, enter a name for the secret in the **Description** field. Click **Add**. 
 <img src="./docs/images/Screenshot_2022-02-15_142102_edit2.png" height="328">
 
-21. Copy the secret **Value** and securely store it somewhere (you will need this when you configure your Postman environments). 
+21. Copy the secret **Value** and securely store it somewhere (you will need this when you configure your Postman environment). 
 <img src="./docs/images/Screenshot_2022-02-15_142159_edit2.png" height="328">
 
 For more information on registering client applications in AAD, please review the [Service Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-service-azure-ad-client-app) and [Confidential Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) documentation for Azure API for FHIR. 
