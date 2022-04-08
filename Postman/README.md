@@ -22,7 +22,7 @@ To set up Postman for testing FHIR service, we'll walk through these steps:
 
 ## Step 1 - Create an App Registration for Postman in AAD 
 
-Before you can use Postman to make API calls to FHIR service, you will need to create a registered [client application](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) to represent Postman in Azure Active Directory.
+Before you can use Postman to make API calls to FHIR service, you will need to create a registered [client application](https://docs.microsoft.com/en-us/azure/healthcare-apis/register-application) to represent Postman in Azure Active Directory.
 
 1. In Azure Portal, go to **Azure Active Directory** -> **App registrations** and click **New registration**. 
 <img src="./docs/images/Screenshot_2022-02-11_065619_edit2.png" height="328">
@@ -85,7 +85,7 @@ Before you can use Postman to make API calls to FHIR service, you will need to c
 21. Copy the secret **Value** and securely store it somewhere (you will need this when you configure your Postman environment). 
 <img src="./docs/images/Screenshot_2022-02-15_142159_edit2.png" height="328">
 
-For more information on registering client applications in AAD, please review the [Service Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-service-azure-ad-client-app) and [Confidential Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) documentation for FHIR service. 
+For more information on registering client applications in AAD for Azure Health Data Services, please see the [Authentication and Authorization for Azure Health Data Services](https://docs.microsoft.com/en-us/azure/healthcare-apis/authentication-authorization) documentation. 
 
 ## Step 2 - Assign Azure RBAC roles for Postman
 
@@ -137,7 +137,7 @@ For more information on registering client applications in AAD, please review th
 16. Back in **Add Assignment**, click **Assign**. 
 <img src="./docs/images/Screenshot_2022-02-15_151738_edit2.png" height="328">
 
-For more information on assigning user/app roles, see [Configure Azure RBAC for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/configure-azure-rbac).
+For more information on assigning user/app roles, see [Configure Azure RBAC for Azure Health Data Services](https://docs.microsoft.com/en-us/azure/healthcare-apis/configure-azure-rbac).
 
 ## Step 3 - Import environment and collection files into Postman
 
@@ -226,10 +226,10 @@ __Note:__ Access tokens expire after 60 minutes. To obtain a token refresh, simp
 
 ### Resources 
 
-A tutorial for using Postman with FHIR service is available on [docs.microsoft.com](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/access-fhir-postman-tutorial).
+A tutorial for using Postman with FHIR service is available on [docs.microsoft.com](https://docs.microsoft.com/en-us/azure/healthcare-apis/fhir/use-postman).
  
 ### FAQ's / Issues 
 
-403 - Unauthorized:  Check the Azure RBAC for FHIR service ([link](https://docs.microsoft.com/en-us/azure/healthcare-apis/fhir/configure-azure-rbac-for-fhir)).
+403 - Unauthorized:  Check the Azure RBAC for FHIR service ([link](https://docs.microsoft.com/en-us/azure/healthcare-apis/configure-azure-rbac)).
 
   
