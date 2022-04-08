@@ -1,28 +1,28 @@
 # Postman setup + sample Postman environment and collections 
 
 ## Overview 
-When testing data connectivity between [Azure API for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/overview) and a remote client app, it is useful to have an API testing utility to send requests, view responses, and debug issues. One of the most popular API testing tools is [Postman](https://www.postman.com/), and in this guide we provide instructions plus a set of sample data files to help you get started with Postman as a testing platform for Azure API for FHIR.
+When testing data connectivity between [FHIR service](https://docs.microsoft.com/en-us/azure/healthcare-apis/fhir/overview) and a remote client app, it is useful to have an API testing utility to send requests, view responses, and debug issues. One of the most popular API testing tools is [Postman](https://www.postman.com/), and in this guide we provide instructions plus a set of sample data files to help you get started with Postman as a testing platform for FHIR service in [Azure Health Data Services](https://docs.microsoft.com/en-us/azure/healthcare-apis/healthcare-apis-overview).
 
 ## Prerequisites
 + [Contributor](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles) role in your Azure Subscription
 + [Application Administrator](https://docs.microsoft.com/en-us/azure/active-directory/roles/permissions-reference#all-roles) role in your Azure Active Directory (AAD) tenant
-+ **Azure API for FHIR** deployed. To deploy Azure API for FHIR (PaaS), we recommend using the [FHIR-Starter Quickstart ARM template](https://github.com/microsoft/fhir-starter/tree/main/quickstarts), which allows you to deploy [Azure API for FHIR](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/overview), [FHIR-Proxy](https://github.com/microsoft/fhir-proxy), and [FHIR-Bulk Loader](https://github.com/microsoft/fhir-loader) all in one pass.
-+ **FHIR-Proxy** deployed and set up with AAD authentication and app roles for connecting to Azure API for FHIR. To learn more about FHIR-Proxy (OSS), please visit [here](https://github.com/microsoft/fhir-proxy). For information about setting up FHIR Proxy AAD authentication and app roles, please see [here](https://github.com/microsoft/fhir-starter/tree/main/quickstarts) (Steps 2 and 3 - midway through page).
++ **FHIR service** deployed. To deploy FHIR service (PaaS), we recommend using the [FHIR-Starter Quickstart ARM template](https://github.com/microsoft/fhir-starter/tree/main/quickstarts), which allows you to deploy [FHIR service](https://docs.microsoft.com/en-us/azure/healthcare-apis/fhir/overview), [FHIR-Proxy](https://github.com/microsoft/fhir-proxy), and [FHIR-Bulk Loader](https://github.com/microsoft/fhir-loader) all in one pass.
++ **FHIR-Proxy** deployed and set up with AAD authentication and app roles for connecting to FHIR service. To learn more about FHIR-Proxy (OSS), please visit [here](https://github.com/microsoft/fhir-proxy). For information about setting up FHIR Proxy AAD authentication and app roles, please see [here](https://github.com/microsoft/fhir-starter/tree/main/quickstarts) (Steps 2 and 3 - midway through page).
 + **Postman** installed - desktop or web client. Information about installing Postman is available [here](https://www.getpostman.com/). 
 
 ## Getting started
-To set up Postman for testing Azure API for FHIR, we'll walk through these steps:
+To set up Postman for testing FHIR service, we'll walk through these steps:
 
 **Step 1:** Create an App Registration for Postman in AAD  
 **Step 2:** Assign Azure RBAC roles for Postman  
 **Step 3:** Import an environment template and collection files into Postman  
 **Step 4:** Enter parameter values for the Postman environment  
 **Step 5:** Get an authorization token from AAD  
-**Step 6:** Test Azure API for FHIR with Postman
+**Step 6:** Test FHIR service with Postman
 
 ## Step 1 - Create an App Registration for Postman in AAD 
 
-Before you can use Postman to make API calls to Azure API for FHIR, you will need to create a registered [client application](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) to represent Postman in Azure Active Directory.
+Before you can use Postman to make API calls to FHIR service, you will need to create a registered [client application](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) to represent Postman in Azure Active Directory.
 
 1. In Azure Portal, go to **Azure Active Directory** -> **App registrations** and click **New registration**. 
 <img src="./docs/images/Screenshot_2022-02-11_065619_edit2.png" height="328">
@@ -85,11 +85,11 @@ Before you can use Postman to make API calls to Azure API for FHIR, you will nee
 21. Copy the secret **Value** and securely store it somewhere (you will need this when you configure your Postman environment). 
 <img src="./docs/images/Screenshot_2022-02-15_142159_edit2.png" height="328">
 
-For more information on registering client applications in AAD, please review the [Service Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-service-azure-ad-client-app) and [Confidential Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) documentation for Azure API for FHIR. 
+For more information on registering client applications in AAD, please review the [Service Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-service-azure-ad-client-app) and [Confidential Client](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app) documentation for FHIR service. 
 
 ## Step 2 - Assign Azure RBAC roles for Postman
 
-1. In Azure Portal, go to **Home** -> **Resource groups** and find the resource group containing your Azure API for FHIR instance. When in the resource group **Overview**, click on your Azure API for FHIR app name in the list. 
+1. In Azure Portal, go to **Home** -> **Resource groups** and find the resource group containing your FHIR service instance. When in the resource group **Overview**, click on your FHIR service app name in the list. 
 <img src="./docs/images/Screenshot_2022-02-15_142434_edit2.png" height="328">
 
 2. Go to the **Access Control (IAM)** blade. Click on the **Roles** tab.
@@ -178,7 +178,7 @@ Populate the above parameter values in your `fhir-proxy` Postman environment as 
 <img src="./docs/images/Screenshot_2022-02-16_105208_edit2.png" height="328">
 
 ## Step 5 - Get an access token from AAD
-In order to connect to Azure API for FHIR, you will need to get an access token first. To obtain an access token from AAD via Postman, you can send a ```POST AuthorizeGetToken``` request. The ```POST AuthorizeGetToken``` call comes pre-configured as part of the `FHIR CALLS` collection that you imported earlier. 
+In order to connect to FHIR service, you will need to get an access token first. To obtain an access token from AAD via Postman, you can send a ```POST AuthorizeGetToken``` request. The ```POST AuthorizeGetToken``` call comes pre-configured as part of the `FHIR CALLS` collection that you imported earlier. 
 
 In Postman, click on `Collections` on the left, select the `FHIR CALLS` collection, and then select `POST AuthorizeGetToken`. Press `Send` on the right.
 
@@ -200,25 +200,25 @@ On clicking ```Send```, you should receive a response in the **Body** tab like s
 }
 ```
 
-You now have a valid access token in your Postman environment and can use the token in subsequent API calls to Azure API for FHIR - passing through FHIR-Proxy on the way in. For more information about access tokens in AAD, see [Microsoft identity platform access tokens](https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens).
+You now have a valid access token in your Postman environment and can use the token in subsequent API calls to FHIR service - passing through FHIR-Proxy on the way in. For more information about access tokens in AAD, see [Microsoft identity platform access tokens](https://docs.microsoft.com/en-us/azure/active-directory/develop/access-tokens).
 
 __Note:__ Access tokens expire after 60 minutes. To obtain a token refresh, simply make another ```POST AuthorizeGetToken``` call and you will receive a new token valid for another 60 minutes.
 
-## Step 6 - Test Azure API for FHIR with Postman 
+## Step 6 - Test FHIR service with Postman 
 
 1. In Postman, click on `Collections` on the left, select the `FHIR CALLS` collection, and then select the `GET List Metadata` call. Your Postman interface should look something like this: 
 
 <img src="./docs/images/Screenshot_2022-02-17_101024_edit2.png" height="328">
 
-2. Click `Send` to test that Azure API for FHIR and FHIR-Proxy are functioning on a basic level. The `GET List Metadata` call returns the Azure API for FHIR server's Capability Statement. If you receive an error, there should be information in the response indicating the cause of the error. If you receive a response like shown below, this means your setup has passed the first test. 
+2. Click `Send` to test that FHIR service and FHIR-Proxy are functioning on a basic level. The `GET List Metadata` call returns the FHIR service server's Capability Statement. If you receive an error, there should be information in the response indicating the cause of the error. If you receive a response like shown below, this means your setup has passed the first test. 
 
 <img src="./docs/images/Screenshot_2022-02-17_101116_edit2.png" height="328">
 
-3. Click on `POST Save Patient` in the `FHIR CALLS` collection and press `Send`. If you get a response like shown below, this means you succeeded in populating Azure API for FHIR with a Patient Resource. This indicates that your setup is functioning properly. 
+3. Click on `POST Save Patient` in the `FHIR CALLS` collection and press `Send`. If you get a response like shown below, this means you succeeded in populating FHIR service with a Patient Resource. This indicates that your setup is functioning properly. 
 
 <img src="./docs/images/Screenshot_2022-02-17_101224_edit2.png" height="328">
 
-4. Try `GET List Patients` in the `FHIR CALLS` collection and press `Send`. If the response is as shown below, this means you successfully queried Azure API for FHIR for a list of every Patient Resource stored on the FHIR server. This means your setup is fully functional.
+4. Try `GET List Patients` in the `FHIR CALLS` collection and press `Send`. If the response is as shown below, this means you successfully queried FHIR service for a list of every Patient Resource stored on the FHIR server. This means your setup is fully functional.
 
 <img src="./docs/images/Screenshot_2022-02-17_101255_edit2.png" height="328">
 
@@ -226,10 +226,10 @@ __Note:__ Access tokens expire after 60 minutes. To obtain a token refresh, simp
 
 ### Resources 
 
-A tutorial for using Postman with Azure API for FHIR is available on [docs.microsoft.com](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/access-fhir-postman-tutorial).
+A tutorial for using Postman with FHIR service is available on [docs.microsoft.com](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/access-fhir-postman-tutorial).
  
 ### FAQ's / Issues 
 
-403 - Unauthorized:  Check the Azure RBAC for Azure API for FHIR ([link](https://docs.microsoft.com/en-us/azure/healthcare-apis/fhir/configure-azure-rbac-for-fhir)).
+403 - Unauthorized:  Check the Azure RBAC for FHIR service ([link](https://docs.microsoft.com/en-us/azure/healthcare-apis/fhir/configure-azure-rbac-for-fhir)).
 
   
