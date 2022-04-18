@@ -36,7 +36,7 @@ Before you can use Postman to make API calls to FHIR service, you will need to c
 4. Now you will be taken to the **Overview** blade for your Postman client app in AAD.  
 <img src="./docs/images/Screenshot_2022-02-15_141337_edit2.png" height="328">  
 
-5. Click on **API Permissions** and then click on **+Add a permission**.  
+5. Click on **API Permissions** and then click **+Add a permission**.  
 <img src="./docs/images/Screenshot_2022-02-15_141418_edit2.png" height="328">
 
 6. Select the **My APIs** tab and you will see a list containing the FHIR-Proxy instance that you deployed and registered earlier. Click on the FHIR-Proxy app name.
