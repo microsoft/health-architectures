@@ -1,6 +1,8 @@
-**UPDATE** - As of 06/01/2021, FHIR Proxy is now in its own dedicated repository at <https://github.com/microsoft/fhir-proxy>.  
+> :warning: Thank you for your interest in our repository. **As of May 13, 2022, this repository has been archived per [Microsoft open-source guideline](https://docs.opensource.microsoft.com/github/repos/).** All of the codebase as well as documentation present in this repository will remain public for reference, but will **no longer be maintained, fixed, or updated**.  
 
 # Introduction
+
+**UPDATE** - As of 06/01/2021, FHIR Proxy is now in its own dedicated repository at <https://github.com/microsoft/fhir-proxy>.  
 
 Health Architectures is a collection of reference architectures and, when appropriate, implementations. They illustrate end-to-end best practices for using the Azure API for FHIR and related technologies. Below is the holistic conceptual end to end architecture for Azure API for FHIR.
 ![Microsoft Health Concecptual](./ConceptualArchitectureCore.png)
